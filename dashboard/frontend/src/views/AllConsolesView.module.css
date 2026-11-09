@@ -1,0 +1,304 @@
+.view {
+  min-height: 100%;
+  padding: calc(32px * var(--u)) calc(48px * var(--u)) calc(32px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(24px * var(--u));
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--u));
+}
+
+.title {
+  margin: 0;
+  font-size: calc(22px * var(--u));
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--text-1);
+}
+
+.note {
+  margin: 0;
+  font-size: calc(14px * var(--u));
+  color: var(--text-3);
+}
+
+.brands {
+  display: flex;
+  flex-direction: column;
+  gap: calc(12px * var(--u));
+}
+
+/* Una marca: nome in verticale a sinistra, le sue console a destra. */
+.brand {
+  padding: calc(12px * var(--u)) calc(16px * var(--u)) calc(12px * var(--u)) calc(14px * var(--u));
+  display: flex;
+  align-items: stretch;
+  gap: calc(28px * var(--u));
+  border: 2px solid var(--border-1);
+  border-radius: calc(16px * var(--u));
+  background: rgb(var(--surface-1-rgb) / 0.6);
+}
+
+.brand:global(.focused) {
+  border-color: var(--accent);
+}
+
+.open {
+  border-color: var(--accent);
+}
+
+.dimmed {
+  opacity: 0.3;
+}
+
+/* Logo della marca: colonna fissa a sinistra; grigio, a colori sulla marca selezionata o aperta. */
+.brandSide {
+  width: calc(150px * var(--u));
+  padding-right: calc(24px * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--border-1);
+}
+
+.brandLogo {
+  max-width: 100%;
+  max-height: calc(64px * var(--u));
+  object-fit: contain;
+  filter: grayscale(1) brightness(1.7);
+  opacity: 0.5;
+}
+
+.pixelIcon {
+  width: auto;
+  height: calc(64px * var(--u));
+}
+
+.brandLogo[data-dark] {
+  filter: grayscale(1) invert(1);
+}
+
+.brand:global(.focused) .brandLogo,
+.open .brandLogo {
+  filter: none;
+  opacity: 1;
+}
+
+.brand:global(.focused) .brandLogo[data-dark],
+.open .brandLogo[data-dark] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Marca senza logo: il nome in orizzontale, a capo tra le parole; grigio come i loghi. */
+.brandName {
+  font-size: calc(17px * var(--u));
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  text-align: center;
+  overflow-wrap: anywhere;
+  color: var(--text-4);
+}
+
+.brand:global(.focused) .brandName,
+.open .brandName {
+  color: var(--text-1);
+}
+
+.grid {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(150px * var(--u)), 1fr));
+  align-content: start;
+  gap: calc(10px * var(--u));
+}
+
+/* Una console: etichetta chiara col logo, sotto nome e giochi. Il bordo indica la selezione. */
+.cell {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 3px solid transparent;
+  border-radius: calc(10px * var(--u));
+  background: var(--surface-2);
+}
+
+.cell:global(.focused) {
+  border-color: var(--accent);
+}
+
+.plate {
+  height: calc(56px * var(--u));
+  padding: calc(8px * var(--u)) calc(12px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: grayscale(1) brightness(1.7);
+  opacity: 0.5;
+}
+
+/* Loghi scuri (riconosciuti nel browser): schiariti invertendo la luminosità, tinte comprese. */
+.logo[data-dark] {
+  filter: grayscale(1) invert(1);
+}
+
+/* Loghi con una parte nera: contorno chiaro. */
+.logo[data-outlined] {
+  filter: grayscale(1) brightness(1.7) drop-shadow(0 0 1px #ffffff);
+}
+
+/* Marca aperta: loghi a colori. */
+.open .logo {
+  filter: none;
+  opacity: 1;
+}
+
+.open .logo[data-dark] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.open .logo[data-outlined] {
+  filter: drop-shadow(0 0 1px #ffffff) drop-shadow(0 0 1px #ffffff);
+}
+
+.fallback {
+  font-size: calc(13px * var(--u));
+  line-height: 1.2;
+  text-align: center;
+  color: var(--text-4);
+}
+
+.open .fallback {
+  color: var(--text-1);
+}
+
+.info {
+  padding: calc(5px * var(--u)) calc(9px * var(--u)) calc(7px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(2px * var(--u));
+}
+
+.name {
+  overflow: hidden;
+  font-size: calc(12px * var(--u));
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--text-1);
+}
+
+.meta {
+  padding-left: calc(27px * var(--u));
+  font-size: calc(11px * var(--u));
+  color: var(--text-4);
+}
+
+/* Riga del nome: casella a sinistra, cuore della preferita a destra. */
+.title {
+  display: flex;
+  align-items: center;
+  gap: calc(7px * var(--u));
+  min-width: 0;
+}
+
+.title .name {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Casella della riga: bordo grigio se vuota, verde pieno con la spunta se la console è nella riga. */
+.check {
+  width: calc(20px * var(--u));
+  height: calc(20px * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--border-3);
+  border-radius: calc(5px * var(--u));
+  color: var(--text-4);
+}
+
+.check svg {
+  width: 100%;
+  height: 100%;
+}
+
+.checkOn {
+  border-color: var(--ok);
+  background: var(--ok);
+  color: #ffffff;
+}
+
+/* Cuore della console preferita, sempre rosso. */
+.fav {
+  width: calc(18px * var(--u));
+  height: calc(18px * var(--u));
+  flex-shrink: 0;
+}
+
+/* Console fuori dalla riga: nome e giochi più spenti. */
+.outside .name {
+  color: var(--text-4);
+}
+
+.outside .meta {
+  color: var(--text-5);
+}
+
+/* Tema giorno: i loghi sono pensati per il fondo chiaro, niente schiarimento né contorno. */
+:global(:root[data-mode='day']) .logo,
+:global(:root[data-mode='day']) .logo[data-dark],
+:global(:root[data-mode='day']) .logo[data-outlined],
+:global(:root[data-mode='day']) .brandLogo,
+:global(:root[data-mode='day']) .brandLogo[data-dark] {
+  filter: grayscale(1);
+}
+
+:global(:root[data-mode='day']) .open .logo,
+:global(:root[data-mode='day']) .open .logo[data-dark],
+:global(:root[data-mode='day']) .open .logo[data-outlined],
+:global(:root[data-mode='day']) .brand:global(.focused) .brandLogo,
+:global(:root[data-mode='day']) .open .brandLogo {
+  filter: none;
+}
+
+/* Telefono: margini ridotti e caselle più strette. */
+[data-layout='compact'] .view {
+  padding: calc(20px * var(--u)) calc(16px * var(--u));
+  gap: calc(18px * var(--u));
+}
+
+[data-layout='compact'] .brand {
+  padding: calc(12px * var(--u)) calc(12px * var(--u)) calc(12px * var(--u)) calc(8px * var(--u));
+  gap: calc(10px * var(--u));
+}
+
+[data-layout='compact'] .grid {
+  grid-template-columns: repeat(auto-fill, minmax(calc(110px * var(--u)), 1fr));
+  gap: calc(8px * var(--u));
+}
+
+[data-layout='compact'] .brandSide {
+  width: calc(76px * var(--u));
+  padding-right: calc(10px * var(--u));
+}
+
+[data-layout='compact'] .brandName {
+  font-size: calc(11px * var(--u));
+}
+
+[data-layout='compact'] .plate {
+  height: calc(44px * var(--u));
+}

@@ -32,7 +32,7 @@ import { initialState, reducer } from './reducer.js'
 
 const systems = [
   { id: 'arcade', name: 'ARCADE', covers: [] },
-  { id: 'nes', name: 'NES', covers: [] },
+  { id: 'mame', name: 'MAME', arcade: true, covers: [] },
 ]
 
 const LUCA = { id: 1, name: 'LUCA_8BIT', color: '#ff5d73' }
@@ -59,7 +59,7 @@ describe('START e slot', () => {
   it('il primo joypad che preme START è P1, il secondo P2, un terzo trova gli slot pieni', () => {
     let state = apply(ready(), pressStart(2))
     expect(state.players.p1).toMatchObject({ joined: true, pad: 2, modal: true, step: 'choose', user: null })
-    expect(state.players.p1.form).toEqual({ name: '', color: '#ff5d73', console: 'arcade' })
+    expect(state.players.p1.form).toEqual({ name: '', color: '#ff5d73' })
     state = apply(state, pressStart(0))
     expect(state.players.p2).toMatchObject({ joined: true, pad: 0, modal: true })
     expect(state.players.p2.form.color).toBe('#3ccfc4')

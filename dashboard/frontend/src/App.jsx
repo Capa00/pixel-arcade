@@ -71,7 +71,9 @@ import {
   showToast,
 } from './state/actions.js'
 import { AppProvider, useApp } from './state/AppContext.jsx'
-import { allConsoles, currentAddonConsole, heroView } from './state/reducer.js'
+import { activeTab, allConsoles, backToAll, currentAddonConsole, heroView } from './state/reducer.js'
+import { ALL_CONSOLE } from './lib/consoleTabs.js'
+import AllConsolesView from './views/AllConsolesView.jsx'
 import { JOIN_HINT, SLOTS, activeUsers, anyModal, gate } from './state/players.js'
 import { crtOn, vibrates } from './state/profiles.js'
 import * as tournamentStore from './state/tournamentStore.js'
@@ -83,7 +85,7 @@ const ALL_LEGENDS = mergeLegends(LEGENDS, addons)
 // Console delle estensioni (`consoles`), in coda alle schede di quelle dei giochi.
 const ADDON_CONSOLES = addonConsoles(addons)
 const NO_COMMANDS = []
-const COMMAND_CONTEXTS = new Set(['library', 'players'])
+const COMMAND_CONTEXTS = new Set(['library', 'players', 'libraryAll', 'playersAll'])
 // Comando della dashboard «Cosa gioco?» (src/views/RandomPickLayer.jsx): Y tenuto, oppure R.
 const RANDOM_PICK = 'random-pick'
 const RANDOM_HOLD_MS = 800
@@ -133,6 +135,8 @@ function Shell() {
       const addon = addons.find((item) => item.id === entry.addon)
       return !addon.watchConsoles || shownConsoles.has(entry.id)
     })
+    // Scheda TUTTE (src/views/AllConsolesView.jsx): sempre, prima di TOURNAMENT.
+    visible.push(ALL_CONSOLE)
     if (tournamentTab) {
       visible.push({ ...TOURNAMENT_CONSOLE, live: tournamentLive })
     }
@@ -173,6 +177,9 @@ function Shell() {
   const challengeInput = useRef(null)
   // Scheda TOURNAMENT (src/views/TournamentView.jsx) e avviso dei tornei all'ingresso (src/views/TournamentNoticeLayer.jsx).
   const tournamentInput = useRef(null)
+  // Scheda TUTTE: griglia di tutte le console.
+  const allInput = useRef(null)
+  const [allContext, setAllContext] = useState(null)
   const tournamentNoticeInput = useRef(null)
   // Schermata «Incontro» del torneo (src/views/MatchLayer.jsx): riceve gli eventi dei due giocatori dell'incontro.
   const matchInput = useRef(null)
@@ -386,6 +393,9 @@ function Shell() {
     if (!current.osk && current.view === 'library' && tournamentInput.current && tournamentInput.current(event)) {
       return
     }
+    if (!current.osk && current.view === 'library' && !anyModal(current.players) && allInput.current && allInput.current(event)) {
+      return
+    }
     if (!current.osk && libraryInput.current && libraryInput.current(event, target)) {
       return
     }
@@ -527,6 +537,8 @@ function Shell() {
     context = addonContext
   } else if (tournamentContext && !settingsView && !profileView && !anyModal(state.players)) {
     context = tournamentContext
+  } else if (allContext && !settingsView && !profileView && !anyModal(state.players)) {
+    context = allContext
   } else if (randomContext && !settingsView && !profileView) {
     context = randomContext
   } else if (libraryContext && !settingsView && !profileView) {
@@ -545,6 +557,10 @@ function Shell() {
     context = state.heroFocus === 'play' ? 'heroPlay' : 'heroCore'
   } else if (state.heroFocus) {
     context = 'hero'
+  }
+  // Console aperta da TUTTE: la legenda della griglia ha anche BACK per tornarci.
+  if ((context === 'library' || context === 'players') && backToAll(state)) {
+    context = `${context}All`
   }
   // Contesto senza Wrapped e sfide: i loro avvisi compaiono solo nella libreria senza finestre.
   const baseContext = context
@@ -832,6 +848,7 @@ function Shell() {
   const consoleTab = currentAddonConsole(state)
   const addonView = consoleTab ? addons.find((addon) => addon.id === consoleTab.addon && addon.ConsoleView) || null : null
   const tournamentView = Boolean(consoleTab && consoleTab.id === TOURNAMENT_CONSOLE.id)
+  const allView = Boolean(consoleTab && consoleTab.id === ALL_CONSOLE.id)
 
   const theme = activeTheme(state)
   useColorMode(chosenMode(state), state.status === 'ready' ? state.mode : null)
@@ -850,7 +867,7 @@ function Shell() {
           settingsView || profileView ? null : (
             <ConsoleTabs
               systems={allConsoles(state)}
-              current={state.systemId}
+              current={activeTab(state)}
               onSelect={(id) => dispatch(selectSystem(id))}
             />
           )
@@ -880,7 +897,10 @@ function Shell() {
         {!settingsView && !profileView && tournamentView && (
           <TournamentView inputRef={tournamentInput} onContext={setTournamentContext} />
         )}
-        {!settingsView && !profileView && !tournamentView && (addonView ? (
+        {!settingsView && !profileView && allView && (
+          <AllConsolesView inputRef={allInput} onContext={setAllContext} />
+        )}
+        {!settingsView && !profileView && !tournamentView && !allView && (addonView ? (
           <addonView.ConsoleView key={consoleTab.id} console={consoleTab} host={host} />
         ) : (
           <Library onWheelMove={wheelMove} />

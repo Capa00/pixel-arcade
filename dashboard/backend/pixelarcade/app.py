@@ -33,6 +33,7 @@ from .leaderboard import LeaderboardService
 from .library import Library
 from .play import PlayService
 from .gravatar import GravatarCache, cache_dir as avatars_dir
+from .consoles import ConsoleRowService
 from .playlists import PlaylistService
 from .profiles import ProfileService
 from .ra_client import RAClient
@@ -41,6 +42,7 @@ from .repositories.bios import BiosRepository
 from .repositories.challenges import ChallengesRepository
 from .repositories.cores import CoresRepository, now_iso
 from .repositories.gameconfig import GameConfigRepository
+from .repositories.consoles import ConsolesRepository
 from .repositories.playlists import PlaylistsRepository
 from .repositories.profiles import ProfilesRepository
 from .repositories.retroachievements import RARepository
@@ -132,6 +134,7 @@ def create_services(db, base_dir, opener=None, data_dir=None, process_factory=No
     profiles.challenge = leaderboard.is_challenge
     wrapped = WrappedService(WrappedRepository(db), profiles)
     playlists = PlaylistService(PlaylistsRepository(db), profiles)
+    consoles = ConsoleRowService(ConsolesRepository(db), profiles_repo)
     ra_client = RAClient() if opener is None else RAClient(opener)
     ra = RAService(ra_repo, SettingsRepository(db), ra_client, profiles_repo, library, data_dir)
     saves = SaveStore(temp_dir, SavesRepository(db))
@@ -175,7 +178,7 @@ def create_services(db, base_dir, opener=None, data_dir=None, process_factory=No
     play.tournament_run = tournament_run
     tournament_run.ingame = ingame
     return {'db': db, 'config': config, 'cores': cores, 'library': library, 'downloader': downloader,
-            'play': play, 'ingame': ingame, 'rescue': rescue, 'controls': controls, 'gameconfig': gameconfig, 'bios': bios, 'boost': boost, 'joypads': joypads, 'profiles': profiles, 'leaderboard': leaderboard, 'wrapped': wrapped, 'challenges': challenges, 'tournaments': tournaments, 'tournamentRun': tournament_run, 'replays': replays, 'playlists': playlists, 'saves': saves, 'gameinfo': gameinfo, 'ra': ra,
+            'play': play, 'ingame': ingame, 'rescue': rescue, 'controls': controls, 'gameconfig': gameconfig, 'bios': bios, 'boost': boost, 'joypads': joypads, 'profiles': profiles, 'leaderboard': leaderboard, 'wrapped': wrapped, 'challenges': challenges, 'tournaments': tournaments, 'tournamentRun': tournament_run, 'replays': replays, 'playlists': playlists, 'consoles': consoles, 'saves': saves, 'gameinfo': gameinfo, 'ra': ra,
             'thumbnails': ImageCache(cache_dir(data_dir)),
             'avatars': GravatarCache(avatars_dir(data_dir)) if opener is None else
             GravatarCache(avatars_dir(data_dir), opener),

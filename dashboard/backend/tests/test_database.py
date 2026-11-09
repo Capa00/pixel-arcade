@@ -26,8 +26,8 @@ class DatabaseTest(unittest.TestCase):
     def test_database_nuovo_arriva_all_ultima_versione(self):
         db = Database(self.path)
         self.assertEqual(db.version(), 0)
-        self.assertEqual(db.migrate(), 26)
-        self.assertEqual(db.version(), 26)
+        self.assertEqual(db.migrate(), 27)
+        self.assertEqual(db.version(), 27)
         tables = [row[0] for row in db.query("SELECT name FROM sqlite_master WHERE type = 'table'")]
         for table in ('settings', 'systems', 'system_cores', 'buildbot_cores', 'downloaded_cores', 'game_cores',
                       'core_attempts', 'sessions', 'accounts', 'account_genres', 'session_players', 'favorites',
@@ -53,7 +53,7 @@ class DatabaseTest(unittest.TestCase):
             conn.execute("INSERT INTO tournament_players (tournament_id, account_id, joined_at) VALUES (1, 1, 'a')")
         db.close()
         db = Database(self.path)
-        self.assertEqual(db.migrate(), 26)
+        self.assertEqual(db.migrate(), 27)
         self.assertEqual(db.query('SELECT format, options, seeding, seeding_weight, advantaged_side, started_at '
                                   'FROM tournaments'), [('single', '{}', 'random', 50, 'none', None)])
         self.assertEqual(db.query('SELECT seed, group_no, withdrawn_at, place FROM tournament_players'),
@@ -87,7 +87,7 @@ class DatabaseTest(unittest.TestCase):
                          "('arcade', 'mame_libretro.so', 0), ('arcade', 'fbneo_libretro.so', 1)")
         db.close()
         db = Database(self.path)
-        self.assertEqual(db.migrate(), 26)
+        self.assertEqual(db.migrate(), 27)
         self.assertEqual(db.query('SELECT id, extensions, cores_set FROM systems ORDER BY id'),
                          [('arcade', 'zip', 1), ('nes', '', 0)])
         self.assertEqual(db.query('SELECT system_id, core FROM system_cores ORDER BY core'),
@@ -111,7 +111,7 @@ class DatabaseTest(unittest.TestCase):
                          "('ps1', '', 'soft', 'max', '{}', 'a'), ('arcade', '', 'smooth', 'original', '{}', 'b')")
         db.close()
         db = Database(self.path)
-        self.assertEqual(db.migrate(), 26)
+        self.assertEqual(db.migrate(), 27)
         self.assertEqual(db.query('SELECT system_id, game_id, mode, custom, options FROM game_config ORDER BY system_id'),
                          [('arcade', '', 'smooth', None, '{"retroarch": {}, "cores": {}}'),
                           ('ps1', '', 'max', None, '{"retroarch": {}, "cores": {}}')])
@@ -126,7 +126,7 @@ class DatabaseTest(unittest.TestCase):
             conn.execute("INSERT INTO settings (key, value) VALUES ('a', '1')")
         db.close()
         db = Database(self.path)
-        self.assertEqual(db.migrate(), 26)
+        self.assertEqual(db.migrate(), 27)
         self.assertEqual(db.query('SELECT key, value FROM settings'), [('a', '1')])
         db.close()
 

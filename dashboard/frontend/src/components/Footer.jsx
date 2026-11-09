@@ -648,6 +648,69 @@ export const LEGENDS = {
     { id: 'start', pad: ['START'], key: ['Invio'], label: 'Conferma', command: 'start' },
     { id: 'b', face: 'east', key: ['Esc'], label: 'Annulla', command: 'b' },
   ],
+  // Scheda TUTTE, livello delle marche (`Home` senza giocatori: SELECT apre le Impostazioni).
+  allBrands: [
+    { id: 'a', face: 'south', key: ['Invio'], label: 'Entra' },
+    { id: 'lbrb', shoulder: ['lb', 'rb'], key: ['[', ']'], label: 'Console' },
+    { id: 'ltrt', shoulder: ['lt', 'rt'], key: ['PagSu', 'PagGiù'], label: 'Marca' },
+    { id: 'start', pad: ['START'], key: ['F2'], label: 'Giocatori', command: 'start' },
+    { id: 'select', pad: ['SELECT'], key: ['F3'], label: 'Profilo', command: 'select' },
+  ],
+  allBrandsHome: [
+    { id: 'a', face: 'south', key: ['Invio'], label: 'Entra' },
+    { id: 'lbrb', shoulder: ['lb', 'rb'], key: ['[', ']'], label: 'Console' },
+    { id: 'ltrt', shoulder: ['lt', 'rt'], key: ['PagSu', 'PagGiù'], label: 'Marca' },
+    { id: 'start', pad: ['START'], key: ['F2'], label: 'Giocatori', command: 'start' },
+    { id: 'select', pad: ['SELECT'], key: ['F3'], label: 'Impostazioni', command: 'select' },
+  ],
+  // Scheda TUTTE, console di una marca (solo con un profilo): il tasto ovest accende o spegne la casella
+  // della riga, il tasto nord sceglie la console preferita.
+  allConsoles: [
+    { id: 'a', face: 'south', key: ['Invio'], label: 'Apri' },
+    { id: 'x', face: 'west', key: ['/'], label: 'Nella riga', command: 'x' },
+    { id: 'y', face: 'north', key: ['P'], label: 'Preferita', command: 'y' },
+    { id: 'b', face: 'east', key: ['Esc'], label: 'Marche', command: 'b' },
+    { id: 'lbrb', shoulder: ['lb', 'rb'], key: ['[', ']'], label: 'Console' },
+    { id: 'ltrt', shoulder: ['lt', 'rt'], key: ['PagSu', 'PagGiù'], label: 'Marca' },
+    { id: 'start', pad: ['START'], key: ['F2'], label: 'Giocatori', command: 'start' },
+    { id: 'select', pad: ['SELECT'], key: ['F3'], label: 'Profilo', command: 'select' },
+  ],
+  allConsolesGuest: [
+    { id: 'a', face: 'south', key: ['Invio'], label: 'Apri' },
+    { id: 'b', face: 'east', key: ['Esc'], label: 'Marche', command: 'b' },
+    { id: 'lbrb', shoulder: ['lb', 'rb'], key: ['[', ']'], label: 'Console' },
+    { id: 'ltrt', shoulder: ['lt', 'rt'], key: ['PagSu', 'PagGiù'], label: 'Marca' },
+    { id: 'start', pad: ['START'], key: ['F2'], label: 'Giocatori', command: 'start' },
+    { id: 'select', pad: ['SELECT'], key: ['F3'], label: 'Profilo', command: 'select' },
+  ],
+  allConsolesGuestHome: [
+    { id: 'a', face: 'south', key: ['Invio'], label: 'Apri' },
+    { id: 'b', face: 'east', key: ['Esc'], label: 'Marche', command: 'b' },
+    { id: 'lbrb', shoulder: ['lb', 'rb'], key: ['[', ']'], label: 'Console' },
+    { id: 'ltrt', shoulder: ['lt', 'rt'], key: ['PagSu', 'PagGiù'], label: 'Marca' },
+    { id: 'start', pad: ['START'], key: ['F2'], label: 'Giocatori', command: 'start' },
+    { id: 'select', pad: ['SELECT'], key: ['F3'], label: 'Impostazioni', command: 'select' },
+  ],
+  // Scheda «Console» delle Impostazioni: prima le marche, poi le console della marca (il tasto ovest le accende o spegne per tutti).
+  settingsConsoles: [
+    { id: 'a', face: 'south', key: ['Invio'], label: 'Entra' },
+    { id: 'lbrb', shoulder: ['lb', 'rb'], key: ['[', ']'], label: 'Scheda' },
+    { id: 'b', face: 'east', key: ['Esc'], label: 'Indietro', command: 'b' },
+  ],
+  settingsConsolesIn: [
+    { id: 'a', face: 'south', key: ['Invio'], label: 'Seleziona' },
+    { id: 'x', face: 'west', key: ['/'], label: 'Accendi/spegni', command: 'x' },
+    { id: 'b', face: 'east', key: ['Esc'], label: 'Marche', command: 'b' },
+    { id: 'lbrb', shoulder: ['lb', 'rb'], key: ['[', ']'], label: 'Scheda' },
+  ],
+}
+
+// Griglia di una console aperta da TUTTE: come la libreria, con BACK per tornarci.
+const BACK_TO_ALL = { id: 'b', face: 'east', key: ['Esc'], label: 'Tutte', command: 'b' }
+for (const name of ['library', 'players']) {
+  const items = LEGENDS[name]
+  const at = items.findIndex((item) => item.id === 'start')
+  LEGENDS[`${name}All`] = [...items.slice(0, at), BACK_TO_ALL, ...items.slice(at)]
 }
 
 function Keys({ item, keyboard }) {

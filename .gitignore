@@ -38,6 +38,9 @@ games/
 
 # --- Build e dipendenze ---
 dashboard/frontend/dist/
+
+# --- Loghi delle console (scaricati da dashboard/tools/fetch_logos.py) ---
+dashboard/frontend/public/logos/
 node_modules/
 __pycache__/
 *.pyc

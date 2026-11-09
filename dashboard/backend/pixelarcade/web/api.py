@@ -33,6 +33,7 @@ def bootstrap(ctx, request):
         'sound': sound_data(settings),
         'run': run_data(ctx),
         'warnings': library.warnings(),
+        'consoles': ctx['consoles'].data(),
         'addons': addons.bootstrap_data(ctx.get('addons', []), ctx),
     }
 
@@ -1123,6 +1124,17 @@ def profile_played(ctx, request):
 # --- Playlist -----------------------------------------------------------------
 
 
+def consoles_off(ctx, request):
+    """``POST /api/consoles/off`` ``{off: [id]}``: console spente per tutti, ``{consoles}``."""
+    return {'consoles': ctx['consoles'].set_off(request.body.get('off'))}
+
+
+def consoles_row(ctx, request):
+    """``POST /api/consoles/row`` ``{account, id, on}``: accende o spegne la console nella riga del profilo, ``{consoles}``."""
+    body = request.body
+    return {'consoles': ctx['consoles'].set_row(body.get('account'), body.get('id'), body.get('on'))}
+
+
 def playlists(ctx, request):
     """``GET /api/playlists``: ``{playlists: [{id, name, filters, games}], games}`` (riepiloghi dei giochi aggiunti)."""
     return ctx['playlists'].data()
@@ -1641,6 +1653,8 @@ def register(router):
     router.add('GET', '/api/replays/status', replay_status)
     router.add('POST', '/api/replays/stop', replay_stop)
     router.add('POST', '/api/favorites', set_favorite)
+    router.add('POST', '/api/consoles/off', consoles_off)
+    router.add('POST', '/api/consoles/row', consoles_row)
     router.add('GET', '/api/playlists', playlists)
     router.add('POST', '/api/playlists', create_playlist)
     router.add('POST', '/api/playlists/update', update_playlist)

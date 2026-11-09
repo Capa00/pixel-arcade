@@ -18,6 +18,19 @@
   color: var(--text-1);
 }
 
+/* Logo al posto del nome: attenuato come il testo delle schede non attive. */
+.logo {
+  display: block;
+  height: calc(52px * var(--u));
+  width: auto;
+  opacity: 0.55;
+  transition: opacity 0.15s;
+}
+
+.active .logo {
+  opacity: 1;
+}
+
 .line {
   position: absolute;
   left: calc(18px * var(--u));
@@ -46,4 +59,8 @@
 /* Telefono: schede più basse sotto il logo. */
 [data-layout='compact'] .tab {
   height: calc(52px * var(--u));
+}
+
+[data-layout='compact'] .logo {
+  height: calc(38px * var(--u));
 }

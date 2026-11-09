@@ -350,7 +350,7 @@ export default function Profile({ inputRef, onContext }) {
             </section>
           )}
           {current === 'prefs' && (
-            <ProfilePrefs profile={profile} accountId={accountId} pad={slot.pad} item={scope.item} patch={patch} />
+            <ProfilePrefs profile={profile} accountId={accountId} slot={slotKey} pad={slot.pad} item={scope.item} patch={patch} />
           )}
         </div>
       </div>

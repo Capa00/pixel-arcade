@@ -18,6 +18,7 @@ import { START, clampPos, keyAt, keyChar, layout as oskLayout, move as oskMoveTo
 import { applyField, settingsReducer } from './settings.js'
 import * as P from './players.js'
 import * as PR from './profiles.js'
+import { ALL_CONSOLE, EMPTY_PREFS, normalizePrefs, rowSystems } from '../lib/consoleTabs.js'
 
 export const initialState = {
   status: 'loading',
@@ -125,11 +126,58 @@ export const initialState = {
   addons: {},
   // Console delle estensioni, senza giochi (`[{id, name, accent, addon}]`, src/addons/registry.js).
   extraConsoles: [],
+  // Console accese per tutti e scelte dei profili per la riga delle schede (src/lib/consoleTabs.js).
+  consolePrefs: EMPTY_PREFS,
+  // Console aperta dalla scheda TUTTE (BACK riporta lì), oppure `null`.
+  fromAll: null,
 }
 
-/** Schede delle console: quelle dei giochi e, in coda, quelle delle estensioni. */
+/** Profilo che decide la riga delle schede: quello del P1, se non ospite; altrimenti `null`. */
+export function rowAccount(state) {
+  const user = state.players.p1.user
+  return user && !user.guest ? user.id : null
+}
+
+/** Console preferita del profilo della riga (sempre nella sua riga), oppure `null`. */
+export function rowFavorite(state) {
+  if (rowAccount(state) === null) {
+    return null
+  }
+  const profile = PR.profileOf(state, 'p1')
+  return (profile && profile.favConsole) || null
+}
+
+/**
+ * Schede della riga: le console dei giochi accese (Impostazioni e scelte del
+ * profilo del P1) e, in coda, quelle delle estensioni (TUTTE, TOURNAMENT…).
+ */
 export function allConsoles(state) {
-  return state.extraConsoles.length ? [...state.systems, ...state.extraConsoles] : state.systems
+  const shown = rowSystems(state.systems, state.consolePrefs, rowAccount(state), rowFavorite(state))
+  return state.extraConsoles.length ? [...shown, ...state.extraConsoles] : shown
+}
+
+/** Scheda evidenziata: la console selezionata, oppure TUTTE se è fuori dalla riga. */
+export function activeTab(state) {
+  const tabs = allConsoles(state)
+  if (tabs.some((entry) => entry.id === state.systemId)) {
+    return state.systemId
+  }
+  return tabs.some((entry) => entry.id === ALL_CONSOLE.id) ? ALL_CONSOLE.id : state.systemId
+}
+
+/** Vero se BACK nella griglia riporta alla scheda TUTTE (console aperta da lì o fuori dalla riga). */
+export function backToAll(state) {
+  if (state.systemId === ALL_CONSOLE.id || !state.extraConsoles.some((entry) => entry.id === ALL_CONSOLE.id)) {
+    return false
+  }
+  return state.fromAll === state.systemId || activeTab(state) === ALL_CONSOLE.id
+}
+
+/** Prima console della riga, per la scelta iniziale. */
+function firstConsole(state) {
+  const shown = rowSystems(state.systems, state.consolePrefs, rowAccount(state), rowFavorite(state))
+  const first = shown[0] || state.systems[0]
+  return first ? first.id : null
 }
 
 /** Console di un'estensione selezionata, oppure `null` (su una console dei giochi). */
@@ -137,9 +185,9 @@ export function currentAddonConsole(state) {
   return state.extraConsoles.find((entry) => entry.id === state.systemId) || null
 }
 
-/** Vero se `id` è una console, dei giochi o di un'estensione. */
+/** Vero se `id` è una console, dei giochi (anche fuori dalla riga) o di un'estensione. */
 function knownConsole(state, id) {
-  return allConsoles(state).some((entry) => entry.id === id)
+  return state.systems.some((entry) => entry.id === id) || state.extraConsoles.some((entry) => entry.id === id)
 }
 
 /** Sistema dei giochi selezionato, oppure `null` (anche sulla console di un'estensione). */
@@ -286,9 +334,10 @@ function cycle(state, dir) {
   if (count < 2) {
     return state
   }
-  const at = consoles.findIndex((system) => system.id === state.systemId)
+  const at = consoles.findIndex((system) => system.id === activeTab(state))
   const next = consoles[(at + dir + count) % count]
-  return { ...state, systemId: next.id, index: 0 }
+  // Arrivando su TUTTE con L1/R1 si riparte dalle marche (`allBrand`, src/views/AllConsolesView.jsx).
+  return { ...state, systemId: next.id, index: 0, fromAll: null, focus: { ...state.focus, allBrand: null } }
 }
 
 /**
@@ -613,11 +662,11 @@ function playersReducer(state, action) {
   const { players } = state
   switch (action.type) {
     case A.PRESS_START: {
-      const next = P.pressStart(players, action.pad, state.systemId, action.padId)
+      const next = P.pressStart(players, action.pad, action.padId)
       return next ? withPlayers(state, next) : toast(state, P.FULL_MESSAGE)
     }
     case A.CLICK_SLOT:
-      return withPlayers(state, P.clickSlot(players, action.slot, state.systemId))
+      return withPlayers(state, P.clickSlot(players, action.slot))
     case A.CLOSE_LOGIN:
       return withPlayers({ ...state, reservedGame: null }, P.closeModal(players, action.slot))
     case A.LEAVE_SLOT:
@@ -778,8 +827,9 @@ function baseReducer(state, action) {
     case A.INPUT:
       return route(state, action.event).reduce(reducer, state)
     case A.BOOTSTRAP_LOADED: {
-      const { systems, padButtons, saveCombo, rescueCombo, quitCombo, warnings, run, theme, mode, screensaver, screensaverContent, tournamentAds, logout, sound, addons } = action.data
+      const { systems, padButtons, saveCombo, rescueCombo, quitCombo, warnings, run, theme, mode, screensaver, screensaverContent, tournamentAds, logout, sound, addons, consoles } = action.data
       const keep = knownConsole({ ...state, systems }, state.systemId)
+      const consolePrefs = consoles ? normalizePrefs(consoles) : state.consolePrefs
       return {
         ...state,
         status: 'ready',
@@ -799,7 +849,8 @@ function baseReducer(state, action) {
         warnings: warnings || [],
         run: run || state.run,
         addons: addons || {},
-        systemId: keep ? state.systemId : (systems[0] ? systems[0].id : null),
+        consolePrefs,
+        systemId: keep ? state.systemId : firstConsole({ ...state, systems, consolePrefs }),
         index: keep ? state.index : 0,
       }
     }
@@ -828,7 +879,16 @@ function baseReducer(state, action) {
       if (action.system === state.systemId || !knownConsole(state, action.system)) {
         return state
       }
-      return { ...state, systemId: action.system, index: 0, heroFocus: null, pendingGame: null }
+      return {
+        ...state,
+        systemId: action.system,
+        index: 0,
+        heroFocus: null,
+        pendingGame: null,
+        fromAll: action.fromAll ? action.system : null,
+      }
+    case A.CONSOLE_PREFS:
+      return action.prefs === state.consolePrefs ? state : { ...state, consolePrefs: action.prefs }
     case A.ADDON_CONSOLES: {
       const next = { ...state, extraConsoles: action.consoles }
       if (state.extraConsoles.some((entry) => entry.id === state.systemId) && !knownConsole(next, state.systemId)) {
@@ -911,7 +971,7 @@ function baseReducer(state, action) {
         ...state,
         systems,
         games: {},
-        systemId: keep ? state.systemId : (systems[0] ? systems[0].id : null),
+        systemId: keep ? state.systemId : firstConsole({ ...state, systems }),
         index: keep ? state.index : 0,
       }
     }

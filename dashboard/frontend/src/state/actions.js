@@ -12,6 +12,7 @@ export const HIDE_TOAST = 'hideToast'
 export const INPUT = 'input'
 export const CYCLE_SYSTEM = 'cycleSystem'
 export const ADDON_CONSOLES = 'addonConsoles'
+export const CONSOLE_PREFS = 'consolePrefs'
 export const JUMP_LETTER = 'jumpLetter'
 export const JUMP_TO_LETTER = 'jumpToLetter'
 export const SET_QUERY = 'setQuery'
@@ -98,7 +99,8 @@ export const MATCH_CLOSE = 'matchClose'
 export const bootstrapLoaded = (data) => ({ type: BOOTSTRAP_LOADED, data })
 export const loadFailed = (message) => ({ type: LOAD_FAILED, message })
 export const gamesLoaded = (system, games) => ({ type: GAMES_LOADED, system, games })
-export const selectSystem = (system) => ({ type: SELECT_SYSTEM, system })
+/** Seleziona una console; `fromAll` se aperta dalla scheda TUTTE (BACK ci riporta lì). */
+export const selectSystem = (system, fromAll = false) => ({ type: SELECT_SYSTEM, system, fromAll })
 export const moveSelection = (dx, dy, wrap = false) => ({ type: MOVE_SELECTION, dx, dy, wrap })
 export const setColumns = (columns) => ({ type: SET_COLUMNS, columns })
 export const selectIndex = (index) => ({ type: SELECT_INDEX, index })
@@ -115,6 +117,8 @@ export const input = (event) => ({ type: INPUT, event })
 export const cycleSystem = (dir) => ({ type: CYCLE_SYSTEM, dir })
 /** Console delle estensioni (`[{id, name, accent, addon}]`), in coda a quelle dei giochi. */
 export const addonConsolesLoaded = (consoles) => ({ type: ADDON_CONSOLES, consoles })
+/** Console accese per tutti e scelte dei profili (src/lib/consoleTabs.js). */
+export const consolePrefsChanged = (prefs) => ({ type: CONSOLE_PREFS, prefs })
 /** Primo gioco dell'iniziale successiva (`dir` = 1) o precedente (-1). */
 export const jumpLetter = (dir, wrap = true) => ({ type: JUMP_LETTER, dir, wrap })
 /** Primo gioco con l'iniziale `letter` (`#` o `A`–`Z`), se presente. */

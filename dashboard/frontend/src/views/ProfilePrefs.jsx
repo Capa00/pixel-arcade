@@ -3,7 +3,8 @@ import * as api from '../api/client.js'
 import Segmented from '../components/Segmented.jsx'
 import Toggle from '../components/Toggle.jsx'
 import { bumpAvatar } from '../lib/avatar.js'
-import { openKeyboard, showToast } from '../state/actions.js'
+import { ALL_CONSOLE, ALL_SCOPES, allFocus } from '../lib/consoleTabs.js'
+import { closeProfile, openKeyboard, selectSystem, setFocus, showToast } from '../state/actions.js'
 import { useApp } from '../state/AppContext.jsx'
 import { NAME_MAX, SWATCHES, normalizeName } from '../state/players.js'
 import { DIFFICULTIES, GENRES, OPTIONS } from '../state/profiles.js'
@@ -176,39 +177,44 @@ function GravatarGroup({ accountId, linked, pad, item }) {
 
 /**
  * Scheda «Preferenze» della pagina profilo: per un profilo registrato
- * (`accountId` non `null`) nome e colore, poi console preferita, generi,
+ * (`accountId` non `null`) nome e colore, poi console preferita (si sceglie
+ * nella scheda TUTTE col tasto nord: dal P1 la voce porta lì), generi,
  * difficoltà, opzioni e, sempre per un profilo registrato, l'avatar Gravatar. `item(id, onActivate)` sono le voci navigabili della
  * pagina; `patch(value)` modifica il profilo; `pad` è il joypad del giocatore.
  */
-export default function ProfilePrefs({ profile, accountId, pad, item, patch }) {
-  const { state } = useApp()
+export default function ProfilePrefs({ profile, accountId, slot, pad, item, patch }) {
+  const { state, dispatch } = useApp()
   const genres = profile.genres || []
   const opts = profile.opts || {}
-  const hasConsole = state.systems.some((system) => system.id === profile.favConsole)
+  const favorite = state.systems.find((system) => system.id === profile.favConsole) || null
+
+  // Chiude il profilo e apre TUTTE sulla marca della preferita (oppure sulle marche, se non c'è).
+  const chooseInAll = () => {
+    dispatch(closeProfile())
+    dispatch(selectSystem(ALL_CONSOLE.id))
+    const focus = favorite ? allFocus(state.systems, favorite.id) : [[ALL_SCOPES.open, null]]
+    for (const [scope, value] of focus) {
+      dispatch(setFocus(scope, value))
+    }
+  }
 
   return (
     <div className={styles.prefs}>
       {accountId !== null && <IdentityGroup profile={profile} pad={pad} item={item} patch={patch} />}
-      <div className={styles.group}>
-        <div className={styles.groupLabel}>CONSOLE PREFERITA</div>
-        <div className={styles.chips}>
-          {state.systems.map((system, position) => {
-            const on = system.id === profile.favConsole
-            return (
-              <button
-                key={system.id}
-                type="button"
-                aria-pressed={on}
-                className={on ? `${styles.chip} ${styles.consoleOn}` : styles.chip}
-                data-autofocus={on || (!hasConsole && position === 0) || undefined}
-                {...item(`console-${system.id}`, () => patch({ favConsole: system.id }))}
-              >
-                {system.name}
+      {accountId !== null && (
+        <div className={styles.group}>
+          <div className={styles.groupLabel}>CONSOLE PREFERITA</div>
+          <div className={styles.chips}>
+            {slot === 'p1' ? (
+              <button type="button" className={`${styles.chip} ${styles.consoleOn}`} {...item('fav-console', chooseInAll)}>
+                {`${favorite ? favorite.name : 'Nessuna'} · Scegli in TUTTE ▸`}
               </button>
-            )
-          })}
+            ) : (
+              <span className={styles.chip}>{`${favorite ? favorite.name : 'Nessuna'} · si sceglie in TUTTE da P1`}</span>
+            )}
+          </div>
         </div>
-      </div>
+      )}
       <div className={styles.group}>
         <div className={styles.groupLabel}>GENERI PREFERITI</div>
         <div className={styles.chips}>

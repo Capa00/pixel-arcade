@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { HERO_ACTIONS, followerActions, route } from '../input/controller.js'
 import {
   bootstrapLoaded,
+  consolePrefsChanged,
   favoriteSynced,
   gamesLoaded,
   gotoGame,
@@ -25,11 +26,11 @@ import {
 import { gate } from './players.js'
 import { stepId } from '../input/wrap.js'
 import { crtOn, favoriteSlots, gameSummary, isFavorite, profileOf, profileTabs, vibrates } from './profiles.js'
-import { currentGame, initialState, reducer } from './reducer.js'
+import { allConsoles, currentGame, initialState, reducer } from './reducer.js'
 
 const systems = [
   { id: 'arcade', name: 'ARCADE', covers: [] },
-  { id: 'nes', name: 'NES', covers: [] },
+  { id: 'mame', name: 'MAME', arcade: true, covers: [] },
 ]
 
 function account(id, name, extra = {}) {
@@ -55,7 +56,7 @@ function account(id, name, extra = {}) {
 
 const LUCA = account(1, 'LUCA_8BIT', { opts: { crt: true, vib: true } })
 const SARA = account(2, 'SARA.EXE', { color: '#3ccfc4', favorites: ['nes/zelda.nes'] })
-const NONNO = account(3, 'NONNO', { favConsole: 'nes' })
+const NONNO = account(3, 'NONNO', { favConsole: 'mame' })
 
 function apply(state, ...actions) {
   return actions.reduce(reducer, state)
@@ -162,9 +163,18 @@ describe('preferenze', () => {
 
   it('P1 entra: la libreria passa alla sua console preferita', () => {
     const state = apply(ready(), pressStart(0), login('p1', NONNO))
-    expect(state.systemId).toBe('nes')
+    expect(state.systemId).toBe('mame')
     const other = apply(ready(), pressStart(0), pressStart(1), login('p2', NONNO))
     expect(other.systemId).toBe('arcade')
+  })
+
+  it('la console preferita del P1 è sempre nella sua riga', () => {
+    let state = apply(ready(), consolePrefsChanged({ off: ['mame'], profiles: { 3: { add: [], remove: ['mame'] } } }))
+    expect(allConsoles(state).map((entry) => entry.id)).toEqual(['arcade'])
+    state = apply(state, pressStart(0), login('p1', NONNO))
+    expect(allConsoles(state).map((entry) => entry.id)).toEqual(['arcade', 'mame'])
+    state = apply(state, patchProfile('p1', { favConsole: null }))
+    expect(allConsoles(state).map((entry) => entry.id)).toEqual(['arcade'])
   })
 })
 
@@ -193,10 +203,10 @@ describe('pagina profilo', () => {
     let state = apply(twoPlayers(), selectIndex(0), openProfile('p1'), gotoGame('arcade', 'sf2.zip'))
     expect(state.view).toBe('library')
     expect(currentGame(state).id).toBe('sf2.zip')
-    state = apply(state, openProfile('p1'), gotoGame('nes', 'zelda.nes'))
-    expect(state.systemId).toBe('nes')
-    expect(state.pendingGame).toEqual({ system: 'nes', id: 'zelda.nes' })
-    state = apply(state, gamesLoaded('nes', [{ id: 'mario.nes', title: 'Mario' }, { id: 'zelda.nes', title: 'Zelda' }]))
+    state = apply(state, openProfile('p1'), gotoGame('mame', 'zelda.nes'))
+    expect(state.systemId).toBe('mame')
+    expect(state.pendingGame).toEqual({ system: 'mame', id: 'zelda.nes' })
+    state = apply(state, gamesLoaded('mame', [{ id: 'mario.zip', title: 'Mario' }, { id: 'zelda.nes', title: 'Zelda' }]))
     expect(currentGame(state).id).toBe('zelda.nes')
     expect(state.pendingGame).toBeNull()
     state = apply(state, gotoGame('snes', 'x.sfc'))

@@ -15,7 +15,7 @@ Aggiornato sprint per sprint: qui compaiono solo le rotte già implementate.
 | Metodo | Rotta | Corpo / query | Risposta | Sprint |
 | --- | --- | --- | --- | --- |
 | GET | `/api/health` | — | `{ok, version, db: {version}}` | 01 |
-| GET | `/api/bootstrap` | — | `{token, version, systems[], buttons, saveCombo, rescueCombo, quitCombo, theme, mode, screensaver, screensaverContent, logout, sound, run, warnings[], addons}` | 02, salvataggi 04 |
+| GET | `/api/bootstrap` | — | `{token, version, systems[], buttons, saveCombo, rescueCombo, quitCombo, theme, mode, screensaver, screensaverContent, logout, sound, run, warnings[], consoles, addons}` | 02, salvataggi 04, console della riga |
 | GET | `/api/games` | `?system=` | `{system, games[]}` | 02 |
 | POST | `/api/library/rescan` | `{}` | `{systems[]}` | 02 |
 | GET | `/api/settings` | — | `{settings, systems[], coreTypes[], availableCores[], coreIndex, retroarch: {quitCombo}, cpu: {ready, governor}}` | 04, 04b |
@@ -106,6 +106,8 @@ Aggiornato sprint per sprint: qui compaiono solo le rotte già implementate.
 | GET | `/api/replays/status` | — | `{playing, reason, showing}` | Salvaschermo |
 | POST | `/api/replays/stop` | — | `{playing, reason, showing}` | Salvaschermo |
 | POST | `/api/favorites` | `{account, game: "<system>/<id>", on: bool}` | `{favorites: [key], games: {key: gameSummary}}` | 08 |
+| POST | `/api/consoles/off` | `{off: [id]}` | `{consoles}` | console della riga |
+| POST | `/api/consoles/row` | `{account, id, on}` | `{consoles}` | console della riga |
 | GET | `/api/playlists` | — | `playlists` | playlist |
 | POST | `/api/playlists` | `{name, filters?, games?: [key]}` | `playlists` | playlist |
 | POST | `/api/playlists/update` | `{id, patch: {name?, filters?}}` | `playlists` | playlist |
@@ -574,6 +576,21 @@ Nelle partite normali col P1 registrato (non nelle sfide trofeo, nelle prove dei
 - Il gioco della sfida si estrae alla prima richiesta della settimana (o alla prima partita finita), a caso tra quelli con una partita registrata di un profilo e ancora presenti nella libreria; poi resta in `weekly_challenges` fino a domenica.
 - Contano le partite finite (`ended_at`) dentro la settimana; una partita in due conta per entrambi i profili.
 - I punti RetroAchievements non sono qui: l'interfaccia li chiede con `GET /api/ra/profile` per i profili con `raUser`.
+
+### Console della riga
+
+Le Impostazioni decidono quali console sono accese per tutti; ogni profilo accende o spegne le console della propria riga delle schede. Una scelta del profilo resta salvata così com'è, anche quando le Impostazioni cambiano; le console che il profilo non ha mai toccato seguono le Impostazioni. La console preferita del profilo (`favConsole`) è sempre nella sua riga: lo decide l'interfaccia. Il riquadro `consoles` arriva con `GET /api/bootstrap` e con la risposta delle due rotte:
+
+```json
+{"off": ["snes"], "profiles": {"3": {"add": ["snes"], "remove": ["nes"]}}}
+```
+
+- `off`: id delle console spente per tutti, in ordine alfabetico. Una console senza giochi o non più nella libreria può restarci: la scelta vale di nuovo quando ritorna.
+- `profiles`: per ogni profilo (id come testo) le console che ha acceso (`add`) e spento (`remove`). I profili senza scelte non compaiono. Un ospite non ha scelte proprie.
+- `POST /api/consoles/off` sostituisce l'elenco delle console spente (al massimo 500 id); le scelte dei profili restano.
+- `POST /api/consoles/row` accende (`on: true`) o spegne (`on: false`) la console nella riga del profilo; ripetere la stessa scelta non cambia nulla.
+- Le scelte di un profilo si cancellano insieme al profilo.
+- 400: elenco non valido, id di console vuoto, troppo lungo (oltre 64 caratteri) o non testuale, `on` non booleano, profilo inesistente.
 
 ### Giochi giocati e playlist
 

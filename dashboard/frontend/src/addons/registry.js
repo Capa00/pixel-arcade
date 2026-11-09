@@ -19,7 +19,9 @@
  *   `Layer` si chiudono da sole (App li ricrea); uno store esterno si chiude
  *   iscrivendosi con `subscribeSplash` di src/addons/splash.js;
  * - `consoles`: console senza giochi, con una scheda in coda a quelle dei
- *   giochi (`[{id, name, accent}]`; `id` diverso dalle cartelle di `games/`);
+ *   giochi (`[{id, name, accent, logo}]`; `id` diverso dalle cartelle di
+ *   `games/`). `logo` (facoltativo) è l'URL di un'immagine, di solito
+ *   importata dalla cartella dell'estensione: nella riga prende il posto del nome;
  * - `watchConsoles(host, show)` (facoltativa): controlla quando mostrare le
  *   sue `consoles`, chiamando `show(id, visibile)`; restituisce la funzione
  *   che lo ferma. Finché non la chiama, le sue console restano nascoste;
@@ -123,6 +125,12 @@ export function mergeLegends(base, addons) {
     if (library.length) {
       result.library = append(result.library || [], library)
       result.players = append(result.players || [], library)
+      // Stessa griglia aperta dalla scheda TUTTE (legende `libraryAll` e `playersAll`).
+      for (const name of ['libraryAll', 'playersAll']) {
+        if (result[name]) {
+          result[name] = append(result[name], library)
+        }
+      }
     }
   }
   return result

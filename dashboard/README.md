@@ -21,6 +21,14 @@ npm run build
 
 La build finisce in `dashboard/frontend/dist/`, che il backend serve così com'è.
 
+**Loghi delle console (facoltativi).** I loghi mostrati nella scheda TUTTE e nelle Impostazioni non stanno nella repo. Prima della build li scarica da Wikimedia Commons lo script:
+
+```bash
+python3 dashboard/tools/fetch_logos.py
+```
+
+I PNG finiscono in `dashboard/frontend/public/logos/` (esclusa dal `.gitignore`), che la build copia in `dist/logos/`; accanto, `index.json` riporta file, fonte, licenza e autore di ogni logo. I loghi sono marchi dei rispettivi proprietari. `--force` scarica di nuovo anche quelli già presenti, `--out CARTELLA` cambia la destinazione. Senza loghi la dashboard mostra il nome della console.
+
 ## Avvio sulla console
 
 ```bash
@@ -93,6 +101,24 @@ SELECT e START agiscono al rilascio, così si possono premere insieme per la chi
 Nella griglia ↑ e ↓ passano alla prima o all'ultima riga nella stessa colonna (se manca, all'ultimo gioco).
 Una direzione tenuta premuta e la rotellina si fermano invece al bordo: per ripartire dall'altro capo si rilascia e si preme di nuovo.
 
+**Riga delle console e scheda TUTTE.** Le schede in alto seguono l'ordine delle marche, alfabetico: Arcade, Atari, Bandai, Computer, NEC, Nintendo, Sega, SNK, Sony e per ultime le console di «Altro». Dentro una marca le console sono in ordine di uscita (`BRANDS` in `frontend/src/lib/consoleTabs.js`). In coda vengono le schede delle estensioni, tra cui TUTTE e TOURNAMENT.
+TUTTE mostra ogni console, anche quelle fuori dalla riga, divise per marca: le frecce scelgono la marca, A ci entra (le altre si attenuano), poi le frecce scelgono la console.
+
+| Joypad | Tastiera | Azione |
+| --- | --- | --- |
+| A | Invio | Tra le marche entra nella marca; su una console la apre |
+| X | `/` | Accende o spegne la casella della console nella riga del profilo di P1 |
+| Y | `P` | Rende la console la preferita del profilo di P1; sulla preferita la toglie |
+| B | Esc | Torna alle marche |
+
+La casella accanto al nome è verde con la spunta se la console è nella riga, vuota se non c'è.
+- Senza scelte del profilo valgono le Impostazioni (Console → interruttore «Accesa / Spenta»): le console accese sono già spuntate.
+- Una casella cambiata dal profilo resta così anche quando le Impostazioni cambiano: una console accesa dal profilo resta nella sua riga anche se poi viene spenta per tutti. Le console mai toccate seguono le Impostazioni.
+- La console preferita ha il cuore rosso ed è sempre nella riga: la sua casella ha il lucchetto e X non la toglie.
+- Senza profilo (ospite o nessun giocatore) la riga è quella delle Impostazioni: le caselle hanno il lucchetto, X e Y mostrano un avviso.
+
+Le scelte stanno nel database (`POST /api/consoles/off` e `POST /api/consoles/row`, vedi API.md). Una console aperta da TUTTE, o fuori dalla riga, torna a TUTTE con B dalla griglia; LB e RB partono da TUTTE.
+
 **Giocatori.** Un joypad comanda la dashboard solo dopo aver premuto START: il primo che lo preme diventa P1, il secondo P2 (un terzo riceve «Due giocatori già attivi»).
 Ognuno sceglie il proprio profilo nella sua finestra «Chi gioca?» (P1 a sinistra, P2 a destra), ne crea uno nuovo o gioca come ospite. In cima ci sono «Gioca come ospite» (già selezionato) e «Crea un nuovo profilo», sotto i profili: chi non ha un profilo suo entra come ospite invece di usare quello di un altro.
 Se il joypad che entra non ha ancora un autoconfig di RetroArch, prima di «Chi gioca?» la stessa finestra apre «Configura il joypad» per quel giocatore (vedi «Joypad nei giochi» nelle Impostazioni). «Più tardi», Esc o la ✕ la saltano, e non viene richiesta di nuovo finché la pagina resta aperta.
@@ -104,7 +130,7 @@ Il joypad comanda la dashboard solo quando la finestra di Chrome è in primo pia
 **Preferiti e profilo.** Y salva il gioco selezionato nei preferiti del giocatore (sotto «Gioca» il cuore con P1 o P2, sulla copertina un pallino rosso P1 o azzurro P2); i preferiti si cambiano solo con Y; per un ospite vale solo finché resta nello slot.
 Ogni partita di almeno 20 s dà XP e tempo ai profili in gioco (1 XP al minuto fino a 180, +5 per la partita, +25 per un gioco nuovo; sul gioco della sfida della settimana i minuti valgono il doppio): al rientro compare «+N XP» e, se si sale di livello, «Livello N · Titolo».
 SELECT apre la pagina profilo: livello, ore di gioco, giochi provati, preferiti (A porta al gioco nella libreria, Y o il cuore lo tolgono), le ultime 5 partite e le preferenze.
-Le preferenze si salvano subito: nome e colore (solo per un profilo registrato; il nome si scrive con la tastiera a schermo e non può essere quello di un altro profilo), console preferita (la libreria ci passa quando P1 entra), generi, difficoltà (solo indicativa), Filtro CRT di P1 (righe di scansione sulla dashboard e, se `paths.crt_shader` è impostato, shader in RetroArch), Vibrazione joypad (impulso breve all'avvio e sui preferiti, se il joypad la supporta; in RetroArch `input_rumble_gain`).
+Le preferenze si salvano subito: nome e colore (solo per un profilo registrato; il nome si scrive con la tastiera a schermo e non può essere quello di un altro profilo), console preferita (vedi «Riga delle console e scheda TUTTE»: nel profilo di P1 la voce «Scegli in TUTTE» apre la scheda sulla sua marca; un profilo nuovo nasce senza; la libreria ci passa quando P1 entra), generi, difficoltà (solo indicativa), Filtro CRT di P1 (righe di scansione sulla dashboard e, se `paths.crt_shader` è impostato, shader in RetroArch), Vibrazione joypad (impulso breve all'avvio e sui preferiti, se il joypad la supporta; in RetroArch `input_rumble_gain`).
 La sezione «Salvataggi» elenca i giochi con un «Riprendi» del profilo, con miniatura e data; A porta al gioco nella libreria.
 Dalla pagina profilo si raggiungono anche «Cambia profilo», «Esci» e le Impostazioni.
 
@@ -264,7 +290,9 @@ Se il salvataggio non riesce si resta nelle Impostazioni e l'errore compare in u
 | X | Canc | Pulsante ✕ della riga | Nella finestra di una console, toglie il core selezionato dalla lista |
 | B o SELECT | Esc o F3 | Clic su «Indietro» nella barra comandi | Chiude la finestra della console, oppure torna alla libreria |
 
-**Console.** La sezione elenca le cartelle di `games/`, una riga ciascuna (giochi, «Pronta», numero di core); A apre la finestra della console con la sua lista di core e le estensioni, B la chiude. Subito sotto l'elenco c'è «Elimina core inutilizzati».
+**Console.** La sezione elenca le cartelle di `games/` divise per marca, come la scheda TUTTE: le frecce scelgono la marca, A ci entra, B torna alle marche. Dentro, una riga per console (logo, giochi, «Pronta», numero di core, interruttore); A apre la finestra della console con la sua lista di core e le estensioni, B la chiude. Subito sotto l'elenco c'è «Elimina core inutilizzati».
+L'interruttore «Accesa / Spenta» decide se la console è nella riga delle schede di tutti: si cambia con X (tastiera `/`, legenda «Accendi/spegni») e si salva con «Salva», come il resto delle Impostazioni. Le scelte dei profili valgono sopra l'interruttore (vedi «Riga delle console e scheda TUTTE»).
+In fondo, nel gruppo ESTENSIONI, ci sono le console delle estensioni con impostazioni proprie, con il loro logo se ce l'hanno.
 Per ogni cartella c'è una lista di core, provati nell'ordine mostrato all'avvio dei giochi (sprint 05).
 - **Ordine**: automatico. Prima i core compatibili con RetroAchievements della console, installati o scaricabili, nell'ordine consigliato dalla [documentazione di RetroAchievements](https://docs.retroachievements.org/general/emulator-support-and-issues.html) (elenco in `backend/pixelarcade/ra_cores.py`); poi gli altri core installati in ordine alfabetico, gli altri scaricabili in ordine alfabetico e infine quelli non disponibili. Così il primo core provato, e scaricato se manca, è quello che attiva i trofei.
 - **Stato dei core**: ogni core è segnato «installato», «da scaricare» (dal buildbot libretro, sprint 05) o «non disponibile».
@@ -340,6 +368,7 @@ Le impostazioni (tabella `settings`) partono dai valori predefiniti di `backend/
 Le console hanno estensioni e lista dei core nelle tabelle `systems` e `system_cores`; l'elenco dei core scaricabili sta in `buildbot_cores`, i core scaricati dalla dashboard in `downloaded_cores`.
 Il core di ogni gioco sta in `game_cores`, i core provati (con esito e ultime righe del log di RetroArch) in `core_attempts`, le partite in `sessions`.
 Il gioco della sfida di ogni settimana sta in `weekly_challenges` (data del lunedì, console, gioco).
+Le console spente per tutti dalle Impostazioni stanno in `consoles_off`; le console accese o spente da ogni profilo nella propria riga in `account_consoles` (con `ON DELETE CASCADE`: le righe di un profilo se ne vanno con lui).
 RetroAchievements: account dei profili (nome utente e token) in `ra_accounts`, gioco riconosciuto di ogni file in `ra_games`, trofei delle partite in `ra_unlocks`; la chiave Web API è la riga interna `retroachievements.api_key` di `settings`. Gli elenchi dei giochi con gli hash e i badge stanno in cache in `~/.config/pixel-arcade/retroachievements/`.
 Le migrazioni in `backend/pixelarcade/db/migrations/` vengono applicate all'avvio, una sola volta ciascuna.
 

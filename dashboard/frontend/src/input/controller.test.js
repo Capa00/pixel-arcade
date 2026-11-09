@@ -5,8 +5,8 @@ import { heroActionsFor, route, settingsCommand } from './controller.js'
 
 const systems = [
   { id: 'arcade', name: 'ARCADE', covers: [] },
-  { id: 'nes', name: 'NES', covers: [] },
-  { id: 'snes', name: 'SNES', covers: [] },
+  { id: 'mame', name: 'MAME', arcade: true, covers: [] },
+  { id: 'neogeo', name: 'NEO GEO', arcade: true, covers: [] },
 ]
 
 const titles = ['1942', 'Asteroids', 'Bomb Jack', 'Dig Dug', 'Dig Dug II', 'Donkey Kong', 'Élite', 'Galaga', 'Zaxxon']
@@ -112,10 +112,10 @@ describe('instradamento nel reducer', () => {
     let state = send(ready(), press('right'), press('right'))
     expect(state.index).toBe(2)
     state = send(state, press('rb'))
-    expect(state.systemId).toBe('nes')
+    expect(state.systemId).toBe('mame')
     expect(state.index).toBe(0)
     state = send(state, press('lb'), press('lb'))
-    expect(state.systemId).toBe('snes')
+    expect(state.systemId).toBe('neogeo')
     state = send(state, press('rb'))
     expect(state.systemId).toBe('arcade')
   })
@@ -274,8 +274,8 @@ describe('copertina e descrizione nella sezione in alto', () => {
 
   function withMetadata() {
     let state = reducer(initialState, bootstrapLoaded({ systems, warnings: [] }))
-    state = reducer(state, gamesLoaded('nes', [full, { id: 'b.nes', file: 'b.nes', title: 'B' }]))
-    state = reducer(state, { type: 'selectSystem', system: 'nes' })
+    state = reducer(state, gamesLoaded('mame', [full, { id: 'b.nes', file: 'b.nes', title: 'B' }]))
+    state = reducer(state, { type: 'selectSystem', system: 'mame' })
     return send(reducer(state, setColumns(4)), press('a'))
   }
 

@@ -154,6 +154,146 @@
   color: var(--text-3);
 }
 
+/* Gruppo di una marca nella lista delle console: logo (o icona, o nome) a sinistra, righe a destra. */
+.brandGroup {
+  padding: calc(10px * var(--u)) calc(12px * var(--u));
+  display: flex;
+  align-items: flex-start;
+  gap: calc(24px * var(--u));
+  border: 2px solid var(--border-1);
+  border-radius: calc(14px * var(--u));
+}
+
+/* Marca selezionata (livello delle marche) o aperta; le altre attenuate mentre una è aperta. */
+.brandGroup:global(.focused) {
+  border-color: var(--text-1);
+}
+
+.brandOpen {
+  border-color: var(--text-3);
+}
+
+.brandDimmed {
+  opacity: 0.3;
+}
+
+.brandHead {
+  width: calc(150px * var(--u));
+  min-height: calc(52px * var(--u));
+  margin: 0;
+  padding-right: calc(20px * var(--u));
+  flex-shrink: 0;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--border-1);
+}
+
+.brandHeadLogo {
+  max-width: 100%;
+  max-height: calc(56px * var(--u));
+  object-fit: contain;
+}
+
+.brandHeadIcon {
+  width: auto;
+  height: calc(56px * var(--u));
+}
+
+.brandHeadName {
+  font-size: calc(15px * var(--u));
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  text-align: center;
+  color: var(--text-2);
+}
+
+.brandRows {
+  min-width: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+}
+
+/* Telefono: colonna della marca più stretta. */
+[data-layout='compact'] .brandGroup {
+  padding: calc(8px * var(--u));
+  gap: calc(10px * var(--u));
+}
+
+[data-layout='compact'] .brandHead {
+  width: calc(76px * var(--u));
+  padding-right: calc(8px * var(--u));
+}
+
+[data-layout='compact'] .brandHeadName {
+  font-size: calc(11px * var(--u));
+}
+
+/* Logo piccolo della console nella riga e nella finestra. */
+.rowLogo {
+  width: calc(96px * var(--u));
+  height: calc(30px * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rowLogoImg {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.headLogo {
+  max-width: calc(160px * var(--u));
+  max-height: calc(44px * var(--u));
+  object-fit: contain;
+}
+
+/* Loghi scuri (src/components/ConsoleLogo.jsx): schiariti sul fondo scuro, tinte comprese. */
+.brandHeadLogo[data-dark],
+.rowLogoImg[data-dark],
+.headLogo[data-dark] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.rowLogoImg[data-outlined],
+.headLogo[data-outlined] {
+  filter: drop-shadow(0 0 1px #ffffff) drop-shadow(0 0 1px #ffffff);
+}
+
+/* Tema giorno: loghi originali, pensati per il fondo chiaro. */
+:global(:root[data-mode='day']) .brandHeadLogo,
+:global(:root[data-mode='day']) .rowLogoImg,
+:global(:root[data-mode='day']) .headLogo {
+  filter: none;
+}
+
+.brandHead:first-child {
+  margin-top: 0;
+}
+
+/* Interruttore accesa/spenta della console per tutti (tasto ovest). */
+.consoleSwitch {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+}
+
+.consoleSwitch + .open {
+  margin-left: 0;
+}
+
+.consoleSwitchLabel {
+  font-size: calc(13px * var(--u));
+  color: var(--text-4);
+}
+
 /*
  * Finestra di una console (livello 40, sotto i menu a comparsa e la tastiera):
  * centrata e mai più alta dello schermo, sopra la barra dei comandi che resta

@@ -34,7 +34,7 @@ export function emptySlot(key) {
     user: null,
     modal: false,
     step: 'choose',
-    form: { name: '', color: PLAYER_INFO[key].color, console: null },
+    form: { name: '', color: PLAYER_INFO[key].color },
     error: null,
     saving: false,
   }
@@ -119,7 +119,7 @@ function update(players, key, patch) {
   return { ...players, [key]: { ...players[key], ...patch } }
 }
 
-function join(players, key, pad, systemId, padId) {
+function join(players, key, pad, padId) {
   const slot = emptySlot(key)
   const withPad = hasPad(pad)
   return {
@@ -130,7 +130,6 @@ function join(players, key, pad, systemId, padId) {
       pad: withPad ? pad : null,
       padId: withPad && padId ? padId : null,
       modal: true,
-      form: { ...slot.form, console: systemId || null },
     },
   }
 }
@@ -146,25 +145,25 @@ export function openModal(players, key) {
  * (`padId`). Tastiera e mouse riaprono o occupano P1. Restituisce `null` se
  * entrambi gli slot sono occupati.
  */
-export function pressStart(players, pad, systemId, padId = null) {
+export function pressStart(players, pad, padId = null) {
   if (!hasPad(pad)) {
-    return players.p1.joined ? openModal(players, 'p1') : join(players, 'p1', null, systemId)
+    return players.p1.joined ? openModal(players, 'p1') : join(players, 'p1', null)
   }
   const own = slotOfPad(players, pad)
   if (own) {
     return openModal(players, own)
   }
   const key = freeSlot(players)
-  return key ? join(players, key, pad, systemId, padId) : null
+  return key ? join(players, key, pad, padId) : null
 }
 
 /** Clic su uno slot: occupato → riapre la sua finestra; vuoto → entra senza joypad nel primo slot libero. */
-export function clickSlot(players, key, systemId) {
+export function clickSlot(players, key) {
   if (players[key].joined) {
     return openModal(players, key)
   }
   const free = freeSlot(players)
-  return free ? join(players, free, null, systemId) : players
+  return free ? join(players, free, null) : players
 }
 
 /** Libera lo slot; se esce P1, P2 diventa P1 con profilo, joypad e finestra. */
@@ -201,7 +200,7 @@ export function setStep(players, key, step) {
   return update(players, key, { step, error: null })
 }
 
-/** Modifica il modulo del nuovo profilo (`name`, `color`, `console`). */
+/** Modifica il modulo del nuovo profilo (`name`, `color`). */
 export function setForm(players, key, patch) {
   return update(players, key, { form: { ...players[key].form, ...patch }, error: null })
 }

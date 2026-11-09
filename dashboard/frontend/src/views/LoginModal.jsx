@@ -50,8 +50,8 @@ function Chevron() {
 /**
  * Finestra di accesso di uno slot (`slotKey`: `p1` a sinistra, `p2` a
  * destra), come nella demo: «Chi gioca?» con l'ospite, il nuovo profilo, i
- * profili ed «Esci»; oppure «Nuovo profilo» con nome, colore e console
- * preferita. Si naviga con `useFocusScope`, un focus per giocatore;
+ * profili ed «Esci»; oppure «Nuovo profilo» con nome e colore (la console
+ * preferita si sceglie poi nella scheda TUTTE). Si naviga con `useFocusScope`, un focus per giocatore;
  * `register(slotKey, handle)` consegna a LoginLayer la funzione che riceve
  * gli eventi del giocatore. `dual` è vero con entrambe le finestre aperte
  * (o con la classifica accanto): si dividono lo schermo senza sovrapporsi.
@@ -150,7 +150,6 @@ export default function LoginModal({ slotKey, dual = false, away = false, onRetu
   })
 
   const previewName = slot.form.name || DEFAULT_NAME
-  const previewConsole = consoleName(state.systems, slot.form.console)
 
   return (
     <section
@@ -207,7 +206,7 @@ export default function LoginModal({ slotKey, dual = false, away = false, onRetu
               </span>
               <span className={styles.rowText}>
                 <span className={styles.previewName}>{previewName}</span>
-                <span className={styles.rowSub}>Livello 1 · Recluta{previewConsole ? ` · ${previewConsole}` : ''}</span>
+                <span className={styles.rowSub}>Livello 1 · Recluta</span>
               </span>
             </div>
 
@@ -239,23 +238,6 @@ export default function LoginModal({ slotKey, dual = false, away = false, onRetu
                 ))}
               </div>
             </div>
-
-            <div className={styles.group}>
-              <div className={styles.groupLabel}>CONSOLE PREFERITA</div>
-              <div className={styles.chips}>
-                {state.systems.map((system) => (
-                  <button
-                    key={system.id}
-                    type="button"
-                    className={slot.form.console === system.id ? `${styles.chip} ${styles.on}` : styles.chip}
-                    aria-pressed={slot.form.console === system.id}
-                    {...scope.item(`console-${system.id}`, () => dispatch(loginForm(slotKey, { console: system.id })))}
-                  >
-                    {system.name}
-                  </button>
-                ))}
-              </div>
-            </div>
           </>
         ) : (
           <>
@@ -284,7 +266,7 @@ export default function LoginModal({ slotKey, dual = false, away = false, onRetu
               </span>
               <span className={styles.rowText}>
                 <span className={styles.rowTitle}>Crea un nuovo profilo</span>
-                <span className={styles.rowSub}>Nome, colore e console preferita: niente password</span>
+                <span className={styles.rowSub}>Nome e colore: niente password</span>
               </span>
             </button>
 

@@ -4,6 +4,8 @@ import {
   bootstrapLoaded,
   cycleSystem,
   clearSearch,
+  consolePrefsChanged,
+  input,
   closeLogin,
   closeConfigMenu,
   gameUpdated,
@@ -36,11 +38,11 @@ import {
   setQuery,
   showToast,
 } from './actions.js'
-import { allConsoles, currentAddonConsole, currentGame, currentSystem, filtered, initialState, reducer, rowInfo } from './reducer.js'
+import { activeTab, allConsoles, backToAll, currentAddonConsole, currentGame, currentSystem, filtered, initialState, reducer, rowInfo } from './reducer.js'
 
 const systems = [
   { id: 'arcade', name: 'ARCADE', covers: [] },
-  { id: 'nes', name: 'NES', covers: [] },
+  { id: 'mame', name: 'MAME', arcade: true, covers: [] },
 ]
 
 function makeGames(count) {
@@ -60,7 +62,7 @@ function apply(state, ...actions) {
 describe('reducer', () => {
   it('console delle estensioni in coda alle schede, senza giochi', () => {
     let state = apply(ready(), addonConsolesLoaded([{ id: 'cube', name: 'CUBE', addon: 'box' }]))
-    expect(allConsoles(state).map((entry) => entry.id)).toEqual(['arcade', 'nes', 'cube'])
+    expect(allConsoles(state).map((entry) => entry.id)).toEqual(['arcade', 'mame', 'cube'])
     state = apply(state, cycleSystem(-1))
     expect(state.systemId).toBe('cube')
     expect(currentAddonConsole(state)).toMatchObject({ id: 'cube', addon: 'box' })
@@ -76,6 +78,27 @@ describe('reducer', () => {
     expect(state.systemId).toBe('arcade')
   })
 
+  it('riga delle schede, scheda TUTTE e ritorno con BACK', () => {
+    const all = { id: '@all', name: 'TUTTE' }
+    let state = apply(ready(), addonConsolesLoaded([all]), consolePrefsChanged({ off: ['mame'], profiles: {} }))
+    expect(allConsoles(state).map((entry) => entry.id)).toEqual(['arcade', '@all'])
+    // NES spenta, aperta da TUTTE: resta fuori dalla riga, evidenziata TUTTE.
+    state = apply(state, selectSystem('@all'), selectSystem('mame', true))
+    expect(state.systemId).toBe('mame')
+    expect(activeTab(state)).toBe('@all')
+    expect(backToAll(state)).toBe(true)
+    state = apply(state, input({ pad: null, button: 'b', kind: 'press', source: 'keyboard' }))
+    expect(state.systemId).toBe('@all')
+    // L1/R1 da una console fuori dalla riga partono da TUTTE.
+    state = apply(state, selectSystem('mame', true), cycleSystem(-1))
+    expect(state.systemId).toBe('arcade')
+    expect(backToAll(state)).toBe(false)
+    // Il profilo del P1 aggiunge la NES alla sua riga.
+    state = apply(state, pressStart(0), login('p1', { id: 1, name: 'ADA', color: '#ff5d73', favConsole: null, favorites: [] }))
+    state = apply(state, consolePrefsChanged({ off: ['mame'], profiles: { 1: { add: ['mame'], remove: [] } } }))
+    expect(allConsoles(state).map((entry) => entry.id)).toEqual(['arcade', 'mame', '@all'])
+  })
+
   it('gioco prenotato dalla classifica: entrato il giocatore si va su «Gioca»', () => {
     let state = apply(ready(), pressStart(0), reserveGame('p1', 'arcade', 'g7.zip'))
     expect(state.reservedGame).toEqual({ slot: 'p1', system: 'arcade', id: 'g7.zip', title: 'g7.zip' })
@@ -86,10 +109,10 @@ describe('reducer', () => {
   })
 
   it('prenotazione su una console non caricata, annullata o tolta', () => {
-    let state = apply(ready(), pressStart(0), reserveGame('p1', 'nes', 'mario.nes'))
+    let state = apply(ready(), pressStart(0), reserveGame('p1', 'mame', 'mario.zip'))
     state = reducer(state, login('p1', { id: 1, name: 'ADA', color: '#ff5d73', favConsole: null, favorites: [] }))
-    expect(state.systemId).toBe('nes')
-    expect(state.pendingGame).toEqual({ system: 'nes', id: 'mario.nes' })
+    expect(state.systemId).toBe('mame')
+    expect(state.pendingGame).toEqual({ system: 'mame', id: 'mario.zip' })
     state = apply(ready(), pressStart(0), reserveGame('p1', 'arcade', 'g7.zip'), closeLogin('p1'))
     expect(state.reservedGame).toBeNull()
     expect(currentGame(state).id).toBe('g0.zip')
@@ -102,6 +125,14 @@ describe('reducer', () => {
     expect(state.configMenu).toEqual({ system: 'arcade', id: 'g0.zip', title: 'Gioco 0' })
     state = reducer(state, closeConfigMenu())
     expect(state.configMenu).toBeNull()
+  })
+
+  it('bootstrap legge le console della riga dal backend', () => {
+    const consoles = { off: ['arcade'], profiles: { 4: { add: ['arcade'], remove: [] } } }
+    const state = reducer(initialState, bootstrapLoaded({ systems, warnings: [], consoles }))
+    expect(state.consolePrefs).toEqual(consoles)
+    expect(state.systemId).toBe('mame')
+    expect(reducer(state, bootstrapLoaded({ systems, warnings: [] })).consolePrefs).toBe(state.consolePrefs)
   })
 
   it('bootstrap seleziona la prima console', () => {
@@ -166,12 +197,12 @@ describe('reducer', () => {
   })
 
   it('cambio di console azzera l\'indice', () => {
-    let state = apply(ready(), selectIndex(5), selectSystem('nes'))
-    expect(state.systemId).toBe('nes')
+    let state = apply(ready(), selectIndex(5), selectSystem('mame'))
+    expect(state.systemId).toBe('mame')
     expect(state.index).toBe(0)
     expect(currentGame(state)).toBeNull()
     expect(apply(state, moveSelection(1, 0))).toBe(state)
-    expect(apply(state, selectSystem('manca')).systemId).toBe('nes')
+    expect(apply(state, selectSystem('manca')).systemId).toBe('mame')
   })
 
   it('giochi ricaricati con i metadati: la selezione resta sullo stesso gioco', () => {

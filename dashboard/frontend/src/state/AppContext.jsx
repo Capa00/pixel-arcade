@@ -191,7 +191,7 @@ export function AppProvider({ children }) {
   const createProfile = useCallback(async (slot, form) => {
     dispatch(profileSaving(slot))
     try {
-      const account = await api.createProfile({ name: form.name, color: form.color, favConsole: form.console })
+      const account = await api.createProfile({ name: form.name, color: form.color })
       dispatch(profileCreated(slot, account))
     } catch (error) {
       dispatch(profileFailed(slot, error.message))

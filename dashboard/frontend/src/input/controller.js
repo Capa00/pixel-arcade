@@ -39,13 +39,15 @@ import {
   openSettings,
   request,
   scrollHero,
+  selectSystem,
   setHeroFocus,
   stepHeroImage,
   toggleFavorite,
   toggleHeroPanel,
 } from '../state/actions.js'
 import { SLOTS, ownsKeyboard, slotOfPad } from '../state/players.js'
-import { currentGame, heroView } from '../state/reducer.js'
+import { backToAll, currentGame, heroView } from '../state/reducer.js'
+import { ALL_CONSOLE } from '../lib/consoleTabs.js'
 import { hasImages, hasText } from '../lib/gameInfo.js'
 import { stepIndex, wraps } from './wrap.js'
 
@@ -231,7 +233,11 @@ function libraryActions(state, event) {
     case 'x':
       return [openFilters()]
     case 'b':
-      return state.query ? [clearSearch()] : []
+      if (state.query) {
+        return [clearSearch()]
+      }
+      // Console aperta dalla scheda TUTTE (o fuori dalla riga): si torna lì.
+      return backToAll(state) ? [selectSystem(ALL_CONSOLE.id)] : []
     case 'y': {
       const slot = eventSlot(state, event)
       return slot && currentGame(state) ? [toggleFavorite(slot)] : []

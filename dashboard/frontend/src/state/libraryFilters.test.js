@@ -47,7 +47,7 @@ const NES = [
 
 const systems = [
   { id: 'arcade', name: 'ARCADE' },
-  { id: 'nes', name: 'NES' },
+  { id: 'mame', name: 'MAME', arcade: true },
 ]
 
 function ids(list) {
@@ -57,7 +57,7 @@ function ids(list) {
 function ready() {
   let state = reducer(initialState, bootstrapLoaded({ systems, warnings: [] }))
   state = reducer(state, gamesLoaded('arcade', GAMES))
-  state = reducer(state, gamesLoaded('nes', NES))
+  state = reducer(state, gamesLoaded('mame', NES))
   return reducer(state, setColumns(4))
 }
 
@@ -125,7 +125,7 @@ describe('filtri nel reducer', () => {
     state = reducer(state, setFilter('genre', ['Picchiaduro']))
     expect(filtersActive(state)).toBe(true)
     expect(currentGame(state).id).toBe('mk.zip')
-    state = reducer(state, selectSystem('nes'))
+    state = reducer(state, selectSystem('mame'))
     expect(ids(filtered(state))).toEqual(['DoubleDragon.nes'])
     state = reducer(state, setFilter('genre', null))
     expect(state.filters.genre).toEqual([])
@@ -147,13 +147,13 @@ describe('filtri nel reducer', () => {
 
   it('«Sorprendimi»: seleziona il gioco tenendo i filtri e porta su «Gioca»', () => {
     let state = reducer(ready(), setFilter('players', '2'))
-    state = reducer(reducer(state, openFilters()), showGame('nes', 'DoubleDragon.nes'))
-    expect(state.systemId).toBe('nes')
+    state = reducer(reducer(state, openFilters()), showGame('mame', 'DoubleDragon.nes'))
+    expect(state.systemId).toBe('mame')
     expect(currentGame(state).id).toBe('DoubleDragon.nes')
     expect(state.heroFocus).toBe('play')
     expect(state.filtersOpen).toBe(false)
     // Un gioco escluso dai filtri non si seleziona.
-    expect(reducer(state, showGame('nes', 'Zelda.nes'))).toBe(state)
+    expect(reducer(state, showGame('mame', 'Zelda.nes'))).toBe(state)
   })
 
   it('giocati del P1 e playlist eliminate', () => {

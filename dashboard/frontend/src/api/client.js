@@ -601,6 +601,16 @@ export function played(id) {
   return request('GET', '/api/profiles/played?id=' + encodeURIComponent(id))
 }
 
+/** Spegne per tutti le console `off` (lista di id); restituisce `{consoles: {off, profiles}}` (API.md, «Console della riga»). */
+export function saveConsolesOff(off) {
+  return request('POST', '/api/consoles/off', { off })
+}
+
+/** Accende (`on`) o spegne la console `id` nella riga del profilo `account`; restituisce `{consoles}` come sopra. */
+export function toggleConsoleRow(account, id, on) {
+  return request('POST', '/api/consoles/row', { account, id, on })
+}
+
 /** Playlist condivise: `{playlists: [{id, name, filters, games}], games: {key: summary}}` (API.md, «Playlist»). */
 export function playlists() {
   return request('GET', '/api/playlists')

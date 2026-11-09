@@ -89,7 +89,7 @@ class ServerTest(unittest.TestCase):
     def test_health(self):
         response, data = self.request('GET', '/api/health')
         self.assertEqual(response.status, 200)
-        self.assertEqual(json.loads(data), {'ok': True, 'version': __version__, 'db': {'version': 26}})
+        self.assertEqual(json.loads(data), {'ok': True, 'version': __version__, 'db': {'version': 27}})
         self.assertEqual(response.getheader('Cache-Control'), 'no-store')
         self.assertIn('default-src', response.getheader('Content-Security-Policy'))
 
@@ -140,6 +140,28 @@ class ServerTest(unittest.TestCase):
         self.assertEqual(data['systems'][0]['count'], 2)
         self.assertEqual(data['systems'][0]['name'], 'NES')
         self.assertEqual(data['addons'], {})
+        self.assertEqual(data['consoles'], {'off': [], 'profiles': {}})
+
+    def test_console_della_riga(self):
+        response, data = self.post('/api/profiles', body={'name': 'RIGA', 'color': '#f5c542'})
+        self.assertEqual(response.status, 200)
+        account = json.loads(data)['id']
+        response, data = self.post('/api/consoles/off', body={'off': ['nes']})
+        self.assertEqual(response.status, 200)
+        self.assertEqual(json.loads(data)['consoles']['off'], ['nes'])
+        response, data = self.post('/api/consoles/row', body={'account': account, 'id': 'nes', 'on': True})
+        self.assertEqual(response.status, 200)
+        self.assertEqual(json.loads(data)['consoles']['profiles'], {str(account): {'add': ['nes'], 'remove': []}})
+        _, data = self.request('GET', '/api/bootstrap')
+        self.assertEqual(json.loads(data)['consoles']['off'], ['nes'])
+        self.assertEqual(self.post('/api/consoles/off', body={'off': 'nes'})[0].status, 400)
+        self.assertEqual(self.post('/api/consoles/row', body={'account': 99999, 'id': 'nes', 'on': True})[0].status, 400)
+        self.assertEqual(self.post('/api/consoles/row', token=False, body={'account': account, 'id': 'nes', 'on': True})[0].status, 403)
+        self.assertEqual(self.post('/api/consoles/row', body={'account': account, 'id': 'nes'})[0].status, 400)
+        # Torna come prima per gli altri test della classe.
+        with self.server.services['db'].transaction() as conn:
+            conn.execute('DELETE FROM account_consoles')
+        self.post('/api/consoles/off', body={'off': []})
 
     def test_games(self):
         response, data = self.request('GET', '/api/games?system=nes')

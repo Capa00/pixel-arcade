@@ -7,6 +7,9 @@ import JoypadList from '../components/JoypadList.jsx'
 import ComboLearn, { comboLabel } from '../components/ComboLearn.jsx'
 import ConfigModal from '../components/ConfigModal.jsx'
 import ConfirmDialog from '../components/ConfirmDialog.jsx'
+import { BrandLogo, ConsoleLogo } from '../components/ConsoleLogo.jsx'
+import toggleStyles from '../components/Toggle.module.css'
+import { groupSystems, normalizePrefs } from '../lib/consoleTabs.js'
 import { YES_NO, moveChoice } from '../components/confirmChoices.js'
 import ItemList from '../components/ItemList.jsx'
 import MultiPickerMenu from '../components/MultiPickerMenu.jsx'
@@ -33,6 +36,7 @@ import { useFocusScope } from '../input/useFocusScope.js'
 import { stepIndex, wraps } from '../input/wrap.js'
 import {
   closeSettings,
+  consolePrefsChanged,
   coreRemove,
   coresAdd,
   openKeyboard,
@@ -70,12 +74,12 @@ const SCOPE = 'settings'
 // Schede delle estensioni (`settingsTab`, src/addons/registry.js), in coda a quelle fisse.
 const ADDON_TABS = addonSettingsTabs(addons)
 const TABS = [...SETTINGS_TABS, ...ADDON_TABS.map((entry) => ({ id: entry.id, label: entry.label }))]
-// Impostazioni delle console delle estensioni (`consoleSettings`, src/addons/registry.js), con il nome della console.
+// Impostazioni delle console delle estensioni (`consoleSettings`, src/addons/registry.js), con nome e logo della console.
 const CONSOLE_SETTINGS = addons
   .filter((addon) => addon.consoleSettings)
   .map((addon) => {
     const entry = addonConsoles([addon]).find((item) => item.id === addon.consoleSettings.console)
-    return { ...addon.consoleSettings, addon: addon.id, name: entry ? entry.name : addon.id }
+    return { ...addon.consoleSettings, addon: addon.id, name: entry ? entry.name : addon.id, logo: (entry && entry.logo) || null }
   })
 // Prefisso della finestra aperta di una console delle estensioni (`openSystem`).
 const ADDON_PREFIX = 'addon:'
@@ -255,11 +259,12 @@ function coresLabel(summary) {
  * vengono provati, con «Aggiungi…», estensioni dei giochi, «Configurazione…»
  * (pagina con grafica, latenza, audio ed emulazione, salvata subito) e
  * «BIOS…» (file di sistema dei core, src/components/BiosModal.jsx).
+ * `logo` è la console con `preset` (src/components/ConsoleLogo.jsx), per il logo in alto.
  * Ha un proprio ambito di navigazione (`item`, contenitore `scopeRef`); B la
  * chiude (lo gestisce la vista), come il clic fuori dal pannello o su «Chiudi».
  */
 function SystemDialog({
-  system, available, scopeRef, item, onTypes, onCores, onCoreActions, onRemove, onExtensions, onConfig, onBios, biosState, onClose,
+  system, logo, available, scopeRef, item, onTypes, onCores, onCoreActions, onRemove, onExtensions, onConfig, onBios, biosState, onClose,
 }) {
   const listId = `sys:${system.id}`
   const summary = coreSummary(system.cores, available)
@@ -276,6 +281,7 @@ function SystemDialog({
     >
       <section className={styles.modal} role="dialog" aria-label={system.name} ref={scopeRef}>
         <div className={styles.systemHead}>
+          <ConsoleLogo system={logo} className={styles.headLogo} fallback={null} />
           <span className={`pix ${styles.systemName}`}>{system.name}</span>
           <span className={styles.count}>{system.count === 1 ? '1 gioco' : `${system.count} giochi`}</span>
           <span className={summary.ready ? `${styles.badge} ${styles.ready}` : styles.badge}>
@@ -367,6 +373,7 @@ function AddonConsoleDialog({ entry, values, ctx, scopeRef, item, onClose }) {
     >
       <section className={styles.modal} role="dialog" aria-label={entry.name} ref={scopeRef}>
         <div className={styles.systemHead}>
+          {entry.logo && <img className={styles.headLogo} src={entry.logo} alt="" />}
           <span className={`pix ${styles.systemName}`}>{entry.name}</span>
           <button type="button" className={styles.modalClose} onClick={onClose}>
             Chiudi
@@ -407,6 +414,9 @@ function AddonConsoleDialog({ entry, values, ctx, scopeRef, item, onClose }) {
  * sta subito sotto l'elenco. In coda ci sono le console delle estensioni con
  * `consoleSettings` (`AddonConsoleDialog`): le loro impostazioni stanno in una
  * bozza a parte e si salvano anche loro con «Salva».
+ * Ogni console ha un interruttore accesa/spenta per tutti (riga delle schede,
+ * src/lib/consoleTabs.js): lo cambia il tasto ovest, anche questo in una bozza
+ * salvata con «Salva» (`POST /api/consoles/off`).
  *
  * Gli eventi di input arrivano da App tramite `inputRef.current(event)`,
  * con priorità: apprendimento dei tasti, conferma, menu a comparsa,
@@ -417,6 +427,27 @@ function AddonConsoleDialog({ entry, values, ctx, scopeRef, item, onClose }) {
  * `tournament`, `tournamentCombo`, `tournamentDate`, `tournamentGame`, `tournamentFormat`,
  * `tournamentFormatOptions`).
  */
+/** Logo piccolo della console in una riga dell'elenco (spazio vuoto se manca, per tenere allineati i nomi). */
+function RowLogo({ system }) {
+  return (
+    <span className={styles.rowLogo}>
+      <ConsoleLogo system={system} className={styles.rowLogoImg} fallback={null} />
+    </span>
+  )
+}
+
+/** Interruttore accesa/spenta di una console, dentro la sua riga (che è già un pulsante). */
+function ConsoleSwitch({ on }) {
+  return (
+    <span className={`${styles.consoleSwitch} ${on ? toggleStyles.on : ''}`} role="img" aria-label={on ? 'Accesa' : 'Spenta'}>
+      <span className={styles.consoleSwitchLabel}>{on ? 'Accesa' : 'Spenta'}</span>
+      <span className={toggleStyles.track}>
+        <span className={toggleStyles.knob} />
+      </span>
+    </span>
+  )
+}
+
 export default function Settings({ inputRef, gamepad, onContext }) {
   const { state, dispatch, loadSettings, saveSettings, rescanLibrary, refreshCores } = useApp()
   const scope = useFocusScope(SCOPE)
@@ -458,7 +489,25 @@ export default function Settings({ inputRef, gamepad, onContext }) {
   // Bozze delle console delle estensioni: `{addon: {original, draft}}`.
   const [addonDrafts, setAddonDrafts] = useState({})
   const addonDirty = CONSOLE_SETTINGS.some((entry) => addonChanged(addonDrafts[entry.addon]))
-  const dirty = isDirty(settings) || addonDirty
+  // Console spente per tutti: bozza a parte, salvata con «Salva» (`POST /api/consoles/off`).
+  const [consoleOff, setConsoleOff] = useState(() => ({ original: state.consolePrefs.off, draft: state.consolePrefs.off }))
+  const consoleDirty = consoleOff.draft.length !== consoleOff.original.length
+    || consoleOff.draft.some((id) => !consoleOff.original.includes(id))
+  const dirty = isDirty(settings) || addonDirty || consoleDirty
+  const consoleOn = (id) => !consoleOff.draft.includes(id)
+  const switchConsole = (id) => {
+    setConsoleOff((current) => ({
+      ...current,
+      draft: current.draft.includes(id) ? current.draft.filter((item) => item !== id) : [...current.draft, id],
+    }))
+  }
+  // Scheda Console a due livelli, come TUTTE: prima le marche, A entra, B torna alle marche.
+  const [openBrand, setOpenBrand] = useState(null)
+  // Marca della console per i gruppi: `preset` e `arcade` vengono dalle console caricate all'avvio.
+  const withBrandInfo = (system) => {
+    const known = state.systems.find((entry) => entry.id === system.id)
+    return known ? { ...system, preset: known.preset, arcade: known.arcade } : system
+  }
 
   useEffect(() => {
     let alive = true
@@ -479,14 +528,17 @@ export default function Settings({ inputRef, gamepad, onContext }) {
 
   // Sulla prima voce della scheda la vista torna in cima: titolo e schede restano visibili
   // (non sono selezionabili, lo scorrimento verso la voce da solo li lascerebbe fuori).
+  // Non dentro una marca della scheda Console: lì la prima voce è la prima console della marca,
+  // che può stare in basso nella pagina.
   const focused = state.focus[SCOPE]
+  const insideBrand = Boolean(openBrand)
   useEffect(() => {
     const container = scope.ref.current
     const first = container ? container.querySelector('[data-focus-id]') : null
-    if (first && first.dataset.focusId === focused) {
+    if (first && first.dataset.focusId === focused && !insideBrand) {
       container.scrollIntoView({ block: 'start' })
     }
-  }, [focused, scope.ref])
+  }, [focused, insideBrand, scope.ref])
 
   // RetroAchievements: stato della chiave Web API (mai la chiave intera, solo gli ultimi 4 caratteri).
   const [ra, setRa] = useState(null)
@@ -580,6 +632,8 @@ export default function Settings({ inputRef, gamepad, onContext }) {
     mode = addonMode
   } else if (openSystem) {
     mode = openSystem.startsWith(ADDON_PREFIX) ? 'consoleSettings' : 'system'
+  } else if (tab === 'systems') {
+    mode = openBrand ? 'settingsConsolesIn' : 'settingsConsoles'
   }
   useEffect(() => {
     onContext(mode)
@@ -610,8 +664,31 @@ export default function Settings({ inputRef, gamepad, onContext }) {
   const showTab = (id) => {
     if (id !== tab) {
       setTab(id)
+      setOpenBrand(null)
       dispatch(setFocus(SCOPE, null))
     }
+  }
+
+  // Gruppi della scheda Console: le marche (src/lib/consoleTabs.js) e, in coda, le console delle estensioni.
+  const consoleGroups = settings && settings.status === 'ready'
+    ? [
+        ...groupSystems(settings.draft.systems.map(withBrandInfo)),
+        ...(CONSOLE_SETTINGS.length
+          ? [{
+              brand: 'extensions',
+              name: 'ESTENSIONI',
+              systems: CONSOLE_SETTINGS.map((entry) => ({ id: `${ADDON_PREFIX}${entry.addon}`, addonEntry: entry })),
+            }]
+          : []),
+      ]
+    : []
+  const enterBrand = (group) => {
+    setOpenBrand(group.brand)
+    dispatch(setFocus(SCOPE, `sys:${group.systems[0].id}`))
+  }
+  const leaveBrand = () => {
+    dispatch(setFocus(SCOPE, `brand:${openBrand}`))
+    setOpenBrand(null)
   }
 
   const showSystem = (id) => {
@@ -817,7 +894,18 @@ export default function Settings({ inputRef, gamepad, onContext }) {
       return { saved: false }
     }
     const changed = CONSOLE_SETTINGS.filter((entry) => addonChanged(addonDrafts[entry.addon]))
-    const main = isDirty(settings) || !changed.length
+    const main = isDirty(settings) || (!changed.length && !consoleDirty)
+    if (consoleDirty) {
+      const off = consoleOff.draft
+      try {
+        const data = await api.saveConsolesOff(off)
+        dispatch(consolePrefsChanged(normalizePrefs(data.consoles)))
+        setConsoleOff((current) => ({ ...current, original: off }))
+      } catch (error) {
+        dispatch(showToast(error.message, 'error'))
+        return { saved: false, error: error.message }
+      }
+    }
     if (main) {
       const result = await saveSettings(settingsPayload(settings))
       if (!result.saved) {
@@ -1050,6 +1138,18 @@ export default function Settings({ inputRef, gamepad, onContext }) {
     if (scope.handle(event) || !press) {
       return
     }
+    if (tab === 'systems' && openBrand && event.button === 'b') {
+      leaveBrand()
+      return
+    }
+    if (tab === 'systems' && event.button === 'x') {
+      // Interruttore accesa/spenta della console con il focus (non delle estensioni).
+      const id = scope.focused || ''
+      if (id.startsWith('sys:') && !id.startsWith(`sys:${ADDON_PREFIX}`) && id !== 'sys:unused') {
+        switchConsole(id.slice(4))
+      }
+      return
+    }
     if (event.button === 'lb' || event.button === 'rb') {
       showTab(stepTab(tab, event.button === 'lb' ? -1 : 1, TABS))
       return
@@ -1202,33 +1302,61 @@ export default function Settings({ inputRef, gamepad, onContext }) {
           <Panel title="CONSOLE">
             {draft.systems.length === 0 && <p className={styles.empty}>Nessuna console nella cartella dei giochi.</p>}
             <div className={styles.systems}>
-              {draft.systems.map((system) => {
-                const summary = coreSummary(system.cores, available)
+              {consoleGroups.map((group) => {
+                const isOpen = openBrand === group.brand
+                const groupClass = [styles.brandGroup, isOpen ? styles.brandOpen : '', openBrand && !isOpen ? styles.brandDimmed : '']
+                  .filter(Boolean)
+                  .join(' ')
+                // Solo le righe della marca aperta sono navigabili; senza marca aperta lo sono i gruppi.
+                const rowItem = (id, onActivate) => (isOpen ? scope.item(id, onActivate) : {})
                 return (
-                  <button key={system.id} type="button" className={styles.systemRow} {...scope.item(`sys:${system.id}`, () => showSystem(system.id))}>
-                    <span className={`pix ${styles.systemName}`}>{system.name}</span>
-                    <span className={styles.count}>{system.count === 1 ? '1 gioco' : `${system.count} giochi`}</span>
-                    <span className={summary.ready ? `${styles.badge} ${styles.ready}` : styles.badge}>
-                      {summary.ready ? 'Pronta' : 'Non pronta'}
-                    </span>
-                    <span className={styles.count}>{coresLabel(summary)}</span>
-                    <span className={styles.open} aria-hidden="true">▸</span>
-                  </button>
-                )
-              })}
-              {CONSOLE_SETTINGS.map((entry) => {
-                const values = addonDrafts[entry.addon]
-                return (
-                  <button
-                    key={entry.addon}
-                    type="button"
-                    className={styles.systemRow}
-                    {...scope.item(`sys:${ADDON_PREFIX}${entry.addon}`, () => values && showSystem(`${ADDON_PREFIX}${entry.addon}`))}
-                  >
-                    <span className={`pix ${styles.systemName}`}>{entry.name}</span>
-                    <span className={styles.count}>{values ? entry.summary(values.draft) : 'Caricamento…'}</span>
-                    <span className={styles.open} aria-hidden="true">▸</span>
-                  </button>
+                  <div key={group.brand} className={groupClass} {...(openBrand ? {} : scope.item(`brand:${group.brand}`, () => enterBrand(group)))}>
+                    <h3 className={styles.brandHead} aria-label={group.name}>
+                      <BrandLogo
+                        brand={group.brand}
+                        className={styles.brandHeadLogo}
+                        iconClassName={styles.brandHeadIcon}
+                        fallback={<span className={`pix ${styles.brandHeadName}`}>{group.name}</span>}
+                      />
+                    </h3>
+                    <div className={styles.brandRows}>
+                      {group.systems.map((system) => {
+                        if (system.addonEntry) {
+                          const entry = system.addonEntry
+                          const values = addonDrafts[entry.addon]
+                          return (
+                            <button
+                              key={system.id}
+                              type="button"
+                              className={styles.systemRow}
+                              {...rowItem(`sys:${system.id}`, () => values && showSystem(system.id))}
+                            >
+                              <span className={styles.rowLogo}>
+                                {entry.logo && <img className={styles.rowLogoImg} src={entry.logo} alt="" />}
+                              </span>
+                              <span className={`pix ${styles.systemName}`}>{entry.name}</span>
+                              <span className={styles.count}>{values ? entry.summary(values.draft) : 'Caricamento…'}</span>
+                              <span className={styles.open} aria-hidden="true">▸</span>
+                            </button>
+                          )
+                        }
+                        const summary = coreSummary(system.cores, available)
+                        return (
+                          <button key={system.id} type="button" className={styles.systemRow} {...rowItem(`sys:${system.id}`, () => showSystem(system.id))}>
+                            <RowLogo system={system} />
+                            <span className={`pix ${styles.systemName}`}>{system.name}</span>
+                            <span className={styles.count}>{system.count === 1 ? '1 gioco' : `${system.count} giochi`}</span>
+                            <span className={summary.ready ? `${styles.badge} ${styles.ready}` : styles.badge}>
+                              {summary.ready ? 'Pronta' : 'Non pronta'}
+                            </span>
+                            <span className={styles.count}>{coresLabel(summary)}</span>
+                            <ConsoleSwitch on={consoleOn(system.id)} />
+                            <span className={styles.open} aria-hidden="true">▸</span>
+                          </button>
+                        )
+                      })}
+                    </div>
+                  </div>
                 )
               })}
             </div>
@@ -1240,7 +1368,7 @@ export default function Settings({ inputRef, gamepad, onContext }) {
                 type="button"
                 className={styles.action}
                 disabled={state.run.running}
-                {...scope.item('sys:unused', cleanCores)}
+                {...(openBrand ? {} : scope.item('sys:unused', cleanCores))}
               >
                 {cleaning ? 'Controllo…' : 'Elimina core inutilizzati'}
               </button>
@@ -1524,6 +1652,7 @@ export default function Settings({ inputRef, gamepad, onContext }) {
       {modalSystem && (
         <SystemDialog
           system={modalSystem}
+          logo={withBrandInfo(modalSystem)}
           available={available}
           scopeRef={systemScope.ref}
           item={systemScope.item}
