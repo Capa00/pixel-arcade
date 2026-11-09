@@ -1,0 +1,132 @@
+/* Stile della pagina statica dashboard.html (colori e font della demo). */
+
+@font-face {
+  font-family: 'Silkscreen';
+  font-style: normal;
+  font-weight: 400;
+  src: url('frontend/src/assets/fonts/silkscreen-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Sora';
+  font-style: normal;
+  font-weight: 400 700;
+  src: url('frontend/src/assets/fonts/sora-latin.woff2') format('woff2');
+}
+
+:root {
+  --bg: #0d0c12;
+  --surface-1: #16151e;
+  --surface-2: #1b1a24;
+  --border-1: #22212d;
+  --border-2: #2a2936;
+  --text-1: #f3f1f8;
+  --text-2: #d8d5e3;
+  --text-3: #a3a0b3;
+  --p1: #ff5d73;
+  --p2: #3ccfc4;
+  --ok: #3ddc84;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 48px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: var(--bg);
+  color: var(--text-1);
+  font-family: 'Sora', system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+.pix {
+  font-family: 'Silkscreen', monospace;
+}
+
+.card {
+  width: 100%;
+  max-width: 760px;
+  padding: 36px;
+  border: 1px solid var(--border-2);
+  border-radius: 24px;
+  background: var(--surface-1);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-1);
+  font-size: 19px;
+  letter-spacing: 0.04em;
+}
+
+h1 {
+  margin: 28px 0 8px;
+  font-size: 34px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.lead {
+  margin: 0 0 28px;
+  color: var(--text-3);
+}
+
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.steps li {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: var(--surface-2);
+  color: var(--text-2);
+}
+
+.num {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--ok);
+  border-radius: 50%;
+  color: var(--ok);
+  font-size: 12px;
+}
+
+strong {
+  color: var(--text-1);
+}
+
+code {
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--p2);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.note {
+  margin: 24px 0 0;
+  font-size: 14px;
+  color: var(--text-3);
+}

@@ -1,0 +1,27 @@
+.strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(2px * var(--u));
+}
+
+.letter {
+  min-width: calc(15px * var(--u));
+  padding: calc(2px * var(--u)) 0;
+  border: 0;
+  border-bottom: calc(2px * var(--u)) solid transparent;
+  background: transparent;
+  color: var(--text-2);
+  font-family: inherit;
+  font-size: calc(11px * var(--u));
+  text-align: center;
+}
+
+.missing {
+  color: var(--text-4);
+}
+
+.current {
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+}

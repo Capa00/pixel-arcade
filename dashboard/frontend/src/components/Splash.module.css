@@ -1,0 +1,168 @@
+/* Schermata iniziale: logo che si compone, titolo, «Caricamento» e poi «PRESS START». */
+.splash {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  padding: calc(24px * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(28px * var(--u));
+  background: radial-gradient(ellipse at 50% 40%, var(--surface-2) 0%, var(--bg) 70%);
+  text-align: center;
+  user-select: none;
+}
+
+.ready {
+  cursor: pointer;
+}
+
+.logoWrap {
+  animation: float 3.2s ease-in-out 2.2s infinite;
+}
+
+.logo {
+  width: calc(240px * var(--u));
+  height: calc(240px * var(--u));
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 0 calc(18px * var(--u)) rgba(255, 93, 115, 0.35));
+}
+
+.pixel {
+  animation: drop 0.5s cubic-bezier(0.3, 1.4, 0.6, 1) var(--delay) both;
+}
+
+.title {
+  margin: 0;
+  color: var(--text-1);
+  font-size: calc(72px * var(--u));
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  animation: glow 3.2s ease-in-out 2.2s infinite;
+}
+
+.letter {
+  display: inline-block;
+  animation: pop 0.3s ease-out var(--delay) both;
+}
+
+.status {
+  min-height: calc(40px * var(--u));
+  display: flex;
+  align-items: center;
+}
+
+.loading {
+  color: var(--text-4);
+  font-size: calc(18px * var(--u));
+  letter-spacing: 0.08em;
+}
+
+.dots span {
+  animation: dot 1.2s steps(1) infinite;
+}
+
+.dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.start {
+  color: var(--text-1);
+  font-size: calc(30px * var(--u));
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 calc(12px * var(--u)) rgba(60, 207, 196, 0.6);
+  animation: blink 1s steps(1) infinite;
+}
+
+[data-layout='compact'] .logo {
+  width: calc(160px * var(--u));
+  height: calc(160px * var(--u));
+}
+
+[data-layout='compact'] .title {
+  font-size: calc(40px * var(--u));
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(calc(-20px * var(--u))) scale(1.6);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(calc(-10px * var(--u)));
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    text-shadow: 0 0 calc(10px * var(--u)) rgba(255, 93, 115, 0.45);
+  }
+
+  50% {
+    text-shadow: 0 0 calc(22px * var(--u)) rgba(60, 207, 196, 0.55);
+  }
+}
+
+@keyframes dot {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logoWrap,
+  .pixel,
+  .title,
+  .letter,
+  .dots span,
+  .start {
+    animation: none;
+  }
+}

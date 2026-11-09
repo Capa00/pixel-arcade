@@ -1,0 +1,8 @@
+/* Righe di scansione della demo: non intercettano mouse e tocco. */
+.scan {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.16) 0 1px, transparent 1px 3px);
+}

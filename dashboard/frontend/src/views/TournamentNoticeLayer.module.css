@@ -1,0 +1,13 @@
+/*
+ * Avviso dei tornei all'ingresso: forma dell'avviso delle sfide
+ * (ChallengeLayer.module.css) con la copertina del gioco.
+ */
+.cover {
+  width: calc(130px * var(--u));
+  aspect-ratio: 3 / 4;
+  border-radius: calc(10px * var(--u));
+  box-shadow:
+    0 calc(16px * var(--u)) calc(36px * var(--u)) calc(-12px * var(--u)) var(--shadow-75),
+    0 0 calc(28px * var(--u)) rgb(245 197 66 / 0.25),
+    0 0 0 1px rgb(245 197 66 / 0.35);
+}

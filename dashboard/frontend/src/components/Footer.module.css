@@ -1,0 +1,74 @@
+/*
+ * Sopra lo sfondo scuro e la sfocatura delle finestre modali (fino al
+ * livello 50), sotto la schermata iniziale (60): la legenda resta leggibile.
+ */
+.footer {
+  position: relative;
+  z-index: 55;
+  min-height: calc(64px * var(--u));
+  flex-shrink: 0;
+  margin-top: auto;
+  padding: calc(8px * var(--u)) calc(48px * var(--u));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: calc(28px * var(--u));
+  row-gap: calc(8px * var(--u));
+  border-top: 1px solid var(--border-1);
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  white-space: nowrap;
+}
+
+/* Voce cliccabile: stesso aspetto delle altre, senza lo stile del pulsante. */
+.command {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+}
+
+.command:hover {
+  color: var(--text-1);
+}
+
+/* Comando non ancora attivo. */
+.off {
+  opacity: 0.4;
+}
+
+.pill {
+  height: calc(22px * var(--u));
+  padding: 0 calc(8px * var(--u));
+  border-radius: calc(11px * var(--u));
+  border: 1.5px solid var(--text-5);
+  color: var(--text-2);
+  display: flex;
+  align-items: center;
+  font-size: calc(10px * var(--u));
+  font-weight: 700;
+}
+
+/* Telefono: legenda su più righe, margini ridotti. */
+[data-layout='compact'] .footer {
+  padding: calc(10px * var(--u)) calc(16px * var(--u));
+  column-gap: calc(16px * var(--u));
+}
+
+.hint {
+  margin-left: auto;
+  color: var(--text-2);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+[data-layout='compact'] .hint {
+  margin-left: 0;
+}

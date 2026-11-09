@@ -1,0 +1,74 @@
+.header {
+  min-height: calc(84px * var(--u));
+  flex-shrink: 0;
+  padding: 0 calc(48px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(40px * var(--u));
+  border-bottom: 1px solid var(--border-1);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: calc(12px * var(--u));
+  flex-shrink: 0;
+}
+
+.logo {
+  width: calc(30px * var(--u));
+  height: calc(30px * var(--u));
+}
+
+.title {
+  font-size: calc(19px * var(--u));
+  letter-spacing: 0.04em;
+}
+
+.tabs {
+  flex-grow: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: safe center;
+  gap: calc(6px * var(--u));
+  padding: 0 calc(24px * var(--u));
+  overflow-x: auto;
+  scrollbar-width: none;
+  /* Sfumatura ai bordi: segnala le schede fuori vista quando sono troppe. */
+  mask-image: linear-gradient(to right, transparent, #000 calc(24px * var(--u)), #000 calc(100% - 24px * var(--u)), transparent);
+}
+
+/* Elementi delle estensioni: fissi tra le schede e gli slot; nascosti se non mostrano nulla. */
+.extras {
+  display: flex;
+  align-items: center;
+  gap: calc(12px * var(--u));
+  flex-shrink: 0;
+}
+
+.extras:empty {
+  display: none;
+}
+
+.slots {
+  display: flex;
+  gap: calc(12px * var(--u));
+  flex-shrink: 0;
+}
+
+/* Telefono: logo e slot sulla prima riga, schede console sotto e scorrevoli. */
+[data-layout='compact'] .header {
+  flex-wrap: wrap;
+  row-gap: 0;
+  padding: calc(12px * var(--u)) calc(16px * var(--u)) 0;
+}
+
+[data-layout='compact'] .slots {
+  margin-left: auto;
+}
+
+[data-layout='compact'] .tabs {
+  order: 1;
+  flex-basis: 100%;
+  justify-content: flex-start;
+}

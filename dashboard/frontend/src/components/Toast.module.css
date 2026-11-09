@@ -1,0 +1,47 @@
+/*
+ * Notifica in basso al centro: colori invertiti rispetto al tema (chiara su
+ * sfondo scuro), testo grande e ombra, perché si veda anche da lontano.
+ */
+.toast {
+  position: absolute;
+  left: 50%;
+  bottom: calc(96px * var(--u));
+  z-index: 50;
+  max-width: calc(100% - 32px);
+  padding: calc(18px * var(--u)) calc(28px * var(--u));
+  transform: translateX(-50%);
+  border: 2px solid var(--text-1);
+  border-radius: calc(16px * var(--u));
+  background: var(--text-1);
+  color: var(--bg);
+  font-size: calc(20px * var(--u));
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  box-shadow: 0 calc(18px * var(--u)) calc(48px * var(--u)) var(--shadow-65);
+  animation: toast-in 0.25s ease-out;
+}
+
+.error {
+  border-color: var(--p1);
+  background: var(--p1);
+  color: var(--on-accent);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(24px * var(--u))) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
+}

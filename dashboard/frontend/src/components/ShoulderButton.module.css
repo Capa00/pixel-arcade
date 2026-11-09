@@ -1,0 +1,23 @@
+.glyph {
+  width: calc(32px * var(--u));
+  height: calc(22px * var(--u));
+  flex-shrink: 0;
+}
+
+.on {
+  fill: var(--text-1);
+}
+
+.off {
+  fill: none;
+  stroke: var(--text-5);
+  stroke-width: 1.4;
+}
+
+/* Profilo del joypad sotto i tasti. */
+.body {
+  fill: none;
+  stroke: var(--text-5);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}

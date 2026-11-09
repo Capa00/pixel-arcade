@@ -1,0 +1,42 @@
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  padding: calc(24px * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(18px * var(--u));
+  background: rgb(var(--deep-rgb) / 0.88);
+  text-align: center;
+}
+
+.ring {
+  width: calc(140px * var(--u));
+  height: calc(140px * var(--u));
+  transform: rotate(-90deg);
+}
+
+.track {
+  fill: none;
+  stroke: var(--border-2);
+  stroke-width: 6;
+}
+
+.value {
+  fill: none;
+  stroke: var(--p1);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.label {
+  font-size: calc(14px * var(--u));
+  color: var(--p1);
+}
+
+.text {
+  font-size: calc(15px * var(--u));
+  color: var(--text-3);
+}

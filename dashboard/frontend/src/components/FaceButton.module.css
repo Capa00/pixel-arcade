@@ -1,0 +1,15 @@
+.glyph {
+  width: calc(24px * var(--u));
+  height: calc(24px * var(--u));
+  flex-shrink: 0;
+}
+
+.on {
+  fill: var(--text-1);
+}
+
+.off {
+  fill: none;
+  stroke: var(--text-5);
+  stroke-width: 1.4;
+}

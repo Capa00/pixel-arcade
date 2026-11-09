@@ -1,0 +1,231 @@
+/*
+ * Pagina «Configurazione» di una console o di un gioco (livello 45, come la
+ * finestra «Comandi»). Lascia libera la barra dei comandi in basso.
+ */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: calc(64px * var(--u));
+  z-index: 45;
+  padding: calc(24px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(var(--bg-rgb) / 0.7);
+}
+
+.panel {
+  width: calc(860px * var(--u));
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border-2);
+  border-radius: calc(24px * var(--u));
+  background: var(--surface-1);
+  box-shadow: 0 calc(40px * var(--u)) calc(80px * var(--u)) calc(-20px * var(--u)) var(--shadow-70);
+}
+
+.strip {
+  height: 4px;
+  flex-shrink: 0;
+  background: var(--accent);
+}
+
+.head {
+  padding: calc(22px * var(--u)) calc(32px * var(--u)) calc(14px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--u));
+}
+
+.kicker {
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+
+.title {
+  overflow: hidden;
+  font-size: calc(26px * var(--u));
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sub {
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+/* Sezioni: LB/RB, [ ] o clic. */
+.tabs {
+  padding: 0 calc(20px * var(--u));
+  display: flex;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border-2);
+}
+
+.tab {
+  position: relative;
+  height: calc(46px * var(--u));
+  padding: 0 calc(16px * var(--u));
+  display: flex;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--text-4);
+  font-family: inherit;
+  font-size: calc(15px * var(--u));
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.tab::after {
+  content: '';
+  position: absolute;
+  left: calc(16px * var(--u));
+  right: calc(16px * var(--u));
+  bottom: -1px;
+  height: calc(3px * var(--u));
+  border-radius: calc(3px * var(--u)) calc(3px * var(--u)) 0 0;
+  background: transparent;
+}
+
+.tab:hover {
+  color: var(--text-2);
+}
+
+.tabActive {
+  color: var(--text-1);
+}
+
+.tabActive::after {
+  background: var(--accent);
+}
+
+/* Testo cercato con Y. */
+.filter {
+  padding: calc(10px * var(--u)) calc(32px * var(--u)) 0;
+  font-size: calc(13px * var(--u));
+  color: var(--accent);
+}
+
+/* Righe: nome e nota, valore in uso, origine del valore. */
+.list {
+  min-height: 0;
+  padding: calc(16px * var(--u)) calc(32px * var(--u));
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.list::-webkit-scrollbar {
+  display: none;
+}
+
+.entry {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+}
+
+.group {
+  padding: calc(10px * var(--u)) calc(4px * var(--u)) 0;
+  font-size: calc(10px * var(--u));
+  letter-spacing: 0.08em;
+  color: var(--text-4);
+}
+
+.row {
+  padding: calc(10px * var(--u)) calc(16px * var(--u));
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: calc(14px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.row:global(.focused) {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.fixedRow {
+  background: var(--surface-3);
+}
+
+.text {
+  min-width: 0;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: calc(3px * var(--u));
+}
+
+/* Nome, nota e valore vanno a capo: le descrizioni dei core si leggono per intero. */
+.name {
+  font-size: calc(16px * var(--u));
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.note {
+  font-size: calc(12px * var(--u));
+  line-height: 1.4;
+  color: var(--text-3);
+  overflow-wrap: anywhere;
+}
+
+.value {
+  max-width: 40%;
+  flex-shrink: 0;
+  font-size: calc(15px * var(--u));
+  font-weight: 600;
+  text-align: right;
+  color: var(--text-1);
+  overflow-wrap: anywhere;
+}
+
+.origin {
+  min-width: calc(92px * var(--u));
+  flex-shrink: 0;
+  padding: calc(4px * var(--u)) calc(8px * var(--u));
+  border-radius: calc(6px * var(--u));
+  background: var(--surface-1);
+  font-size: calc(9px * var(--u));
+  text-align: center;
+  color: var(--text-3);
+}
+
+/* Riga «BIOS» con un file obbligatorio mancante. */
+.missing {
+  color: var(--danger);
+}
+
+/* Valore scelto in questa pagina (gioco, console o Personalizzata). */
+.changed {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.empty {
+  padding: calc(8px * var(--u)) calc(4px * var(--u));
+  font-size: calc(14px * var(--u));
+  color: var(--text-3);
+}

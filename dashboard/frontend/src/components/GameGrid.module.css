@@ -1,0 +1,119 @@
+.grid {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(16px * var(--u));
+}
+
+.heading {
+  display: flex;
+  align-items: baseline;
+  gap: calc(12px * var(--u));
+}
+
+.icon {
+  width: calc(22px * var(--u));
+  flex-shrink: 0;
+  align-self: center;
+  opacity: 0.85;
+}
+
+.iconArt {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.name {
+  font-size: calc(20px * var(--u));
+  font-weight: 600;
+}
+
+.count {
+  font-size: calc(14px * var(--u));
+  color: var(--text-3);
+}
+
+.hint {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  vertical-align: middle;
+}
+
+/* Filtri attivi accanto al titolo: si accorciano con i puntini se non c'è spazio. */
+.chips {
+  min-width: 0;
+  display: flex;
+  gap: calc(6px * var(--u));
+  overflow: hidden;
+}
+
+.chip {
+  flex-shrink: 1;
+  min-width: 0;
+  padding: calc(2px * var(--u)) calc(10px * var(--u));
+  overflow: hidden;
+  border: 1px solid var(--accent, var(--border-3));
+  border-radius: 999px;
+  color: var(--text-2);
+  font-size: calc(12px * var(--u));
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chipLabel {
+  color: var(--text-4);
+}
+
+.letters {
+  margin-left: auto;
+  min-width: 0;
+}
+
+.row {
+  min-height: calc(220px * var(--u));
+  display: grid;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  gap: calc(20px * var(--u));
+  /* Spazio per l'anello e il sollevamento della copertina selezionata. */
+  padding-top: calc(6px * var(--u));
+}
+
+.down {
+  animation: from-below 0.15s ease-out;
+}
+
+.up {
+  animation: from-above 0.15s ease-out;
+}
+
+@keyframes from-below {
+  from {
+    opacity: 0.4;
+    transform: translateY(calc(24px * var(--u)));
+  }
+}
+
+@keyframes from-above {
+  from {
+    opacity: 0.4;
+    transform: translateY(calc(-24px * var(--u)));
+  }
+}
+
+[data-layout='compact'] .heading,
+[data-layout='portrait'] .heading {
+  flex-wrap: wrap;
+}
+
+[data-layout='compact'] .letters,
+[data-layout='portrait'] .letters {
+  order: 1;
+  flex-basis: 100%;
+  margin-left: 0;
+}
+
+[data-layout='compact'] .row {
+  gap: calc(12px * var(--u));
+}

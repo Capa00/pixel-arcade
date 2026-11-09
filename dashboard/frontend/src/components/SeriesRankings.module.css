@@ -1,0 +1,122 @@
+/*
+ * Classifiche e albo d'oro di una serie di tornei (SeriesRankings.jsx), nelle
+ * Impostazioni e nella scheda TOURNAMENT.
+ */
+
+.rankings {
+  display: flex;
+  flex-direction: column;
+  gap: calc(12px * var(--u));
+  min-width: 0;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+}
+
+.tab {
+  padding: calc(4px * var(--u)) calc(12px * var(--u));
+  border: 1px solid transparent;
+  border-radius: calc(999px * var(--u));
+  font-size: calc(14px * var(--u));
+  color: var(--text-3);
+}
+
+.on {
+  border-color: var(--border-3);
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+.empty {
+  font-size: calc(14px * var(--u));
+  color: var(--text-3);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: calc(15px * var(--u));
+  color: var(--text-1);
+}
+
+.table th {
+  padding: calc(4px * var(--u)) calc(8px * var(--u));
+  font-size: calc(12px * var(--u));
+  font-weight: 400;
+  color: var(--text-4);
+  text-align: left;
+}
+
+.table td {
+  padding: calc(6px * var(--u)) calc(8px * var(--u));
+  border-top: 1px solid var(--border-1);
+}
+
+.position {
+  width: calc(44px * var(--u));
+  color: var(--text-3);
+}
+
+.name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table .value {
+  width: calc(72px * var(--u));
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.swatch {
+  display: inline-block;
+  width: calc(12px * var(--u));
+  height: calc(12px * var(--u));
+  margin-right: calc(8px * var(--u));
+  border-radius: calc(3px * var(--u));
+  vertical-align: middle;
+}
+
+.section {
+  margin-top: calc(8px * var(--u));
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.12em;
+  color: var(--text-4);
+}
+
+.honours {
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--u));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.honour {
+  display: flex;
+  align-items: center;
+  gap: calc(12px * var(--u));
+  font-size: calc(14px * var(--u));
+  color: var(--text-1);
+}
+
+.edition {
+  width: calc(44px * var(--u));
+  color: var(--text-3);
+}
+
+.winners {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(12px * var(--u));
+}
+
+.winner {
+  display: inline-flex;
+  align-items: center;
+}

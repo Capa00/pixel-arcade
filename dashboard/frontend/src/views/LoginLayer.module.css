@@ -1,0 +1,8 @@
+/* Sfondo delle finestre di accesso (livello 10, come nella demo). */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: rgb(var(--deep-rgb) / 0.72);
+  backdrop-filter: blur(6px);
+}

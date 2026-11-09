@@ -1,0 +1,155 @@
+/* «Cosa gioco?»: finestra al centro sopra la libreria (sotto la barra comandi). */
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(var(--deep-rgb) / 0.72);
+  backdrop-filter: blur(6px);
+}
+
+.card {
+  position: relative;
+  width: calc(420px * var(--u));
+  max-width: calc(100% - 32px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(12px * var(--u));
+  padding: calc(28px * var(--u)) calc(32px * var(--u));
+  border: 1px solid var(--border-2);
+  border-top: 4px solid var(--gold);
+  border-radius: calc(24px * var(--u));
+  background: var(--surface-1);
+  box-shadow: 0 calc(40px * var(--u)) calc(80px * var(--u)) calc(-20px * var(--u)) var(--shadow-70);
+}
+
+.kicker {
+  font-size: calc(14px * var(--u));
+  letter-spacing: 0.08em;
+  color: var(--gold);
+}
+
+.system {
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+/* Finestra del rullo: una copertina alla volta. */
+.window {
+  width: calc(240px * var(--u));
+  height: calc(320px * var(--u));
+  overflow: hidden;
+  border-radius: calc(14px * var(--u));
+  box-shadow: 0 0 0 3px var(--border-3);
+}
+
+.turning {
+  box-shadow: 0 0 0 3px var(--gold);
+}
+
+.turning .cover {
+  animation: drop 90ms linear;
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes drop {
+  from {
+    transform: translateY(-18%);
+    opacity: 0.6;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.title {
+  max-width: 100%;
+  min-height: 2.6em;
+  overflow: hidden;
+  font-size: calc(20px * var(--u));
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.blur {
+  color: var(--text-4);
+}
+
+.actions {
+  display: flex;
+  gap: calc(10px * var(--u));
+}
+
+.button {
+  padding: calc(10px * var(--u)) calc(16px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: transparent;
+  color: var(--text-1);
+  font-size: calc(14px * var(--u));
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Pulsante evidenziato (← → per sceglierlo, A per premerlo). */
+.chosen {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--on-accent);
+}
+
+/* Avviso del triangolo tenuto: si riempie fino all'apertura. */
+.hint {
+  position: absolute;
+  left: 50%;
+  bottom: calc(96px * var(--u));
+  z-index: 45;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  padding: calc(10px * var(--u)) calc(18px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(14px * var(--u));
+  background: var(--surface-1);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.hintText {
+  font-size: calc(14px * var(--u));
+  font-weight: 600;
+}
+
+.hintBar {
+  width: calc(140px * var(--u));
+  height: calc(4px * var(--u));
+  border-radius: calc(2px * var(--u));
+  background: linear-gradient(to right, var(--gold) calc(var(--progress) * 100%), var(--border-2) 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .turning .cover {
+    animation: none;
+  }
+}

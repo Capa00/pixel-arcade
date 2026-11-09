@@ -1,0 +1,41 @@
+.library {
+  min-height: 100%;
+  padding: calc(40px * var(--u)) calc(48px * var(--u)) calc(24px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(44px * var(--u));
+}
+
+/* Ricerca senza risultati: lo spazio del gioco selezionato resta vuoto. */
+.empty {
+  flex-grow: 1;
+}
+
+.message {
+  height: 100%;
+  padding: calc(40px * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(10px * var(--u));
+  text-align: center;
+}
+
+.messageTitle {
+  font-size: calc(22px * var(--u));
+  font-weight: 600;
+}
+
+.messageText {
+  max-width: calc(720px * var(--u));
+  font-size: calc(15px * var(--u));
+  color: var(--text-3);
+}
+
+/* Telefono: margini ridotti, il contenuto scorre in verticale. */
+[data-layout='compact'] .library {
+  min-height: 0;
+  padding: calc(20px * var(--u)) calc(16px * var(--u));
+  gap: calc(28px * var(--u));
+}

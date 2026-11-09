@@ -1,0 +1,20 @@
+{
+  "title": "Windjammers",
+  "system": "arcade",
+  "hashes": ["c9a5750db3e5f76e917e153dc097e738"],
+  "modes": [
+    {
+      "id": "match",
+      "label": "Vittoria della partita",
+      "text": "Il gioco si chiude da solo 3,5 secondi dopo la fine della partita e il vincitore viene assegnato in automatico: chi vince 2 set, oppure il sudden death dopo il 2–2. Il «draw game» vale come pareggio, o come partita da rigiocare se il torneo non ammette pareggi.",
+      "detect": {
+        "kind": "sets",
+        "active": {"address": "0x101", "equals": 3},
+        "p1": "0x873",
+        "p2": "0x8f3",
+        "target": 2,
+        "draw": 3
+      }
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+/* Modale del formato del torneo (FormatDialog.jsx): formati a sinistra, opzioni a destra. */
+
+.dialog {
+  width: calc(940px * var(--u));
+}
+
+.body {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  align-items: start;
+  gap: calc(20px * var(--u));
+}
+
+.formats {
+  margin: 0;
+  padding: calc(2px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--u));
+  list-style: none;
+}
+
+.format {
+  width: 100%;
+  min-height: calc(48px * var(--u));
+  padding: calc(8px * var(--u)) calc(16px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(12px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  font-size: calc(15px * var(--u));
+  text-align: left;
+}
+
+.formatName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.soon {
+  color: var(--text-4);
+}
+
+.soonTag {
+  flex-shrink: 0;
+  font-size: calc(12px * var(--u));
+  letter-spacing: 0.04em;
+  opacity: 0.8;
+}
+
+.chosen {
+  flex-shrink: 0;
+  color: var(--ok);
+}
+
+/* Cursore sull'elenco. */
+.active {
+  border-color: var(--text-1);
+  background: var(--text-1);
+  color: var(--bg);
+}
+
+.active .chosen {
+  color: var(--bg);
+}
+
+/* Formato evidenziato mentre il cursore è sulle opzioni. */
+.current {
+  border-color: var(--text-1);
+}
+
+.options {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--u));
+}
+
+.soonText {
+  padding: calc(12px * var(--u)) calc(4px * var(--u));
+  font-size: calc(15px * var(--u));
+  color: var(--text-3);
+}
+
+.option {
+  min-height: calc(52px * var(--u));
+  padding: calc(6px * var(--u)) calc(8px * var(--u)) calc(6px * var(--u)) calc(16px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(12px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+}
+
+.optionActive {
+  border-color: var(--text-1);
+  box-shadow: 0 0 0 1px var(--text-1);
+}
+
+.optionText {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(2px * var(--u));
+}
+
+.optionLabel {
+  font-size: calc(15px * var(--u));
+  font-weight: 600;
+}
+
+.optionNote {
+  font-size: calc(12px * var(--u));
+  color: var(--text-4);
+}
+
+.value {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: calc(6px * var(--u));
+}
+
+.valueText {
+  min-width: calc(170px * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(4px * var(--u));
+  font-size: calc(15px * var(--u));
+  text-align: center;
+}
+
+.arrow {
+  width: calc(32px * var(--u));
+  height: calc(32px * var(--u));
+  border-radius: calc(8px * var(--u));
+  font-size: calc(12px * var(--u));
+  color: var(--text-3);
+}
+
+.optionActive .arrow {
+  color: var(--text-1);
+}
+
+/* Cursore dei pesi del misto: la parte piena è il peso degli XP. */
+.slider {
+  width: calc(150px * var(--u));
+  height: calc(6px * var(--u));
+  overflow: hidden;
+  border-radius: calc(3px * var(--u));
+  background: var(--border-2);
+}
+
+.sliderFill {
+  height: 100%;
+  display: block;
+  background: var(--ok);
+}

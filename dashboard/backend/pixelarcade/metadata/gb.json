@@ -1,0 +1,4014 @@
+{
+  "games": [
+    {
+      "id": "aerostar",
+      "title": "Aerostar",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Sigma Pro-Tech",
+      "publisher": "Vic Tokai",
+      "year": 1991,
+      "genre": [
+        "Sparatutto a scorrimento"
+      ],
+      "players": "1",
+      "description": "Sparatutto a scorrimento in cui si pilota un veicolo armato attraverso livelli ostili. Il gioco alterna tratti di volo e tratti di guida a terra.",
+      "plot": null,
+      "thumbnail": "Aerostar (USA, Europe)",
+      "hashes": {
+        "crc32": "5f45fa7d"
+      },
+      "keys": [
+        "aerostar"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "amazing-penguin",
+      "title": "Amazing Penguin",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Natsume",
+      "publisher": "Natsume",
+      "year": null,
+      "genre": [
+        "Azione",
+        "Rompicapo"
+      ],
+      "players": "1",
+      "description": "Un pinguino si muove in labirinti a schermata singola, evitando i nemici e cercando di completare ogni quadro. Il gioco unisce riflessi e un po' di pianificazione.",
+      "plot": null,
+      "thumbnail": "Amazing Penguin (USA, Europe)",
+      "hashes": {
+        "crc32": "48e445d3"
+      },
+      "keys": [
+        "amazingpenguin"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "astro-rabby",
+      "title": "Astro Rabby",
+      "region": "Giappone",
+      "languages": [
+        "en"
+      ],
+      "developer": "Information Global Service",
+      "publisher": "Information Global Service",
+      "year": 1990,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Un coniglio spaziale avanza a salti da una piattaforma all'altra, in livelli a schermata fissa. Uscì solo in Giappone nel 1990.",
+      "plot": null,
+      "thumbnail": "Astro Rabby (Japan)",
+      "hashes": {
+        "crc32": "7eb8d991"
+      },
+      "keys": [
+        "astrorabby"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "atomic-punk",
+      "title": "Atomic Punk",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Hudson",
+      "publisher": "Hudson",
+      "year": 1991,
+      "genre": [
+        "Azione",
+        "Rompicapo"
+      ],
+      "players": "1",
+      "description": "Versione per Game Boy di «Bomberman». Si piazzano bombe per aprirsi la strada nei labirinti, eliminare i nemici e raggiungere l'uscita di ogni livello.",
+      "plot": null,
+      "thumbnail": "Atomic Punk (USA)",
+      "hashes": {
+        "crc32": "9455faa2"
+      },
+      "keys": [
+        "atomicpunk"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "avenging-spirit",
+      "title": "Avenging Spirit",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "C.P. Brain",
+      "publisher": "Jaleco",
+      "year": null,
+      "genre": [
+        "Piattaforme",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Si controlla uno spirito che può possedere i corpi dei nemici e sfruttarne le capacità. Il gioco è un'avventura d'azione a scorrimento con livelli in successione.",
+      "plot": null,
+      "thumbnail": "Avenging Spirit (USA, Europe)",
+      "hashes": {
+        "crc32": "36806080"
+      },
+      "keys": [
+        "avengingspirit"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "balloon-kid",
+      "title": "Balloon Kid",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1–2",
+      "description": "Spin-off di «Balloon Fight». La protagonista si sposta tenendo in mano dei palloncini, che le permettono di fluttuare tra piattaforme e nemici. Oltre ai livelli a scorrimento ha una modalità a due giocatori.",
+      "plot": null,
+      "thumbnail": "Balloon Kid (USA, Europe)",
+      "hashes": {
+        "crc32": "3df9e3d3"
+      },
+      "keys": [
+        "balloonkid"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "batman-return-of-the-joker-gb",
+      "title": "Batman: Return of the Joker",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Sunsoft",
+      "publisher": "Sunsoft",
+      "year": 1992,
+      "genre": [
+        "Piattaforme",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Batman affronta i sicari del Joker in livelli a scorrimento, con salti, pugni e armi da lancio. Il gioco esce nel 1992 ed è del tutto diverso dall'edizione per NES.",
+      "plot": null,
+      "thumbnail": "Batman - Return of the Joker (USA, Europe)",
+      "hashes": {
+        "crc32": "da28ccb1"
+      },
+      "keys": [
+        "batmanreturnofthejoker"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "batman-the-video-game-gb",
+      "title": "Batman: The Video Game",
+      "region": "Mondo",
+      "languages": [
+        "en"
+      ],
+      "developer": "Sunsoft",
+      "publisher": "Sunsoft",
+      "year": null,
+      "genre": [
+        "Piattaforme",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Gioco d'azione a piattaforme ispirato al film di Tim Burton del 1989. Batman avanza tra livelli a scorrimento, combattendo i nemici con pugni e armi.",
+      "plot": null,
+      "thumbnail": "Batman - The Video Game (World)",
+      "hashes": {
+        "crc32": "0e7eaf4e"
+      },
+      "keys": [
+        "batmanthevideogame"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "battle-arena-toshinden-gb",
+      "title": "Battle Arena Toshinden",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Tamsoft",
+      "publisher": "Takara",
+      "year": 1996,
+      "genre": [
+        "Picchiaduro"
+      ],
+      "players": "1–2",
+      "description": "Adattamento per Game Boy del picchiaduro a incontri singoli uscito su PlayStation. I combattenti usano armi e mosse speciali in scontri uno contro uno, con grafica ridotta al monocromatico.",
+      "plot": null,
+      "thumbnail": "Battle Arena Toshinden (USA) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "4ac02021"
+      },
+      "keys": [
+        "battlearenatoshinden"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "battle-unit-zeoth",
+      "title": "Battle Unit Zeoth",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Jaleco",
+      "publisher": "Jaleco",
+      "year": 1990,
+      "genre": [
+        "Sparatutto a scorrimento"
+      ],
+      "players": "1",
+      "description": "Sparatutto a scorrimento in cui si guida un robot da combattimento. Si possono raccogliere potenziamenti per le armi durante i livelli.",
+      "plot": null,
+      "thumbnail": "Battle Unit Zeoth (USA, Europe)",
+      "hashes": {
+        "crc32": "8beb7685"
+      },
+      "keys": [
+        "battleunitzeoth"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "bionic-commando-gb",
+      "title": "Bionic Commando",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Minakuchi Engineering",
+      "publisher": "Capcom",
+      "year": 1992,
+      "genre": [
+        "Azione",
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Il soldato protagonista non può saltare, ma usa un braccio bionico a gancio per aggrapparsi ai sostegni e dondolarsi. Il gioco combina esplorazione, sparatorie e scelta dei percorsi.",
+      "plot": null,
+      "thumbnail": "Bionic Commando (USA)",
+      "hashes": {
+        "crc32": "3df26dc7"
+      },
+      "keys": [
+        "bioniccommando"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "blaster-master-boy",
+      "title": "Blaster Master Boy",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Aicom",
+      "publisher": "Sunsoft",
+      "year": 1991,
+      "genre": [
+        "Azione",
+        "Avventura"
+      ],
+      "players": "1",
+      "description": "Seguito spirituale di «Blaster Master». Si esplorano labirinti a piedi, con visuale dall'alto, e si affrontano boss. Le sezioni sono collegate da un percorso ramificato.",
+      "plot": null,
+      "thumbnail": "Blaster Master Boy (USA)",
+      "hashes": {
+        "crc32": "a762710c"
+      },
+      "keys": [
+        "blastermasterboy"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "booby-boys",
+      "title": "Booby Boys",
+      "region": "Giappone",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nichibutsu",
+      "publisher": "Nichibutsu",
+      "year": 1993,
+      "genre": [
+        "Azione",
+        "Rompicapo"
+      ],
+      "players": "1",
+      "description": "Gioco d'azione e rompicapo di Nichibutsu, uscito solo in Giappone nel 1993. Questa versione ha una traduzione amatoriale in inglese.",
+      "plot": null,
+      "thumbnail": "Booby Boys (Japan)",
+      "hashes": {
+        "crc32": "b8c2933e"
+      },
+      "keys": [
+        "boobyboys"
+      ],
+      "achievements": false,
+      "kind": "translation"
+    },
+    {
+      "id": "boxxle",
+      "title": "Boxxle",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Atelier Double",
+      "publisher": "FCI",
+      "year": null,
+      "genre": [
+        "Rompicapo"
+      ],
+      "players": "1",
+      "description": "Rompicapo in cui si spingono casse su una griglia fino alle posizioni indicate. Non si può tirare nulla, quindi ogni mossa sbagliata può bloccare il livello.",
+      "plot": null,
+      "thumbnail": "Boxxle (USA, Europe) (Rev 1)",
+      "hashes": {
+        "crc32": "b0815dce"
+      },
+      "keys": [
+        "boxxle"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "boxxle-ii",
+      "title": "Boxxle II",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Thinking Rabbit",
+      "publisher": "Pony Canyon",
+      "year": null,
+      "genre": [
+        "Rompicapo"
+      ],
+      "players": "1",
+      "description": "Seguito di «Boxxle». Si spingono casse nei magazzini fino alle caselle di destinazione, con nuovi livelli di difficoltà crescente.",
+      "plot": null,
+      "thumbnail": "Boxxle II (USA, Europe)",
+      "hashes": {
+        "crc32": "5978eca5"
+      },
+      "keys": [
+        "boxxleii"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "bubble-ghost",
+      "title": "Bubble Ghost",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Ere Informatique",
+      "publisher": "FCI",
+      "year": 1990,
+      "genre": [
+        "Azione",
+        "Rompicapo"
+      ],
+      "players": "1",
+      "description": "Un fantasma soffia una bolla attraverso le sale di un castello, senza toccare trappole e ostacoli. Basta un contatto per far scoppiare la bolla e perdere una vita.",
+      "plot": null,
+      "thumbnail": "Bubble Ghost (USA, Europe)",
+      "hashes": {
+        "crc32": "755800b3"
+      },
+      "keys": [
+        "bubbleghost"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "castlevania-ii-belmonts-revenge",
+      "title": "Castlevania II: Belmont's Revenge",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Konami",
+      "year": null,
+      "genre": [
+        "Piattaforme",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Secondo capitolo della serie per Game Boy. Christopher Belmont affronta il castello di Dracula con la frusta, scegliendo l'ordine di quattro torri iniziali. Rispetto al primo capitolo è più vario e ha grafica più curata.",
+      "plot": "Christopher Belmont torna a combattere Dracula, che ha rapito suo figlio Soleil. Deve attraversare il castello per liberarlo.",
+      "thumbnail": "Castlevania II - Belmont's Revenge (USA, Europe)",
+      "hashes": {
+        "crc32": "751f5350"
+      },
+      "keys": [
+        "castlevaniaiibelmontsrevenge"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "castlevania-legends",
+      "title": "Castlevania Legends",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Konami",
+      "year": null,
+      "genre": [
+        "Piattaforme",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Capitolo della serie uscito nel 1997. Si gioca con Sonia Belmont, che usa la frusta in livelli a scorrimento e può scegliere l'ordine di alcune tappe. È stato l'ultimo «Castlevania» per Game Boy classico.",
+      "plot": null,
+      "thumbnail": "Castlevania Legends (USA, Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "9fed30ec"
+      },
+      "keys": [
+        "castlevanialegends"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "castlevania-the-adventure",
+      "title": "Castlevania: The Adventure",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Konami",
+      "year": 1990,
+      "genre": [
+        "Piattaforme",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Primo «Castlevania» per Game Boy. Christopher Belmont usa la frusta lungo quattro livelli a scorrimento, con ritmo più lento rispetto ai capitoli per console fisse.",
+      "plot": "Christopher Belmont, cacciatore di vampiri, deve fermare Dracula, tornato per minacciare di nuovo la Transilvania.",
+      "thumbnail": "Castlevania - The Adventure (USA)",
+      "hashes": {
+        "crc32": "5e7bb2ee"
+      },
+      "keys": [
+        "castlevaniatheadventure"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "catrap",
+      "title": "Catrap",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "ASK Kodansha",
+      "publisher": "Asmik",
+      "year": 1990,
+      "genre": [
+        "Rompicapo"
+      ],
+      "players": "1",
+      "description": "Si guida un personaggio in stanze a schermata singola, spingendo blocchi e cancellando i mostri. Bisogna completare il livello senza restare bloccati.",
+      "plot": null,
+      "thumbnail": "Catrap (USA)",
+      "hashes": {
+        "crc32": "2f43fded"
+      },
+      "keys": [
+        "catrap"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "cave-noire",
+      "title": "Cave Noire",
+      "region": "Giappone",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Konami",
+      "year": 1991,
+      "genre": [
+        "GdR"
+      ],
+      "players": "1",
+      "description": "GdR a turni di Konami, uscito solo in Giappone nel 1991. Ha dungeon generati a caso in una torre. Questa versione ha una traduzione amatoriale in inglese.",
+      "plot": null,
+      "thumbnail": "Cave Noire (Japan)",
+      "hashes": {
+        "crc32": "878b2ca4"
+      },
+      "keys": [
+        "cavenoire"
+      ],
+      "achievements": false,
+      "kind": "translation"
+    },
+    {
+      "id": "chalvo-55-super-puzzle-action",
+      "title": "Chalvo 55: Super Puzzle Action",
+      "region": "Giappone",
+      "languages": [
+        "en"
+      ],
+      "developer": "Japan System Supply",
+      "publisher": "Japan System Supply",
+      "year": 1997,
+      "genre": [
+        "Piattaforme",
+        "Rompicapo"
+      ],
+      "players": "1",
+      "description": "Gioco a piattaforme e rompicapo di Japan System Supply, uscito solo in Giappone nel 1997. Questa versione ha una traduzione amatoriale in inglese.",
+      "plot": null,
+      "thumbnail": "Chalvo 55 - Super Puzzle Action (Japan)",
+      "hashes": {
+        "crc32": "58c1b914"
+      },
+      "keys": [
+        "chalvo55superpuzzleaction"
+      ],
+      "achievements": false,
+      "kind": "translation"
+    },
+    {
+      "id": "contra-the-alien-wars",
+      "title": "Contra: The Alien Wars",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Konami",
+      "year": 1994,
+      "genre": [
+        "Sparatutto a scorrimento"
+      ],
+      "players": "1",
+      "description": "Versione per Game Boy di «Contra III», con livelli a scorrimento e sparatorie contro alieni. Alterna scene con visuale laterale e scene dall'alto.",
+      "plot": null,
+      "thumbnail": "Contra - The Alien Wars (USA) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "17a5ff13"
+      },
+      "keys": [
+        "contrathealienwars"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "cosmo-tank",
+      "title": "Cosmo Tank",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Atlus",
+      "publisher": "Asuka Technologies, Inc.",
+      "year": 1990,
+      "genre": [
+        "Azione",
+        "Avventura"
+      ],
+      "players": "1",
+      "description": "Si guida un carro armato, sia in visuale laterale sia in prima persona nei labirinti. Il gioco mescola combattimento ed esplorazione di ambienti sotterranei.",
+      "plot": null,
+      "thumbnail": "Cosmo Tank (USA)",
+      "hashes": {
+        "crc32": "fa1a25b6"
+      },
+      "keys": [
+        "cosmotank"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "darkwing-duck-gb",
+      "title": "Darkwing Duck",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Capcom",
+      "publisher": "Capcom",
+      "year": 1993,
+      "genre": [
+        "Piattaforme",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Darkwing Duck combatte i suoi nemici con la pistola a gas e può aggrapparsi ai ganci con il mantello. Il gioco segue lo stile della versione per NES, ridotto per il Game Boy.",
+      "plot": null,
+      "thumbnail": "Darkwing Duck (USA)",
+      "hashes": {
+        "crc32": "626b12c1"
+      },
+      "keys": [
+        "darkwingduck"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "dead-heat-scramble",
+      "title": "Dead Heat Scramble",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Copya System Ltd.",
+      "publisher": "Electro Brain Corp.",
+      "year": 1990,
+      "genre": [
+        "Corse"
+      ],
+      "players": "1–2",
+      "description": "Gioco di corse di moto da cross con visuale laterale. Il pilota deve affrontare salti e dossi su piste in successione.",
+      "plot": null,
+      "thumbnail": "Dead Heat Scramble (USA)",
+      "hashes": {
+        "crc32": "5cd9c0e4"
+      },
+      "keys": [
+        "deadheatscramble"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "dexterity",
+      "title": "Dexterity",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "SNK",
+      "publisher": "SNK",
+      "year": null,
+      "genre": [
+        "Rompicapo",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Rompicapo d'azione in cui bisogna spostare i pezzi e far combaciare forme. Il gioco richiede sia rapidità sia attenzione.",
+      "plot": null,
+      "thumbnail": "Dexterity (USA, Europe)",
+      "hashes": {
+        "crc32": "8e46f021"
+      },
+      "keys": [
+        "dexterity"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "donkey-kong-gb",
+      "title": "Donkey Kong",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": 1994,
+      "genre": [
+        "Piattaforme",
+        "Rompicapo"
+      ],
+      "players": "1",
+      "description": "Parte come il classico arcade, poi prosegue con oltre cento livelli a schermata singola. Mario deve prendere una chiave e raggiungere la porta, usando salti acrobatici e oggetti. Sul Super Game Boy mostra una cornice e colori dedicati.",
+      "plot": "Donkey Kong rapisce Pauline e scappa. Mario lo insegue attraverso molti livelli per salvarla.",
+      "thumbnail": "Donkey Kong (World) (Rev 1) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "b661c6ad"
+      },
+      "keys": [
+        "donkeykong"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "donkey-kong-land",
+      "title": "Donkey Kong Land",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Rareware",
+      "publisher": "Nintendo",
+      "year": 1995,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Versione per Game Boy della serie «Donkey Kong Country». Grafica prerenderizzata adattata al monocromatico e livelli a scorrimento con Donkey e Diddy Kong.",
+      "plot": null,
+      "thumbnail": "Donkey Kong Land (USA, Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "a22f1af2"
+      },
+      "keys": [
+        "donkeykongland"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "donkey-kong-land-2",
+      "title": "Donkey Kong Land 2",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Rareware",
+      "publisher": "Nintendo",
+      "year": 1996,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Seguito di «Donkey Kong Land», ispirato a «Donkey Kong Country 2». Diddy e Dixie Kong attraversano livelli a scorrimento e affrontano i pirati di King K. Rool.",
+      "plot": null,
+      "thumbnail": "Donkey Kong Land 2 (USA, Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "79cac666"
+      },
+      "keys": [
+        "donkeykongland2"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "donkey-kong-land-iii",
+      "title": "Donkey Kong Land III",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Rareware",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Terzo capitolo della serie portatile. Dixie e Kiddy Kong attraversano livelli a scorrimento e raccolgono oggetti nascosti.",
+      "plot": null,
+      "thumbnail": "Donkey Kong Land III (USA, Europe) (Rev 1) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "bb81821c"
+      },
+      "keys": [
+        "donkeykonglandiii"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "dr-franken",
+      "title": "Dr. Franken",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Motivetime Ltd.",
+      "publisher": "Kemco",
+      "year": 1992,
+      "genre": [
+        "Piattaforme",
+        "Avventura"
+      ],
+      "players": "1",
+      "description": "Il mostro di Frankenstein deve ricomporre il proprio corpo, cercando i pezzi sparsi per un castello. Il gioco è un'avventura a piattaforme con enigmi.",
+      "plot": null,
+      "thumbnail": "Dr. Franken (USA)",
+      "hashes": {
+        "crc32": "510dc1b2"
+      },
+      "keys": [
+        "drfranken"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "dr-franken-ii",
+      "title": "Dr. Franken II",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en",
+        "fr",
+        "de",
+        "es",
+        "it",
+        "nl",
+        "sv"
+      ],
+      "developer": "Motivetime Ltd.",
+      "publisher": "Elite Systems",
+      "year": null,
+      "genre": [
+        "Piattaforme",
+        "Avventura"
+      ],
+      "players": "1",
+      "description": "Seguito di «Dr. Franken». Si esplorano ambienti a piattaforme cercando oggetti e risolvendo enigmi.",
+      "plot": null,
+      "thumbnail": "Dr. Franken II (USA, Europe) (En,Fr,De,Es,It,Nl,Sv)",
+      "hashes": {
+        "crc32": "815927c5"
+      },
+      "keys": [
+        "drfrankenii"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "dr-mario-gb",
+      "title": "Dr. Mario",
+      "region": "Mondo",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Rompicapo"
+      ],
+      "players": "1–2",
+      "description": "Rompicapo in cui si lasciano cadere capsule di due colori su un flacone pieno di virus. Allineando quattro elementi dello stesso colore, questi scompaiono. Ha una modalità per due giocatori tramite cavo.",
+      "plot": null,
+      "thumbnail": "Dr. Mario (World) (Rev 1)",
+      "hashes": {
+        "crc32": "13e9d83f"
+      },
+      "keys": [
+        "drmario"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "dragonheart",
+      "title": "DragonHeart",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Torus Games",
+      "publisher": "Acclaim",
+      "year": null,
+      "genre": [
+        "Avventura",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Gioco d'azione ispirato al film «Dragonheart» del 1996. Si controlla il cavaliere Bowen, con salti e attacchi di spada.",
+      "plot": null,
+      "thumbnail": "DragonHeart (USA, Europe)",
+      "hashes": {
+        "crc32": "10fb2504"
+      },
+      "keys": [
+        "dragonheart"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "dropzone-gb",
+      "title": "Dropzone",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Arena Graphics",
+      "publisher": "Mindscape",
+      "year": null,
+      "genre": [
+        "Sparatutto a scorrimento"
+      ],
+      "players": "1",
+      "description": "Sparatutto a scorrimento orizzontale derivato dal gioco per computer a 8 bit. Si pilota un jetpack e si difendono gli scienziati dagli alieni.",
+      "plot": null,
+      "thumbnail": "Dropzone (Europe)",
+      "hashes": {
+        "crc32": "c777715f"
+      },
+      "keys": [
+        "dropzone"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "ducktales-gb",
+      "title": "DuckTales",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Capcom",
+      "publisher": "Capcom",
+      "year": 1990,
+      "genre": [
+        "Piattaforme",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Zio Paperone salta e usa il bastone come una molla, cercando tesori in vari luoghi del mondo. L'ordine dei livelli è a scelta del giocatore.",
+      "plot": null,
+      "thumbnail": "DuckTales (USA)",
+      "hashes": {
+        "crc32": "72fef4f9"
+      },
+      "keys": [
+        "ducktales"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "ducktales-2-gb",
+      "title": "DuckTales 2",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Capcom",
+      "publisher": "Capcom",
+      "year": 1991,
+      "genre": [
+        "Piattaforme",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Seguito di «DuckTales». Zio Paperone cerca tesori in diverse zone del mondo, usando il bastone per saltare e colpire.",
+      "plot": null,
+      "thumbnail": "DuckTales 2 (USA)",
+      "hashes": {
+        "crc32": "541cf92c"
+      },
+      "keys": [
+        "ducktales2"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "f-1-race-gb",
+      "title": "F-1 Race",
+      "region": "Mondo",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Corse",
+        "Formula 1"
+      ],
+      "players": "1–4",
+      "description": "Gioco di corse di Formula 1 con visuale posteriore. Consente di correre fino a quattro giocatori tramite l'adattatore apposito.",
+      "plot": null,
+      "thumbnail": "F-1 Race (World) (Rev 1)",
+      "hashes": {
+        "crc32": "b3f9e159"
+      },
+      "keys": [
+        "f1race"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "faceball-2000",
+      "title": "Faceball 2000",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Xanth Software",
+      "publisher": "Bullet Proof Software",
+      "year": 1991,
+      "genre": [
+        "Sparatutto in prima persona"
+      ],
+      "players": "1–4",
+      "description": "Sparatutto in prima persona in labirinti tridimensionali, con nemici a forma di faccia sorridente. Con il cavo si può giocare in due.",
+      "plot": null,
+      "thumbnail": "Faceball 2000 (USA)",
+      "hashes": {
+        "crc32": "81065dc3"
+      },
+      "keys": [
+        "faceball2000"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "fastest-lap",
+      "title": "Fastest Lap",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Kindle Imagine Develop",
+      "publisher": "NTV International Corporation",
+      "year": 1992,
+      "genre": [
+        "Corse",
+        "Formula 1"
+      ],
+      "players": "1–4",
+      "description": "Gioco di corse di Formula 1 con visuale da dietro l'auto. Si gareggia sui circuiti in una modalità campionato.",
+      "plot": null,
+      "thumbnail": "Fastest Lap (USA)",
+      "hashes": {
+        "crc32": "2f7aa37a"
+      },
+      "keys": [
+        "fastestlap"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "fighting-simulator-2-in-1-flying-warriors",
+      "title": "Fighting Simulator 2 in 1: Flying Warriors",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Culture Brain",
+      "publisher": "Culture Brain",
+      "year": null,
+      "genre": [
+        "Picchiaduro a scorrimento"
+      ],
+      "players": "1–2",
+      "description": "Picchiaduro a scorrimento di Culture Brain. Il protagonista supera livelli in cui sconfigge avversari con attacchi a corpo libero e mosse speciali.",
+      "plot": null,
+      "thumbnail": "Fighting Simulator 2 in 1 - Flying Warriors (USA, Europe)",
+      "hashes": {
+        "crc32": "7e2ec0bc"
+      },
+      "keys": [
+        "fightingsimulator2in1flyingwarriors"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "final-fantasy-adventure",
+      "title": "Final Fantasy Adventure",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Square Enix",
+      "publisher": "Square Enix",
+      "year": 1991,
+      "genre": [
+        "GdR d'azione"
+      ],
+      "players": "1",
+      "description": "GdR d'azione con visuale dall'alto e combattimento in tempo reale. Nel gioco si esplorano città e dungeon. Fu il primo capitolo della serie «Mana», in Giappone «Seiken Densetsu».",
+      "plot": "Un giovane gladiatore fugge dal suo padrone, il Signore Glaive, e si mette in viaggio con una ragazza per salvare l'Albero del Mana.",
+      "thumbnail": "Final Fantasy Adventure (USA)",
+      "hashes": {
+        "crc32": "09bcb74b"
+      },
+      "keys": [
+        "finalfantasyadventure"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "final-fantasy-legend-ii",
+      "title": "Final Fantasy Legend II",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Square Enix",
+      "publisher": "Square Enix",
+      "year": 1991,
+      "genre": [
+        "GdR"
+      ],
+      "players": "1",
+      "description": "GdR a turni della serie «SaGa». Si viaggia tra mondi collegati da una torre e si compongono gruppi di umani, mutanti e robot.",
+      "plot": null,
+      "thumbnail": "Final Fantasy Legend II (USA)",
+      "hashes": {
+        "crc32": "c6ce4c85"
+      },
+      "keys": [
+        "finalfantasylegendii"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "final-fantasy-legend-iii",
+      "title": "Final Fantasy Legend III",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Square Enix",
+      "publisher": "Square Enix",
+      "year": 1993,
+      "genre": [
+        "GdR"
+      ],
+      "players": "1",
+      "description": "GdR a turni della serie «SaGa», con viaggi nel tempo tra passato e futuro. La squadra comprende umani, mutanti e mostri, e può cambiare razza.",
+      "plot": null,
+      "thumbnail": "Final Fantasy Legend III (USA)",
+      "hashes": {
+        "crc32": "18ee9ab0"
+      },
+      "keys": [
+        "finalfantasylegendiii"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "for-the-frog-the-bell-tolls",
+      "title": "For the Frog the Bell Tolls",
+      "region": "Giappone",
+      "languages": [
+        "en"
+      ],
+      "developer": "Intelligent Systems",
+      "publisher": "Nintendo",
+      "year": 1992,
+      "genre": [
+        "Azione",
+        "Avventura"
+      ],
+      "players": "1",
+      "description": "Avventura d'azione con un principe rana, in Giappone «Kaeru no Tame ni Kane wa Naru». Combatte con la spada in un mondo pieno di enigmi. Qui è presente con una traduzione amatoriale in inglese.",
+      "plot": null,
+      "thumbnail": "Kaeru no Tame ni Kane wa Naru (Japan)",
+      "hashes": {
+        "crc32": "4967666e"
+      },
+      "keys": [
+        "forthefrogthebelltolls",
+        "kaerunotamenikanewanaru"
+      ],
+      "achievements": false,
+      "kind": "translation"
+    },
+    {
+      "id": "fortified-zone",
+      "title": "Fortified Zone",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Jaleco",
+      "publisher": "Jaleco",
+      "year": null,
+      "genre": [
+        "Sparatutto",
+        "Azione"
+      ],
+      "players": "1–2",
+      "description": "Sparatutto d'azione con visuale dall'alto e a scorrimento. Il soldato attraversa una base nemica.",
+      "plot": null,
+      "thumbnail": "Fortified Zone (USA, Europe)",
+      "hashes": {
+        "crc32": "b6845aeb"
+      },
+      "keys": [
+        "fortifiedzone"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "game-and-watch-gallery",
+      "title": "Game & Watch Gallery",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": 1997,
+      "genre": [
+        "Arcade",
+        "Raccolta"
+      ],
+      "players": "1",
+      "description": "Raccolta di giochi elettronici Game & Watch, tra cui «Ball», «Manhole», «Fire» e «Oil Panic». Ognuno è disponibile nella versione classica e in una versione aggiornata con personaggi Nintendo.",
+      "plot": null,
+      "thumbnail": "Game & Watch Gallery (USA) (Rev 1) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "250c46a6"
+      },
+      "keys": [
+        "gameandwatchgallery"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "gargoyles-quest",
+      "title": "Gargoyle's Quest",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Capcom",
+      "publisher": "Capcom",
+      "year": 1990,
+      "genre": [
+        "Piattaforme",
+        "GdR d'azione"
+      ],
+      "players": "1",
+      "description": "Avventura d'azione con elementi di GdR. Il gargoyle Firebrand vola e si aggrappa alle pareti, e passa da una mappa panoramica ai livelli a scorrimento. Deriva dalla serie «Ghosts 'n Goblins».",
+      "plot": null,
+      "thumbnail": "Gargoyle's Quest (USA, Europe)",
+      "hashes": {
+        "crc32": "d06d7ce8"
+      },
+      "keys": [
+        "gargoylesquest"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "gargoyles-quest-ii-the-demon-darkness",
+      "title": "Gargoyle's Quest II: The Demon Darkness",
+      "region": "Giappone",
+      "languages": [
+        "en"
+      ],
+      "developer": "Sun L",
+      "publisher": "Capcom",
+      "year": 1993,
+      "genre": [
+        "Piattaforme",
+        "GdR d'azione"
+      ],
+      "players": "1",
+      "description": "Versione per Game Boy di «Gargoyle's Quest II», uscita solo in Giappone nel 1993 come «Makaimura Gaiden: The Demon Darkness». Firebrand alterna fasi a piattaforme, in cui vola e si aggrappa alle pareti, all'esplorazione di una mappa con città e personaggi. Questa versione ha una traduzione amatoriale in inglese.",
+      "plot": null,
+      "thumbnail": "Makaimura Gaiden - The Demon Darkness (Japan)",
+      "hashes": {
+        "crc32": "07ade9de"
+      },
+      "keys": [
+        "gargoylesquestiithedemondarkness",
+        "makaimuragaidenthedemondarkness"
+      ],
+      "achievements": false,
+      "kind": "translation"
+    },
+    {
+      "id": "ghostbusters-ii-gb",
+      "title": "Ghostbusters II",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Kemco",
+      "publisher": "Activision",
+      "year": 1990,
+      "genre": [
+        "Azione",
+        "Sparatutto"
+      ],
+      "players": "1",
+      "description": "Gioco d'azione ispirato al film «Ghostbusters II». Si affrontano fantasmi con il raggio protonico, in livelli a scorrimento.",
+      "plot": null,
+      "thumbnail": "Ghostbusters II (USA, Europe)",
+      "hashes": {
+        "crc32": "b8e0d663"
+      },
+      "keys": [
+        "ghostbustersii"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "golf-gb",
+      "title": "Golf",
+      "region": "Mondo",
+      "languages": [
+        "en"
+      ],
+      "developer": "Intelligent Systems",
+      "publisher": "Nintendo",
+      "year": 1990,
+      "genre": [
+        "Golf"
+      ],
+      "players": "1–2",
+      "description": "Simulazione di golf con buche da 18 hole. Si sceglie il bastone e si regola la potenza del colpo. Può essere giocato in due tramite cavo.",
+      "plot": null,
+      "thumbnail": "Golf (World)",
+      "hashes": {
+        "crc32": "48014eb8"
+      },
+      "keys": [
+        "golf"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "great-greed",
+      "title": "Great Greed",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Namco",
+      "publisher": "Namco",
+      "year": 1993,
+      "genre": [
+        "GdR"
+      ],
+      "players": "1",
+      "description": "GdR di Namco con combattimenti a turni. Il gioco ha collegamenti per scambiare oggetti fra due Game Boy.",
+      "plot": null,
+      "thumbnail": "Great Greed (USA)",
+      "hashes": {
+        "crc32": "b3a50751"
+      },
+      "keys": [
+        "greatgreed"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "gremlins-2-the-new-batch-gb",
+      "title": "Gremlins 2: The New Batch",
+      "region": "Mondo",
+      "languages": [
+        "en"
+      ],
+      "developer": "Sunsoft",
+      "publisher": "Sunsoft",
+      "year": null,
+      "genre": [
+        "Piattaforme",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Gioco d'azione ispirato al film «Gremlins 2». Il protagonista Gizmo attraversa un grattacielo affrontando i Gremlin.",
+      "plot": null,
+      "thumbnail": "Gremlins 2 - The New Batch (World)",
+      "hashes": {
+        "crc32": "89664c66"
+      },
+      "keys": [
+        "gremlins2thenewbatch"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "hammerin-harry-gb",
+      "title": "Hammerin' Harry",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Tamtex",
+      "publisher": "Irem",
+      "year": null,
+      "genre": [
+        "Piattaforme",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Un carpentiere combatte i nemici con un grosso martello di legno, in livelli a scorrimento. Deriva dal gioco arcade «Hammerin' Harry».",
+      "plot": null,
+      "thumbnail": "Hammerin' Harry (Europe)",
+      "hashes": {
+        "crc32": "8acb1dff"
+      },
+      "keys": [
+        "hammerinharry"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "harvest-moon-gb-gb",
+      "title": "Harvest Moon GB",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Victor Interactive",
+      "publisher": "Natsume",
+      "year": 1997,
+      "genre": [
+        "Simulazione",
+        "Gestionale"
+      ],
+      "players": "1–2",
+      "description": "Si gestisce una fattoria: si coltivano ortaggi, si allevano animali e si stringono rapporti con gli abitanti del villaggio. Il gioco è il primo «Harvest Moon» portatile.",
+      "plot": null,
+      "thumbnail": "Harvest Moon GB (USA) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "e56599fd"
+      },
+      "keys": [
+        "harvestmoongb"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "heiankyo-alien",
+      "title": "Heiankyo Alien",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Live Planning",
+      "publisher": "Meldac",
+      "year": 1990,
+      "genre": [
+        "Azione",
+        "Rompicapo"
+      ],
+      "players": "1–2",
+      "description": "Si scavano buche nelle strade di una città per intrappolare gli alieni, e li si seppellisce prima che raggiungano il protagonista. Deriva dal vecchio gioco per computer.",
+      "plot": null,
+      "thumbnail": "Heiankyo Alien (USA)",
+      "hashes": {
+        "crc32": "1410840d"
+      },
+      "keys": [
+        "heiankyoalien"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "james-bond-007",
+      "title": "James Bond 007",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Saffire",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Avventura",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Gioco d'azione con James Bond, con visuale dall'alto. L'agente 007 attraversa varie missioni di spionaggio.",
+      "plot": null,
+      "thumbnail": "James Bond 007 (USA, Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "96152b28"
+      },
+      "keys": [
+        "jamesbond007"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "kid-dracula",
+      "title": "Kid Dracula",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Konami",
+      "year": null,
+      "genre": [
+        "Piattaforme",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Parodia della serie «Castlevania». Il giovane Dracula affronta livelli a scorrimento sparando palle di fuoco e ottenendo nuove armi.",
+      "plot": null,
+      "thumbnail": "Kid Dracula (USA, Europe)",
+      "hashes": {
+        "crc32": "e70fd394"
+      },
+      "keys": [
+        "kiddracula"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "kid-icarus-of-myths-and-monsters",
+      "title": "Kid Icarus: Of Myths and Monsters",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Azione",
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Seguito di «Kid Icarus» ambientato nella mitologia greca. Il protagonista Pit combatte con arco e frecce, con livelli a scorrimento in orizzontale e in verticale.",
+      "plot": null,
+      "thumbnail": "Kid Icarus - Of Myths and Monsters (USA, Europe)",
+      "hashes": {
+        "crc32": "1e2efcce"
+      },
+      "keys": [
+        "kidicarusofmythsandmonsters"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "kingdom-crusade",
+      "title": "Kingdom Crusade",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Sculptured Software",
+      "publisher": "Ocean",
+      "year": 1992,
+      "genre": [
+        "Strategia a turni"
+      ],
+      "players": "1–2",
+      "description": "Gioco di strategia a turni in cui si comandano eserciti su una mappa. Il giocatore conquista castelli e città.",
+      "plot": null,
+      "thumbnail": "Kingdom Crusade (USA)",
+      "hashes": {
+        "crc32": "6a56df1f"
+      },
+      "keys": [
+        "kingdomcrusade"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "kirbys-block-ball",
+      "title": "Kirby's Block Ball",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "TOSE",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Azione",
+        "Arcade"
+      ],
+      "players": "1",
+      "description": "Variante di «Breakout» con Kirby come palla. Si rimbalza sulle barre per rompere i blocchi e ottenere poteri.",
+      "plot": null,
+      "thumbnail": "Kirby's Block Ball (USA, Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "1a02aa1e"
+      },
+      "keys": [
+        "kirbysblockball"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "kirbys-dream-land",
+      "title": "Kirby's Dream Land",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "HAL Laboratory",
+      "publisher": "Nintendo",
+      "year": 1992,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Primo gioco della serie di Kirby. Il protagonista può gonfiarsi e volare, e aspirare i nemici per sputarli. È breve e adatto ai principianti.",
+      "plot": "Re Dedede ha rubato il cibo e le stelle di Dream Land. Kirby parte per riprendersele.",
+      "thumbnail": "Kirby's Dream Land (USA, Europe)",
+      "hashes": {
+        "crc32": "b439a38b"
+      },
+      "keys": [
+        "kirbysdreamland"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "kirbys-dream-land-2",
+      "title": "Kirby's Dream Land 2",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "HAL Laboratory",
+      "publisher": "Nintendo",
+      "year": 1995,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Kirby può copiare i poteri dei nemici, e a volte si fa aiutare da tre compagni animali. Il gioco ha una struttura a isole con vari livelli.",
+      "plot": null,
+      "thumbnail": "Kirby's Dream Land 2 (USA, Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "606fa3af"
+      },
+      "keys": [
+        "kirbysdreamland2"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "kirbys-pinball-land",
+      "title": "Kirby's Pinball Land",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "HAL Laboratory",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Flipper"
+      ],
+      "players": "1",
+      "description": "Flipper in cui Kirby fa da pallina. Ha tre tavoli ognuno con un boss, e chi riesce a sconfiggerli ottiene punti extra.",
+      "plot": null,
+      "thumbnail": "Kirby's Pinball Land (USA, Europe)",
+      "hashes": {
+        "crc32": "30230193"
+      },
+      "keys": [
+        "kirbyspinballland"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "kirbys-star-stacker",
+      "title": "Kirby's Star Stacker",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "HAL Laboratory",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Rompicapo"
+      ],
+      "players": "1–2",
+      "description": "Rompicapo a caduta di blocchi, con Kirby e i suoi amici. Bisogna far combaciare le stelle tra i blocchi che cadono. Ha una modalità a due giocatori.",
+      "plot": null,
+      "thumbnail": "Kirby's Star Stacker (USA, Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "95bf7026"
+      },
+      "keys": [
+        "kirbysstarstacker"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "kung-fu-master",
+      "title": "Kung-Fu Master",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Irem",
+      "publisher": "Irem",
+      "year": null,
+      "genre": [
+        "Picchiaduro a scorrimento",
+        "Arcade"
+      ],
+      "players": "1",
+      "description": "Versione portatile del gioco arcade di Irem. Il maestro di kung fu sale piani di un tempio, sconfiggendo nemici con pugni e calci.",
+      "plot": null,
+      "thumbnail": "Kung-Fu Master (USA, Europe)",
+      "hashes": {
+        "crc32": "b7f207cd"
+      },
+      "keys": [
+        "kungfumaster"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "kwirk-hes-a-maze-ing",
+      "title": "Kwirk: He's A-maze-ing!",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Acclaim",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Rompicapo"
+      ],
+      "players": "1",
+      "description": "Un pomodoro con occhiali da sole deve attraversare labirinti, spingendo blocchi e ruotando porte. Nei livelli successivi si controllano più personaggi.",
+      "plot": null,
+      "thumbnail": "Kwirk - He's A-maze-ing! (USA, Europe)",
+      "hashes": {
+        "crc32": "5af6a1ed"
+      },
+      "keys": [
+        "kwirkhesamazeing"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "legend-of-the-river-king-gb-gb",
+      "title": "Legend of the River King GB",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "TOSE",
+      "publisher": "Natsume",
+      "year": null,
+      "genre": [
+        "GdR",
+        "Pesca"
+      ],
+      "players": "1",
+      "description": "Gioco di ruolo con pesca. Un ragazzo viaggia per il paese pescando e affrontando incontri. Il gioco è considerato l'origine della serie «River King».",
+      "plot": null,
+      "thumbnail": "Legend of the River King GB (USA) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "d343fb72"
+      },
+      "keys": [
+        "legendoftheriverkinggb"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "lock-n-chase",
+      "title": "Lock 'n' Chase",
+      "region": "Mondo",
+      "languages": [
+        "en"
+      ],
+      "developer": "Data East",
+      "publisher": "Data East",
+      "year": null,
+      "genre": [
+        "Azione",
+        "Arcade"
+      ],
+      "players": "1",
+      "description": "Versione portatile del gioco arcade di Data East. Un ladro raccoglie monete in un labirinto, sfuggendo ai poliziotti.",
+      "plot": null,
+      "thumbnail": "Lock n' Chase ~ Lock 'n' Chase (World)",
+      "hashes": {
+        "crc32": "9380a343"
+      },
+      "keys": [
+        "locknchase",
+        "locknchaselocknchase"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "magic-knight-rayearth",
+      "title": "Magic Knight Rayearth",
+      "region": "Giappone",
+      "languages": [
+        "en"
+      ],
+      "developer": "Tomy",
+      "publisher": "Tomy",
+      "year": 1995,
+      "genre": [
+        "GdR"
+      ],
+      "players": "1",
+      "description": "GdR tratto dal manga e anime «Magic Knight Rayearth» del collettivo CLAMP. Uscì solo in Giappone nel 1995. Questa versione ha una traduzione amatoriale in inglese.",
+      "plot": null,
+      "thumbnail": "Magic Knight Rayearth (Japan) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "7467dca8"
+      },
+      "keys": [
+        "magicknightrayearth"
+      ],
+      "achievements": false,
+      "kind": "translation"
+    },
+    {
+      "id": "marios-picross",
+      "title": "Mario's Picross",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Rompicapo"
+      ],
+      "players": "1",
+      "description": "Rompicapo a griglie numeriche. Con i numeri ai lati si stabilisce quali caselle scalpellare per far comparire un disegno. Ha molti livelli di difficoltà crescente.",
+      "plot": null,
+      "thumbnail": "Mario's Picross (USA, Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "a94dee38"
+      },
+      "keys": [
+        "mariospicross"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "marus-mission",
+      "title": "Maru's Mission",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Jaleco",
+      "publisher": "Jaleco",
+      "year": null,
+      "genre": [
+        "Piattaforme",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Un piccolo personaggio ninja avanza su piattaforme, e usa una specie di lancio per colpire i nemici. Il gioco è di Jaleco.",
+      "plot": null,
+      "thumbnail": "Maru's Mission (USA)",
+      "hashes": {
+        "crc32": "8866b2db"
+      },
+      "keys": [
+        "marusmission"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "mega-man-ii",
+      "title": "Mega Man II",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Capcom",
+      "publisher": "Capcom",
+      "year": 1992,
+      "genre": [
+        "Piattaforme",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Mega Man affronta quattro robot e ne assorbe le armi. Il gioco è uno dei capitoli portatili della serie, con livelli propri.",
+      "plot": null,
+      "thumbnail": "Mega Man II (USA)",
+      "hashes": {
+        "crc32": "07bea9f7"
+      },
+      "keys": [
+        "megamanii"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "mega-man-iii",
+      "title": "Mega Man III",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Capcom",
+      "publisher": "Capcom",
+      "year": 1992,
+      "genre": [
+        "Piattaforme",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Mega Man affronta i robot maestri e ne conquista le armi. Ha livelli originali e un cane robot, Rush, come aiuto.",
+      "plot": null,
+      "thumbnail": "Mega Man III (USA)",
+      "hashes": {
+        "crc32": "272c246e"
+      },
+      "keys": [
+        "megamaniii"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "mega-man-iv",
+      "title": "Mega Man IV",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Capcom",
+      "publisher": "Capcom",
+      "year": 1993,
+      "genre": [
+        "Azione",
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Quarto episodio di Mega Man per Game Boy. Si affrontano stadi a scorrimento contro boss robot, acquisendo le loro armi da usare poi contro gli altri avversari.",
+      "plot": null,
+      "thumbnail": "Mega Man IV (USA)",
+      "hashes": {
+        "crc32": "1954d378"
+      },
+      "keys": [
+        "megamaniv"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "mega-man-v",
+      "title": "Mega Man V",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Capcom",
+      "publisher": "Capcom",
+      "year": 1994,
+      "genre": [
+        "Azione",
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Quinto e ultimo Mega Man per Game Boy. Il gioco alterna salti e sparo in stadi a scorrimento e si conclude con i livelli finali dedicati a un nuovo nemico.",
+      "plot": null,
+      "thumbnail": "Mega Man V (USA) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "2322a0d9"
+      },
+      "keys": [
+        "megamanv"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "mega-man-dr-wilys-revenge",
+      "title": "Mega Man: Dr. Wily's Revenge",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Capcom",
+      "publisher": "Capcom",
+      "year": 1991,
+      "genre": [
+        "Azione",
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Primo Mega Man per Game Boy. Mega Man attraversa stadi a scorrimento, sconfigge boss robot e ne acquisisce le armi. Riprende personaggi dei primi episodi della serie.",
+      "plot": null,
+      "thumbnail": "Mega Man - Dr. Wily's Revenge (USA)",
+      "hashes": {
+        "crc32": "26e4f3f2"
+      },
+      "keys": [
+        "megamandrwilysrevenge"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "mercenary-force",
+      "title": "Mercenary Force",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Lenar Co., Ltd.",
+      "publisher": "Meldac",
+      "year": null,
+      "genre": [
+        "Sparatutto a scorrimento"
+      ],
+      "players": "1",
+      "description": "Sparatutto a scorrimento orizzontale in cui si guida una squadra di mercenari attraverso livelli di ambientazione fantastica. Il gioco è basato sull'uso di personaggi diversi con caratteristiche proprie.",
+      "plot": null,
+      "thumbnail": "Mercenary Force (USA, Europe)",
+      "hashes": {
+        "crc32": "090e7b30"
+      },
+      "keys": [
+        "mercenaryforce"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "metal-masters",
+      "title": "Metal Masters",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Bit Managers",
+      "publisher": "Electro Brain Corp.",
+      "year": null,
+      "genre": [
+        "Picchiaduro"
+      ],
+      "players": "1",
+      "description": "Picchiaduro a incontri singoli in cui si affrontano robot da combattimento. Ogni macchina ha le proprie mosse e il proprio stile. Sviluppato da Bit Managers.",
+      "plot": null,
+      "thumbnail": "Metal Masters (USA)",
+      "hashes": {
+        "crc32": "989a8ca8"
+      },
+      "keys": [
+        "metalmasters"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "metroid-ii-return-of-samus",
+      "title": "Metroid II: Return of Samus",
+      "region": "Mondo",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": 1991,
+      "genre": [
+        "Azione",
+        "Avventura",
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Avventura d'azione a scorrimento con esplorazione di caverne, potenziamenti da raccogliere e combattimenti contro i Metroid. È il primo Metroid portatile.",
+      "plot": "Samus Aran viene inviata sul pianeta SR388 per sterminare i Metroid, creature che minacciano la galassia. Deve scendere nelle caverne del pianeta e affrontarli uno dopo l'altro.",
+      "thumbnail": "Metroid II - Return of Samus (World)",
+      "hashes": {
+        "crc32": "0d8d6182"
+      },
+      "keys": [
+        "metroidiireturnofsamus"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "mickey-mouse-magic-wands",
+      "title": "Mickey Mouse: Magic Wands!",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Kemco",
+      "publisher": "Kemco",
+      "year": null,
+      "genre": [
+        "Rompicapo",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Rompicapo d'azione di Kemco con Topolino. In ogni schermata si spostano blocchi e si usano le bacchette magiche per aprire la strada verso l'uscita.",
+      "plot": null,
+      "thumbnail": "Mickey Mouse - Magic Wands! (USA, Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "b3ccdbab"
+      },
+      "keys": [
+        "mickeymousemagicwands"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "mickeys-dangerous-chase",
+      "title": "Mickey's Dangerous Chase",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Now Production",
+      "publisher": "Capcom",
+      "year": null,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Gioco a piattaforme con Topolino e altri personaggi Disney, pubblicato da Capcom. Si superano livelli a scorrimento evitando nemici e trappole.",
+      "plot": null,
+      "thumbnail": "Mickey's Dangerous Chase (USA)",
+      "hashes": {
+        "crc32": "220e5cf9"
+      },
+      "keys": [
+        "mickeysdangerouschase"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "mole-mania",
+      "title": "Mole Mania",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo EAD",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Rompicapo",
+        "Azione"
+      ],
+      "players": "1–2",
+      "description": "Rompicapo d'azione diretto da Shigeru Miyamoto. La talpa Muddy scava sottoterra, sposta massi e ortaggi e supera i nemici per aprire la strada all'uscita di ogni schema.",
+      "plot": "La talpa Muddy deve salvare la moglie e i figli, rapiti dal contadino Jinbe. Per riunire la famiglia attraversa diversi mondi pieni di rompicapo.",
+      "thumbnail": "Mole Mania (USA, Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "69e30e66"
+      },
+      "keys": [
+        "molemania"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "monster-max",
+      "title": "Monster Max",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en",
+        "fr",
+        "de",
+        "es",
+        "it",
+        "nl"
+      ],
+      "developer": "Rareware",
+      "publisher": "Titus",
+      "year": null,
+      "genre": [
+        "Avventura",
+        "Rompicapo"
+      ],
+      "players": "1",
+      "description": "Avventura isometrica sviluppata da Rare. Si esplorano stanze piene di trappole e nemici, risolvendo piccoli rompicapo per proseguire.",
+      "plot": null,
+      "thumbnail": "Monster Max (Europe) (En,Fr,De,Es,It,Nl)",
+      "hashes": {
+        "crc32": "699a68c9"
+      },
+      "keys": [
+        "monstermax"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "montezumas-return-gb",
+      "title": "Montezuma's Return!",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "developer": "Utopia Technologies Inc.",
+      "publisher": "Software 2000",
+      "year": null,
+      "genre": [
+        "Piattaforme",
+        "Avventura"
+      ],
+      "players": "1",
+      "description": "Gioco a piattaforme e avventura di Utopia Technologies, seguito ideale di «Montezuma's Revenge». Si esplorano ambienti a stanze raccogliendo oggetti.",
+      "plot": null,
+      "thumbnail": "Montezuma's Return! (Europe) (En,Fr,De,Es,It)",
+      "hashes": {
+        "crc32": "737957ba"
+      },
+      "keys": [
+        "montezumasreturn"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "motocross-maniacs",
+      "title": "Motocross Maniacs",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Ultra Games",
+      "year": 1989,
+      "genre": [
+        "Corse",
+        "Moto"
+      ],
+      "players": "1–2",
+      "description": "Gioco di moto a scorrimento laterale di Konami. Si percorrono piste piene di rampe e ostacoli, tra salti e acrobazie, contro il tempo.",
+      "plot": null,
+      "thumbnail": "Motocross Maniacs (USA)",
+      "hashes": {
+        "crc32": "5bfceed5"
+      },
+      "keys": [
+        "motocrossmaniacs"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "mystical-ninja-starring-goemon-gb",
+      "title": "Mystical Ninja Starring Goemon",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Konami",
+      "year": null,
+      "genre": [
+        "GdR d'azione",
+        "Avventura"
+      ],
+      "players": "1",
+      "description": "Avventura di Konami con il ladro ninja Goemon, tratta della serie giapponese «Ganbare Goemon». Si esplora con visuale dall'alto, tra città, negozi e combattimenti.",
+      "plot": null,
+      "thumbnail": "Mystical Ninja Starring Goemon (USA) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "1ab58c07"
+      },
+      "keys": [
+        "mysticalninjastarringgoemon"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "nemesis",
+      "title": "Nemesis",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Ultra Games",
+      "year": 1990,
+      "genre": [
+        "Sparatutto a scorrimento"
+      ],
+      "players": "1",
+      "description": "Versione portatile di «Gradius» di Konami. La navicella si potenzia raccogliendo capsule e affronta ondate di nemici e boss in livelli a scorrimento orizzontale.",
+      "plot": null,
+      "thumbnail": "Nemesis (USA)",
+      "hashes": {
+        "crc32": "356e0ab4"
+      },
+      "keys": [
+        "nemesis"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "nemesis-ii-the-return-of-the-hero",
+      "title": "Nemesis II: The Return of the Hero",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Konami",
+      "year": null,
+      "genre": [
+        "Sparatutto a scorrimento"
+      ],
+      "players": "1",
+      "description": "Seguito di «Nemesis» per Game Boy. Sparatutto a scorrimento orizzontale con potenziamenti da scegliere e boss alla fine di ogni livello.",
+      "plot": null,
+      "thumbnail": "Nemesis II - The Return of the Hero (Europe)",
+      "hashes": {
+        "crc32": "d6612ab9"
+      },
+      "keys": [
+        "nemesisiithereturnofthehero"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "ninja-boy",
+      "title": "Ninja Boy",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Culture Brain",
+      "publisher": "Culture Brain",
+      "year": null,
+      "genre": [
+        "Azione",
+        "Avventura"
+      ],
+      "players": "1",
+      "description": "Gioco di Culture Brain con un giovane combattente di arti marziali. Si alternano esplorazione e combattimenti in aree a schermata singola.",
+      "plot": null,
+      "thumbnail": "Ninja Boy (USA, Europe)",
+      "hashes": {
+        "crc32": "b296186a"
+      },
+      "keys": [
+        "ninjaboy"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "ninja-boy-2",
+      "title": "Ninja Boy 2",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Culture Brain",
+      "publisher": "Culture Brain",
+      "year": null,
+      "genre": [
+        "Azione",
+        "Avventura"
+      ],
+      "players": "1–2",
+      "description": "Seguito di «Ninja Boy», sempre di Culture Brain. Unisce esplorazione di mappe e scontri, con qualche elemento di gioco di ruolo.",
+      "plot": null,
+      "thumbnail": "Ninja Boy 2 (USA, Europe)",
+      "hashes": {
+        "crc32": "df97ab94"
+      },
+      "keys": [
+        "ninjaboy2"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "ninja-gaiden-shadow",
+      "title": "Ninja Gaiden Shadow",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Natsume",
+      "publisher": "Tecmo",
+      "year": null,
+      "genre": [
+        "Azione",
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Azione a piattaforme con il ninja Ryu Hayabusa, sviluppata da Natsume. Ryu attacca con la spada e si aggrappa alle pareti e ai soffitti per superare gli stadi.",
+      "plot": null,
+      "thumbnail": "Ninja Gaiden Shadow (USA)",
+      "hashes": {
+        "crc32": "be02f32f"
+      },
+      "keys": [
+        "ninjagaidenshadow"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "ninja-taro",
+      "title": "Ninja Taro",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "NMK",
+      "publisher": "Sammy",
+      "year": 1992,
+      "genre": [
+        "GdR",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Gioco di ruolo con visuale dall'alto di NMK, pubblicato da Sammy. Il protagonista ninja esplora luoghi e affronta nemici lungo il percorso.",
+      "plot": null,
+      "thumbnail": "Ninja Taro (USA)",
+      "hashes": {
+        "crc32": "ad72baca"
+      },
+      "keys": [
+        "ninjataro"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "noobow",
+      "title": "Noobow",
+      "region": "Giappone",
+      "languages": [
+        "en"
+      ],
+      "developer": "",
+      "publisher": "Irem",
+      "year": 1992,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Gioco a piattaforme uscito solo in Giappone, pubblicato da Irem. Qui è presente con una traduzione amatoriale in inglese.",
+      "plot": null,
+      "thumbnail": "Noobow (Japan)",
+      "hashes": {
+        "crc32": "c1a41b7b"
+      },
+      "keys": [
+        "noobow"
+      ],
+      "achievements": false,
+      "kind": "translation"
+    },
+    {
+      "id": "operation-c",
+      "title": "Operation C",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Ultra Games",
+      "year": 1991,
+      "genre": [
+        "Sparatutto",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Versione per Game Boy della serie «Contra» di Konami. Si combatte a piedi e in volo con armi potenziabili, tra livelli a scorrimento e boss.",
+      "plot": null,
+      "thumbnail": "Operation C (USA)",
+      "hashes": {
+        "crc32": "df88d18a"
+      },
+      "keys": [
+        "operationc"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "out-of-gas",
+      "title": "Out of Gas",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Realtime Associates",
+      "publisher": "FCI",
+      "year": 1992,
+      "genre": [
+        "Azione",
+        "Avventura"
+      ],
+      "players": "1",
+      "description": "Gioco d'azione con visuale dall'alto in cui si guida un piccolo veicolo alla ricerca di carburante. Bisogna fare rifornimento prima che il serbatoio si svuoti.",
+      "plot": null,
+      "thumbnail": "Out of Gas (USA)",
+      "hashes": {
+        "crc32": "8666e942"
+      },
+      "keys": [
+        "outofgas"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "painter-momopie",
+      "title": "Painter Momopie",
+      "region": "Giappone",
+      "languages": [
+        "en"
+      ],
+      "developer": "",
+      "publisher": "Sigma Enterprises",
+      "year": 1990,
+      "genre": [
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Gioco d'azione uscito solo in Giappone, pubblicato da Sigma Enterprises. Qui è presente con una traduzione amatoriale in inglese.",
+      "plot": null,
+      "thumbnail": "Painter Momopie (Japan)",
+      "hashes": {
+        "crc32": "253a9a48"
+      },
+      "keys": [
+        "paintermomopie"
+      ],
+      "achievements": false,
+      "kind": "translation"
+    },
+    {
+      "id": "parodius-gb",
+      "title": "Parodius",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Konami",
+      "year": null,
+      "genre": [
+        "Sparatutto a scorrimento"
+      ],
+      "players": "1",
+      "description": "Sparatutto a scorrimento di Konami, parodia di «Gradius» con personaggi buffi al posto delle astronavi. Si sceglie il personaggio e si affrontano livelli surreali con boss stravaganti.",
+      "plot": null,
+      "thumbnail": "Parodius (Europe)",
+      "hashes": {
+        "crc32": "16774fac"
+      },
+      "keys": [
+        "parodius"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "penguin-wars",
+      "title": "Penguin Wars",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "ASCII Corporation",
+      "publisher": "ASCII Corporation",
+      "year": null,
+      "genre": [
+        "Sport",
+        "Arcade"
+      ],
+      "players": "1–2",
+      "description": "Gioco a due in cui si lanciano palle contro un avversario in un campo chiuso. Ciascuno controlla un pinguino e può colpire l'altro per vincere l'incontro. Pubblicato da ASCII.",
+      "plot": null,
+      "thumbnail": "Penguin Wars (USA)",
+      "hashes": {
+        "crc32": "1ca64076"
+      },
+      "keys": [
+        "penguinwars"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "picross-2",
+      "title": "Picross 2",
+      "region": "Giappone",
+      "languages": [
+        "en"
+      ],
+      "developer": "Creatures, Inc.",
+      "publisher": "Nintendo",
+      "year": 1996,
+      "genre": [
+        "Rompicapo"
+      ],
+      "players": "1",
+      "description": "Seguito di «Mario's Picross», uscito solo in Giappone. Si completano griglie di numeri per rivelare immagini a pixel. Qui è presente con una traduzione amatoriale in inglese.",
+      "plot": null,
+      "thumbnail": "Picross 2 (Japan) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "78d2ffe2"
+      },
+      "keys": [
+        "picross2"
+      ],
+      "achievements": false,
+      "kind": "translation"
+    },
+    {
+      "id": "pinball-revenge-of-the-gator",
+      "title": "Pinball: Revenge of the 'Gator",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Flipper"
+      ],
+      "players": "1–2",
+      "description": "Flipper di Nintendo con un tavolo dominato da un alligatore. Si colpisce la pallina con le palette per raggiungere gli obiettivi e ottenere punti.",
+      "plot": null,
+      "thumbnail": "Pinball - Revenge of the 'Gator (USA, Europe)",
+      "hashes": {
+        "crc32": "50ad6ca0"
+      },
+      "keys": [
+        "pinballrevengeofthegator"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "pocket-bomberman-gb",
+      "title": "Pocket Bomberman",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Hudson",
+      "publisher": "Hudson",
+      "year": 1997,
+      "genre": [
+        "Azione",
+        "Avventura"
+      ],
+      "players": "1",
+      "description": "Avventura d'azione con Bomberman, pubblicata da Hudson nel 1997. Si posano bombe per aprire il passaggio, sconfiggere i nemici e affrontare i boss.",
+      "plot": null,
+      "thumbnail": "Pocket Bomberman (Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "e392a03a"
+      },
+      "keys": [
+        "pocketbomberman"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "pokemon-blue-version",
+      "title": "Pokemon: Blue Version",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Game Freak",
+      "publisher": "Nintendo",
+      "year": 1998,
+      "genre": [
+        "GdR"
+      ],
+      "players": "1–2",
+      "description": "Gioco di ruolo in cui si cattura, si allena e si scambia una collezione di mostri tascabili. Si affrontano Capipalestra e allenatori in tutta la regione. Con il cavo link si combatte e si scambia con altri giocatori.",
+      "plot": "Il giovane protagonista parte da Biancavilla con un primo Pokémon per completare il Pokédex e sfidare la Lega. Lungo il cammino si scontra con un rivale e con un'organizzazione criminale.",
+      "thumbnail": "Pokemon - Blue Version (USA, Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "6aa437b2"
+      },
+      "keys": [
+        "pokemonblueversion"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "pokemon-red-version",
+      "title": "Pokemon: Red Version",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Game Freak",
+      "publisher": "Nintendo",
+      "year": 1998,
+      "genre": [
+        "GdR"
+      ],
+      "players": "1–2",
+      "description": "Gioco di ruolo in cui si cattura, si allena e si scambia una collezione di mostri tascabili. Si affrontano Capipalestra e allenatori in tutta la regione. Con il cavo link si combatte e si scambia con altri giocatori.",
+      "plot": "Il giovane protagonista parte da Biancavilla con un primo Pokémon per completare il Pokédex e sfidare la Lega. Lungo il cammino si scontra con un rivale e con un'organizzazione criminale.",
+      "thumbnail": "Pokemon - Red Version (USA, Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "289a6703"
+      },
+      "keys": [
+        "pokemonredversion"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "pokemon-yellow-version-special-pikachu-edition",
+      "title": "Pokemon: Yellow Version - Special Pikachu Edition",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Game Freak",
+      "year": 1999,
+      "genre": [
+        "GdR"
+      ],
+      "players": "1–2",
+      "description": "Variante dei primi «Pokémon», in cui il primo compagno è Pikachu, che segue il giocatore lungo il percorso. Cambiano alcuni incontri e personaggi rispetto alle edizioni Rossa e Blu.",
+      "plot": "Il protagonista riceve un Pikachu dal professore e con lui viaggia per completare il Pokédex e sfidare la Lega.",
+      "thumbnail": "Pokemon - Yellow Version - Special Pikachu Edition (USA, Europe) (CGB+SGB Enhanced)",
+      "hashes": {
+        "crc32": "a778fede"
+      },
+      "keys": [
+        "pokemonyellowversionspecialpikachuedition"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "popn-twinbee",
+      "title": "Pop'n TwinBee",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Konami",
+      "year": null,
+      "genre": [
+        "Sparatutto a scorrimento"
+      ],
+      "players": "1–2",
+      "description": "Sparatutto di Konami con la piccola navicella TwinBee. Si colpiscono i nemici in aria e a terra e si raccolgono campanelle per ottenere potenziamenti.",
+      "plot": null,
+      "thumbnail": "Pop'n TwinBee (Europe)",
+      "hashes": {
+        "crc32": "b4de54d2"
+      },
+      "keys": [
+        "popntwinbee"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "q-billion",
+      "title": "Q Billion",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "SETA Corporation",
+      "publisher": "SETA Corporation",
+      "year": 1990,
+      "genre": [
+        "Rompicapo",
+        "Strategia"
+      ],
+      "players": "1–2",
+      "description": "Gioco di SETA che unisce ragionamento e strategia. Si spostano gli elementi dello schema per completare gli obiettivi di ogni livello.",
+      "plot": null,
+      "thumbnail": "Q Billion (USA)",
+      "hashes": {
+        "crc32": "061fbcc2"
+      },
+      "keys": [
+        "qbillion"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "quarth",
+      "title": "Quarth",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Ultra Games",
+      "year": 1990,
+      "genre": [
+        "Rompicapo",
+        "Sparatutto"
+      ],
+      "players": "1–2",
+      "description": "Rompicapo di Konami in cui si spara ai blocchi che scendono. Colpendoli si formano rettangoli e quadrati che spariscono, evitando che il muro raggiunga il fondo.",
+      "plot": null,
+      "thumbnail": "Quarth (USA, Europe)",
+      "hashes": {
+        "crc32": "e153e9a1"
+      },
+      "keys": [
+        "quarth"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "r-type-gb",
+      "title": "R-Type",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Irem",
+      "publisher": "Irem",
+      "year": 1991,
+      "genre": [
+        "Sparatutto a scorrimento"
+      ],
+      "players": "1",
+      "description": "Versione portatile dello sparatutto di Irem. La navicella dispone del modulo Force e affronta livelli a scorrimento orizzontale con boss enormi.",
+      "plot": null,
+      "thumbnail": "R-Type (USA, Europe)",
+      "hashes": {
+        "crc32": "cb572c46"
+      },
+      "keys": [
+        "rtype"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "r-type-ii",
+      "title": "R-Type II",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Irem",
+      "publisher": "Irem",
+      "year": 1992,
+      "genre": [
+        "Sparatutto a scorrimento"
+      ],
+      "players": "1",
+      "description": "Versione portatile del secondo «R-Type» di Irem. Sparatutto a scorrimento orizzontale con il modulo Force e livelli difficili.",
+      "plot": null,
+      "thumbnail": "R-Type II (Europe)",
+      "hashes": {
+        "crc32": "2610f6d9"
+      },
+      "keys": [
+        "rtypeii"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "rolans-curse",
+      "title": "Rolan's Curse",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "NMK",
+      "publisher": "Sammy",
+      "year": 1991,
+      "genre": [
+        "Azione",
+        "Avventura"
+      ],
+      "players": "1–2",
+      "description": "Gioco d'azione e avventura di NMK, pubblicato da Sammy. Il protagonista esplora luoghi e sconfigge i nemici per progredire.",
+      "plot": null,
+      "thumbnail": "Rolan's Curse (USA)",
+      "hashes": {
+        "crc32": "88f9439d"
+      },
+      "keys": [
+        "rolanscurse"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "rolans-curse-ii",
+      "title": "Rolan's Curse II",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "NMK",
+      "publisher": "Sammy",
+      "year": 1992,
+      "genre": [
+        "GdR",
+        "Avventura"
+      ],
+      "players": "1",
+      "description": "Seguito di «Rolan's Curse» di NMK, pubblicato da Sammy. Ha una struttura più simile a un gioco di ruolo, con esplorazione e combattimenti.",
+      "plot": null,
+      "thumbnail": "Rolan's Curse II (USA)",
+      "hashes": {
+        "crc32": "ece99eae"
+      },
+      "keys": [
+        "rolanscurseii"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "skate-or-die-bad-n-rad",
+      "title": "Skate or Die: Bad 'N Rad",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Palcom",
+      "publisher": "Konami",
+      "year": 1990,
+      "genre": [
+        "Sport",
+        "Skateboard",
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Gioco di skateboard di Konami a scorrimento laterale. Si supera ogni livello su tavola, evitando ostacoli e nemici.",
+      "plot": null,
+      "thumbnail": "Skate or Die - Bad 'N Rad (USA)",
+      "hashes": {
+        "crc32": "f051d1dd"
+      },
+      "keys": [
+        "skateordiebadnrad"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "solarstriker",
+      "title": "SolarStriker",
+      "region": "Mondo",
+      "languages": [
+        "en"
+      ],
+      "developer": "Minakuchi Engineering Co., Ltd.",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Sparatutto a scorrimento"
+      ],
+      "players": "1",
+      "description": "Sparatutto a scorrimento verticale di Nintendo. La navicella spara ai nemici e ai boss e raccoglie potenziamenti nel corso dei livelli.",
+      "plot": null,
+      "thumbnail": "SolarStriker (World)",
+      "hashes": {
+        "crc32": "2feebe68"
+      },
+      "keys": [
+        "solarstriker"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "solomons-club",
+      "title": "Solomon's Club",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Graphic Research Co., Ltd.",
+      "publisher": "Tecmo",
+      "year": 1991,
+      "genre": [
+        "Rompicapo",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Rompicapo d'azione di Tecmo che prosegue la serie di «Solomon's Key». Si creano e si distruggono blocchi per raggiungere l'uscita di ogni stanza.",
+      "plot": null,
+      "thumbnail": "Solomon's Club (USA)",
+      "hashes": {
+        "crc32": "7db2befb"
+      },
+      "keys": [
+        "solomonsclub"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "spankys-quest",
+      "title": "Spanky's Quest",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Natsume",
+      "publisher": "Natsume",
+      "year": null,
+      "genre": [
+        "Piattaforme",
+        "Rompicapo"
+      ],
+      "players": "1",
+      "description": "Gioco a piattaforme di Natsume con la scimmia Spanky. Si lanciano bolle contro i nemici e si sale attraverso una torre di livelli.",
+      "plot": null,
+      "thumbnail": "Spanky's Quest (USA)",
+      "hashes": {
+        "crc32": "03b6d684"
+      },
+      "keys": [
+        "spankysquest"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "spuds-adventure",
+      "title": "Spud's Adventure",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Atlus",
+      "publisher": "Atlus",
+      "year": null,
+      "genre": [
+        "Avventura",
+        "Rompicapo"
+      ],
+      "players": "1",
+      "description": "Gioco pubblicato da Atlus con Spud come protagonista. Si esplorano schemi e si superano ostacoli per andare avanti.",
+      "plot": null,
+      "thumbnail": "Spud's Adventure (USA)",
+      "hashes": {
+        "crc32": "1acb591b"
+      },
+      "keys": [
+        "spudsadventure"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "super-mario-land",
+      "title": "Super Mario Land",
+      "region": "Mondo",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": 1989,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Primo Mario portatile, uscito con il Game Boy. Si attraversano quattro mondi a scorrimento, con livelli in volo e su sommergibile. È un gioco breve, ma rappresenta il debutto di Mario sulla console.",
+      "plot": "Nel regno di Sarasaland la principessa Daisy è stata rapita dall'alieno Tatanga. Mario attraversa i mondi del regno per riportarla a casa.",
+      "thumbnail": "Super Mario Land (World) (Rev 1)",
+      "hashes": {
+        "crc32": "3453fdbd"
+      },
+      "keys": [
+        "supermarioland"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "super-mario-land-2-6-golden-coins",
+      "title": "Super Mario Land 2: 6 Golden Coins",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": 1992,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Seguito di «Super Mario Land». Ha una mappa con mondi tra cui scegliere e una grafica più curata. Compare Wario come avversario, alla sua prima apparizione.",
+      "plot": "Wario si è impossessato del castello di Mario. Per riaverlo, Mario deve raccogliere le sei monete d'oro sparse nei vari mondi.",
+      "thumbnail": "Super Mario Land 2 - 6 Golden Coins (USA, Europe) (Rev 2)",
+      "hashes": {
+        "crc32": "dfa8ff58"
+      },
+      "keys": [
+        "supermarioland26goldencoins"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "super-rc-pro-am",
+      "title": "Super R.C. Pro-Am",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Rareware",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Corse",
+        "Guida"
+      ],
+      "players": "1–4",
+      "description": "Corse con auto radiocomandate viste dall'alto, sviluppate da Rare. Si raccolgono armi e potenziamenti lungo la pista e si punta al primo posto.",
+      "plot": null,
+      "thumbnail": "Super R.C. Pro-Am (USA, Europe)",
+      "hashes": {
+        "crc32": "4e6d7a4c"
+      },
+      "keys": [
+        "superrcproam"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "tail-gator",
+      "title": "Tail 'Gator",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Natsume",
+      "publisher": "Natsume",
+      "year": null,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Gioco a piattaforme di Natsume con un alligatore protagonista. Charly attacca con la coda e supera i livelli raccogliendo oggetti.",
+      "plot": null,
+      "thumbnail": "Tail 'Gator (USA, Europe)",
+      "hashes": {
+        "crc32": "f45b7cfa"
+      },
+      "keys": [
+        "tailgator"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "teenage-mutant-ninja-turtles-ii-back-from-the-sewers",
+      "title": "Teenage Mutant Ninja Turtles II: Back from the Sewers",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Konami",
+      "year": null,
+      "genre": [
+        "Azione",
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Gioco di Konami con le Tartarughe Ninja per Game Boy. Si affrontano livelli a scorrimento con nemici e boss, scegliendo tra le quattro tartarughe.",
+      "plot": null,
+      "thumbnail": "Teenage Mutant Ninja Turtles II - Back from the Sewers (USA)",
+      "hashes": {
+        "crc32": "bee57fe6"
+      },
+      "keys": [
+        "teenagemutantninjaturtlesiibackfromthesewers"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "teenage-mutant-ninja-turtles-iii-radical-rescue",
+      "title": "Teenage Mutant Ninja Turtles III: Radical Rescue",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Konami",
+      "year": 1993,
+      "genre": [
+        "Azione",
+        "Avventura",
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Avventura d'azione di Konami con le Tartarughe Ninja. Si esplorano mappe ampie e si liberano le tartarughe prigioniere, ognuna con abilità utili nei livelli.",
+      "plot": "Tre tartarughe sono state catturate dai nemici. Michelangelo, rimasto libero, deve liberare i fratelli.",
+      "thumbnail": "Teenage Mutant Ninja Turtles III - Radical Rescue (USA)",
+      "hashes": {
+        "crc32": "3c40f71e"
+      },
+      "keys": [
+        "teenagemutantninjaturtlesiiiradicalrescue"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "teenage-mutant-ninja-turtles-fall-of-the-foot-clan",
+      "title": "Teenage Mutant Ninja Turtles: Fall of the Foot Clan",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Ultra Games",
+      "publisher": "Konami",
+      "year": null,
+      "genre": [
+        "Azione",
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Primo gioco delle Tartarughe Ninja per Game Boy, di Konami. Si attraversano livelli a scorrimento e si sconfiggono i nemici del Clan del Piede.",
+      "plot": null,
+      "thumbnail": "Teenage Mutant Ninja Turtles - Fall of the Foot Clan (USA)",
+      "hashes": {
+        "crc32": "11699b5c"
+      },
+      "keys": [
+        "teenagemutantninjaturtlesfallofthefootclan"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "tennis-gb",
+      "title": "Tennis",
+      "region": "Mondo",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Sport",
+        "Tennis"
+      ],
+      "players": "1–2",
+      "description": "Tennis di Nintendo, uscito nei primi anni del Game Boy. Si gioca in singolo contro la console o in due con il cavo link.",
+      "plot": null,
+      "thumbnail": "Tennis (World)",
+      "hashes": {
+        "crc32": "313aaccb"
+      },
+      "keys": [
+        "tennis"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "tetris-gb",
+      "title": "Tetris",
+      "region": "Mondo",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": 1989,
+      "genre": [
+        "Rompicapo"
+      ],
+      "players": "1–2",
+      "description": "Versione per Game Boy del celebre rompicapo. Si dispongono i tetramini che cadono per completare righe. Con il cavo link si sfida un altro giocatore. Fu il titolo venduto insieme alla console.",
+      "plot": null,
+      "thumbnail": "Tetris (World) (Rev 1)",
+      "hashes": {
+        "crc32": "3f70da8f"
+      },
+      "keys": [
+        "tetris"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "tetris-2-gb",
+      "title": "Tetris 2",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": 1993,
+      "genre": [
+        "Rompicapo"
+      ],
+      "players": "1–2",
+      "description": "Rompicapo di Nintendo che unisce pezzi che cadono e blocchi colorati da eliminare. Si allineano i blocchi dello stesso colore per cancellarli. Non è un classico «Tetris».",
+      "plot": null,
+      "thumbnail": "Tetris 2 (USA, Europe) (Rev 1) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "c196111d"
+      },
+      "keys": [
+        "tetris2"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "tetris-attack",
+      "title": "Tetris Attack",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Intelligent Systems",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Rompicapo"
+      ],
+      "players": "1–2",
+      "description": "Rompicapo di Intelligent Systems con personaggi della serie «Yoshi». Si scambiano blocchi affiancati per creare file di tre o più simboli uguali. Fu ripreso da una versione per Super Nintendo.",
+      "plot": null,
+      "thumbnail": "Tetris Attack (USA, Europe) (Rev 1) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "ca073de5"
+      },
+      "keys": [
+        "tetrisattack"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "tetris-blast",
+      "title": "Tetris Blast",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Bullet Proof Software",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Rompicapo"
+      ],
+      "players": "1–2",
+      "description": "Variante di «Tetris» con bombe che si attivano quando si completano certe righe. Ha diverse modalità di gioco, tra cui una per due giocatori.",
+      "plot": null,
+      "thumbnail": "Tetris Blast (USA, Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "7ecd40f7"
+      },
+      "keys": [
+        "tetrisblast"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "the-adventures-of-star-saver",
+      "title": "The Adventures of Star Saver",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "A Wave Inc",
+      "publisher": "Taito",
+      "year": null,
+      "genre": [
+        "Piattaforme",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Gioco a piattaforme di Taito con un ragazzo dentro una tuta robotica. Si attraversano livelli a scorrimento, tra salti e sparo.",
+      "plot": null,
+      "thumbnail": "Adventures of Star Saver, The (USA, Europe)",
+      "hashes": {
+        "crc32": "62180361"
+      },
+      "keys": [
+        "theadventuresofstarsaver",
+        "adventuresofstarsaverthe"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "the-bugs-bunny-crazy-castle-gb",
+      "title": "The Bugs Bunny Crazy Castle",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Kemco",
+      "publisher": "Kemco",
+      "year": null,
+      "genre": [
+        "Rompicapo",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Rompicapo d'azione con Bugs Bunny, di Kemco. Si raccolgono tutte le carote di ogni piano del castello, evitando i nemici e usando oggetti a disposizione.",
+      "plot": null,
+      "thumbnail": "Bugs Bunny Crazy Castle, The (USA, Europe)",
+      "hashes": {
+        "crc32": "b724b30c"
+      },
+      "keys": [
+        "thebugsbunnycrazycastle",
+        "bugsbunnycrazycastlethe"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "the-bugs-bunny-crazy-castle-2",
+      "title": "The Bugs Bunny Crazy Castle 2",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Kemco",
+      "publisher": "Kemco",
+      "year": 1991,
+      "genre": [
+        "Rompicapo",
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Seguito di «The Bugs Bunny Crazy Castle», di Kemco. Bugs Bunny raccoglie le carote in stanze a schermata singola, sfuggendo ai personaggi che lo inseguono.",
+      "plot": null,
+      "thumbnail": "Bugs Bunny Crazy Castle 2, The (USA)",
+      "hashes": {
+        "crc32": "9895a0c4"
+      },
+      "keys": [
+        "thebugsbunnycrazycastle2",
+        "bugsbunnycrazycastle2the"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "the-final-fantasy-legend",
+      "title": "The Final Fantasy Legend",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Square Enix",
+      "publisher": "Square Enix",
+      "year": 1990,
+      "genre": [
+        "GdR"
+      ],
+      "players": "1",
+      "description": "Primo gioco di ruolo di Square per Game Boy, primo capitolo della serie «SaGa». Si forma una squadra di quattro personaggi di razze diverse, che si evolvono in modi diversi. Si sale in una grande torre.",
+      "plot": "Al centro del mondo si erge una torre che porta a un paradiso. Un gruppo di eroi la scala, piano dopo piano, per raggiungerne la cima.",
+      "thumbnail": "Final Fantasy Legend, The (USA)",
+      "hashes": {
+        "crc32": "e5c89ff6"
+      },
+      "keys": [
+        "thefinalfantasylegend",
+        "finalfantasylegendthe"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "the-legend-of-zelda-links-awakening",
+      "title": "The Legend of Zelda: Link's Awakening",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": 1993,
+      "genre": [
+        "GdR d'azione",
+        "Avventura"
+      ],
+      "players": "1",
+      "description": "Prima avventura di Zelda per Game Boy. Si esplora l'isola di Koholint, si superano otto dungeon e si raccolgono oggetti utili. Fu il primo «Zelda» ambientato fuori da Hyrule.",
+      "plot": "Link naufraga sull'isola di Koholint. Per lasciarla deve svegliare il Pesce Vento, che dorme nell'uovo in cima alla montagna.",
+      "thumbnail": "Legend of Zelda, The - Link's Awakening (USA, Europe) (Rev 2)",
+      "hashes": {
+        "crc32": "13c60471"
+      },
+      "keys": [
+        "thelegendofzeldalinksawakening",
+        "legendofzeldathelinksawakening"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "the-sword-of-hope",
+      "title": "The Sword of Hope",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Seika Corporation",
+      "publisher": "Kemco",
+      "year": 1991,
+      "genre": [
+        "GdR"
+      ],
+      "players": "1",
+      "description": "Gioco di ruolo di Kemco con visuale dall'alto in prima persona nei dungeon. Si esplora, si combatte a turni e si cercano oggetti per andare avanti.",
+      "plot": null,
+      "thumbnail": "Sword of Hope, The (USA)",
+      "hashes": {
+        "crc32": "ce522b6e"
+      },
+      "keys": [
+        "theswordofhope",
+        "swordofhopethe"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "the-sword-of-hope-ii",
+      "title": "The Sword of Hope II",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Kemco",
+      "publisher": "Kemco",
+      "year": 1996,
+      "genre": [
+        "GdR"
+      ],
+      "players": "1",
+      "description": "Seguito di «The Sword of Hope», di Kemco. Gioco di ruolo con combattimenti a turni, esplorazione di città e dungeon.",
+      "plot": null,
+      "thumbnail": "Sword of Hope II, The (USA)",
+      "hashes": {
+        "crc32": "33a189c7"
+      },
+      "keys": [
+        "theswordofhopeii",
+        "swordofhopeiithe"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "tiny-toon-adventures-2-montanas-movie-madness",
+      "title": "Tiny Toon Adventures 2: Montana's Movie Madness",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Konami",
+      "year": null,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Gioco a piattaforme di Konami con i personaggi di «Tiny Toon Adventures». Si attraversano livelli ispirati ai generi del cinema, guidando Buster Bunny.",
+      "plot": null,
+      "thumbnail": "Tiny Toon Adventures 2 - Montana's Movie Madness (USA, Europe)",
+      "hashes": {
+        "crc32": "9ec4281c"
+      },
+      "keys": [
+        "tinytoonadventures2montanasmoviemadness"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "tiny-toon-adventures-babs-big-break",
+      "title": "Tiny Toon Adventures: Babs' Big Break",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Konami",
+      "publisher": "Konami",
+      "year": null,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Gioco a piattaforme di Konami con Babs Bunny protagonista. Si attraversano livelli a scorrimento con salti e ostacoli.",
+      "plot": null,
+      "thumbnail": "Tiny Toon Adventures - Babs' Big Break (USA, Europe)",
+      "hashes": {
+        "crc32": "219b0e4c"
+      },
+      "keys": [
+        "tinytoonadventuresbabsbigbreak"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "trax",
+      "title": "Trax",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "HAL Laboratory",
+      "publisher": "Electro Brain Corp.",
+      "year": null,
+      "genre": [
+        "Azione",
+        "Sparatutto"
+      ],
+      "players": "1–2",
+      "description": "Gioco di HAL Laboratory in cui si guida un carro armato con torretta rotante, visto dall'alto. Si sparano ai nemici nei labirinti di ogni livello.",
+      "plot": null,
+      "thumbnail": "Trax (USA, Europe)",
+      "hashes": {
+        "crc32": "a4a9d4c0"
+      },
+      "keys": [
+        "trax"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "trip-world",
+      "title": "Trip World",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Sunsoft",
+      "publisher": "Sunsoft",
+      "year": 1992,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Gioco a piattaforme di Sunsoft con Yacopu, una creatura che cambia forma. Le trasformazioni servono a superare gli ostacoli e gli avversari dei livelli.",
+      "plot": null,
+      "thumbnail": "Trip World (Europe)",
+      "hashes": {
+        "crc32": "45908113"
+      },
+      "keys": [
+        "tripworld"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "vattle-giuce",
+      "title": "Vattle Giuce",
+      "region": "Giappone",
+      "languages": [
+        "en"
+      ],
+      "developer": "",
+      "publisher": "IGS",
+      "year": null,
+      "genre": [
+        "Sparatutto a scorrimento"
+      ],
+      "players": "1",
+      "description": "Sparatutto a scorrimento pubblicato in Giappone da IGS. Si guida una navicella contro ondate di nemici.",
+      "plot": null,
+      "thumbnail": "Vattle Giuce (Japan)",
+      "hashes": {
+        "crc32": "4e3c547f"
+      },
+      "keys": [
+        "vattlegiuce"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "wario-blast-featuring-bomberman",
+      "title": "Wario Blast Featuring Bomberman!",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Hudson",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Azione"
+      ],
+      "players": "1",
+      "description": "Gioco d'azione in cui Wario prende il posto di Bomberman. Si posano bombe per sconfiggere i nemici. Supporta il gioco in due con il cavo link.",
+      "plot": null,
+      "thumbnail": "Wario Blast Featuring Bomberman! (USA, Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "e2de0d43"
+      },
+      "keys": [
+        "warioblastfeaturingbomberman"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "wario-land-ii-gb",
+      "title": "Wario Land II",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Seguito di «Wario Land» in cui Wario non può morire. Colpi e trappole lo trasformano in forme diverse, utili per raggiungere nuove aree.",
+      "plot": "I tesori di Wario sono stati rubati da Capitan Sciroppo e dalla sua ciurma. Wario deve riprenderseli.",
+      "thumbnail": "Wario Land II (USA, Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "0b6308ed"
+      },
+      "keys": [
+        "wariolandii"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "wario-land-super-mario-land-3",
+      "title": "Wario Land: Super Mario Land 3",
+      "region": "Mondo",
+      "languages": [
+        "en"
+      ],
+      "developer": "Nintendo",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Piattaforme"
+      ],
+      "players": "1",
+      "description": "Primo gioco in cui Wario è il protagonista. Si attraversano livelli a scorrimento con salti e attacchi con la spalla, e si raccolgono monete e tesori.",
+      "plot": "Wario vuole diventare ricco per comprare un castello tutto suo. Per farlo deve recuperare un tesoro rubato.",
+      "thumbnail": "Wario Land - Super Mario Land 3 (World)",
+      "hashes": {
+        "crc32": "fd6deaf4"
+      },
+      "keys": [
+        "wariolandsupermarioland3"
+      ],
+      "achievements": false,
+      "kind": "original"
+    },
+    {
+      "id": "wave-race",
+      "title": "Wave Race",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Pax Softnica",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Corse",
+        "Sport acquatici"
+      ],
+      "players": "1–4",
+      "description": "Gara con moto d'acqua vista dall'alto, sviluppata da Pax Softnica per Nintendo. Si passa tra le boe e si cerca di arrivare primi.",
+      "plot": null,
+      "thumbnail": "Wave Race (USA, Europe)",
+      "hashes": {
+        "crc32": "221249f3"
+      },
+      "keys": [
+        "waverace"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "world-heroes-2-jet",
+      "title": "World Heroes 2 Jet",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Takara",
+      "publisher": "Playmates Interactive",
+      "year": null,
+      "genre": [
+        "Picchiaduro"
+      ],
+      "players": "1–2",
+      "description": "Versione portatile di «World Heroes 2 Jet» di Takara. Picchiaduro a incontri singoli, con lottatori di epoche e paesi diversi.",
+      "plot": null,
+      "thumbnail": "World Heroes 2 Jet (USA, Europe) (SGB Enhanced)",
+      "hashes": {
+        "crc32": "e2948378"
+      },
+      "keys": [
+        "worldheroes2jet"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "x",
+      "title": "X",
+      "region": "Giappone",
+      "languages": [
+        "en"
+      ],
+      "developer": "Argonaut Software",
+      "publisher": "Nintendo",
+      "year": 1992,
+      "genre": [
+        "Sparatutto",
+        "Simulazione"
+      ],
+      "players": "1",
+      "description": "Gioco spaziale di Argonaut con grafica tridimensionale a struttura di linee. Si pilota una navicella contro i nemici. Uscito solo in Giappone, qui con una traduzione amatoriale in inglese.",
+      "plot": null,
+      "thumbnail": "X (Japan)",
+      "hashes": {
+        "crc32": "fc43250e"
+      },
+      "keys": [
+        "x"
+      ],
+      "achievements": false,
+      "kind": "translation"
+    },
+    {
+      "id": "yoshi-gb",
+      "title": "Yoshi",
+      "region": "USA (NTSC)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Game Freak",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Rompicapo"
+      ],
+      "players": "1–2",
+      "description": "Rompicapo di Nintendo con Yoshi. Si scambiano le colonne di nemici che cadono per farli scontrare e sparire. Le uova rompono le combinazioni.",
+      "plot": null,
+      "thumbnail": "Yoshi (USA)",
+      "hashes": {
+        "crc32": "282d9975"
+      },
+      "keys": [
+        "yoshi"
+      ],
+      "achievements": true,
+      "kind": "original"
+    },
+    {
+      "id": "yoshis-cookie-gb",
+      "title": "Yoshi's Cookie",
+      "region": "Europa (PAL)",
+      "languages": [
+        "en"
+      ],
+      "developer": "Home Data",
+      "publisher": "Nintendo",
+      "year": null,
+      "genre": [
+        "Rompicapo"
+      ],
+      "players": "1–4",
+      "description": "Rompicapo di Nintendo con biscotti di forme diverse. Si scambiano righe e colonne per formare file uguali, sfidando la console o un altro giocatore.",
+      "plot": null,
+      "thumbnail": "Yoshi's Cookie (USA, Europe)",
+      "hashes": {
+        "crc32": "8f0a78e2"
+      },
+      "keys": [
+        "yoshiscookie"
+      ],
+      "achievements": true,
+      "kind": "original"
+    }
+  ]
+}

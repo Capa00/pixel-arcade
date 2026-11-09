@@ -1,0 +1,112 @@
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(12px * var(--u));
+  align-items: flex-start;
+  margin-top: calc(8px * var(--u));
+}
+
+.play {
+  height: calc(60px * var(--u));
+  padding: 0 calc(30px * var(--u)) 0 calc(24px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(12px * var(--u));
+  border: 2px solid transparent;
+  border-radius: calc(16px * var(--u));
+  background: var(--text-1);
+  color: var(--bg);
+  font-family: inherit;
+  font-size: calc(18px * var(--u));
+  font-weight: 700;
+}
+
+.playIcon {
+  width: calc(22px * var(--u));
+  height: calc(22px * var(--u));
+}
+
+.core {
+  height: calc(60px * var(--u));
+  max-width: calc(420px * var(--u));
+  padding: 0 calc(22px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(12px * var(--u));
+  border: 2px solid var(--border-2);
+  border-radius: calc(16px * var(--u));
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-family: inherit;
+  font-size: calc(15px * var(--u));
+  font-weight: 600;
+}
+
+/* «Gioca» con sotto, in piccolo, il core: la colonna è larga quanto «Gioca». */
+.playColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: calc(6px * var(--u));
+}
+
+.coreLink {
+  max-width: calc(240px * var(--u));
+  padding: calc(2px * var(--u)) calc(8px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(6px * var(--u));
+  border: 2px solid transparent;
+  border-radius: calc(8px * var(--u));
+  background: transparent;
+  color: var(--text-3);
+  font-family: inherit;
+  font-size: calc(12px * var(--u));
+  font-weight: 600;
+}
+
+.coreName {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.coreLink.focused {
+  box-shadow: none;
+  border-color: var(--accent);
+  color: var(--text-1);
+}
+
+/* Tre puntini di «Altro», più piccoli del testo. */
+.dots {
+  font-size: calc(10px * var(--u));
+  letter-spacing: 0.1em;
+}
+
+/* Scritte «Descrizione» e «Scheda» nella stessa cella: si vede solo quella attiva. */
+.swap {
+  display: grid;
+}
+
+.swap > * {
+  grid-area: 1 / 1;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.incompatible {
+  color: var(--p1);
+}
+
+.focused {
+  box-shadow: 0 0 0 calc(3px * var(--u)) var(--bg), 0 0 0 calc(6px * var(--u)) var(--accent);
+}
+
+.core.focused {
+  border-color: var(--text-1);
+  color: var(--text-1);
+}

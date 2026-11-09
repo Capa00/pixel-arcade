@@ -1,0 +1,141 @@
+/*
+ * Salvaschermo: sopra tutto, sfondo scuro velato sul tema grafico. Le
+ * immagini di una scena hanno posto e grandezza calcolati a caso
+ * (src/lib/screensaver.js, `sceneLayout`): `left`, `top` e le variabili
+ * `--w` e `--h` (larghezza e altezza dell'immagine). Ognuna scivola piano
+ * da `-(--dx, --dy)` a `(--dx, --dy)`: direzione e velocità sue.
+ */
+.saver {
+  composes: tone-night from global;
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  overflow: hidden;
+  background: rgb(var(--deep-rgb) / 0.82);
+  cursor: none;
+  animation: fade 1.2s ease-out;
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  animation: show 1.2s ease-out;
+}
+
+/* Solo il logo, quando non c'è nessuna immagine. */
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide {
+  position: absolute;
+  width: var(--w);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: drift 8s linear forwards;
+  /* La didascalia sta nello spazio riservato sotto l'immagine (`CAPTION_SHARE`). */
+  gap: calc(var(--h) * 0.04);
+}
+
+.cover,
+.thumb {
+  width: var(--w);
+  height: var(--h);
+  border-radius: calc(var(--h) * 0.05);
+  box-shadow: 0 calc(var(--h) * 0.07) calc(var(--h) * 0.14) var(--shadow-70);
+}
+
+.thumb {
+  object-fit: cover;
+}
+
+.caption {
+  /* Larga quanto l'immagine: non invade la colonna accanto. */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--h) * 0.012);
+  text-align: center;
+}
+
+/* Testo in proporzione all'immagine, con un minimo leggibile; al massimo due righe per il titolo. */
+.title {
+  overflow: hidden;
+  font-size: max(13px, calc(var(--h) * 0.055));
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-1);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.meta {
+  overflow: hidden;
+  max-width: 100%;
+  font-size: max(11px, calc(var(--h) * 0.04));
+  color: var(--text-3);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owner {
+  font-weight: 700;
+  color: var(--owner);
+}
+
+/* Dietro RetroArch, mentre rigioca uno spezzone: di chi è la partita. */
+.clip {
+  margin: 0;
+  font-size: calc(22px * var(--u));
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.logo {
+  width: calc(160px * var(--u));
+  height: calc(160px * var(--u));
+  fill: var(--text-3);
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Spostamento lento di un'immagine. */
+@keyframes drift {
+  from {
+    transform: translate(calc(-1 * var(--dx)), calc(-1 * var(--dy)));
+  }
+
+  to {
+    transform: translate(var(--dx), var(--dy));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide {
+    animation: none;
+  }
+}

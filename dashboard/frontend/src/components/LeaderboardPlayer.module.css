@@ -1,0 +1,251 @@
+/*
+ * Scheda di una persona nella classifica di «Chi gioca?»: fascia sfumata nel
+ * colore del profilo (`--profile`), quattro riquadri, il pulsante per
+ * entrare, la barra delle console e le file di card, tutto compatto. Card e cursore vengono da
+ * src/components/Leaderboard.module.css.
+ */
+.hero {
+  padding: calc(14px * var(--u)) calc(32px * var(--u)) calc(14px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--profile) 22%, transparent), transparent);
+}
+
+.back {
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-3);
+  font: inherit;
+  font-size: calc(12px * var(--u));
+  cursor: pointer;
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: calc(18px * var(--u));
+}
+
+.avatar {
+  width: calc(56px * var(--u));
+  height: calc(56px * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(16px * var(--u));
+  box-shadow: 0 0 0 3px var(--surface-1), 0 0 0 5px var(--profile);
+  color: var(--on-accent);
+  font-size: calc(24px * var(--u));
+  font-weight: 700;
+}
+
+.text {
+  min-width: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--u));
+}
+
+.name {
+  overflow: hidden;
+  font-size: calc(22px * var(--u));
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.level {
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.xpRow {
+  margin-top: calc(4px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+}
+
+.xpTrack {
+  height: calc(6px * var(--u));
+  flex-grow: 1;
+  overflow: hidden;
+  border-radius: calc(3px * var(--u));
+  background: var(--border-1);
+}
+
+.xpFill {
+  display: block;
+  height: 100%;
+  border-radius: calc(3px * var(--u));
+  background: var(--profile);
+}
+
+.xpText {
+  flex-shrink: 0;
+  font-size: calc(11px * var(--u));
+  font-variant-numeric: tabular-nums;
+  color: var(--text-3);
+}
+
+/* Contenuto che scorre, come nella classifica. */
+.body {
+  flex-grow: 1;
+  min-height: 0;
+  padding: calc(4px * var(--u)) calc(32px * var(--u)) calc(24px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(14px * var(--u));
+  overflow-y: auto;
+  scroll-padding: calc(12px * var(--u)) 0 calc(24px * var(--u));
+  scrollbar-width: none;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: calc(8px * var(--u));
+}
+
+.tile {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: calc(7px * var(--u)) calc(6px * var(--u));
+  border-radius: calc(10px * var(--u));
+  background: var(--surface-2);
+}
+
+.tileValue {
+  font-size: calc(17px * var(--u));
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.tileLabel {
+  font-size: calc(11px * var(--u));
+  color: var(--text-4);
+}
+
+.tileNote {
+  font-size: calc(10px * var(--u));
+  color: var(--text-5);
+}
+
+.play {
+  flex-shrink: 0;
+  align-self: flex-start;
+  /* Tornando su fino al pulsante si vedono anche i riquadri sopra (lo scorrimento arriva in cima). */
+  scroll-margin-top: calc(200px * var(--u));
+  padding: calc(7px * var(--u)) calc(16px * var(--u));
+  border: 0;
+  border-radius: calc(9px * var(--u));
+  background: var(--player);
+  color: var(--on-accent);
+  font: inherit;
+  font-size: calc(13px * var(--u));
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Profilo dell'altro giocatore: stessa forma, spento. */
+.off {
+  background: var(--surface-2);
+  color: var(--text-4);
+  cursor: default;
+}
+
+.note {
+  margin: 0;
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.section {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+  border-radius: calc(10px * var(--u));
+}
+
+/* Intestazione: una parola in pixel e una linea sottile fino al bordo. */
+.sectionTitle {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+  font-size: calc(11px * var(--u));
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--text-4);
+}
+
+.sectionTitle::after {
+  content: '';
+  height: 1px;
+  flex-grow: 1;
+  background: var(--border-1);
+}
+
+/*
+ * Fila di card che scorre di lato seguendo il cursore: 4 card intere e un
+ * quarto della successiva (o della precedente, in fondo alla fila). Il
+ * margine interno lascia vedere il contorno del cursore.
+ */
+.cards {
+  --gap: calc(8px * var(--u));
+  margin: calc(-4px * var(--u));
+  padding: calc(4px * var(--u));
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 4 * var(--gap)) / 4.25);
+  gap: var(--gap);
+  overflow-x: auto;
+  scroll-padding-inline: calc(4px * var(--u));
+  scrollbar-width: none;
+}
+
+/* Ore per console: una barra divisa in colori, con la legenda sotto. */
+.split {
+  height: calc(8px * var(--u));
+  display: flex;
+  gap: 2px;
+  overflow: hidden;
+  border-radius: calc(5px * var(--u));
+}
+
+.part {
+  min-width: 3px;
+  background: var(--accent, var(--text-4));
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(6px * var(--u)) calc(16px * var(--u));
+  font-size: calc(12px * var(--u));
+  color: var(--text-3);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: calc(6px * var(--u));
+}
+
+.dot {
+  width: calc(8px * var(--u));
+  height: calc(8px * var(--u));
+  border-radius: 50%;
+  background: var(--accent, var(--text-4));
+}

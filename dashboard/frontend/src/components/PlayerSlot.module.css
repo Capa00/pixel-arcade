@@ -1,0 +1,93 @@
+/* Slot P1/P2 dell'intestazione (demo: 52 unità di altezza). */
+.slot {
+  height: calc(52px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(12px * var(--u));
+  padding: 0 calc(16px * var(--u)) 0 calc(8px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(14px * var(--u));
+  background: var(--surface-1);
+  color: var(--text-1);
+  text-align: left;
+  cursor: pointer;
+}
+
+.empty {
+  border: 1px dashed var(--border-3);
+  background: transparent;
+}
+
+.badge {
+  width: calc(36px * var(--u));
+  height: calc(36px * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(10px * var(--u));
+  background: var(--surface-2);
+  color: var(--player);
+  font-size: calc(11px * var(--u));
+}
+
+.avatar {
+  position: relative;
+  width: calc(36px * var(--u));
+  height: calc(36px * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(10px * var(--u));
+  background: var(--user);
+  color: var(--on-accent);
+  font-size: calc(15px * var(--u));
+  font-weight: 700;
+}
+
+.dot {
+  position: absolute;
+  right: calc(-3px * var(--u));
+  bottom: calc(-3px * var(--u));
+  width: calc(12px * var(--u));
+  height: calc(12px * var(--u));
+  border: 2px solid var(--surface-1);
+  border-radius: 50%;
+  background: var(--player);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(2px * var(--u));
+  min-width: 0;
+}
+
+.tag {
+  font-size: calc(10px * var(--u));
+  color: var(--player);
+}
+
+.name {
+  font-size: calc(14px * var(--u));
+  font-weight: 600;
+  /* Nomi lunghi (fino a 25 caratteri): tagliati con «…». */
+  min-width: 0;
+  max-width: calc(180px * var(--u));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wait {
+  font-size: calc(13px * var(--u));
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+.pad {
+  font-size: calc(12px * var(--u));
+  color: var(--text-3);
+}

@@ -1,0 +1,12 @@
+#!/bin/sh
+# Cambia il governor di cpufreq di tutti i core. Lo lancia la dashboard con
+# «sudo -n» durante le partite (impostazione «Processore al massimo», README).
+# Accetta solo i nomi dei governor del kernel: nient'altro passa da root.
+set -eu
+case "${1:-}" in
+    performance|schedutil|ondemand|conservative|powersave) ;;
+    *) echo "uso: pixelarcade-cpu performance|schedutil|ondemand|conservative|powersave" >&2; exit 2 ;;
+esac
+for file in /sys/devices/system/cpu/cpu[0-9]*/cpufreq/scaling_governor; do
+    echo "$1" > "$file"
+done

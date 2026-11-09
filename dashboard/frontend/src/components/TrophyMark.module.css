@@ -1,0 +1,30 @@
+.mark {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.cup {
+  fill: currentColor;
+}
+
+.yes {
+  color: var(--gold);
+}
+
+.no {
+  color: var(--text-4);
+}
+
+.strikeBack {
+  stroke: rgba(13, 12, 18, 0.9);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.strike {
+  stroke: var(--p1);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}

@@ -1,0 +1,66 @@
+/* Schede dei Wrapped disponibili (pagina profilo e Impostazioni). */
+.periods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(14px * var(--u));
+}
+
+.period {
+  position: relative;
+  width: calc(190px * var(--u));
+  min-height: calc(110px * var(--u));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: calc(6px * var(--u));
+  overflow: hidden;
+  padding: calc(14px * var(--u)) calc(16px * var(--u));
+  border: 2px solid transparent;
+  border-radius: calc(16px * var(--u));
+  background: var(--wrapped-card);
+  color: var(--text-1);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.1s,
+    transform 0.1s;
+}
+
+/* Il Wrapped dell'anno ha un bordo dorato. */
+.year {
+  background: var(--wrapped-card-year);
+  box-shadow: inset 0 0 0 1px rgb(245 197 66 / calc(0.5 * var(--wrapped-glow)));
+}
+
+.period:global(.focused) {
+  border-color: var(--text-1);
+  transform: translateY(calc(-3px * var(--u)));
+}
+
+.kind {
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.2em;
+  color: var(--gold);
+}
+
+.label {
+  font-size: calc(19px * var(--u));
+  font-weight: 800;
+}
+
+.fresh {
+  position: absolute;
+  top: calc(10px * var(--u));
+  right: calc(10px * var(--u));
+  padding: calc(3px * var(--u)) calc(7px * var(--u));
+  border-radius: calc(6px * var(--u));
+  background: var(--p1);
+  color: var(--on-accent);
+  font-size: calc(10px * var(--u));
+  letter-spacing: 0.08em;
+}
+
+.empty {
+  font-size: calc(15px * var(--u));
+  color: var(--text-3);
+}

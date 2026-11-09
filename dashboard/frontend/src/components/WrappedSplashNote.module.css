@@ -1,0 +1,45 @@
+/* Riga del Wrapped di casa in cima alla schermata «PRESS START». */
+.note {
+  position: absolute;
+  left: 50%;
+  top: calc(32px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+  padding: calc(8px * var(--u)) calc(16px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: 999px;
+  background: rgb(var(--surface-1-rgb) / 0.8);
+  color: var(--text-2);
+  font-size: calc(15px * var(--u));
+  white-space: nowrap;
+  transform: translateX(-50%);
+  animation: note-in 0.6s ease-out both;
+}
+
+.tag {
+  padding: calc(2px * var(--u)) calc(7px * var(--u));
+  border-radius: calc(6px * var(--u));
+  background: var(--gold);
+  color: var(--on-accent);
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.12em;
+}
+
+@keyframes note-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-12px * var(--u)));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note {
+    animation: none;
+  }
+}

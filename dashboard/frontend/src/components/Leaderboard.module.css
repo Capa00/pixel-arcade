@@ -1,0 +1,370 @@
+/*
+ * Classifica di casa: nella metà libera dello schermo, larga quanto la
+ * finestra «Chi gioca?» quando sono affiancate (src/views/LoginModal.module.css,
+ * `.dual`), così non si sovrappongono. Righe semplici divise da linee
+ * sottili, giochi come card; il contenuto scorre seguendo il cursore.
+ * Centrata in verticale come la finestra nello spazio tra l'intestazione
+ * (84 unità) e la barra comandi (64 unità, che sta sopra), con almeno 20
+ * unità di margine da entrambe. `--player` è il colore dello slot.
+ */
+.board {
+  --height: min(calc(810px * var(--u)), calc(100% - 188px * var(--u)));
+  position: absolute;
+  top: calc(104px * var(--u) + (100% - 188px * var(--u) - var(--height)) / 2);
+  z-index: 20;
+  width: min(calc(720px * var(--u)), calc(50% - 60px * var(--u)));
+  height: var(--height);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border-2);
+  border-radius: calc(24px * var(--u));
+  background: var(--surface-1);
+  box-shadow: 0 calc(40px * var(--u)) calc(80px * var(--u)) calc(-20px * var(--u)) var(--shadow-70);
+}
+
+.left {
+  left: calc(40px * var(--u));
+}
+
+.right {
+  right: calc(40px * var(--u));
+}
+
+/* Il joypad è dentro la classifica: bordo nel colore del giocatore. */
+.active {
+  border-color: var(--player);
+}
+
+/* Telefono e schermo verticale: la finestra occupa tutta la larghezza, la classifica non ha posto. */
+[data-layout='compact'] .board,
+[data-layout='portrait'] .board {
+  display: none;
+}
+
+.head {
+  padding: calc(24px * var(--u)) calc(32px * var(--u)) calc(12px * var(--u));
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: calc(12px * var(--u));
+}
+
+.kicker {
+  font-size: calc(13px * var(--u));
+  letter-spacing: 0.08em;
+  color: var(--gold);
+}
+
+.enter {
+  font-size: calc(12px * var(--u));
+  color: var(--text-4);
+}
+
+.body {
+  flex-grow: 1;
+  min-height: 0;
+  padding: calc(6px * var(--u)) calc(32px * var(--u)) calc(24px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(18px * var(--u));
+  overflow-y: auto;
+  /* Lo scorrimento che segue il cursore lascia spazio sopra e sotto la voce, anche per il suo bordo. */
+  scroll-padding: calc(12px * var(--u)) 0 calc(24px * var(--u));
+  scrollbar-width: none;
+}
+
+.note {
+  margin: 0;
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Riga di una persona: niente riquadri, solo una linea sotto. */
+.leader {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: calc(12px * var(--u));
+  padding: calc(10px * var(--u)) calc(8px * var(--u));
+  border: 0;
+  border-bottom: 1px solid var(--border-1);
+  border-radius: calc(10px * var(--u));
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.list > :last-child {
+  border-bottom: 0;
+}
+
+/* Cursore solo quando il joypad è nella classifica. */
+.active :global(.focused) {
+  box-shadow: 0 0 0 2px var(--player);
+}
+
+.place {
+  width: calc(26px * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  font-family: var(--font-pixel);
+  font-size: calc(14px * var(--u));
+  color: var(--text-4);
+}
+
+.cup {
+  width: calc(22px * var(--u));
+  height: calc(22px * var(--u));
+  overflow: visible;
+}
+
+.gold {
+  color: var(--gold);
+}
+
+.silver {
+  color: var(--silver);
+}
+
+.bronze {
+  color: var(--bronze);
+}
+
+.avatar {
+  width: calc(34px * var(--u));
+  height: calc(34px * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(10px * var(--u));
+  color: var(--on-accent);
+  font-size: calc(14px * var(--u));
+  font-weight: 700;
+}
+
+.who {
+  min-width: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: calc(3px * var(--u));
+}
+
+.name {
+  overflow: hidden;
+  font-size: calc(15px * var(--u));
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.line {
+  overflow: hidden;
+  font-size: calc(12px * var(--u));
+  color: var(--text-4);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.xp {
+  flex-shrink: 0;
+  font-size: calc(16px * var(--u));
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.unit {
+  margin-left: calc(4px * var(--u));
+  font-size: calc(11px * var(--u));
+  font-weight: 600;
+  color: var(--text-4);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+  border-radius: calc(10px * var(--u));
+}
+
+.sectionHead {
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+}
+
+.sectionTitle {
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.08em;
+  color: var(--text-4);
+}
+
+.badge {
+  padding: calc(2px * var(--u)) calc(7px * var(--u));
+  border: 1px solid var(--gold);
+  border-radius: calc(6px * var(--u));
+  color: var(--gold);
+  font-size: calc(11px * var(--u));
+  font-weight: 700;
+}
+
+.ranking {
+  margin: 0;
+  padding: 0 calc(8px * var(--u));
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(6px * var(--u)) calc(18px * var(--u));
+  list-style: none;
+}
+
+.rankItem {
+  display: flex;
+  align-items: center;
+  gap: calc(6px * var(--u));
+}
+
+.smallCup {
+  width: calc(16px * var(--u));
+  height: calc(16px * var(--u));
+  flex-shrink: 0;
+}
+
+.rankName {
+  font-size: calc(13px * var(--u));
+  font-weight: 700;
+  min-width: 0;
+  max-width: calc(200px * var(--u));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rankTime {
+  flex-shrink: 0;
+  font-size: calc(12px * var(--u));
+  font-variant-numeric: tabular-nums;
+  color: var(--text-3);
+}
+
+.inlineCup {
+  width: calc(13px * var(--u));
+  height: calc(13px * var(--u));
+  vertical-align: calc(-2px * var(--u));
+}
+
+/* Card dei giochi: copertina 3:4 come nella griglia, titolo e dettaglio sotto. */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: calc(10px * var(--u));
+}
+
+.card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--u));
+  padding: calc(6px * var(--u));
+  border: 0;
+  border-radius: calc(12px * var(--u));
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cardCover {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: calc(8px * var(--u));
+  overflow: hidden;
+  box-shadow: 0 calc(8px * var(--u)) calc(18px * var(--u)) calc(-8px * var(--u)) var(--shadow-60);
+}
+
+.cardTitle {
+  overflow: hidden;
+  font-size: calc(12px * var(--u));
+  font-weight: 700;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.cardBadge {
+  position: absolute;
+  right: calc(5px * var(--u));
+  bottom: calc(5px * var(--u));
+  max-width: calc(100% - 10px * var(--u));
+  overflow: hidden;
+  padding: calc(2px * var(--u)) calc(6px * var(--u));
+  border-radius: calc(6px * var(--u));
+  background: rgb(var(--deep-rgb) / 0.82);
+  color: #f3f1f8;
+  font-size: calc(10px * var(--u));
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cardDetail {
+  overflow: hidden;
+  font-size: calc(11px * var(--u));
+  color: var(--text-4);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Gioco della sfida: card larga a sinistra, chi è in testa a destra. */
+.challenge {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(16px * var(--u));
+}
+
+.bigCard {
+  width: calc(150px * var(--u));
+  flex-shrink: 0;
+}
+
+.bigCard .cardTitle {
+  font-size: calc(14px * var(--u));
+}
+
+.challengeSide {
+  min-width: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: calc(10px * var(--u));
+  padding-top: calc(6px * var(--u));
+}
+
+.challengeSide .ranking {
+  flex-direction: column;
+  padding: 0;
+}
+
+/* Gioco citato nel testo (vincitore della settimana prima). */
+.inlineGame {
+  padding: 0 calc(4px * var(--u));
+  border: 0;
+  border-radius: calc(6px * var(--u));
+  background: transparent;
+  color: var(--text-1);
+  font: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--border-3);
+  cursor: pointer;
+}

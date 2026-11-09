@@ -1,0 +1,1143 @@
+/*
+ * Scheda TOURNAMENT tra le console: manifesto sulla scheda e, dentro,
+ * elenco dei tornei e dettaglio. Oro dei trofei per i titoli, verde per le
+ * iscrizioni aperte, rosso per il torneo in corso.
+ */
+.view {
+  position: relative;
+  min-height: 100%;
+  padding: calc(36px * var(--u)) calc(48px * var(--u)) calc(24px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(20px * var(--u));
+}
+
+/* --- Copertina --- */
+
+.cover {
+  flex-shrink: 0;
+  aspect-ratio: 3 / 4;
+  border-radius: calc(12px * var(--u));
+  box-shadow:
+    0 calc(18px * var(--u)) calc(40px * var(--u)) calc(-12px * var(--u)) var(--shadow-75),
+    0 0 0 1px rgb(255 255 255 / 0.08);
+}
+
+.noCover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-3);
+  font-family: var(--font-pixel);
+  font-size: calc(28px * var(--u));
+  color: var(--text-5);
+}
+
+.heroCover {
+  width: calc(170px * var(--u));
+}
+
+.posterCover {
+  width: calc(250px * var(--u));
+  box-shadow:
+    0 calc(24px * var(--u)) calc(60px * var(--u)) calc(-14px * var(--u)) var(--shadow-75),
+    0 0 calc(40px * var(--u)) rgb(245 197 66 / 0.25),
+    0 0 0 1px rgb(245 197 66 / 0.35);
+}
+
+.miniCover {
+  width: calc(54px * var(--u));
+  border-radius: calc(7px * var(--u));
+}
+
+/* --- Testata (manifesto) --- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  gap: calc(28px * var(--u));
+  padding: calc(28px * var(--u)) calc(32px * var(--u));
+  border-radius: calc(20px * var(--u)) calc(20px * var(--u)) 0 0;
+  isolation: isolate;
+}
+
+.poster {
+  align-items: center;
+  gap: calc(44px * var(--u));
+  padding: calc(40px * var(--u)) calc(48px * var(--u));
+  border: 1px solid rgb(245 197 66 / 0.25);
+  border-radius: calc(26px * var(--u));
+  animation: rise 0.45s cubic-bezier(0.3, 1.2, 0.6, 1) both;
+}
+
+.heroBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--surface-1);
+}
+
+.heroImage {
+  position: absolute;
+  inset: calc(-40px * var(--u));
+  background-position: center;
+  background-size: cover;
+  filter: blur(calc(28px * var(--u))) saturate(1.3);
+  opacity: 0.55;
+  transform: scale(1.1);
+}
+
+.heroShade {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 0%, rgb(245 197 66 / 0.18), transparent 55%),
+    linear-gradient(90deg, rgb(var(--deep-rgb) / 0.35), rgb(var(--deep-rgb) / 0.85) 70%),
+    linear-gradient(0deg, rgb(var(--deep-rgb) / 0.7), transparent 60%);
+}
+
+.heroText {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(10px * var(--u));
+}
+
+.kicker {
+  font-size: calc(12px * var(--u));
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-shadow: 0 0 calc(12px * var(--u)) rgb(245 197 66 / 0.5);
+}
+
+.title {
+  margin: 0;
+  font-size: calc(30px * var(--u));
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  color: var(--text-1);
+  text-shadow: 0 calc(3px * var(--u)) 0 rgb(0 0 0 / 0.35);
+}
+
+/* Numero e titolo dell'edizione, sotto il nome della serie. */
+.edition {
+  margin: 0;
+  font-size: calc(14px * var(--u));
+  letter-spacing: 0.08em;
+  color: var(--text-2);
+}
+
+.poster .title {
+  font-size: calc(38px * var(--u));
+}
+
+.game {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(12px * var(--u));
+  font-size: calc(18px * var(--u));
+  font-weight: 700;
+  color: var(--text-1);
+}
+
+.system {
+  padding: calc(3px * var(--u)) calc(8px * var(--u));
+  border: 1px solid var(--border-3);
+  border-radius: calc(6px * var(--u));
+  font-size: calc(10px * var(--u));
+  letter-spacing: 0.15em;
+  color: var(--text-3);
+}
+
+.date {
+  margin: 0;
+  font-size: calc(14px * var(--u));
+  color: var(--text-3);
+}
+
+/* --- Stato --- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  padding: calc(5px * var(--u)) calc(10px * var(--u));
+  border-radius: 999px;
+  font-size: calc(10px * var(--u));
+  letter-spacing: 0.18em;
+}
+
+.open {
+  background: rgb(61 220 132 / 0.15);
+  color: var(--ok);
+  box-shadow: inset 0 0 0 1px rgb(61 220 132 / 0.45);
+}
+
+.closed {
+  background: var(--surface-3);
+  color: var(--text-3);
+  box-shadow: inset 0 0 0 1px var(--border-3);
+}
+
+.live {
+  background: rgb(var(--danger-rgb) / 0.16);
+  color: var(--danger-soft);
+  box-shadow: inset 0 0 0 1px rgb(var(--danger-rgb) / 0.5);
+}
+
+.done {
+  background: rgb(245 197 66 / 0.15);
+  color: var(--gold);
+  box-shadow: inset 0 0 0 1px rgb(245 197 66 / 0.45);
+}
+
+/* Podio nell'anteprima del torneo concluso. */
+.previewPodium {
+  align-self: flex-start;
+  padding-top: calc(6px * var(--u));
+}
+
+.liveDot {
+  flex-shrink: 0;
+  width: calc(9px * var(--u));
+  height: calc(9px * var(--u));
+  border-radius: 50%;
+  background: var(--danger);
+  box-shadow: 0 0 calc(8px * var(--u)) var(--danger);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+/* --- Conto alla rovescia --- */
+
+.countdown {
+  display: flex;
+  gap: calc(10px * var(--u));
+  margin-top: calc(4px * var(--u));
+}
+
+.digitBox {
+  min-width: calc(70px * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(4px * var(--u));
+  padding: calc(10px * var(--u)) calc(10px * var(--u)) calc(8px * var(--u));
+  border: 1px solid rgb(245 197 66 / 0.3);
+  border-radius: calc(10px * var(--u));
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.06) 50%, transparent 50%),
+    rgb(var(--deep-rgb) / 0.75);
+  box-shadow: inset 0 calc(-2px * var(--u)) 0 rgb(0 0 0 / 0.35);
+}
+
+.digits {
+  font-size: calc(28px * var(--u));
+  line-height: 1;
+  color: var(--gold);
+  text-shadow: 0 0 calc(10px * var(--u)) rgb(245 197 66 / 0.45);
+}
+
+.unit {
+  font-size: calc(9px * var(--u));
+  letter-spacing: 0.2em;
+  color: var(--text-4);
+}
+
+.waiting {
+  margin: 0;
+  font-size: calc(16px * var(--u));
+  font-weight: 700;
+  color: var(--gold);
+}
+
+/* --- Posti a pallini (manifesto) --- */
+
+.seatDots {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(6px * var(--u));
+  margin-top: calc(4px * var(--u));
+}
+
+.seatDot {
+  width: calc(14px * var(--u));
+  height: calc(14px * var(--u));
+  border-radius: 50%;
+  box-shadow: 0 0 0 calc(2px * var(--u)) rgb(var(--deep-rgb) / 0.6);
+}
+
+.seatFree {
+  background: transparent;
+  border: calc(2px * var(--u)) dashed var(--border-3);
+  box-shadow: none;
+}
+
+.seatMore {
+  font-size: calc(12px * var(--u));
+  font-weight: 700;
+  color: var(--text-4);
+}
+
+.seatText {
+  margin-left: calc(6px * var(--u));
+  font-size: calc(14px * var(--u));
+  color: var(--text-3);
+}
+
+.enter {
+  margin-top: calc(10px * var(--u));
+  display: inline-flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+  padding: calc(11px * var(--u)) calc(22px * var(--u)) calc(11px * var(--u)) calc(14px * var(--u));
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffd866, var(--gold));
+  color: var(--on-accent);
+  font-size: calc(14px * var(--u));
+  letter-spacing: 0.2em;
+  box-shadow:
+    0 calc(8px * var(--u)) calc(24px * var(--u)) calc(-6px * var(--u)) rgb(245 197 66 / 0.6),
+    inset 0 calc(-3px * var(--u)) 0 rgb(0 0 0 / 0.2);
+}
+
+/* --- Anteprima: altri tornei --- */
+
+.preview {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(22px * var(--u));
+}
+
+.others {
+  display: flex;
+  flex-direction: column;
+  gap: calc(10px * var(--u));
+  animation: rise 0.45s 0.1s cubic-bezier(0.3, 1.2, 0.6, 1) both;
+}
+
+.otherList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(12px * var(--u));
+}
+
+.other {
+  display: flex;
+  align-items: center;
+  gap: calc(12px * var(--u));
+  padding: calc(10px * var(--u)) calc(16px * var(--u)) calc(10px * var(--u)) calc(10px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(14px * var(--u));
+  background: var(--surface-1);
+}
+
+/* --- Dentro: elenco --- */
+
+.split {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: calc(360px * var(--u)) minmax(0, 1fr);
+  gap: calc(24px * var(--u));
+  align-items: start;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: calc(10px * var(--u));
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: calc(14px * var(--u));
+  padding: calc(10px * var(--u)) calc(14px * var(--u)) calc(10px * var(--u)) calc(10px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(16px * var(--u));
+  background: var(--surface-1);
+  color: var(--text-2);
+  font-family: inherit;
+  text-align: left;
+  transition:
+    border-color 0.15s,
+    background 0.15s,
+    transform 0.15s;
+}
+
+.active {
+  border-color: var(--gold);
+  background: linear-gradient(90deg, rgb(245 197 66 / 0.14), var(--surface-2) 70%);
+  color: var(--text-1);
+  box-shadow: 0 0 calc(24px * var(--u)) calc(-6px * var(--u)) rgb(245 197 66 / 0.5);
+  transform: translateX(calc(4px * var(--u)));
+}
+
+.rowText {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(3px * var(--u));
+}
+
+.rowTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  font-size: calc(16px * var(--u));
+  font-weight: 700;
+  color: var(--text-1);
+}
+
+.rowNote {
+  font-size: calc(13px * var(--u));
+  color: var(--text-2);
+}
+
+.rowMeta {
+  font-size: calc(12px * var(--u));
+  color: var(--text-4);
+}
+
+/* --- Dentro: dettaglio --- */
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border-2);
+  border-radius: calc(20px * var(--u));
+  background: var(--surface-1);
+  box-shadow: 0 calc(30px * var(--u)) calc(60px * var(--u)) calc(-30px * var(--u)) var(--shadow-70);
+  animation: fade 0.3s ease-out both;
+}
+
+.wide {
+  width: calc(1040px * var(--u));
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: calc(22px * var(--u));
+  padding: calc(24px * var(--u)) calc(32px * var(--u)) calc(28px * var(--u));
+}
+
+.intro {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(24px * var(--u));
+}
+
+/* Descrizione della serie e dell'edizione, una sotto l'altra. */
+.texts {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: calc(10px * var(--u));
+}
+
+.description {
+  flex: 1;
+  margin: 0;
+  font-size: calc(15px * var(--u));
+  line-height: 1.55;
+  color: var(--text-2);
+  white-space: pre-line;
+}
+
+.start {
+  flex-shrink: 0;
+  position: relative;
+  width: calc(220px * var(--u));
+  margin: 0 0 0 auto;
+  overflow: hidden;
+  border: 2px solid var(--border-3);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-3);
+}
+
+.start img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.startCaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: calc(14px * var(--u)) calc(8px * var(--u)) calc(6px * var(--u));
+  background: linear-gradient(0deg, rgb(0 0 0 / 0.8), transparent);
+  font-size: calc(9px * var(--u));
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-align: center;
+}
+
+.panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: calc(16px * var(--u));
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: calc(12px * var(--u));
+  padding: calc(16px * var(--u)) calc(18px * var(--u));
+  border-radius: calc(14px * var(--u));
+  background: var(--surface-2);
+}
+
+.label {
+  font-size: calc(10px * var(--u));
+  letter-spacing: 0.28em;
+  color: var(--text-4);
+}
+
+.chips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(8px * var(--u));
+}
+
+.chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: calc(6px * var(--u));
+  padding: calc(6px * var(--u)) calc(11px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(8px * var(--u));
+  background: var(--surface-1);
+  font-size: calc(13px * var(--u));
+}
+
+.chipLabel {
+  font-size: calc(12px * var(--u));
+  font-weight: 600;
+  color: var(--text-4);
+}
+
+.chipValue {
+  font-weight: 700;
+  color: var(--text-1);
+}
+
+.admin {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+}
+
+.adminName {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(7px * var(--u));
+  font-size: calc(14px * var(--u));
+  font-weight: 700;
+  color: var(--text-1);
+  min-width: 0;
+  max-width: 100%;
+}
+
+.adminDot {
+  width: calc(10px * var(--u));
+  height: calc(10px * var(--u));
+  border-radius: 50%;
+}
+
+.adminText {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.crown {
+  font-size: calc(15px * var(--u));
+  line-height: 1;
+  color: var(--gold);
+  text-shadow: 0 0 calc(8px * var(--u)) rgb(245 197 66 / 0.5);
+}
+
+.medals {
+  display: flex;
+  gap: calc(10px * var(--u));
+}
+
+.medal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(6px * var(--u));
+  padding: calc(10px * var(--u)) calc(6px * var(--u));
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-1);
+  box-shadow: inset 0 0 0 1px var(--medal);
+}
+
+.gold {
+  --medal: var(--gold);
+}
+
+.silver {
+  --medal: var(--silver);
+}
+
+.bronze {
+  --medal: var(--bronze);
+}
+
+.medalPlace {
+  width: calc(36px * var(--u));
+  height: calc(36px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgb(255 255 255 / 0.55), var(--medal) 55%);
+  color: var(--on-accent);
+  font-size: calc(12px * var(--u));
+  box-shadow: 0 0 calc(12px * var(--u)) var(--medal);
+}
+
+.medalXp {
+  font-size: calc(13px * var(--u));
+  font-weight: 700;
+  color: var(--text-1);
+}
+
+.empty {
+  margin: 0;
+  font-size: calc(14px * var(--u));
+  color: var(--text-3);
+}
+
+.emptyKey {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(8px * var(--u));
+}
+
+/* --- Iscritti --- */
+
+.roster {
+  display: flex;
+  flex-direction: column;
+  gap: calc(12px * var(--u));
+}
+
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: calc(12px * var(--u));
+}
+
+.rosterGrid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(170px * var(--u)), 1fr));
+  gap: calc(10px * var(--u));
+}
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+  padding: calc(10px * var(--u)) calc(12px * var(--u));
+  border: 1px solid var(--border-2);
+  border-left: calc(4px * var(--u)) solid var(--player);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  animation: fade 0.3s ease-out both;
+}
+
+.avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(36px * var(--u));
+  height: calc(36px * var(--u));
+  border-radius: 50%;
+  font-size: calc(15px * var(--u));
+  font-weight: 800;
+  color: var(--on-accent);
+}
+
+.cardName {
+  min-width: 0;
+  overflow: hidden;
+  font-size: calc(14px * var(--u));
+  font-weight: 700;
+  color: var(--text-1);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slotTag {
+  margin-left: auto;
+  padding: calc(3px * var(--u)) calc(6px * var(--u));
+  border-radius: calc(5px * var(--u));
+  font-size: calc(9px * var(--u));
+  color: var(--on-accent);
+}
+
+.cardText {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(2px * var(--u));
+}
+
+.cardNote {
+  font-size: calc(11px * var(--u));
+  color: var(--text-4);
+}
+
+/* Testa di serie in alto a sinistra della scheda, col torneo in corso. */
+.seedTag {
+  position: absolute;
+  top: calc(-7px * var(--u));
+  left: calc(-7px * var(--u));
+  min-width: calc(20px * var(--u));
+  padding: calc(3px * var(--u)) calc(4px * var(--u));
+  border: 1px solid var(--border-3);
+  border-radius: calc(5px * var(--u));
+  background: var(--surface-3);
+  font-size: calc(9px * var(--u));
+  text-align: center;
+  color: var(--text-2);
+}
+
+/* Eliminato: scheda attenuata. */
+.out {
+  opacity: 0.45;
+  filter: grayscale(0.6);
+}
+
+.freeCard {
+  border: 1px dashed var(--border-3);
+  background: transparent;
+}
+
+.freeCard .cardName {
+  font-weight: 500;
+  color: var(--text-5);
+}
+
+.freeAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: calc(2px * var(--u)) dashed var(--border-3);
+  color: var(--text-5);
+}
+
+/* --- Movimento --- */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(calc(14px * var(--u)));
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .poster,
+  .others,
+  .detail,
+  .card,
+  .liveDot {
+    animation: none;
+  }
+
+  .row {
+    transition: none;
+  }
+
+  .active {
+    transform: none;
+  }
+}
+
+/* --- Telefono: margini ridotti, tutto in colonna --- */
+
+[data-layout='compact'] .view {
+  padding: calc(20px * var(--u)) calc(16px * var(--u));
+}
+
+[data-layout='compact'] .hero,
+[data-layout='compact'] .poster {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: calc(20px * var(--u));
+}
+
+[data-layout='compact'] .posterCover {
+  width: calc(160px * var(--u));
+}
+
+[data-layout='compact'] .split,
+[data-layout='compact'] .panels {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+[data-layout='compact'] .intro {
+  flex-direction: column;
+}
+
+[data-layout='compact'] .body {
+  padding: calc(18px * var(--u));
+}
+
+/* --- Torneo in corso: prossimo incontro sulla scheda --- */
+
+.nextBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(12px * var(--u));
+  margin-top: calc(6px * var(--u));
+  padding: calc(16px * var(--u)) calc(22px * var(--u));
+  border: 1px solid rgb(245 197 66 / 0.45);
+  border-radius: calc(16px * var(--u));
+  background: rgb(var(--deep-rgb) / 0.55);
+  box-shadow: 0 0 calc(30px * var(--u)) calc(-8px * var(--u)) rgb(245 197 66 / 0.45);
+}
+
+.nextLive {
+  border-color: rgb(var(--danger-rgb) / 0.6);
+  box-shadow: 0 0 calc(30px * var(--u)) calc(-8px * var(--u)) rgb(var(--danger-rgb) / 0.55);
+}
+
+.nextHead {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.25em;
+  color: var(--gold);
+}
+
+.nextLive .nextHead {
+  color: var(--danger);
+}
+
+.versus {
+  display: flex;
+  align-items: center;
+  gap: calc(22px * var(--u));
+}
+
+.contender {
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+  min-width: 0;
+}
+
+.bigAvatar {
+  width: calc(46px * var(--u));
+  height: calc(46px * var(--u));
+  font-size: calc(19px * var(--u));
+  box-shadow: 0 0 0 calc(3px * var(--u)) var(--player);
+}
+
+.contenderName {
+  max-width: calc(220px * var(--u));
+  overflow: hidden;
+  font-size: calc(19px * var(--u));
+  font-weight: 800;
+  color: var(--text-1);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contenderSeed {
+  font-size: calc(8px * var(--u));
+  letter-spacing: 0.12em;
+  color: var(--text-4);
+}
+
+.contender .contenderSeed {
+  align-self: flex-end;
+  margin-bottom: calc(4px * var(--u));
+}
+
+.vs {
+  font-size: calc(16px * var(--u));
+  color: var(--gold);
+  text-shadow: 0 0 calc(10px * var(--u)) rgb(245 197 66 / 0.6);
+}
+
+.nextMeta {
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.progress {
+  font-size: calc(10px * var(--u));
+  letter-spacing: 0.18em;
+  color: var(--text-4);
+}
+
+/* Avviso degli spareggi del girone («Serve uno spareggio per il 2° posto»). */
+.playoffNotice {
+  font-size: calc(13px * var(--u));
+  color: var(--gold);
+}
+
+/* Podio a tutto schermo dopo il sorteggio del girone. */
+.lotsLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 47;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lotsBackdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(var(--deep-rgb) / 0.78);
+  backdrop-filter: blur(6px);
+}
+
+.lotsPodium {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lotsClose {
+  position: absolute;
+  bottom: calc(40px * var(--u));
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  padding: calc(8px * var(--u)) calc(18px * var(--u));
+  border: 1px solid var(--gold);
+  border-radius: calc(10px * var(--u));
+  background: var(--gold);
+  color: var(--on-accent);
+  font: inherit;
+  font-size: calc(15px * var(--u));
+  cursor: pointer;
+}
+
+/* --- Torneo in corso: tabellone a tutta larghezza --- */
+
+.boardView {
+  height: 100%;
+  min-height: 0;
+  padding-bottom: calc(12px * var(--u));
+}
+
+.board {
+  flex-grow: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(16px * var(--u));
+  animation: fade 0.3s ease-out both;
+}
+
+.band {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: calc(16px * var(--u));
+  padding: calc(12px * var(--u)) calc(20px * var(--u));
+  border: 1px solid rgb(245 197 66 / 0.25);
+  border-radius: calc(16px * var(--u));
+  isolation: isolate;
+}
+
+.bandText {
+  min-width: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--u));
+}
+
+.bandTitle {
+  overflow: hidden;
+  font-size: calc(20px * var(--u));
+  letter-spacing: 0.04em;
+  color: var(--text-1);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bandNote {
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.bandSide {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: calc(8px * var(--u));
+}
+
+/* Girone: classifica e calendario affiancati, ognuno nel suo riquadro. */
+.league {
+  flex-grow: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: calc(16px * var(--u));
+}
+
+.pane {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(10px * var(--u));
+  padding: calc(12px * var(--u)) calc(14px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(16px * var(--u));
+  background: var(--surface-1);
+}
+
+/* Riquadro col cursore. */
+.paneOn {
+  border-color: rgb(245 197 66 / 0.45);
+}
+
+.paneTitle {
+  flex-shrink: 0;
+  margin: 0;
+  font-size: calc(12px * var(--u));
+  letter-spacing: 0.22em;
+  color: var(--text-3);
+}
+
+.paneOn .paneTitle {
+  color: var(--gold);
+}
+
+/* «Info torneo» dal tabellone: il dettaglio scorre con ▲ ▼. */
+.infoBox {
+  flex-grow: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/*
+ * Testata del dettaglio come il manifesto del salvaschermo: a sinistra
+ * copertina e stato di partenza larghi uguali, a destra le informazioni.
+ */
+.top {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 30%) minmax(0, 1fr);
+  align-items: start;
+  gap: calc(28px * var(--u));
+  padding: calc(28px * var(--u)) calc(32px * var(--u));
+  border-radius: calc(20px * var(--u)) calc(20px * var(--u)) 0 0;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.media {
+  display: flex;
+  flex-direction: column;
+  gap: calc(16px * var(--u));
+  min-width: 0;
+}
+
+.mediaCover {
+  width: 100%;
+}
+
+.mediaStart {
+  width: 100%;
+  margin: 0;
+}
+
+.topInfo {
+  display: flex;
+  flex-direction: column;
+  gap: calc(18px * var(--u));
+  min-width: 0;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: calc(14px * var(--u));
+}

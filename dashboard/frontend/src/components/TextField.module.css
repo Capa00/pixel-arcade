@@ -1,0 +1,45 @@
+.field {
+  width: 100%;
+  min-width: 0;
+  padding: calc(12px * var(--u)) calc(16px * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(4px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  text-align: left;
+  transition: border-color 0.1s, background 0.1s;
+}
+
+.field:global(.focused) {
+  border-color: var(--text-1);
+  background: var(--surface-3);
+}
+
+.label {
+  font-size: calc(12px * var(--u));
+  color: var(--text-4);
+}
+
+.value {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(16px * var(--u));
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+/* Campo vuoto: suggerimento attenuato. */
+.placeholder {
+  font-weight: 400;
+  color: var(--text-5);
+}
+
+.note {
+  font-size: calc(11px * var(--u));
+  color: var(--text-4);
+}

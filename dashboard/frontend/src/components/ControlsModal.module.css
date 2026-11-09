@@ -1,0 +1,320 @@
+/*
+ * Finestra «Comandi» di un gioco (livello 45, come la modale dei
+ * salvataggi). Lascia libera la barra dei comandi in basso.
+ * `--player` è il colore del giocatore della scheda attiva (P1/P2).
+ */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: calc(64px * var(--u));
+  z-index: 45;
+  padding: calc(24px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(var(--bg-rgb) / 0.7);
+}
+
+.panel {
+  width: calc(760px * var(--u));
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border-2);
+  border-radius: calc(24px * var(--u));
+  background: var(--surface-1);
+  box-shadow: 0 calc(40px * var(--u)) calc(80px * var(--u)) calc(-20px * var(--u)) var(--shadow-70);
+}
+
+.strip {
+  height: 4px;
+  flex-shrink: 0;
+  background: var(--player);
+}
+
+.head {
+  padding: calc(24px * var(--u)) calc(32px * var(--u)) calc(16px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+}
+
+.kicker {
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+
+.title {
+  overflow: hidden;
+  font-size: calc(26px * var(--u));
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.core {
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+/* Schede dei giocatori: LB/RB, [ ] o clic. */
+.tabs {
+  padding: 0 calc(20px * var(--u));
+  display: flex;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border-2);
+}
+
+.tab {
+  position: relative;
+  height: calc(46px * var(--u));
+  padding: 0 calc(16px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  border: 0;
+  background: transparent;
+  color: var(--text-4);
+  font-family: inherit;
+  font-size: calc(15px * var(--u));
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.tab::after {
+  content: '';
+  position: absolute;
+  left: calc(16px * var(--u));
+  right: calc(16px * var(--u));
+  bottom: -1px;
+  height: calc(3px * var(--u));
+  border-radius: calc(3px * var(--u)) calc(3px * var(--u)) 0 0;
+  background: transparent;
+}
+
+.tab:hover {
+  color: var(--text-2);
+}
+
+.tabActive {
+  color: var(--text-1);
+}
+
+.tabActive::after {
+  background: var(--tab);
+}
+
+.tabTag {
+  font-size: calc(10px * var(--u));
+  color: var(--tab);
+}
+
+/* Righe delle azioni: icona del tasto, nome e nota. */
+.list {
+  min-height: 0;
+  padding: calc(18px * var(--u)) calc(32px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.list::-webkit-scrollbar {
+  display: none;
+}
+
+.row {
+  padding: calc(10px * var(--u)) calc(16px * var(--u));
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: calc(16px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.row:global(.focused) {
+  border-color: var(--player);
+  box-shadow: 0 0 0 2px var(--player);
+}
+
+.fixed {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.waiting {
+  border-color: var(--player);
+  background: var(--surface-3);
+  animation: waiting 1s ease-in-out infinite alternate;
+}
+
+@keyframes waiting {
+  from {
+    box-shadow: 0 0 0 2px var(--player);
+  }
+
+  to {
+    box-shadow: 0 0 0 2px var(--player), 0 0 calc(22px * var(--u)) var(--player);
+  }
+}
+
+.icon {
+  width: calc(44px * var(--u));
+  height: calc(36px * var(--u));
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-1);
+}
+
+/* Icona più grande del normale, con le proporzioni del disegno. */
+.icon svg {
+  width: auto;
+  height: calc(30px * var(--u));
+}
+
+.pill {
+  padding: calc(4px * var(--u)) calc(6px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(6px * var(--u));
+  font-size: calc(9px * var(--u));
+  color: var(--text-2);
+}
+
+.text {
+  min-width: 0;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: calc(3px * var(--u));
+}
+
+.name {
+  overflow: hidden;
+  font-size: calc(17px * var(--u));
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.note {
+  overflow: hidden;
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.waiting .note {
+  color: var(--player);
+}
+
+.lock,
+.moved {
+  flex-shrink: 0;
+  padding: calc(4px * var(--u)) calc(8px * var(--u));
+  border-radius: calc(6px * var(--u));
+  font-size: calc(9px * var(--u));
+}
+
+.lock {
+  background: var(--surface-3);
+  color: var(--text-3);
+}
+
+.moved {
+  background: var(--player);
+  color: var(--on-accent);
+}
+
+/* Salva e chiudi. */
+.actions {
+  padding: calc(14px * var(--u)) calc(32px * var(--u)) calc(24px * var(--u));
+  display: flex;
+  flex-shrink: 0;
+  gap: calc(12px * var(--u));
+  border-top: 1px solid var(--border-2);
+}
+
+.action {
+  height: calc(46px * var(--u));
+  padding: 0 calc(24px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  color: var(--text-1);
+  font-family: inherit;
+  font-size: calc(16px * var(--u));
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.action:global(.focused) {
+  border-color: var(--player);
+  box-shadow: 0 0 0 2px var(--player);
+}
+
+.action:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.primary {
+  background: var(--player);
+  color: var(--on-accent);
+}
+
+/* Finestra sopra il gioco: come quella dei salvataggi, occupa tutta la finestra sopra la cattura del gioco. */
+.game {
+  composes: tone-night from global;
+  padding: calc(14px * var(--u));
+  background: rgba(13, 12, 18, 0.55);
+}
+
+.game .panel {
+  width: 100%;
+  height: 100%;
+  background: rgb(var(--surface-1-rgb) / 0.94);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 calc(30px * var(--u)) calc(70px * var(--u)) var(--shadow-75);
+}
+
+.game .strip {
+  height: 6px;
+  background: linear-gradient(90deg, var(--player), rgba(255, 255, 255, 0.12));
+}
+
+.game .head {
+  padding: calc(18px * var(--u)) calc(28px * var(--u)) calc(10px * var(--u));
+}
+
+.game .kicker {
+  color: var(--player);
+}
+
+.game .title {
+  font-size: calc(24px * var(--u));
+}
+
+.game .list {
+  flex-grow: 1;
+  padding: calc(12px * var(--u)) calc(28px * var(--u));
+}
+
+.game .actions {
+  padding: calc(12px * var(--u)) calc(28px * var(--u)) calc(18px * var(--u));
+}

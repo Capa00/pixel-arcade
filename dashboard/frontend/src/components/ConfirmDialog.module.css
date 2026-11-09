@@ -1,0 +1,76 @@
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  padding: calc(24px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(var(--bg-rgb) / 0.6);
+}
+
+.panel {
+  width: calc(460px * var(--u));
+  max-width: 100%;
+  padding: calc(26px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(22px * var(--u));
+  border: 1px solid var(--border-3);
+  border-radius: calc(20px * var(--u));
+  background: var(--surface-1);
+  box-shadow: 0 calc(24px * var(--u)) calc(60px * var(--u)) var(--shadow-60);
+}
+
+.wide {
+  width: calc(620px * var(--u));
+}
+
+.text {
+  font-size: calc(17px * var(--u));
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.choices {
+  display: flex;
+  gap: calc(12px * var(--u));
+}
+
+.choice {
+  flex: 1;
+  height: calc(46px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  font-size: calc(15px * var(--u));
+  font-weight: 600;
+}
+
+.active {
+  border-color: var(--text-1);
+  background: var(--text-1);
+  color: var(--bg);
+}
+
+.danger {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.ok {
+  border-color: var(--ok);
+  color: var(--ok);
+}
+
+.danger.active {
+  border-color: var(--danger);
+  background: var(--danger);
+  color: var(--bg);
+}
+
+.ok.active {
+  border-color: var(--ok);
+  background: var(--ok);
+  color: var(--bg);
+}

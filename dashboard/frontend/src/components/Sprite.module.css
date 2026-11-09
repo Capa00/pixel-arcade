@@ -1,0 +1,41 @@
+/* Testo degli sprite: riempie la larghezza del contenitore (--w, impostata da Backdrop). */
+.text {
+  display: flex;
+  align-items: center;
+  gap: 0.15em;
+  white-space: nowrap;
+  font-size: calc(var(--w, 120px) / var(--chars) * 1.3);
+  line-height: 1;
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 0.9em;
+  animation: blink 2.4s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Cubo in fil di ferro: un giro ogni minuto. */
+.spin {
+  transform-origin: 12px 12px;
+  animation: spin 60s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor,
+  .spin {
+    animation: none;
+  }
+}

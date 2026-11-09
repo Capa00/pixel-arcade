@@ -1,0 +1,622 @@
+/* Pagina profilo a schede. --player = colore P1/P2, --profile = colore del profilo. */
+.profile {
+  min-height: 100%;
+  padding: calc(28px * var(--u)) calc(48px * var(--u)) calc(24px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(20px * var(--u));
+}
+
+/* Intestazione compatta: indietro, avatar, nome e livello, azioni. */
+.head {
+  display: flex;
+  align-items: center;
+  gap: calc(24px * var(--u));
+}
+
+.iconButton {
+  width: calc(48px * var(--u));
+  height: calc(48px * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-2);
+  border-radius: calc(14px * var(--u));
+  background: transparent;
+  color: var(--text-1);
+}
+
+.iconButton svg {
+  width: calc(20px * var(--u));
+  height: calc(20px * var(--u));
+}
+
+.avatar {
+  width: calc(72px * var(--u));
+  height: calc(72px * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(20px * var(--u));
+  background: var(--profile);
+  color: var(--on-accent);
+  font-size: calc(32px * var(--u));
+  font-weight: 700;
+}
+
+.identity {
+  flex-grow: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(10px * var(--u));
+}
+
+.labelRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(12px * var(--u));
+}
+
+.tag {
+  padding: calc(5px * var(--u)) calc(9px * var(--u));
+  border-radius: calc(8px * var(--u));
+  background: var(--player);
+  color: var(--on-accent);
+  font-size: calc(11px * var(--u));
+}
+
+.pad {
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.guest {
+  padding: calc(4px * var(--u)) calc(10px * var(--u));
+  border: 1px solid var(--border-3);
+  border-radius: calc(8px * var(--u));
+  font-size: calc(13px * var(--u));
+  color: var(--text-2);
+}
+
+.name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(30px * var(--u));
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.levelRow {
+  display: flex;
+  align-items: center;
+  gap: calc(14px * var(--u));
+  font-size: calc(14px * var(--u));
+  color: var(--text-3);
+}
+
+.title {
+  color: var(--profile);
+  font-weight: 600;
+}
+
+.bar {
+  width: calc(160px * var(--u));
+  height: calc(6px * var(--u));
+  overflow: hidden;
+  border-radius: calc(3px * var(--u));
+  background: var(--border-1);
+}
+
+.fill {
+  display: block;
+  height: 100%;
+  background: var(--profile);
+}
+
+.actions {
+  display: flex;
+  gap: calc(10px * var(--u));
+}
+
+.ghost {
+  height: calc(48px * var(--u));
+  padding: 0 calc(18px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(14px * var(--u));
+  background: transparent;
+  color: var(--text-1);
+  font-size: calc(14px * var(--u));
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.leave {
+  color: var(--danger-soft);
+}
+
+.iconButton:global(.focused),
+.ghost:global(.focused) {
+  border-color: var(--player);
+  box-shadow: 0 0 0 1px var(--player);
+}
+
+/* Schede, come nelle Impostazioni: la riga sotto quella attiva ha il colore del giocatore. */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(4px * var(--u));
+  border-bottom: 1px solid var(--border-1);
+}
+
+.tab {
+  position: relative;
+  height: calc(52px * var(--u));
+  padding: 0 calc(20px * var(--u));
+  display: flex;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--text-4);
+  font-family: inherit;
+  font-size: calc(16px * var(--u));
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.tab::after {
+  content: '';
+  position: absolute;
+  left: calc(20px * var(--u));
+  right: calc(20px * var(--u));
+  bottom: -1px;
+  height: calc(3px * var(--u));
+  border-radius: calc(3px * var(--u)) calc(3px * var(--u)) 0 0;
+  background: transparent;
+}
+
+.tab:hover {
+  color: var(--text-2);
+}
+
+.tabActive {
+  color: var(--text-1);
+}
+
+.tabActive::after {
+  background: var(--player);
+}
+
+/* Contenuto della scheda attiva. */
+.content {
+  flex-grow: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(28px * var(--u));
+}
+
+/* Panoramica: quattro tessere con i numeri del profilo. */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: calc(16px * var(--u));
+}
+
+.tile {
+  padding: calc(18px * var(--u)) calc(20px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--u));
+  border: 1px solid var(--border-1);
+  border-radius: calc(16px * var(--u));
+  background: var(--surface-1);
+}
+
+.tileValue {
+  font-size: calc(28px * var(--u));
+  font-weight: 700;
+}
+
+.tileLabel {
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.section {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(14px * var(--u));
+}
+
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  gap: calc(10px * var(--u));
+}
+
+.sectionTitle {
+  font-size: calc(20px * var(--u));
+  font-weight: 600;
+}
+
+.sectionCount {
+  font-size: calc(14px * var(--u));
+  color: var(--text-3);
+}
+
+/* Preferiti: una riga che scorre in orizzontale. */
+.favorites {
+  display: flex;
+  gap: calc(16px * var(--u));
+  padding: calc(6px * var(--u));
+  margin: calc(-6px * var(--u));
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.favorites::-webkit-scrollbar {
+  display: none;
+}
+
+.favorite {
+  position: relative;
+  width: calc(150px * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(10px * var(--u));
+}
+
+.missing {
+  opacity: 0.55;
+}
+
+.favoriteCover {
+  padding: 0;
+  border: 0;
+  border-radius: calc(12px * var(--u));
+  background: transparent;
+}
+
+.cover {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: calc(12px * var(--u));
+}
+
+.favoriteCover:global(.focused) {
+  box-shadow: 0 0 0 calc(3px * var(--u)) var(--bg), 0 0 0 calc(6px * var(--u)) var(--text-1);
+}
+
+.unfavorite {
+  composes: tone-night from global;
+  position: absolute;
+  top: calc(8px * var(--u));
+  right: calc(8px * var(--u));
+  width: calc(32px * var(--u));
+  height: calc(32px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: calc(10px * var(--u));
+  background: rgba(13, 12, 18, 0.78);
+}
+
+.unfavorite:global(.focused) {
+  box-shadow: 0 0 0 2px var(--player);
+}
+
+.unfavoriteHeart {
+  width: calc(16px * var(--u));
+  height: calc(16px * var(--u));
+}
+
+.favoriteText {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(2px * var(--u));
+}
+
+.favoriteTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(14px * var(--u));
+  font-weight: 600;
+}
+
+.favoriteSystem {
+  font-size: calc(12px * var(--u));
+  color: var(--text-3);
+}
+
+.emptyFavorites {
+  height: calc(160px * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(8px * var(--u));
+  border: 1px dashed var(--border-3);
+  border-radius: calc(16px * var(--u));
+  text-align: center;
+}
+
+.emptyTitle {
+  font-size: calc(16px * var(--u));
+  font-weight: 600;
+}
+
+.emptyText {
+  font-size: calc(14px * var(--u));
+  color: var(--text-3);
+}
+
+.emptyIcon {
+  width: calc(40px * var(--u));
+  margin-bottom: calc(4px * var(--u));
+  opacity: 0.8;
+}
+
+.emptyArt {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.emptyRecent {
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+}
+
+.coin {
+  width: calc(18px * var(--u));
+  flex-shrink: 0;
+}
+
+.recent {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+}
+
+/* Salvataggi: una riga che scorre in orizzontale, con la miniatura del «Riprendi». */
+.saves {
+  display: flex;
+  gap: calc(16px * var(--u));
+  padding: calc(6px * var(--u));
+  margin: calc(-6px * var(--u));
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.saves::-webkit-scrollbar {
+  display: none;
+}
+
+.save {
+  --accent: var(--text-3);
+  width: calc(220px * var(--u));
+  flex-shrink: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-1);
+  color: var(--text-1);
+  text-align: left;
+}
+
+.save:global(.focused) {
+  box-shadow: 0 0 0 calc(3px * var(--u)) var(--bg), 0 0 0 calc(6px * var(--u)) var(--text-1);
+}
+
+.saveThumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: block;
+}
+
+.saveImage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.saveText {
+  min-width: 0;
+  padding: calc(10px * var(--u)) calc(12px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--u));
+}
+
+.saveTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(14px * var(--u));
+  font-weight: 600;
+}
+
+.saveSystem {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(10px * var(--u));
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.saveDate {
+  font-size: calc(12px * var(--u));
+  color: var(--text-3);
+}
+
+/* Preferenze: a tutta larghezza, difficoltà e opzioni affiancate. */
+.prefs {
+  padding: calc(28px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(28px * var(--u));
+  border: 1px solid var(--border-1);
+  border-radius: calc(20px * var(--u));
+  background: var(--surface-1);
+}
+
+.prefsRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: calc(32px * var(--u));
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: calc(12px * var(--u));
+}
+
+.groupLabel {
+  font-size: calc(12px * var(--u));
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+
+/* Campioni del colore del profilo (Preferenze), come nella creazione del profilo. */
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(12px * var(--u));
+  padding: 4px;
+}
+
+.swatch {
+  width: calc(36px * var(--u));
+  height: calc(36px * var(--u));
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.swatchOn {
+  box-shadow: 0 0 0 3px var(--surface-1), 0 0 0 5px var(--text-1);
+}
+
+.swatch:global(.focused) {
+  box-shadow: 0 0 0 3px var(--surface-1), 0 0 0 5px var(--player);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(8px * var(--u));
+}
+
+.chip {
+  height: calc(36px * var(--u));
+  padding: 0 calc(14px * var(--u));
+  border: 1px solid var(--border-3);
+  border-radius: calc(18px * var(--u));
+  background: transparent;
+  color: var(--text-2);
+  font-size: calc(13px * var(--u));
+  font-weight: 600;
+}
+
+.consoleOn {
+  border-color: var(--text-1);
+  background: var(--text-1);
+  color: var(--bg);
+}
+
+.genreOn {
+  border-color: var(--profile);
+  background: var(--profile);
+  color: var(--on-accent);
+}
+
+.chip:global(.focused) {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--player);
+}
+
+.toggles {
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--u));
+}
+
+/* 4:3 e schermi stretti: le azioni vanno sotto. */
+[data-layout='standard'] .head,
+[data-layout='portrait'] .head {
+  flex-wrap: wrap;
+}
+
+/* Verticale e telefono: tessere su due colonne, preferenze in colonna. */
+[data-layout='portrait'] .tiles,
+[data-layout='compact'] .tiles {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+[data-layout='portrait'] .prefsRow,
+[data-layout='compact'] .prefsRow {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+[data-layout='compact'] .profile {
+  padding: calc(20px * var(--u)) calc(16px * var(--u));
+  gap: calc(24px * var(--u));
+}
+
+[data-layout='compact'] .head {
+  flex-wrap: wrap;
+  gap: calc(16px * var(--u));
+}
+
+[data-layout='compact'] .avatar {
+  width: calc(56px * var(--u));
+  height: calc(56px * var(--u));
+  font-size: calc(24px * var(--u));
+}
+
+[data-layout='compact'] .name {
+  font-size: calc(24px * var(--u));
+}
+
+[data-layout='compact'] .tab {
+  padding: 0 calc(12px * var(--u));
+  font-size: calc(14px * var(--u));
+}
+
+[data-layout='compact'] .prefs {
+  padding: calc(18px * var(--u));
+}
+
+[data-layout='compact'] .actions {
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+[data-layout='compact'] .favorite {
+  width: calc(120px * var(--u));
+}
+
+[data-layout='compact'] .save {
+  width: calc(170px * var(--u));
+}

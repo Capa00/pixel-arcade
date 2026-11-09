@@ -1,0 +1,88 @@
+/*
+ * Sfondo del tema: sta dietro a tutto il contenuto dello Stage (z-index -1
+ * dentro il suo contesto) e non riceve mai mouse, tocco o focus.
+ */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/*
+ * Tre aloni sfumati: in alto a sinistra, in basso a destra e uno più tenue
+ * a destra al centro. Intensità di aloni, scena e sprite: --backdrop-* in
+ * tokens.css, diverse di giorno e di notte.
+ */
+.glow {
+  position: absolute;
+  inset: 0;
+  opacity: var(--backdrop-glow);
+  background:
+    radial-gradient(65% 70% at 8% 0%, var(--glow-a), transparent 72%),
+    radial-gradient(60% 65% at 100% 100%, var(--glow-b), transparent 72%),
+    radial-gradient(40% 45% at 85% 35%, var(--glow-c), transparent 70%);
+}
+
+/* Scena in basso, sopra la barra comandi, appena visibile. */
+.sceneBox {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(64px * var(--u));
+  height: 30%;
+  opacity: var(--backdrop-scene);
+}
+
+.scene {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sprites {
+  position: absolute;
+  inset: 0;
+}
+
+/* Ogni sprite galleggia su e giù, lentissimo; il ritardo negativo li sfasa. */
+.sprite {
+  position: absolute;
+  width: var(--w);
+  opacity: var(--backdrop-sprite);
+  animation-name: float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* Di giorno un contorno scuro leggero tiene visibili gli sprite chiari. */
+.art {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: var(--backdrop-outline);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(calc(-12px * var(--u))) rotate(3deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sprite {
+    animation: none;
+  }
+}
+
+/* Telefono: niente sprite né scena, resta la luce. */
+[data-layout='compact'] .sprites,
+[data-layout='compact'] .sceneBox {
+  display: none;
+}

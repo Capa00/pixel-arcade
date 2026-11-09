@@ -1,0 +1,52 @@
+# --- File di contesto dell'agente e istruzioni per l'AI ---
+.ai/
+AGENTS.md
+CLAUDE.md
+CLAUDE.local.md
+.claude/
+
+# --- Cestino del file manager ---
+.Trash-*/
+
+# --- Giochi, ROM e archivi ---
+games/
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+*.iso
+*.chd
+*.cue
+*.bin
+*.nes
+*.sfc
+*.smc
+*.gb
+*.gbc
+*.gba
+*.n64
+*.z64
+*.v64
+*.gen
+# .md (Mega Drive) non è escluso qui: coincide con Markdown; le ROM stanno comunque in games/
+*.smd
+*.sms
+*.gg
+*.pbp
+
+# --- Build e dipendenze ---
+dashboard/frontend/dist/
+node_modules/
+__pycache__/
+*.pyc
+
+# --- Dati locali ---
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+.env
+.env.*
+*.log

@@ -1,0 +1,143 @@
+/*
+ * Pannello laterale dei filtri: sopra la libreria (livello 45) e sotto i
+ * menu dei valori e la tastiera a schermo (livello 50). Sta sul lato
+ * destro, così la tastiera a schermo (a sinistra) non lo copre, e lascia
+ * visibile la barra comandi in basso. Lo sfondo si scurisce senza sfocature.
+ */
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: calc(64px * var(--u));
+  left: 0;
+  z-index: 45;
+  padding: calc(24px * var(--u));
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  background: rgb(var(--bg-rgb) / 0.55);
+}
+
+.panel {
+  width: calc(520px * var(--u));
+  max-width: 100%;
+  padding: calc(22px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(14px * var(--u));
+  border: 1px solid var(--border-3);
+  border-radius: calc(20px * var(--u));
+  background: var(--surface-1);
+  box-shadow: 0 calc(24px * var(--u)) calc(60px * var(--u)) var(--shadow-60);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: calc(12px * var(--u));
+}
+
+.title {
+  font-size: calc(12px * var(--u));
+  letter-spacing: 0.12em;
+  color: var(--text-3);
+}
+
+.count {
+  margin-left: auto;
+  color: var(--text-4);
+  font-size: calc(13px * var(--u));
+  font-variant-numeric: tabular-nums;
+}
+
+.close {
+  width: calc(36px * var(--u));
+  height: calc(36px * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-2);
+  border-radius: calc(10px * var(--u));
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+.close:hover {
+  border-color: var(--border-3);
+  color: var(--text-1);
+}
+
+.close svg {
+  width: calc(16px * var(--u));
+  height: calc(16px * var(--u));
+}
+
+.rows {
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--u));
+  overflow-y: auto;
+  list-style: none;
+}
+
+/* Titolo di un gruppo di righe (per esempio «Azioni»). */
+.section {
+  margin: calc(10px * var(--u)) 0 calc(6px * var(--u));
+  font-size: calc(10px * var(--u));
+  letter-spacing: 0.12em;
+  color: var(--text-4);
+}
+
+.row {
+  width: 100%;
+  min-height: calc(42px * var(--u));
+  padding: calc(7px * var(--u)) calc(16px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(16px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  font-size: calc(15px * var(--u));
+  text-align: left;
+  cursor: pointer;
+}
+
+.current {
+  border-color: var(--accent, var(--text-1));
+  box-shadow: 0 0 0 1px var(--accent, var(--text-1));
+}
+
+.label {
+  flex-shrink: 0;
+  font-weight: 600;
+}
+
+.value {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-4);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Campo con un filtro attivo. */
+.on {
+  color: var(--accent, var(--text-1));
+}
+
+/* Azioni («Sorprendimi», «Azzera filtri»…): bordo tratteggiato. */
+.action {
+  border-style: dashed;
+}
+
+/* Voce non disponibile ora: attenuata, ma si può ancora evidenziare. */
+.disabled {
+  opacity: 0.4;
+}

@@ -1,0 +1,452 @@
+/*
+ * Vista Impostazioni: pannelli come quelli della demo (superficie #16151e,
+ * raggio 20, titoli pixel a 12 px spaziati), una scheda alla volta. Il
+ * contenuto scorre in verticale.
+ */
+.settings {
+  max-width: calc(1180px * var(--u));
+  margin: 0 auto;
+  padding: calc(32px * var(--u)) calc(48px * var(--u)) calc(40px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(24px * var(--u));
+}
+
+.top {
+  display: flex;
+  align-items: baseline;
+  gap: calc(20px * var(--u));
+}
+
+.title {
+  font-size: calc(22px * var(--u));
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+
+.dirty {
+  font-size: calc(13px * var(--u));
+  color: var(--p1);
+}
+
+/* Schede in alto, come quelle delle console: la riga sotto indica quella attiva. */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(4px * var(--u));
+  border-bottom: 1px solid var(--border-1);
+}
+
+.tab {
+  position: relative;
+  height: calc(52px * var(--u));
+  padding: 0 calc(20px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  border: 0;
+  background: transparent;
+  color: var(--text-4);
+  font-family: inherit;
+  font-size: calc(16px * var(--u));
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.tab::after {
+  content: '';
+  position: absolute;
+  left: calc(20px * var(--u));
+  right: calc(20px * var(--u));
+  bottom: -1px;
+  height: calc(3px * var(--u));
+  border-radius: calc(3px * var(--u)) calc(3px * var(--u)) 0 0;
+  background: transparent;
+}
+
+.tab:hover {
+  color: var(--text-2);
+}
+
+.tabActive {
+  color: var(--text-1);
+}
+
+.tabActive::after {
+  background: var(--accent, var(--text-1));
+}
+
+/* Errore nella scheda: pallino rosso con «!». */
+.tabAlert {
+  width: calc(18px * var(--u));
+  height: calc(18px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--p1);
+  color: var(--bg);
+  font-size: calc(12px * var(--u));
+  font-weight: 700;
+}
+
+.panel {
+  padding: calc(24px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(18px * var(--u));
+  border: 1px solid var(--border-1);
+  border-radius: calc(20px * var(--u));
+  background: var(--surface-1);
+}
+
+.heading {
+  font-size: calc(12px * var(--u));
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--text-3);
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(420px * var(--u)), 1fr));
+  gap: calc(12px * var(--u));
+}
+
+.comboField {
+  margin-top: calc(20px * var(--u));
+}
+
+.empty {
+  font-size: calc(15px * var(--u));
+  color: var(--text-3);
+}
+
+/* Elenco delle console: una riga ciascuna, A apre la sua finestra. */
+.systems {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+}
+
+.systemRow {
+  min-height: calc(52px * var(--u));
+  padding: calc(8px * var(--u)) calc(18px * var(--u));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(14px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  text-align: left;
+  transition: border-color 0.1s;
+}
+
+.systemRow:global(.focused) {
+  border-color: var(--text-1);
+}
+
+.open {
+  margin-left: auto;
+  font-size: calc(16px * var(--u));
+  color: var(--text-3);
+}
+
+/*
+ * Finestra di una console (livello 40, sotto i menu a comparsa e la tastiera):
+ * centrata e mai più alta dello schermo, sopra la barra dei comandi che resta
+ * libera. L'intestazione resta ferma, core ed estensioni scorrono seguendo il
+ * cursore.
+ */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: calc(64px * var(--u));
+  z-index: 40;
+  padding: calc(24px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(var(--bg-rgb) / 0.7);
+}
+
+.modal {
+  width: calc(1040px * var(--u));
+  max-width: 100%;
+  max-height: calc(100vh - 112px * var(--u));
+  padding: calc(24px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(18px * var(--u));
+  overflow: hidden;
+  border: 1px solid var(--border-3);
+  border-radius: calc(20px * var(--u));
+  background: var(--surface-1);
+  box-shadow: 0 calc(24px * var(--u)) calc(60px * var(--u)) var(--shadow-60);
+}
+
+.modal .systemHead {
+  flex-shrink: 0;
+}
+
+.modalBody {
+  min-height: 0;
+  flex: 1 1 auto;
+  padding: calc(4px * var(--u));
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  align-items: start;
+  gap: calc(16px * var(--u));
+}
+
+.modalClose {
+  height: calc(36px * var(--u));
+  margin-left: auto;
+  padding: 0 calc(16px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(10px * var(--u));
+  background: var(--surface-2);
+  font-size: calc(13px * var(--u));
+  font-weight: 600;
+}
+
+.systemHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: calc(14px * var(--u));
+}
+
+.systemName {
+  font-size: calc(16px * var(--u));
+  letter-spacing: 0.04em;
+}
+
+.count {
+  font-size: calc(13px * var(--u));
+  color: var(--text-4);
+}
+
+.badge {
+  padding: calc(3px * var(--u)) calc(10px * var(--u));
+  border: 1px solid var(--border-3);
+  border-radius: calc(10px * var(--u));
+  font-size: calc(11px * var(--u));
+  font-weight: 600;
+  color: var(--text-4);
+}
+
+.ready {
+  border-color: var(--ok);
+  color: var(--ok);
+}
+
+.cores {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+}
+
+.caption {
+  font-size: calc(12px * var(--u));
+  color: var(--text-4);
+}
+
+/* Colonna destra della finestra della console: estensioni e grafica. */
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+}
+
+/* Nota «predefinita» accanto alla didascalia della lista. */
+.default {
+  margin-left: calc(10px * var(--u));
+  padding: calc(1px * var(--u)) calc(8px * var(--u));
+  border: 1px solid var(--border-3);
+  border-radius: calc(8px * var(--u));
+  font-size: calc(11px * var(--u));
+  color: var(--text-3);
+}
+
+/* Riga di un core: nome breve, descrizione del .info e stato. */
+.core {
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: calc(10px * var(--u));
+}
+
+.coreName {
+  font-weight: 600;
+}
+
+.coreLabel {
+  min-width: 0;
+  overflow: hidden;
+  font-size: calc(12px * var(--u));
+  color: var(--text-4);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tag {
+  margin-left: auto;
+  font-size: calc(11px * var(--u));
+}
+
+.installed {
+  color: var(--ok);
+}
+
+.downloadable {
+  color: var(--text-3);
+}
+
+.missing {
+  color: var(--p1);
+}
+
+/* Stato dell'elenco dei core scaricabili (scheda Configurazioni) e core inutilizzati (scheda Console). */
+.coreIndex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(12px * var(--u));
+}
+
+.coreIndexText {
+  font-size: calc(14px * var(--u));
+  color: var(--text-3);
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: calc(12px * var(--u));
+}
+
+.error {
+  padding: calc(12px * var(--u)) calc(16px * var(--u));
+  border: 1px solid var(--p1);
+  border-radius: calc(12px * var(--u));
+  background: rgb(var(--danger-rgb) / 0.08);
+  font-size: calc(14px * var(--u));
+  color: var(--text-1);
+}
+
+.ok {
+  font-size: calc(14px * var(--u));
+  color: var(--ok);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(12px * var(--u));
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.action {
+  height: calc(46px * var(--u));
+  padding: 0 calc(24px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  font-size: calc(15px * var(--u));
+  font-weight: 600;
+  transition: border-color 0.1s, background 0.1s, color 0.1s;
+}
+
+.primary {
+  border-color: var(--ok);
+  color: var(--ok);
+}
+
+.action:disabled {
+  opacity: 0.4;
+}
+
+.action:global(.focused) {
+  border-color: var(--text-1);
+  background: var(--text-1);
+  color: var(--bg);
+}
+
+.primary:global(.focused) {
+  border-color: var(--ok);
+  background: var(--ok);
+}
+
+/* Finestra di una playlist: più stretta di quella di una console, una sola colonna. */
+.playlistModal {
+  width: calc(820px * var(--u));
+}
+
+.playlistBody {
+  min-height: 0;
+  flex: 1 1 auto;
+  padding: calc(4px * var(--u));
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: calc(16px * var(--u));
+}
+
+/* Azione che elimina qualcosa (per esempio «Elimina playlist»). */
+.danger {
+  border-color: rgb(var(--danger-rgb) / 0.6);
+  color: var(--danger-soft);
+}
+
+.message {
+  height: 100%;
+  padding: calc(40px * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(10px * var(--u));
+  text-align: center;
+  font-size: calc(18px * var(--u));
+}
+
+.messageTitle {
+  font-size: calc(22px * var(--u));
+  font-weight: 600;
+}
+
+.messageText {
+  max-width: calc(720px * var(--u));
+  font-size: calc(15px * var(--u));
+  color: var(--text-3);
+}
+
+/* Schermi stretti: una colonna. */
+[data-layout='portrait'] .modalBody,
+[data-layout='compact'] .modalBody {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+[data-layout='compact'] .settings {
+  padding: calc(20px * var(--u)) calc(16px * var(--u));
+}
+
+[data-layout='compact'] .panel {
+  padding: calc(16px * var(--u));
+}
+
+[data-layout='compact'] .fields {
+  grid-template-columns: minmax(0, 1fr);
+}

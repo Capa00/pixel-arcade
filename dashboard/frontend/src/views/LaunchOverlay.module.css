@@ -1,0 +1,138 @@
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  padding: calc(24px * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(22px * var(--u));
+  background: var(--bg);
+  text-align: center;
+}
+
+.phase {
+  padding-top: calc(12px * var(--u));
+  font-size: calc(13px * var(--u));
+  color: var(--accent);
+  overflow-wrap: anywhere;
+}
+
+.title {
+  max-width: 100%;
+  font-size: calc(44px * var(--u));
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
+}
+
+.versus {
+  font-size: calc(15px * var(--u));
+  color: var(--text-3);
+  white-space: pre;
+}
+
+.bar {
+  width: calc(360px * var(--u));
+  max-width: 100%;
+  height: calc(4px * var(--u));
+  min-height: 2px;
+  border-radius: 2px;
+  background: var(--border-1);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: var(--text-1);
+  transition: width 0.3s;
+}
+
+.load {
+  height: 100%;
+  background: var(--text-1);
+  animation: load 2.4s ease-in-out infinite;
+}
+
+@keyframes load {
+  from {
+    width: 4%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+.stop {
+  height: calc(48px * var(--u));
+  margin-top: calc(18px * var(--u));
+  padding: 0 calc(20px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(14px * var(--u));
+  background: transparent;
+  color: var(--text-1);
+  font-size: calc(14px * var(--u));
+  font-weight: 600;
+}
+
+.armed {
+  border-color: var(--p1);
+  color: var(--p1);
+}
+
+/* Consigli a rotazione: in fondo, grandi, col bordo del colore della console. */
+.tips {
+  width: calc(640px * var(--u));
+  max-width: 100%;
+  margin-top: calc(10px * var(--u));
+  padding: calc(16px * var(--u)) calc(22px * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(10px * var(--u));
+  border: calc(3px * var(--u)) solid var(--accent);
+  background: var(--surface-1);
+  box-shadow: 0 0 calc(24px * var(--u)) var(--shadow-60);
+}
+
+.tipsHead {
+  font-size: calc(12px * var(--u));
+  color: var(--accent);
+  letter-spacing: 0.12em;
+}
+
+.tip {
+  min-height: calc(56px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(14px * var(--u));
+  color: var(--text-1);
+  font-size: calc(21px * var(--u));
+  font-weight: 600;
+  line-height: 1.3;
+  animation: tip-in 0.4s ease-out both;
+}
+
+@keyframes tip-in {
+  from {
+    opacity: 0;
+    transform: translateY(calc(6px * var(--u)));
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tip {
+    animation: none;
+  }
+}

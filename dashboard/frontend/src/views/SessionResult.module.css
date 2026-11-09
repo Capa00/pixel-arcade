@@ -1,0 +1,502 @@
+/*
+ * Modale «Fine partita»: XP, livelli e trofei dei giocatori. Lascia libera
+ * la barra dei comandi in basso, che resta leggibile.
+ */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: calc(64px * var(--u));
+  z-index: 45;
+  padding: calc(24px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(var(--deep-rgb) / 0.92);
+}
+
+.panel {
+  width: calc(1040px * var(--u));
+  max-width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: calc(28px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(20px * var(--u));
+  border: 1px solid var(--border-3);
+  border-radius: calc(20px * var(--u));
+  background: var(--surface-1);
+  box-shadow: 0 calc(24px * var(--u)) calc(60px * var(--u)) var(--shadow-60);
+  animation: panel-in 0.3s ease-out;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(6px * var(--u));
+  text-align: center;
+}
+
+.kicker {
+  font-size: calc(14px * var(--u));
+  letter-spacing: 0.12em;
+  color: var(--text-3);
+  text-transform: uppercase;
+}
+
+.game {
+  font-size: calc(24px * var(--u));
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
+
+.duration {
+  font-weight: 500;
+  color: var(--text-3);
+}
+
+/* Schede: una centrata, oppure due affiancate della stessa larghezza. */
+.cards,
+.groups {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  gap: calc(20px * var(--u));
+}
+
+.single {
+  max-width: calc(560px * var(--u));
+  margin: 0 auto;
+}
+
+.card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  padding: calc(22px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(12px * var(--u));
+  border: 2px solid var(--player);
+  border-radius: calc(16px * var(--u));
+  background: var(--surface-2);
+}
+
+.leveled {
+  box-shadow: 0 0 calc(28px * var(--u)) calc(-4px * var(--u)) var(--gold);
+}
+
+.flash {
+  animation: card-flash 0.6s ease-out;
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: calc(14px * var(--u));
+}
+
+.avatar {
+  width: calc(52px * var(--u));
+  height: calc(52px * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--on-accent);
+  font-size: calc(22px * var(--u));
+  font-weight: 700;
+}
+
+.whoText {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(2px * var(--u));
+}
+
+.tag {
+  font-size: calc(12px * var(--u));
+  color: var(--player);
+}
+
+.name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(20px * var(--u));
+  font-weight: 700;
+}
+
+.gain {
+  font-size: calc(40px * var(--u));
+  color: var(--gold);
+  text-shadow: 0 0 calc(18px * var(--u)) rgba(245, 197, 66, 0.45);
+}
+
+.parts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--u));
+  font-size: calc(14px * var(--u));
+  color: var(--text-2);
+}
+
+.parts li {
+  display: flex;
+  justify-content: space-between;
+  gap: calc(12px * var(--u));
+}
+
+.partXp {
+  font-weight: 700;
+  color: var(--text-1);
+}
+
+.levelRow {
+  margin-top: calc(4px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+}
+
+.level {
+  display: inline-block;
+  font-size: calc(18px * var(--u));
+  color: var(--user);
+}
+
+.bump {
+  animation: level-bump 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.upTag {
+  padding: calc(3px * var(--u)) calc(8px * var(--u));
+  border-radius: calc(6px * var(--u));
+  background: var(--gold);
+  color: var(--on-accent);
+  font-size: calc(12px * var(--u));
+  animation: tag-pop 0.35s ease-out;
+}
+
+.next {
+  margin-left: auto;
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.bar {
+  height: calc(18px * var(--u));
+  overflow: hidden;
+  border: 1px solid var(--border-2);
+  border-radius: calc(9px * var(--u));
+  background: var(--surface-3);
+}
+
+.fill {
+  display: block;
+  height: 100%;
+  background:
+    repeating-linear-gradient(90deg, transparent 0, transparent calc(10px * var(--u)), rgba(0, 0, 0, 0.18) calc(10px * var(--u)), rgba(0, 0, 0, 0.18) calc(12px * var(--u))),
+    linear-gradient(90deg, var(--user), var(--gold));
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+  font-size: calc(14px * var(--u));
+  color: var(--text-2);
+}
+
+.newTitle {
+  font-weight: 700;
+  color: var(--gold);
+  animation: tag-pop 0.35s ease-out;
+}
+
+/* «LVL UP!» sopra la scheda, con i quadratini che esplodono dal centro. */
+.burst {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(245, 197, 66, 0.28) 0, rgb(var(--surface-1-rgb) / 0.75) 70%);
+}
+
+.burstText {
+  position: relative;
+  font-size: calc(54px * var(--u));
+  color: var(--gold);
+  text-shadow:
+    calc(4px * var(--u)) calc(4px * var(--u)) 0 var(--on-accent),
+    0 0 calc(26px * var(--u)) rgba(245, 197, 66, 0.8);
+  animation: burst-text 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.pixel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(10px * var(--u));
+  height: calc(10px * var(--u));
+  background: var(--gold);
+  opacity: 0;
+  animation: pixel-fly 0.9s ease-out forwards;
+}
+
+.pixel:nth-child(even) {
+  background: var(--user);
+}
+
+/* Trofei della partita, in basso a parte. */
+.groups {
+  padding-top: calc(18px * var(--u));
+  border-top: 1px solid var(--border-1);
+}
+
+.group {
+  min-width: 0;
+  padding: calc(14px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(10px * var(--u));
+  border: 1px solid var(--border-2);
+  border-left: calc(4px * var(--u)) solid var(--player);
+  border-radius: calc(14px * var(--u));
+  background: var(--surface-2);
+}
+
+.groupTitle {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  font-size: calc(15px * var(--u));
+  font-weight: 700;
+}
+
+.trophies {
+  max-height: calc(180px * var(--u));
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+}
+
+.trophy {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+}
+
+.badge {
+  width: calc(36px * var(--u));
+  height: calc(36px * var(--u));
+  flex-shrink: 0;
+  border-radius: calc(8px * var(--u));
+  background: var(--surface-3);
+}
+
+.star {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: calc(18px * var(--u));
+}
+
+.trophyTitle {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(14px * var(--u));
+  font-weight: 600;
+}
+
+.continue {
+  align-self: center;
+  height: calc(48px * var(--u));
+  padding: 0 calc(28px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  font-size: calc(16px * var(--u));
+  font-weight: 600;
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes card-flash {
+  0% {
+    background: var(--gold);
+  }
+
+  100% {
+    background: var(--surface-2);
+  }
+}
+
+@keyframes level-bump {
+  0% {
+    transform: scale(1);
+  }
+
+  40% {
+    transform: scale(1.7);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes tag-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes burst-text {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-8deg);
+  }
+
+  30% {
+    opacity: 1;
+    transform: scale(1.25) rotate(3deg);
+  }
+
+  55% {
+    transform: scale(1) rotate(0);
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes pixel-fly {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dx) * 1px * var(--u)), calc(-50% + var(--dy) * 1px * var(--u))) scale(0.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .flash,
+  .bump,
+  .upTag,
+  .newTitle,
+  .burstText,
+  .pixel {
+    animation: none;
+  }
+}
+
+/* Esito della Sfida trofeo, sotto il titolo. */
+.challenge {
+  padding: calc(14px * var(--u)) calc(18px * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(4px * var(--u));
+  border: 2px solid var(--border-2);
+  border-radius: calc(14px * var(--u));
+  background: var(--surface-2);
+  text-align: center;
+}
+
+.record {
+  border-color: var(--gold);
+  background: rgb(245 197 66 / 0.14);
+  animation: challenge-glow 1.2s ease-in-out 3;
+}
+
+.won {
+  border-color: var(--p2);
+}
+
+.failed {
+  border-color: var(--border-3);
+}
+
+.challengeKicker {
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.challengeTitle {
+  font-size: calc(20px * var(--u));
+  font-weight: 800;
+}
+
+.challengeText {
+  font-size: calc(14px * var(--u));
+  color: var(--text-2);
+}
+
+@keyframes challenge-glow {
+  0%,
+  100% {
+    box-shadow: none;
+  }
+
+  50% {
+    box-shadow: 0 0 calc(24px * var(--u)) rgb(245 197 66 / 0.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .record {
+    animation: none;
+  }
+}

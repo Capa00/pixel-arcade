@@ -1,0 +1,1162 @@
+/*
+ * Inserimento del gioco all'avvio: una scena per console (src/lib/insert.js),
+ * animata una volta in `--insert-ms`. Stile pixel art: niente angoli
+ * arrotondati, contorno scuro di un «pixel» (`--px`) e movimenti a scatti
+ * (`steps`). Il supporto sta in `.track`, un punto di aggancio che si muove;
+ * passa dietro la console (livello più basso), così sembra entrare.
+ * Supporti e console hanno i colori dell'hardware (`--body`, `--trim`);
+ * le console sconosciute e la gettoniera quelli del tema.
+ */
+.insert {
+  --px: calc(4px * var(--u));
+  --ink: #0b0a10;
+  width: calc(300px * var(--u));
+  height: calc(250px * var(--u));
+  flex-shrink: 0;
+}
+
+.scene {
+  --body: var(--surface-3);
+  --trim: var(--border-3);
+  --frame: #4b4b5a;
+  --screen-off: #3d4430;
+  --screen-on: #9bbc0f;
+  --screen-ink: #0f380f;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* --- Colori delle console ----------------------------------------------- */
+
+.scene[data-body='nes'] {
+  --body: #c9c7c2;
+  --trim: #4b4b50;
+}
+
+.scene[data-body='fds'] {
+  --body: #e9e4d6;
+  --trim: #a8322a;
+}
+
+.scene[data-body='pce'] {
+  --body: #f1f0ea;
+  --trim: #2d2d33;
+}
+
+.scene[data-body='snes'] {
+  --body: #c8c8d2;
+  --trim: #6d5e9e;
+}
+
+.scene[data-body='md'] {
+  --body: #1d1d22;
+  --trim: #8a8a90;
+}
+
+.scene[data-body='sms'],
+.scene[data-body='jaguar'] {
+  --body: #1b1b20;
+  --trim: #c4242c;
+}
+
+.scene[data-body='n64'] {
+  --body: #3a3b40;
+  --trim: #24252a;
+}
+
+.scene[data-body='atari'] {
+  --body: #1b1a18;
+  --trim: #8b5a2b;
+}
+
+.scene[data-body='retro'] {
+  --body: #232327;
+  --trim: #7a4f2a;
+}
+
+.scene[data-body='computer'] {
+  --body: #2c2c33;
+  --trim: #6b6b75;
+}
+
+.scene[data-body='vb'] {
+  --body: #b81d24;
+  --trim: #1a1a1d;
+}
+
+.scene[data-body='gb'] {
+  --body: #c8c6c0;
+  --trim: #8b2357;
+}
+
+.scene[data-body='gbc'] {
+  --body: #7b4bc4;
+  --trim: #2a2440;
+  --screen-on: #e8f0f8;
+  --screen-ink: #2a2a6a;
+}
+
+.scene[data-body='pokemini'] {
+  --body: #4a82d6;
+  --trim: #1d2c4a;
+}
+
+.scene[data-body='gba'] {
+  --body: #4b3fa0;
+  --trim: #2a2360;
+  --screen-on: #d8e8e8;
+  --screen-ink: #1d1d40;
+}
+
+.scene[data-body='gg'] {
+  --body: #1d1d22;
+  --trim: #3a3a42;
+  --screen-on: #c7e3f6;
+  --screen-ink: #102a44;
+}
+
+.scene[data-body='lynx'],
+.scene[data-body='ngp'] {
+  --body: #2c2f3a;
+  --trim: #50545f;
+  --screen-on: #d6dce8;
+  --screen-ink: #1d2030;
+}
+
+.scene[data-body='ws'] {
+  --body: #d9d4c4;
+  --trim: #6e6a5e;
+}
+
+.scene[data-body='psp'] {
+  --body: #121216;
+  --trim: #33343c;
+  --screen-on: #20264a;
+  --screen-ink: #e0e6ff;
+}
+
+.scene[data-body='nds'] {
+  --body: #d8d8de;
+  --trim: #8a8a94;
+  --screen-on: #eef2f8;
+  --screen-ink: #20243a;
+}
+
+.scene[data-body='psx'] {
+  --body: #c4c2bc;
+  --trim: #9f9d97;
+}
+
+.scene[data-body='saturn'] {
+  --body: #3a3a40;
+  --trim: #26262b;
+}
+
+.scene[data-body='dreamcast'] {
+  --body: #e9e7e2;
+  --trim: #c9c7c0;
+}
+
+.scene[data-body='pcecd'],
+.scene[data-body='neogeocd'],
+.scene[data-body='segacd'] {
+  --body: #1d1d22;
+  --trim: #44444c;
+}
+
+.scene[data-body='ps2'] {
+  --body: #1a1b20;
+  --trim: #2b2d36;
+}
+
+.scene[data-body='3do'] {
+  --body: #2b2b2f;
+  --trim: #4a4a50;
+}
+
+/* --- Console ------------------------------------------------------------ */
+
+.console {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 0;
+  z-index: 2;
+  height: calc(86px * var(--u));
+  background: var(--body);
+  box-shadow:
+    inset 0 var(--px) 0 rgba(255, 255, 255, 0.18),
+    inset 0 calc(-1 * var(--px)) 0 rgba(0, 0, 0, 0.35),
+    inset 0 0 0 var(--px) var(--ink);
+}
+
+/* Linea nel colore della console, sul fronte. */
+.console::after {
+  content: '';
+  position: absolute;
+  left: calc(2 * var(--px));
+  right: calc(2 * var(--px));
+  bottom: calc(3 * var(--px));
+  height: var(--px);
+  background: var(--accent);
+}
+
+.slot {
+  position: absolute;
+  top: calc(-12px * var(--u));
+  left: 22%;
+  right: 22%;
+  height: calc(12px * var(--u));
+  background: var(--ink);
+  box-shadow: inset 0 0 0 var(--px) var(--trim);
+}
+
+/* Interruttore di accensione: scatta quando la cartuccia è dentro. */
+.power {
+  position: absolute;
+  top: calc(18px * var(--u));
+  left: 10%;
+  width: calc(32px * var(--u));
+  height: calc(12px * var(--u));
+  background: var(--ink);
+}
+
+.power::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(12px * var(--u));
+  height: 100%;
+  background: var(--trim);
+  animation: power-on var(--insert-ms) steps(1) both;
+}
+
+.led {
+  position: absolute;
+  right: calc(18px * var(--u));
+  bottom: calc(24px * var(--u));
+  width: calc(8px * var(--u));
+  height: calc(8px * var(--u));
+  background: #3a2020;
+  animation: led-on var(--insert-ms) steps(1) both;
+}
+
+/* --- Aggancio del supporto ---------------------------------------------- */
+
+/* Punto che si muove: il supporto (`.piece`) vi si appoggia sopra, sotto o al centro. */
+.track {
+  position: absolute;
+  left: 50%;
+  bottom: calc(46px * var(--u));
+  z-index: 1;
+  width: 0;
+  height: 0;
+  animation: top-drop var(--insert-ms) steps(10, end) both;
+}
+
+.piece {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+
+/* --- Supporti: cartucce ------------------------------------------------- */
+
+.cart {
+  width: calc(150px * var(--u));
+  height: calc(170px * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  padding: calc(12px * var(--u));
+  background: #8e8e93;
+  box-shadow:
+    inset 0 calc(-1 * var(--px)) 0 rgba(0, 0, 0, 0.25),
+    inset 0 0 0 var(--px) var(--ink);
+}
+
+/* Righe in rilievo in alto, per l'impugnatura. */
+.grip {
+  width: 70%;
+  height: calc(10px * var(--u));
+  flex-shrink: 0;
+  background: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0 var(--px), transparent 0 calc(2 * var(--px)));
+}
+
+.label {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #f3f1f8;
+  box-shadow: 0 0 0 calc(2px * var(--u)) rgba(0, 0, 0, 0.3);
+}
+
+.labelArt {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+
+.labelTitle {
+  padding: calc(3px * var(--u)) calc(5px * var(--u));
+  overflow: hidden;
+  background: var(--accent);
+  color: #15131c;
+  font-size: calc(10px * var(--u));
+  font-weight: 800;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.cart[data-piece='snes'] {
+  width: calc(170px * var(--u));
+  height: calc(150px * var(--u));
+  background: #a9a9b0;
+}
+
+.cart[data-piece='md'] {
+  width: calc(140px * var(--u));
+  height: calc(180px * var(--u));
+  background: #1f1f25;
+}
+
+.cart[data-piece='n64'] {
+  width: calc(180px * var(--u));
+  height: calc(150px * var(--u));
+  background: #6f7178;
+  clip-path: polygon(8% 0, 92% 0, 92% 6%, 100% 6%, 100% 100%, 0 100%, 0 6%, 8% 6%);
+}
+
+/* Game Boy e portatili: angolo in alto a destra a gradini. */
+.cart[data-piece='gb'] {
+  width: calc(112px * var(--u));
+  height: calc(132px * var(--u));
+  background: #b8b8be;
+  clip-path: polygon(0 0, 84% 0, 84% 5%, 92% 5%, 92% 10%, 100% 10%, 100% 100%, 0 100%);
+}
+
+.cart[data-piece='gba'] {
+  width: calc(140px * var(--u));
+  height: calc(100px * var(--u));
+  background: #5b5e66;
+}
+
+/* Cartucce degli anni '70 e '80: basse, scure, con le righe in alto. */
+.cart[data-piece='atari'] {
+  width: calc(130px * var(--u));
+  height: calc(120px * var(--u));
+  background: #1f1d1b;
+}
+
+/* HuCard del PC Engine e card della Lynx: sottili e chiare. */
+.cart[data-piece='card'] {
+  width: calc(124px * var(--u));
+  height: calc(150px * var(--u));
+  background: #e6e2d6;
+}
+
+/* Dischetto del Disk System. */
+.cart[data-piece='floppy'] {
+  width: calc(130px * var(--u));
+  height: calc(150px * var(--u));
+  background: #e8c547;
+}
+
+/* Card piccola (DS, Pokémon Mini): solo l'immagine. */
+.cart[data-piece='mini'] {
+  width: calc(60px * var(--u));
+  height: calc(64px * var(--u));
+  padding: calc(6px * var(--u));
+  background: #3a3b42;
+}
+
+.cart[data-piece='gba'] .grip,
+.cart[data-piece='card'] .grip,
+.cart[data-piece='floppy'] .grip,
+.cart[data-piece='mini'] .grip,
+.cart[data-piece='mini'] .labelTitle {
+  display: none;
+}
+
+.cart[data-piece='generic'] {
+  background: #77777f;
+}
+
+/* --- Supporti: dischi, UMD e gettone ------------------------------------ */
+
+.disc {
+  width: calc(150px * var(--u));
+  height: calc(150px * var(--u));
+  border-radius: 50%;
+  background: conic-gradient(from 30deg, #d8d8e0, #f6c6ff, #b9f2ff, #fff6b0, #d8d8e0, #c6ffd9, #d8d8e0);
+  box-shadow: 0 0 0 var(--px) var(--ink);
+  animation: spin 0.5s steps(8) infinite;
+}
+
+.discFace {
+  position: absolute;
+  inset: 18%;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.discArt {
+  width: 100%;
+  height: 100%;
+}
+
+.hole {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 26%;
+  height: 26%;
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: 0 0 0 calc(5px * var(--u)) rgba(255, 255, 255, 0.7);
+  transform: translate(-50%, -50%);
+}
+
+/* UMD: guscio trasparente, gira solo il disco dentro. */
+.disc[data-piece='umd'] {
+  width: calc(110px * var(--u));
+  height: calc(120px * var(--u));
+  border-radius: 0 0 calc(40px * var(--u)) calc(40px * var(--u));
+  background: rgba(220, 225, 235, 0.85);
+  animation: none;
+}
+
+.disc[data-piece='umd'] .discFace {
+  inset: 14% 14% 20%;
+  animation: spin 0.6s steps(8) infinite;
+}
+
+.coin {
+  width: calc(70px * var(--u));
+  height: calc(70px * var(--u));
+  display: grid;
+  place-items: center;
+  border: var(--px) solid #c79a1e;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff1b0, #f5c542 55%, #c79a1e);
+  color: #7a5a08;
+  font-size: calc(30px * var(--u));
+  animation: coin-turn 0.35s steps(4) infinite;
+}
+
+/* --- Dall'alto: SNES, Mega Drive, N64, Atari… --------------------------- */
+
+.scene[data-body='n64'] .track {
+  bottom: calc(24px * var(--u));
+}
+
+.scene[data-body='n64'] .console {
+  height: calc(96px * var(--u));
+}
+
+/* Atari e console d'epoca: fascia finto legno sul fronte. */
+.scene[data-body='atari'] .console,
+.scene[data-body='retro'] .console {
+  background: linear-gradient(var(--body) 0 40%, var(--trim) 40% 78%, var(--body) 78%);
+}
+
+/* --- Dal davanti: NES, PC Engine, Disk System --------------------------- */
+
+.scene[data-motion='front'] .console {
+  left: 6%;
+  right: 6%;
+  height: calc(110px * var(--u));
+}
+
+/* Il supporto si avvicina, poi rimpicciolisce nello sportello e passa dietro. */
+.scene[data-motion='front'] .track {
+  top: calc(174px * var(--u));
+  bottom: auto;
+  animation-name: front-in;
+}
+
+.scene[data-motion='front'] .piece {
+  bottom: auto;
+  top: 0;
+  transform: translate(-50%, -50%);
+}
+
+.mouth,
+.door {
+  position: absolute;
+  top: calc(16px * var(--u));
+  left: 22%;
+  right: 22%;
+  height: calc(36px * var(--u));
+}
+
+.mouth {
+  background: var(--ink);
+}
+
+/* Sportello incernierato in alto: si alza, il supporto entra, si richiude. */
+.door {
+  background: var(--trim);
+  box-shadow: inset 0 0 0 var(--px) rgba(0, 0, 0, 0.4);
+  transform-origin: top;
+  animation: door-open var(--insert-ms) steps(4, end) both;
+}
+
+/* POWER e RESET. */
+.buttons {
+  position: absolute;
+  left: 10%;
+  bottom: calc(26px * var(--u));
+  width: calc(64px * var(--u));
+  height: calc(12px * var(--u));
+  background: linear-gradient(90deg, var(--trim) 0 40%, transparent 40% 60%, var(--trim) 60%);
+}
+
+.scene[data-motion='front'] .led {
+  bottom: calc(30px * var(--u));
+}
+
+/* Lo scatto della cartuccia spinta giù: la console sobbalza. */
+.scene[data-motion='front'] .console,
+.scene[data-motion='top'] .console {
+  animation: press var(--insert-ms) steps(1) both;
+}
+
+/* --- Portatili: Game Boy, GBA, Game Gear, PSP… -------------------------- */
+
+.scene[data-motion='portrait'] .console {
+  left: 50%;
+  right: auto;
+  width: calc(150px * var(--u));
+  height: calc(210px * var(--u));
+  margin-left: calc(-75px * var(--u));
+  clip-path: polygon(0 0, 100% 0, 100% 86%, 96% 86%, 96% 91%, 91% 91%, 91% 96%, 84% 96%, 84% 100%, 0 100%);
+}
+
+.scene[data-motion='landscape'] .console {
+  left: 50%;
+  right: auto;
+  bottom: calc(16px * var(--u));
+  width: calc(270px * var(--u));
+  height: calc(120px * var(--u));
+  margin-left: calc(-135px * var(--u));
+}
+
+/* Il supporto entra da dietro, dall'alto: ne resta fuori la cima. */
+.scene[data-motion='portrait'] .track {
+  bottom: calc(230px * var(--u));
+  animation-name: back-drop;
+}
+
+.scene[data-motion='landscape'] .track {
+  bottom: calc(154px * var(--u));
+  animation-name: back-drop;
+}
+
+.scene[data-motion='portrait'] .piece,
+.scene[data-motion='landscape'] .piece,
+.scene[data-motion='clam'] .piece {
+  bottom: auto;
+  top: 0;
+}
+
+.screen {
+  position: absolute;
+  top: calc(16px * var(--u));
+  left: 12%;
+  right: 12%;
+  height: calc(92px * var(--u));
+  padding: calc(10px * var(--u));
+  background: var(--frame);
+}
+
+.scene[data-motion='landscape'] .screen {
+  top: calc(14px * var(--u));
+  left: 28%;
+  right: 28%;
+  height: auto;
+  bottom: calc(14px * var(--u));
+}
+
+.glass {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--screen-off);
+  animation: screen-on var(--insert-ms) steps(1) both;
+}
+
+/* Il titolo scende al centro dello schermo, a scatti. */
+.screenText {
+  max-width: 100%;
+  padding: 0 calc(4px * var(--u));
+  overflow: hidden;
+  color: var(--screen-ink);
+  font-size: calc(10px * var(--u));
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  animation: title-drop var(--insert-ms) steps(6, end) both;
+}
+
+/* Croce direzionale. */
+.dpad {
+  position: absolute;
+  left: 14%;
+  bottom: calc(46px * var(--u));
+  width: calc(36px * var(--u));
+  height: calc(36px * var(--u));
+  background:
+    linear-gradient(var(--ink), var(--ink)) center / 100% 34% no-repeat,
+    linear-gradient(var(--ink), var(--ink)) center / 34% 100% no-repeat;
+}
+
+.keys {
+  position: absolute;
+  right: 12%;
+  bottom: calc(56px * var(--u));
+  width: calc(48px * var(--u));
+  height: calc(20px * var(--u));
+  background: linear-gradient(90deg, var(--trim) 0 40%, transparent 40% 60%, var(--trim) 60%);
+}
+
+.scene[data-motion='landscape'] .dpad {
+  left: 7%;
+  bottom: calc(42px * var(--u));
+}
+
+.scene[data-motion='landscape'] .keys {
+  right: 6%;
+  bottom: calc(50px * var(--u));
+}
+
+.scene[data-motion='portrait'] .led,
+.scene[data-motion='landscape'] .led {
+  right: auto;
+  left: 5%;
+  bottom: auto;
+  top: calc(20px * var(--u));
+}
+
+/* --- A conchiglia: DS ----------------------------------------------------- */
+
+.scene[data-motion='clam'] .console,
+.upper {
+  left: 50%;
+  right: auto;
+  width: calc(210px * var(--u));
+  height: calc(84px * var(--u));
+  margin-left: calc(-105px * var(--u));
+}
+
+.scene[data-motion='clam'] .console {
+  bottom: calc(34px * var(--u));
+}
+
+/* Metà superiore: si apre all'inizio. */
+.upper {
+  position: absolute;
+  bottom: calc(118px * var(--u));
+  z-index: 2;
+  background: var(--body);
+  box-shadow: inset 0 0 0 var(--px) var(--ink);
+  transform-origin: bottom;
+  animation: clam-open var(--insert-ms) steps(4, end) both;
+}
+
+.upper .screen,
+.scene[data-motion='clam'] .console .screen {
+  top: calc(10px * var(--u));
+  left: 30%;
+  right: 30%;
+  height: auto;
+  bottom: calc(10px * var(--u));
+  padding: calc(6px * var(--u));
+}
+
+.scene[data-motion='clam'] .dpad {
+  left: 8%;
+  bottom: calc(24px * var(--u));
+  width: calc(28px * var(--u));
+  height: calc(28px * var(--u));
+}
+
+.scene[data-motion='clam'] .keys {
+  right: 7%;
+  bottom: calc(30px * var(--u));
+  width: calc(36px * var(--u));
+  height: calc(14px * var(--u));
+}
+
+.scene[data-motion='clam'] .led {
+  right: auto;
+  left: 4%;
+  bottom: calc(8px * var(--u));
+}
+
+/* La card sale da sotto nella fessura sul bordo inferiore. */
+.scene[data-motion='clam'] .track {
+  bottom: calc(74px * var(--u));
+  animation-name: card-rise;
+}
+
+/* --- Coperchio: PS1, Saturn, Dreamcast… --------------------------------- */
+
+.scene[data-motion='lid'] .track {
+  bottom: calc(30px * var(--u));
+  animation: disc-drop var(--insert-ms) steps(10, end) both;
+}
+
+.lid {
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: calc(80px * var(--u));
+  z-index: 3;
+  height: calc(14px * var(--u));
+  background: var(--trim);
+  box-shadow: inset 0 0 0 var(--px) var(--ink);
+  transform-origin: left bottom;
+  animation: lid var(--insert-ms) steps(5, end) both;
+}
+
+.scene[data-body='dreamcast'] .lid {
+  left: 30%;
+  right: 30%;
+}
+
+/* --- Cassetto: PS2, Mega CD, 3DO ---------------------------------------- */
+
+.scene[data-motion='tray'] .console {
+  height: calc(100px * var(--u));
+}
+
+.traySlot {
+  position: absolute;
+  top: calc(22px * var(--u));
+  left: 18%;
+  right: 18%;
+  height: calc(6px * var(--u));
+  background: var(--ink);
+}
+
+/* Cassetto che esce verso chi guarda (si allunga dalla fessura) e rientra. */
+.tray {
+  position: absolute;
+  left: 50%;
+  bottom: calc(16px * var(--u));
+  z-index: 3;
+  width: calc(200px * var(--u));
+  height: calc(56px * var(--u));
+  margin-left: calc(-100px * var(--u));
+  background: var(--trim);
+  clip-path: polygon(8% 0, 92% 0, 100% 100%, 0 100%);
+  transform-origin: top;
+  animation: tray-out var(--insert-ms) steps(4, end) both;
+}
+
+/* Il disco, visto di sbieco, si posa sul cassetto e rientra con lui. */
+.scene[data-motion='tray'] .track {
+  bottom: calc(44px * var(--u));
+  animation: tray-disc var(--insert-ms) steps(8, end) both;
+}
+
+.scene[data-motion='tray'] .piece {
+  transform: translate(-50%, 50%) scaleY(0.32);
+}
+
+/* --- Gettoniera --------------------------------------------------------- */
+
+.scene[data-motion='coin'] .console {
+  left: 22%;
+  right: 22%;
+  height: calc(120px * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(14px * var(--u));
+}
+
+.scene[data-motion='coin'] .track {
+  top: calc(35px * var(--u));
+  bottom: auto;
+  animation: coin-drop var(--insert-ms) steps(8, end) both;
+}
+
+.scene[data-motion='coin'] .piece {
+  bottom: auto;
+  top: 0;
+  transform: translate(-50%, -50%);
+}
+
+.coinSlot {
+  width: calc(10px * var(--u));
+  height: calc(44px * var(--u));
+  background: var(--bg);
+  box-shadow: 0 0 calc(12px * var(--u)) var(--accent);
+}
+
+.credit {
+  font-size: calc(14px * var(--u));
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  animation: credit var(--insert-ms) steps(1) both;
+}
+
+/* --- Animazioni --------------------------------------------------------- */
+
+@keyframes top-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(calc(-260px * var(--u)));
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  40% {
+    transform: translateY(calc(10px * var(--u)));
+  }
+
+  46% {
+    transform: translateY(calc(-4px * var(--u)));
+  }
+
+  52%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes front-in {
+  0% {
+    z-index: 3;
+    opacity: 0;
+    transform: translateY(calc(-50px * var(--u))) scale(0.9);
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  48% {
+    z-index: 3;
+    transform: translateY(0) scale(0.2);
+  }
+
+  50%,
+  100% {
+    z-index: 1;
+    opacity: 1;
+    transform: translateY(0) scale(0.2);
+  }
+}
+
+@keyframes door-open {
+  0%,
+  8% {
+    transform: none;
+  }
+
+  18%,
+  50% {
+    transform: scaleY(0.12);
+  }
+
+  60%,
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes press {
+  0%,
+  58% {
+    transform: none;
+  }
+
+  62% {
+    transform: translateY(calc(3px * var(--u)));
+  }
+
+  66%,
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes power-on {
+  0%,
+  65% {
+    transform: none;
+  }
+
+  70%,
+  100% {
+    transform: translateX(calc(20px * var(--u)));
+  }
+}
+
+@keyframes led-on {
+  0%,
+  70% {
+    background: #3a2020;
+    box-shadow: none;
+  }
+
+  75%,
+  100% {
+    background: var(--accent);
+    box-shadow: 0 0 calc(10px * var(--u)) var(--accent);
+  }
+}
+
+@keyframes back-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(calc(-200px * var(--u)));
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  45%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes card-rise {
+  0% {
+    transform: translateY(calc(120px * var(--u)));
+  }
+
+  25% {
+    transform: translateY(calc(120px * var(--u)));
+  }
+
+  55%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes clam-open {
+  0% {
+    transform: scaleY(0.08);
+  }
+
+  25%,
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes screen-on {
+  0%,
+  55% {
+    background: var(--screen-off);
+  }
+
+  58%,
+  100% {
+    background: var(--screen-on);
+  }
+}
+
+@keyframes title-drop {
+  0%,
+  58% {
+    opacity: 0;
+    transform: translateY(calc(-40px * var(--u)));
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(calc(-40px * var(--u)));
+  }
+
+  85%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lid {
+  0% {
+    transform: none;
+  }
+
+  15%,
+  70% {
+    transform: translateY(calc(-60px * var(--u))) rotate(-14deg);
+  }
+
+  88%,
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes disc-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(calc(-170px * var(--u)));
+  }
+
+  15% {
+    opacity: 1;
+    transform: translateY(calc(-170px * var(--u)));
+  }
+
+  62%,
+  100% {
+    opacity: 1;
+    transform: translateY(calc(110px * var(--u)));
+  }
+}
+
+@keyframes tray-out {
+  0% {
+    transform: scaleY(0);
+  }
+
+  15%,
+  60% {
+    transform: none;
+  }
+
+  80%,
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes tray-disc {
+  0%,
+  15% {
+    z-index: 4;
+    opacity: 0;
+    transform: translateY(calc(-160px * var(--u)));
+  }
+
+  16% {
+    opacity: 1;
+  }
+
+  40%,
+  60% {
+    z-index: 4;
+    transform: translateY(0);
+  }
+
+  74% {
+    z-index: 4;
+    transform: translateY(calc(-22px * var(--u)));
+  }
+
+  76%,
+  100% {
+    z-index: 1;
+    opacity: 1;
+    transform: translateY(calc(-28px * var(--u)));
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes coin-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(calc(-60px * var(--u)));
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  34% {
+    opacity: 1;
+    transform: translateY(calc(140px * var(--u))) scaleY(1);
+  }
+
+  40%,
+  100% {
+    opacity: 0;
+    transform: translateY(calc(160px * var(--u))) scaleY(0.2);
+  }
+}
+
+@keyframes coin-turn {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+
+  50% {
+    transform: scaleX(0.15);
+  }
+}
+
+@keyframes credit {
+  0%,
+  40% {
+    opacity: 0;
+  }
+
+  45%,
+  60%,
+  75%,
+  90%,
+  100% {
+    opacity: 1;
+  }
+
+  52%,
+  67%,
+  82% {
+    opacity: 0.2;
+  }
+}
+
+/* Movimento ridotto: la scena compare già con il supporto inserito. */
+@media (prefers-reduced-motion: reduce) {
+  .track,
+  .console,
+  .power::after,
+  .led,
+  .door,
+  .glass,
+  .screenText,
+  .upper,
+  .lid,
+  .tray,
+  .disc,
+  .disc[data-piece='umd'] .discFace,
+  .coin,
+  .credit {
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+  }
+}

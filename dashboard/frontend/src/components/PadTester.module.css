@@ -1,0 +1,28 @@
+/* Joypad della prova dei tasti: i tasti premuti si accendono nel colore del lato (`--side`). */
+.pad {
+  width: calc(200px * var(--u));
+  height: calc(124px * var(--u));
+}
+
+.body {
+  fill: var(--surface-1);
+  stroke: var(--border-3);
+  stroke-width: 2;
+}
+
+.hub {
+  fill: var(--surface-3);
+}
+
+.off {
+  fill: var(--surface-3);
+  stroke: var(--border-3);
+  stroke-width: 1;
+}
+
+.on {
+  fill: var(--side);
+  stroke: var(--side);
+  stroke-width: 1;
+  filter: drop-shadow(0 0 4px var(--side));
+}

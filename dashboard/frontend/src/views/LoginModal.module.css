@@ -1,0 +1,534 @@
+/*
+ * Finestra «Chi gioca?» / «Nuovo profilo» (livello 10, come nella demo):
+ * 720×810 unità, centrata in verticale tra l'intestazione (84 unità) e la
+ * barra comandi (64 unità) con almeno 20 unità di margine da entrambe,
+ * a 40 unità dal bordo sinistro (P1) o destro (P2). `--player` è il colore del giocatore.
+ */
+.modal {
+  --height: min(calc(810px * var(--u)), calc(100% - 188px * var(--u)));
+  position: absolute;
+  top: calc(104px * var(--u) + (100% - 188px * var(--u) - var(--height)) / 2);
+  z-index: 20;
+  width: calc(720px * var(--u));
+  max-width: calc(100% - 32px);
+  height: var(--height);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border-2);
+  border-radius: calc(24px * var(--u));
+  background: var(--surface-1);
+  box-shadow: 0 calc(40px * var(--u)) calc(80px * var(--u)) calc(-20px * var(--u)) var(--shadow-70);
+}
+
+.left {
+  left: calc(40px * var(--u));
+}
+
+.right {
+  right: calc(40px * var(--u));
+}
+
+/*
+ * Due finestre aperte: affiancate, ciascuna al massimo metà schermo meno
+ * i margini, con 40 unità tra l'una e l'altra.
+ */
+.dual {
+  width: min(calc(720px * var(--u)), calc(50% - 60px * var(--u)));
+}
+
+/* Telefono: finestra a tutta larghezza. */
+[data-layout='compact'] .modal {
+  left: 16px;
+  right: 16px;
+  width: auto;
+  max-width: none;
+}
+
+/* Telefono e schermo verticale con due finestre: P1 nella metà in alto, P2 in quella in basso. */
+[data-layout='compact'] .dual,
+[data-layout='portrait'] .dual {
+  left: 16px;
+  right: 16px;
+  width: auto;
+  max-width: none;
+  height: calc(50% - 24px);
+  max-height: none;
+}
+
+[data-layout='compact'] .dual.left,
+[data-layout='portrait'] .dual.left {
+  top: 16px;
+}
+
+[data-layout='compact'] .dual.right,
+[data-layout='portrait'] .dual.right {
+  top: calc(50% + 8px);
+}
+
+/* Metà schermo: niente sottotitolo né citazione, margini ridotti. */
+[data-layout='compact'] .dual .sub,
+[data-layout='portrait'] .dual .sub,
+[data-layout='compact'] .dual .quote,
+[data-layout='portrait'] .dual .quote {
+  display: none;
+}
+
+[data-layout='compact'] .dual .head,
+[data-layout='portrait'] .dual .head {
+  padding: calc(16px * var(--u)) calc(20px * var(--u)) calc(12px * var(--u));
+}
+
+[data-layout='compact'] .dual .body,
+[data-layout='portrait'] .dual .body {
+  padding: calc(4px * var(--u)) calc(20px * var(--u));
+}
+
+[data-layout='compact'] .dual .foot,
+[data-layout='portrait'] .dual .foot {
+  margin-top: calc(8px * var(--u));
+  padding: calc(12px * var(--u)) calc(20px * var(--u));
+}
+
+.strip {
+  height: 4px;
+  flex-shrink: 0;
+  background: var(--player);
+}
+
+.head {
+  padding: calc(32px * var(--u)) calc(36px * var(--u)) calc(24px * var(--u));
+  display: flex;
+  align-items: flex-start;
+  gap: calc(16px * var(--u));
+}
+
+.headText {
+  flex-grow: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(14px * var(--u));
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+}
+
+.tag {
+  padding: calc(5px * var(--u)) calc(9px * var(--u));
+  border-radius: calc(8px * var(--u));
+  background: var(--player);
+  color: var(--on-accent);
+  font-size: calc(11px * var(--u));
+}
+
+.padText {
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.heading {
+  font-size: calc(34px * var(--u));
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.sub {
+  font-size: calc(15px * var(--u));
+  color: var(--text-3);
+}
+
+.close {
+  width: calc(44px * var(--u));
+  height: calc(44px * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: transparent;
+  cursor: pointer;
+}
+
+.close svg {
+  width: calc(18px * var(--u));
+  height: calc(18px * var(--u));
+}
+
+.body {
+  flex-grow: 1;
+  min-height: 0;
+  padding: calc(4px * var(--u)) calc(36px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(10px * var(--u));
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+.groupLabel {
+  padding: calc(4px * var(--u)) 0;
+  font-size: calc(12px * var(--u));
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+
+/* Righe: ospite, nuovo profilo, profili, esci. */
+.row {
+  height: calc(72px * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: calc(16px * var(--u));
+  padding: 0 calc(20px * var(--u)) 0 calc(14px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(16px * var(--u));
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.account {
+  height: calc(76px * var(--u));
+  border: 0;
+  background: var(--surface-3);
+}
+
+.row:global(.focused) {
+  box-shadow: 0 0 0 2px var(--player);
+}
+
+/* Joypad nella classifica accanto: niente cursore nella finestra. */
+.away .row:global(.focused) {
+  box-shadow: none;
+}
+
+/* Gioco prenotato dalla classifica: si va lì dopo la scelta del profilo. */
+.reserved {
+  margin: 0 calc(36px * var(--u)) calc(12px * var(--u));
+  padding: calc(10px * var(--u)) calc(14px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(12px * var(--u));
+  border: 1px solid var(--gold);
+  border-radius: calc(12px * var(--u));
+}
+
+.reservedText {
+  min-width: 0;
+  flex-grow: 1;
+  overflow: hidden;
+  font-size: calc(14px * var(--u));
+  color: var(--text-2);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reservedClear {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: calc(6px * var(--u));
+  padding: calc(4px * var(--u)) calc(8px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(8px * var(--u));
+  background: transparent;
+  color: var(--text-3);
+  font: inherit;
+  font-size: calc(12px * var(--u));
+  cursor: pointer;
+}
+
+.taken {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.avatar {
+  width: calc(48px * var(--u));
+  height: calc(48px * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(13px * var(--u));
+  color: var(--on-accent);
+  font-size: calc(19px * var(--u));
+  font-weight: 700;
+}
+
+.big {
+  width: calc(64px * var(--u));
+  height: calc(64px * var(--u));
+  border-radius: calc(18px * var(--u));
+  font-size: calc(26px * var(--u));
+}
+
+.icon {
+  background: var(--border-1);
+  color: var(--text-2);
+}
+
+.icon svg {
+  width: calc(22px * var(--u));
+  height: calc(22px * var(--u));
+}
+
+.rowText {
+  flex-grow: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--u));
+}
+
+.accountName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(17px * var(--u));
+  font-weight: 600;
+}
+
+.rowTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(16px * var(--u));
+  font-weight: 600;
+}
+
+/* Finestre strette: le righe restano alte uguali, il testo in più viene troncato. */
+.rowSub {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.takenBadge {
+  flex-shrink: 0;
+  padding: calc(5px * var(--u)) calc(10px * var(--u));
+  border-radius: calc(8px * var(--u));
+  background: var(--border-2);
+  color: var(--text-2);
+  font-size: calc(12px * var(--u));
+  font-weight: 600;
+}
+
+.chevron {
+  width: calc(20px * var(--u));
+  height: calc(20px * var(--u));
+  flex-shrink: 0;
+  color: var(--text-5);
+}
+
+.none {
+  padding: calc(8px * var(--u)) 0;
+  font-size: calc(14px * var(--u));
+  color: var(--text-4);
+}
+
+.or {
+  display: flex;
+  align-items: center;
+  gap: calc(14px * var(--u));
+  padding: calc(12px * var(--u)) 0 calc(6px * var(--u));
+  font-size: calc(13px * var(--u));
+  color: var(--text-5);
+}
+
+.line {
+  flex-grow: 1;
+  height: 1px;
+  background: var(--border-2);
+}
+
+/* Nuovo profilo. */
+.preview {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: calc(18px * var(--u));
+  padding: calc(18px * var(--u));
+  border-radius: calc(18px * var(--u));
+  background: var(--surface-3);
+}
+
+.previewName {
+  font-size: calc(20px * var(--u));
+  font-weight: 700;
+}
+
+.group {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(10px * var(--u));
+  padding-top: calc(14px * var(--u));
+}
+
+.name {
+  height: calc(56px * var(--u));
+  flex-shrink: 0;
+  padding: 0 calc(18px * var(--u));
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-3);
+  border-radius: calc(14px * var(--u));
+  background: var(--bg);
+  font-size: calc(17px * var(--u));
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.name:global(.focused) {
+  border-color: var(--player);
+  box-shadow: 0 0 0 1px var(--player);
+}
+
+.placeholder {
+  color: var(--text-5);
+}
+
+.hint {
+  font-size: calc(12px * var(--u));
+  color: var(--text-4);
+}
+
+.error {
+  font-size: calc(13px * var(--u));
+  font-weight: 600;
+  color: var(--p1);
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(12px * var(--u));
+  padding: 4px;
+}
+
+.swatch {
+  width: calc(44px * var(--u));
+  height: calc(44px * var(--u));
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.swatch.on {
+  box-shadow: 0 0 0 3px var(--surface-1), 0 0 0 5px var(--text-1);
+}
+
+.swatch:global(.focused) {
+  box-shadow: 0 0 0 3px var(--surface-1), 0 0 0 5px var(--player);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(8px * var(--u));
+  padding: 2px;
+}
+
+.chip {
+  height: calc(40px * var(--u));
+  padding: 0 calc(16px * var(--u));
+  border: 1px solid var(--border-3);
+  border-radius: calc(20px * var(--u));
+  background: transparent;
+  color: var(--text-2);
+  font-size: calc(13px * var(--u));
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chip.on {
+  border-color: var(--text-1);
+  background: var(--text-1);
+  color: var(--bg);
+}
+
+.chip:global(.focused) {
+  box-shadow: 0 0 0 2px var(--player);
+}
+
+/* Piede: citazione e legenda, oppure Indietro / Crea profilo e gioca. */
+.foot {
+  flex-shrink: 0;
+  margin-top: calc(16px * var(--u));
+  padding: calc(20px * var(--u)) calc(36px * var(--u)) calc(28px * var(--u));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(12px * var(--u));
+  border-top: 1px solid var(--border-1);
+}
+
+.quote {
+  flex-grow: 1;
+  flex-basis: calc(240px * var(--u));
+  min-width: 0;
+  font-size: calc(13px * var(--u));
+  font-style: italic;
+  color: var(--text-4);
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.legend + .legend {
+  margin-left: calc(12px * var(--u));
+}
+
+.back {
+  height: calc(56px * var(--u));
+  padding: 0 calc(22px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(16px * var(--u));
+  background: transparent;
+  font-size: calc(15px * var(--u));
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.back:global(.focused) {
+  border-color: var(--text-1);
+}
+
+.create {
+  flex-grow: 1;
+  min-width: 0;
+  height: calc(56px * var(--u));
+  border: 0;
+  border-radius: calc(16px * var(--u));
+  background: var(--player);
+  color: var(--on-accent);
+  font-size: calc(16px * var(--u));
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.create:global(.focused) {
+  box-shadow: 0 0 0 3px var(--surface-1), 0 0 0 5px var(--text-1);
+}
+
+.create:disabled {
+  opacity: 0.6;
+}

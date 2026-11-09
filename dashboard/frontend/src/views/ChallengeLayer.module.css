@@ -1,0 +1,178 @@
+/*
+ * Avvisi della Sfida trofeo all'ingresso del P1: stesso livello e stessa
+ * forma dell'avviso del Wrapped, con il bordo dorato dei trofei.
+ */
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 48;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(var(--deep-rgb) / 0.72);
+  backdrop-filter: blur(6px);
+}
+
+.notice {
+  position: relative;
+  width: calc(500px * var(--u));
+  max-width: calc(100% - 32px);
+  max-height: calc(100% - 32px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(10px * var(--u));
+  padding: calc(30px * var(--u)) calc(34px * var(--u)) calc(26px * var(--u));
+  border: 1px solid var(--border-2);
+  border-top: calc(4px * var(--u)) solid var(--gold);
+  border-radius: calc(24px * var(--u));
+  background:
+    radial-gradient(circle at 50% 0%, rgb(245 197 66 / 0.18), transparent 60%),
+    var(--surface-1);
+  color: var(--text-1);
+  text-align: center;
+  box-shadow: 0 calc(40px * var(--u)) calc(80px * var(--u)) calc(-20px * var(--u)) var(--shadow-70);
+  animation: notice-in 0.45s cubic-bezier(0.3, 1.4, 0.6, 1) both;
+}
+
+.kicker {
+  font-size: calc(12px * var(--u));
+  letter-spacing: 0.3em;
+  color: var(--gold);
+}
+
+.thumb {
+  width: calc(240px * var(--u));
+  max-width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 2px solid var(--border-3);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-3);
+  image-rendering: pixelated;
+}
+
+.title {
+  margin: 0;
+  font-size: calc(22px * var(--u));
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0.04em;
+}
+
+.text {
+  margin: 0;
+  font-size: calc(16px * var(--u));
+  font-weight: 700;
+}
+
+.detail {
+  margin: 0;
+  font-size: calc(14px * var(--u));
+  color: var(--text-2);
+}
+
+.warning {
+  margin: calc(4px * var(--u)) 0 0;
+  padding: calc(10px * var(--u)) calc(14px * var(--u));
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  font-size: calc(14px * var(--u));
+  line-height: 1.4;
+  color: var(--text-2);
+}
+
+.ranking {
+  width: 100%;
+  margin: calc(4px * var(--u)) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--u));
+  list-style: none;
+  counter-reset: place;
+}
+
+.ranking li {
+  padding: calc(8px * var(--u)) calc(12px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+  border-radius: calc(10px * var(--u));
+  background: var(--surface-2);
+  counter-increment: place;
+}
+
+.ranking li::before {
+  content: counter(place);
+  width: calc(22px * var(--u));
+  color: var(--gold);
+  font-weight: 800;
+}
+
+.ranking .me {
+  box-shadow: inset 0 0 0 2px var(--gold);
+}
+
+.who {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+  font-weight: 600;
+}
+
+.time {
+  font-size: calc(13px * var(--u));
+  color: var(--text-2);
+}
+
+.actions {
+  display: flex;
+  gap: calc(12px * var(--u));
+  margin-top: calc(8px * var(--u));
+}
+
+.button {
+  min-width: calc(130px * var(--u));
+  padding: calc(11px * var(--u)) calc(18px * var(--u));
+  border: 1px solid var(--border-3);
+  border-radius: calc(12px * var(--u));
+  background: transparent;
+  color: var(--text-1);
+  font-size: calc(15px * var(--u));
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chosen {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--on-accent);
+}
+
+@keyframes notice-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(calc(20px * var(--u)));
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notice {
+    animation: none;
+  }
+}

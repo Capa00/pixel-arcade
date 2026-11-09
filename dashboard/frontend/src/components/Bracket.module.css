@@ -1,0 +1,476 @@
+/*
+ * Tabellone a sezioni: nell'eliminazione diretta il tabellone principale
+ * (colonne per turno, schede degli incontri a due righe unite da linee) e,
+ * sotto la finale, il 3° posto; nella doppia vincenti sopra, perdenti sotto
+ * e gran finale a destra. Il contenitore scorre sui due assi seguendo il
+ * cursore. Oro per il prossimo incontro e per il cursore, rosso per
+ * l'incontro in gioco.
+ */
+.bracket {
+  /* Spazio tra le colonne: le linee di collegamento ne occupano metà per parte. */
+  --gap: calc(28px * var(--u));
+  --col: calc(230px * var(--u));
+  --link: var(--border-3);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: auto;
+  padding: calc(4px * var(--u)) calc(4px * var(--u)) calc(12px * var(--u));
+}
+
+/* Disegno intero: le sezioni una sotto l'altra, largo quanto serve. */
+.drawing {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: calc(18px * var(--u));
+  width: max-content;
+}
+
+.section {
+  flex: 1 0 auto;
+  display: flex;
+  gap: var(--gap);
+}
+
+/* Sezione sotto il tabellone principale, spostata alla colonna `--x`. */
+.lower {
+  flex: 0 0 auto;
+  width: var(--col);
+  margin-left: calc(var(--x) * (var(--col) + var(--gap)));
+}
+
+.column {
+  flex: 0 0 var(--col);
+  display: flex;
+  flex-direction: column;
+  gap: calc(10px * var(--u));
+  /* Colonne vuote prima di questa (doppia: le colonne si alternano tra vincenti e perdenti). */
+  margin-left: calc(var(--skip, 0) * (var(--col) + var(--gap)));
+}
+
+/* Colonna fatta solo di bye nascosti: tiene il posto ma non si vede. */
+.hiddenColumn {
+  visibility: hidden;
+}
+
+.columnHead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: calc(2px * var(--u));
+  padding-bottom: calc(6px * var(--u));
+  border-bottom: 1px solid var(--border-2);
+  background: var(--bg);
+}
+
+.roundName {
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.22em;
+  color: var(--gold);
+}
+
+.series {
+  font-size: calc(11px * var(--u));
+  color: var(--text-4);
+}
+
+.cells {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ogni casella occupa la stessa parte della colonna: la scheda resta a metà tra le due da cui arriva. */
+.cell {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: calc(5px * var(--u)) 0;
+}
+
+/* --- Linee di collegamento tra le colonne --- */
+
+/* Dalla scheda verso destra, poi giù fino al confine con la casella sotto (casella pari). */
+.linkOut {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: calc((var(--gap) + var(--skip-out, 0) * (var(--col) + var(--gap))) / 2);
+  height: 50%;
+  border-top: 1px solid var(--link);
+  border-right: 1px solid var(--link);
+  pointer-events: none;
+}
+
+/* Casella dispari: dalla scheda verso destra, poi su fino al confine con la casella sopra. */
+.linkUp {
+  top: 0;
+  border-top: 0;
+  border-bottom: 1px solid var(--link);
+}
+
+/* Una scheda in una (perdenti, dalla colonna dispari alla pari): solo il tratto orizzontale. */
+.linkStraight {
+  height: 0;
+  border-right: 0;
+}
+
+/* Dal punto d'incontro delle due linee fino alla scheda del turno dopo. */
+.linkIn {
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  width: calc((var(--gap) + var(--skip-in, 0) * (var(--col) + var(--gap))) / 2);
+  border-top: 1px solid var(--link);
+  pointer-events: none;
+}
+
+/* --- Scheda dell'incontro --- */
+
+.match {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-2);
+  border-radius: calc(10px * var(--u));
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.bye {
+  border-style: dashed;
+  background: transparent;
+  opacity: 0.75;
+}
+
+/* Rivincita che si gioca solo se vince chi arriva dai perdenti. */
+.conditional {
+  border-style: dashed;
+  opacity: 0.6;
+}
+
+.note {
+  padding: calc(4px * var(--u)) calc(10px * var(--u));
+  border-bottom: 1px solid var(--border-1);
+  font-size: calc(11px * var(--u));
+  font-style: italic;
+  color: var(--text-3);
+}
+
+.next {
+  border-color: var(--gold);
+  box-shadow:
+    0 0 0 1px var(--gold),
+    0 0 calc(18px * var(--u)) rgb(245 197 66 / 0.35);
+}
+
+.playing {
+  border-color: var(--danger);
+  box-shadow: 0 0 calc(14px * var(--u)) rgb(var(--danger-rgb) / 0.35);
+}
+
+/* Cursore del tabellone: contorno spesso e scheda appena sollevata. */
+.focus {
+  border-color: var(--text-1);
+  box-shadow:
+    0 0 0 calc(2px * var(--u)) var(--text-1),
+    0 calc(10px * var(--u)) calc(24px * var(--u)) calc(-8px * var(--u)) var(--shadow-75);
+  transform: scale(1.03);
+}
+
+.next.focus {
+  border-color: var(--gold);
+  box-shadow:
+    0 0 0 calc(2px * var(--u)) var(--gold),
+    0 0 calc(22px * var(--u)) rgb(245 197 66 / 0.5);
+}
+
+.playing.focus {
+  border-color: var(--danger);
+  box-shadow:
+    0 0 0 calc(2px * var(--u)) var(--danger),
+    0 0 calc(22px * var(--u)) rgb(var(--danger-rgb) / 0.5);
+}
+
+.matchHead {
+  display: flex;
+  align-items: center;
+  gap: calc(6px * var(--u));
+  padding: calc(4px * var(--u)) calc(10px * var(--u));
+  border-bottom: 1px solid var(--border-1);
+  background: var(--surface-3);
+}
+
+.code {
+  font-size: calc(9px * var(--u));
+  letter-spacing: 0.16em;
+  color: var(--text-3);
+}
+
+.order {
+  margin-left: auto;
+  font-size: calc(9px * var(--u));
+  color: var(--text-4);
+}
+
+/* Etichette nella testata della scheda: «PROSSIMO», «IN GIOCO», «TAVOLINO». */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(4px * var(--u));
+  padding: calc(1px * var(--u)) calc(5px * var(--u));
+  border-radius: calc(4px * var(--u));
+  background: var(--surface-1);
+  font-size: calc(8px * var(--u));
+  letter-spacing: 0.12em;
+  color: var(--text-3);
+}
+
+.nextTag {
+  background: var(--gold);
+  color: var(--on-accent);
+}
+
+.liveTag {
+  background: rgb(var(--danger-rgb) / 0.2);
+  color: var(--danger);
+}
+
+.liveDot {
+  width: calc(6px * var(--u));
+  height: calc(6px * var(--u));
+  border-radius: 50%;
+  background: var(--danger);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+/* --- Righe dei giocatori --- */
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  min-height: calc(38px * var(--u));
+  padding: calc(5px * var(--u)) calc(10px * var(--u));
+  border-left: calc(3px * var(--u)) solid var(--player);
+}
+
+.row + .row {
+  border-top: 1px solid var(--border-1);
+}
+
+.empty {
+  border-left-color: transparent;
+}
+
+.avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(26px * var(--u));
+  height: calc(26px * var(--u));
+  border-radius: 50%;
+  font-size: calc(12px * var(--u));
+  font-weight: 800;
+  color: var(--on-accent);
+}
+
+.ghost {
+  border: 1px dashed var(--border-3);
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-size: calc(13px * var(--u));
+  font-weight: 700;
+  color: var(--text-1);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pending {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-size: calc(12px * var(--u));
+  font-style: italic;
+  color: var(--text-5);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.seed {
+  flex-shrink: 0;
+  min-width: calc(20px * var(--u));
+  padding: calc(2px * var(--u)) calc(4px * var(--u));
+  border-radius: calc(5px * var(--u));
+  background: var(--surface-3);
+  font-size: calc(9px * var(--u));
+  text-align: center;
+  color: var(--text-3);
+}
+
+.wins {
+  flex-shrink: 0;
+  min-width: calc(18px * var(--u));
+  font-size: calc(12px * var(--u));
+  text-align: right;
+  color: var(--text-2);
+}
+
+.winner .name {
+  color: var(--gold);
+}
+
+.winner .wins {
+  color: var(--gold);
+}
+
+.loser {
+  opacity: 0.45;
+}
+
+.cursor {
+  background: rgb(245 197 66 / 0.14);
+  box-shadow: inset 0 0 0 calc(2px * var(--u)) var(--gold);
+}
+
+.marked {
+  background: rgb(var(--danger-rgb) / 0.16);
+  box-shadow: inset 0 0 0 calc(2px * var(--u)) var(--danger);
+}
+
+.marked.cursor {
+  box-shadow:
+    inset 0 0 0 calc(2px * var(--u)) var(--danger),
+    inset 0 0 0 calc(4px * var(--u)) var(--gold);
+}
+
+/* --- 3° posto --- */
+
+.third {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--u));
+  padding-top: calc(10px * var(--u));
+  border-top: 1px dashed var(--border-3);
+}
+
+.thirdHead {
+  font-size: calc(10px * var(--u));
+  letter-spacing: 0.22em;
+  color: var(--bronze);
+}
+
+/* --- Doppia eliminazione --- */
+
+/*
+ * Griglia a due colonne: a sinistra le righe VINCENTI, vincenti, PERDENTI,
+ * perdenti; a destra, sulla riga PERDENTI, la gran finale.
+ */
+.double {
+  position: relative;
+  flex: 1 0 auto;
+  display: grid;
+  grid-template-columns: max-content var(--col);
+  align-content: start;
+  column-gap: var(--gap);
+  width: max-content;
+}
+
+.double > .section {
+  grid-column: 1;
+}
+
+/* Riga-etichetta di ogni tabellone, larga quanto il disegno. */
+.bracketLabel {
+  grid-column: 1;
+  padding: calc(4px * var(--u)) 0 calc(8px * var(--u));
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.3em;
+  color: var(--text-3);
+}
+
+.losersLabel {
+  margin-top: calc(18px * var(--u));
+  padding-top: calc(12px * var(--u));
+  border-top: 1px dashed var(--border-3);
+}
+
+/* Gran finale e rivincita: alte zero e centrate sulla riga PERDENTI, cioè sul confine tra i due tabelloni. */
+.grand {
+  grid-column: 2;
+  grid-row: 3;
+  align-self: center;
+  height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(14px * var(--u));
+}
+
+.grandCell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--u));
+}
+
+.grandHead {
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.22em;
+  color: var(--gold);
+}
+
+/* Linee dalla finale dei vincenti e da quella dei perdenti alla gran finale. */
+.grandLinks {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  fill: none;
+  stroke: var(--link);
+  stroke-width: 1;
+}
+
+/* --- Schede compatte con molti iscritti --- */
+
+.compact {
+  --gap: calc(16px * var(--u));
+  --col: calc(180px * var(--u));
+}
+
+.compact .cell {
+  padding: calc(2px * var(--u)) 0;
+}
+
+.compact .matchHead {
+  padding: calc(2px * var(--u)) calc(8px * var(--u));
+}
+
+.compact .row {
+  min-height: calc(26px * var(--u));
+  padding: calc(2px * var(--u)) calc(8px * var(--u));
+}
+
+.compact .avatar {
+  width: calc(18px * var(--u));
+  height: calc(18px * var(--u));
+  font-size: calc(9px * var(--u));
+}
+
+.compact .name {
+  font-size: calc(11px * var(--u));
+}

@@ -1,0 +1,205 @@
+/* Scheda «Sfide» del profilo: sezioni con le schede delle sfide trofeo. */
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: calc(22px * var(--u));
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: calc(12px * var(--u));
+}
+
+.title {
+  margin: 0;
+  font-size: calc(15px * var(--u));
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-2);
+  text-transform: uppercase;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(14px * var(--u));
+}
+
+.card {
+  width: calc(320px * var(--u));
+  max-width: 100%;
+  padding: calc(14px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(12px * var(--u));
+  border: 2px solid var(--border-2);
+  border-top: calc(4px * var(--u)) solid var(--gold);
+  border-radius: calc(16px * var(--u));
+  background: var(--surface-2);
+  color: var(--text-1);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.1s,
+    transform 0.1s;
+}
+
+.card:global(.focused) {
+  border-color: var(--text-1);
+  transform: translateY(calc(-3px * var(--u)));
+}
+
+.closed {
+  border-top-color: var(--border-3);
+  opacity: 0.8;
+}
+
+.top {
+  display: flex;
+  gap: calc(12px * var(--u));
+}
+
+.thumb {
+  width: calc(96px * var(--u));
+  height: calc(72px * var(--u));
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: calc(10px * var(--u));
+  background: var(--surface-3);
+  image-rendering: pixelated;
+}
+
+.star {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: calc(26px * var(--u));
+}
+
+.info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(3px * var(--u));
+}
+
+.trophy {
+  font-size: calc(16px * var(--u));
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.game {
+  font-size: calc(13px * var(--u));
+  color: var(--text-2);
+  overflow-wrap: anywhere;
+}
+
+.meta {
+  font-size: calc(12px * var(--u));
+  color: var(--text-3);
+}
+
+.numbers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(10px * var(--u));
+}
+
+.number {
+  padding: calc(8px * var(--u)) calc(10px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(2px * var(--u));
+  border-radius: calc(10px * var(--u));
+  background: var(--surface-1);
+}
+
+.label {
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+  text-transform: uppercase;
+}
+
+.value {
+  font-size: calc(17px * var(--u));
+  color: var(--gold);
+}
+
+.holder {
+  font-size: calc(12px * var(--u));
+  color: var(--text-2);
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ranking {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--u));
+  list-style: none;
+  counter-reset: place;
+}
+
+.ranking li {
+  display: flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  font-size: calc(13px * var(--u));
+  counter-increment: place;
+}
+
+.ranking li::before {
+  content: counter(place);
+  width: calc(18px * var(--u));
+  color: var(--gold);
+  font-weight: 800;
+}
+
+.ranking .me {
+  font-weight: 800;
+}
+
+.who {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.time {
+  color: var(--text-2);
+}
+
+.play {
+  align-self: flex-start;
+  padding: calc(5px * var(--u)) calc(10px * var(--u));
+  border-radius: calc(8px * var(--u));
+  background: var(--gold);
+  color: #15131c;
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.08em;
+}
+
+.warning {
+  margin: 0;
+  padding: calc(10px * var(--u)) calc(14px * var(--u));
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  font-size: calc(14px * var(--u));
+  color: var(--text-2);
+}
+
+.empty {
+  font-size: calc(14px * var(--u));
+  color: var(--text-3);
+}

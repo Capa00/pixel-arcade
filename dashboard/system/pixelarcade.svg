@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" shape-rendering="crispEdges">
+  <!-- Logo pixel di Pixel Arcade: stessi rettangoli di dashboard/frontend/src/lib/logo.js -->
+  <rect x="0" y="3" width="10" height="5" fill="#f3f1f8"/>
+  <rect x="1" y="2" width="8" height="7" fill="#f3f1f8"/>
+  <rect x="2" y="4" width="1" height="3" fill="#0d0c12"/>
+  <rect x="1" y="5" width="3" height="1" fill="#0d0c12"/>
+  <rect x="6" y="4" width="1" height="1" fill="#ff5d73"/>
+  <rect x="7" y="5" width="1" height="1" fill="#3ccfc4"/>
+</svg>

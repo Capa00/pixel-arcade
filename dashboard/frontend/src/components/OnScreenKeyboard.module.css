@@ -1,0 +1,202 @@
+/*
+ * Tastiera a schermo: pannello sopra la libreria (livello 50), in alto,
+ * così la riga dei risultati resta visibile mentre si scrive.
+ */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-start;
+  padding: calc(100px * var(--u)) calc(48px * var(--u)) 0;
+  pointer-events: none;
+}
+
+.center {
+  justify-content: center;
+}
+
+.left {
+  justify-content: flex-start;
+}
+
+.right {
+  justify-content: flex-end;
+}
+
+.panel {
+  width: calc(660px * var(--u));
+  max-width: 100%;
+  padding: calc(22px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(16px * var(--u));
+  border: 1px solid var(--border-3);
+  border-radius: calc(20px * var(--u));
+  background: var(--surface-1);
+  box-shadow: 0 calc(24px * var(--u)) calc(60px * var(--u)) var(--shadow-60);
+  pointer-events: auto;
+}
+
+.top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: calc(15px * var(--u));
+  letter-spacing: 0.06em;
+  color: var(--text-2);
+}
+
+.counter {
+  font-size: calc(12px * var(--u));
+  color: var(--text-4);
+}
+
+/* Pulsante «Incolla» (solo mouse) accanto al contatore. */
+.tools {
+  display: flex;
+  align-items: baseline;
+  gap: calc(14px * var(--u));
+}
+
+.paste {
+  padding: calc(4px * var(--u)) calc(12px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(8px * var(--u));
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-size: calc(12px * var(--u));
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.paste:hover {
+  border-color: var(--text-3);
+  color: var(--text-1);
+}
+
+.field {
+  position: relative;
+  height: calc(52px * var(--u));
+  padding: 0 calc(18px * var(--u));
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid var(--border-3);
+  border-radius: calc(14px * var(--u));
+  background: var(--bg);
+  font-size: calc(19px * var(--u));
+  font-weight: 600;
+  white-space: pre;
+}
+
+/*
+ * Testo prima del cursore: se non ci sta, si vede la parte finale, così il
+ * cursore resta sempre visibile. Il testo dopo il cursore viene tagliato.
+ */
+.before {
+  min-width: 0;
+  display: flex;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.text {
+  flex-shrink: 0;
+}
+
+.after {
+  min-width: 0;
+  flex-shrink: 1;
+  overflow: hidden;
+}
+
+.caret {
+  width: calc(2px * var(--u));
+  height: calc(24px * var(--u));
+  flex-shrink: 0;
+  margin: 0 1px;
+  background: var(--text-1);
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.placeholder {
+  min-width: 0;
+  margin-left: calc(6px * var(--u));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-5);
+  font-weight: 400;
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(20, minmax(0, 1fr));
+  grid-auto-rows: calc(48px * var(--u));
+  gap: calc(6px * var(--u));
+}
+
+.key {
+  min-width: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-2);
+  border-radius: calc(10px * var(--u));
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-size: calc(18px * var(--u));
+  font-weight: 600;
+  transition: background 0.1s, color 0.1s, transform 0.1s;
+}
+
+.shift,
+.space,
+.page,
+.reveal,
+.ok {
+  font-size: calc(12px * var(--u));
+  letter-spacing: 0.06em;
+}
+
+.erase {
+  font-size: calc(20px * var(--u));
+}
+
+.on {
+  border-color: var(--text-3);
+  color: var(--text-1);
+}
+
+.active {
+  border-color: var(--text-1);
+  background: var(--text-1);
+  color: var(--bg);
+  transform: scale(1.06);
+}
+
+/* Telefono: pannello a tutta larghezza, tasti più bassi. */
+[data-layout='compact'] .overlay {
+  padding: calc(16px * var(--u));
+  justify-content: center;
+}
+
+[data-layout='compact'] .panel {
+  width: 100%;
+  padding: calc(14px * var(--u));
+}
+
+[data-layout='compact'] .keys {
+  grid-auto-rows: calc(40px * var(--u));
+  gap: calc(4px * var(--u));
+}

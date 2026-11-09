@@ -1,0 +1,334 @@
+.hero {
+  flex-grow: 1;
+  min-height: calc(360px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(48px * var(--u));
+}
+
+/* Copertina selezionabile: immagine e, sotto, le freccette per cambiarla. */
+.coverBox {
+  position: relative;
+  flex-shrink: 0;
+  width: calc(360px * var(--u));
+  height: calc(360px * var(--u));
+  border-radius: calc(20px * var(--u));
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+  border-radius: calc(20px * var(--u));
+  box-shadow: 0 calc(30px * var(--u)) calc(60px * var(--u)) calc(-20px * var(--u)) var(--glow);
+  transition: box-shadow 0.15s;
+}
+
+.coverFocused .cover {
+  box-shadow: 0 0 0 calc(3px * var(--u)) var(--bg), 0 0 0 calc(6px * var(--u)) var(--accent);
+}
+
+.coverLabel {
+  position: absolute;
+  top: calc(20px * var(--u));
+  left: calc(22px * var(--u));
+  font-size: calc(12px * var(--u));
+  opacity: 0.85;
+}
+
+.coverTitle {
+  position: absolute;
+  left: calc(22px * var(--u));
+  right: calc(22px * var(--u));
+  bottom: calc(22px * var(--u));
+  font-size: calc(30px * var(--u));
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
+
+.imageNav {
+  composes: tone-night from global;
+  position: absolute;
+  left: 50%;
+  bottom: calc(12px * var(--u));
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: calc(6px * var(--u));
+  padding: calc(4px * var(--u)) calc(6px * var(--u));
+  border-radius: calc(16px * var(--u));
+  background: rgba(13, 12, 18, 0.75);
+  color: var(--text-1);
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+
+.coverBox:hover .imageNav,
+.coverFocused .imageNav {
+  opacity: 1;
+}
+
+.arrow {
+  width: calc(28px * var(--u));
+  height: calc(28px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: calc(16px * var(--u));
+  cursor: pointer;
+}
+
+.arrow:hover {
+  background: var(--surface-3);
+}
+
+.imageName {
+  min-width: calc(92px * var(--u));
+  font-size: calc(11px * var(--u));
+  text-align: center;
+}
+
+.details {
+  flex-grow: 1;
+  min-width: 0;
+  height: calc(360px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(14px * var(--u));
+}
+
+.labelRow {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: calc(12px * var(--u));
+}
+
+.trophy {
+  width: calc(18px * var(--u));
+  height: calc(18px * var(--u));
+  flex-shrink: 0;
+}
+
+.label {
+  min-width: 0;
+  font-size: calc(13px * var(--u));
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title {
+  max-width: calc(900px * var(--u));
+  font-size: calc(40px * var(--u));
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  flex-shrink: 0;
+}
+
+/*
+ * Area tra il titolo e le azioni: occupa tutto lo spazio libero, uguale per
+ * la scheda e per la descrizione, così cambiare vista non sposta nulla.
+ */
+.panel {
+  max-width: calc(900px * var(--u));
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(14px * var(--u));
+  overflow: hidden;
+}
+
+/*
+ * Scheda senza riquadri: tre colonne di voci, etichetta pixel nel colore della
+ * console e valore sotto, separate solo da una linea sottile a sinistra.
+ */
+.info {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-content: start;
+  gap: calc(18px * var(--u)) calc(28px * var(--u));
+  margin: 0;
+}
+
+.row {
+  min-width: 0;
+  padding-left: calc(14px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--u));
+  border-left: 2px solid var(--border-2);
+}
+
+.rowLabel {
+  font-size: calc(10px * var(--u));
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.rowValue {
+  min-width: 0;
+  margin: 0;
+  font-size: calc(17px * var(--u));
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text-1);
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* Descrizione e trama: scorrono con la rotellina o con ↑↓. */
+.text {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: calc(12px * var(--u));
+  font-size: calc(15px * var(--u));
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.heading {
+  margin: 0 0 calc(4px * var(--u));
+  font-size: calc(13px * var(--u));
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-4);
+}
+
+.paragraph {
+  margin: 0 0 calc(12px * var(--u));
+}
+
+.actionsRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(20px * var(--u));
+  flex-shrink: 0;
+}
+
+/*
+ * Preferiti dei giocatori sopra la copertina, in alto a destra: una pastiglia
+ * per giocatore col bordo del suo colore su fondo scuro, leggibile su ogni
+ * immagine. Solo indicazione, si cambiano con Y.
+ */
+.favorites {
+  position: absolute;
+  top: calc(14px * var(--u));
+  right: calc(14px * var(--u));
+  display: flex;
+  gap: calc(8px * var(--u));
+  align-items: center;
+}
+
+.favorite {
+  composes: tone-night from global;
+  height: calc(34px * var(--u));
+  padding: 0 calc(12px * var(--u)) 0 calc(10px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(6px * var(--u));
+  border: 2px solid var(--player);
+  border-radius: calc(12px * var(--u));
+  background: rgba(13, 12, 18, 0.75);
+  font-size: calc(12px * var(--u));
+  color: var(--player);
+}
+
+.favHeart {
+  width: calc(18px * var(--u));
+  height: calc(18px * var(--u));
+}
+
+.quote {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: calc(10px * var(--u));
+  font-size: calc(14px * var(--u));
+  color: var(--text-4);
+}
+
+.quoteText {
+  font-style: italic;
+  color: var(--text-quote);
+}
+
+/* Telefono: copertina sopra i dettagli. */
+[data-layout='compact'] .hero {
+  flex-direction: column;
+  align-items: stretch;
+  gap: calc(20px * var(--u));
+  min-height: 0;
+  flex-grow: 0;
+}
+
+[data-layout='compact'] .coverBox {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  max-width: calc(360px * var(--u));
+  align-self: center;
+}
+
+[data-layout='compact'] .details {
+  height: auto;
+  gap: calc(12px * var(--u));
+}
+
+[data-layout='compact'] .title {
+  font-size: calc(30px * var(--u));
+}
+
+[data-layout='compact'] .panel {
+  flex: none;
+  height: calc(240px * var(--u));
+}
+
+[data-layout='compact'] .info {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Schermo verticale: copertina sopra, dettagli sotto, più spazio in altezza. */
+[data-layout='portrait'] .hero {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+[data-layout='portrait'] .details {
+  width: 100%;
+  height: auto;
+  flex-grow: 0;
+}
+
+[data-layout='portrait'] .panel {
+  flex: none;
+  height: calc(240px * var(--u));
+}
+
+[data-layout='portrait'] .info {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}

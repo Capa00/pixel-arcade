@@ -1,0 +1,27 @@
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(var(--count), minmax(0, 1fr));
+  gap: calc(4px * var(--u));
+  padding: calc(4px * var(--u));
+  border-radius: calc(14px * var(--u));
+  background: var(--bg);
+}
+
+.option {
+  height: calc(40px * var(--u));
+  border: 0;
+  border-radius: calc(10px * var(--u));
+  background: transparent;
+  color: var(--text-4);
+  font-size: calc(14px * var(--u));
+  font-weight: 600;
+}
+
+.on {
+  background: var(--border-2);
+  color: var(--text-1);
+}
+
+.option:global(.focused) {
+  box-shadow: 0 0 0 2px var(--player);
+}

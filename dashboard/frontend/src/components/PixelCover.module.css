@@ -1,0 +1,16 @@
+.cover {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--cover-bg);
+  color: var(--ink);
+}
+
+.art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--ink);
+  transform: scaleX(var(--flip));
+}

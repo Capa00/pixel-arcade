@@ -1,0 +1,186 @@
+/*
+ * Calendario del girone: giornate una sotto l'altra, ogni incontro su una
+ * riga (giocatore, risultato, giocatore, etichette). Oro per il prossimo,
+ * rosso per quello in gioco, contorno chiaro per il cursore.
+ */
+.calendar {
+  display: flex;
+  flex-direction: column;
+  gap: calc(14px * var(--u));
+  min-height: 0;
+  overflow: auto;
+  padding: calc(4px * var(--u)) calc(6px * var(--u)) calc(12px * var(--u));
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--u));
+}
+
+.dayName {
+  margin: 0;
+  padding-bottom: calc(5px * var(--u));
+  border-bottom: 1px solid var(--border-2);
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.22em;
+  color: var(--gold);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--u));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.match {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: calc(10px * var(--u));
+  padding: calc(6px * var(--u)) calc(10px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(10px * var(--u));
+  background: var(--surface-2);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.next {
+  border-color: var(--gold);
+  box-shadow:
+    0 0 0 1px var(--gold),
+    0 0 calc(18px * var(--u)) rgb(245 197 66 / 0.35);
+}
+
+.playing {
+  border-color: var(--danger);
+  box-shadow: 0 0 calc(14px * var(--u)) rgb(var(--danger-rgb) / 0.35);
+}
+
+.focus {
+  border-color: var(--text-1);
+  box-shadow:
+    0 0 0 calc(2px * var(--u)) var(--text-1),
+    0 calc(10px * var(--u)) calc(24px * var(--u)) calc(-8px * var(--u)) var(--shadow-75);
+}
+
+.next.focus {
+  border-color: var(--gold);
+  box-shadow:
+    0 0 0 calc(2px * var(--u)) var(--gold),
+    0 0 calc(22px * var(--u)) rgb(245 197 66 / 0.5);
+}
+
+.playing.focus {
+  border-color: var(--danger);
+  box-shadow:
+    0 0 0 calc(2px * var(--u)) var(--danger),
+    0 0 calc(22px * var(--u)) rgb(var(--danger-rgb) / 0.5);
+}
+
+/* Cursore in un altro riquadro: resta il segno, attenuato. */
+.focusDim {
+  border-color: var(--border-3);
+  border-style: dashed;
+}
+
+.side {
+  display: flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  min-width: 0;
+}
+
+.right {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(24px * var(--u));
+  height: calc(24px * var(--u));
+  border-radius: 50%;
+  font-size: calc(11px * var(--u));
+  font-weight: 800;
+  color: var(--on-accent);
+}
+
+.name {
+  min-width: 0;
+  overflow: hidden;
+  font-size: calc(13px * var(--u));
+  font-weight: 700;
+  color: var(--text-1);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.won .name {
+  color: var(--gold);
+}
+
+.lost {
+  opacity: 0.5;
+}
+
+.result {
+  min-width: calc(36px * var(--u));
+  font-size: calc(12px * var(--u));
+  text-align: center;
+  color: var(--text-2);
+}
+
+.tags {
+  display: flex;
+  gap: calc(4px * var(--u));
+}
+
+/* Etichette: «PROSSIMO», «IN GIOCO», «TAVOLINO». */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(4px * var(--u));
+  padding: calc(1px * var(--u)) calc(5px * var(--u));
+  border-radius: calc(4px * var(--u));
+  background: var(--surface-1);
+  font-size: calc(8px * var(--u));
+  letter-spacing: 0.12em;
+  color: var(--text-3);
+}
+
+.nextTag {
+  background: var(--gold);
+  color: var(--on-accent);
+}
+
+.liveTag {
+  background: rgb(var(--danger-rgb) / 0.2);
+  color: var(--danger);
+}
+
+.liveDot {
+  width: calc(6px * var(--u));
+  height: calc(6px * var(--u));
+  border-radius: 50%;
+  background: var(--danger);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.resting {
+  margin: 0;
+  padding-left: calc(10px * var(--u));
+  font-size: calc(12px * var(--u));
+  font-style: italic;
+  color: var(--text-3);
+}

@@ -1,0 +1,18 @@
+/* L'immagine copre tutto l'avatar e ne segue gli angoli arrotondati. */
+.avatar {
+  position: relative;
+}
+
+/* Con l'immagine niente colore del profilo: due classi per prevalere sugli stili dei componenti. */
+.avatar.withImage {
+  background: transparent;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}

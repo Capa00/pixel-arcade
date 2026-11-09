@@ -1,0 +1,110 @@
+/*
+ * Colori della dashboard. Notte: i colori della demo (README §F), anche
+ * senza `data-mode` (finestra in partita). Giorno: la stessa dashboard in
+ * tonalità chiare. `data-mode` su <html> lo imposta src/lib/modes.js
+ * (impostazione `ui.mode`).
+ *
+ * I valori `*-rgb` sono terne per le trasparenze:
+ * rgb(var(--bg-rgb) / 0.7).
+ *
+ * `.tone-night` tiene i colori della notte anche di giorno, per ciò che
+ * sta sopra al gioco, alle copertine o alle miniature
+ * (nei moduli: composes: tone-night from global).
+ */
+:root,
+:root[data-mode='night'],
+.tone-night {
+  --bg: #0d0c12;
+  --bg-rgb: 13 12 18;
+  --deep-rgb: 8 7 12;
+  --surface-1: #16151e;
+  --surface-1-rgb: 22 21 30;
+  --surface-2: #1b1a24;
+  --surface-2-rgb: 27 26 36;
+  --surface-3: #1e1d28;
+  --border-1: #22212d;
+  --border-2: #2a2936;
+  --border-3: #3a3948;
+  --text-1: #f3f1f8;
+  --text-2: #d8d5e3;
+  --text-3: #a3a0b3;
+  --text-4: #8a8799;
+  --text-5: #6f6c80;
+  --text-quote: #c9c6d6;
+  --p1: #ff5d73;
+  --p2: #3ccfc4;
+  --ok: #3ddc84;
+  --danger: #ff5d73;
+  --danger-rgb: 255 93 115;
+  --danger-soft: #ff8a9a;
+  --gold: #f5c542;
+  /* Coppe del secondo e del terzo posto (src/components/Leaderboard.jsx). */
+  --silver: #c9ccd8;
+  --bronze: #d9925a;
+  /* Testo scuro sui riquadri colorati (giocatori, profili, oro, avvisi). */
+  --on-accent: #15131c;
+  --shadow-60: rgba(0, 0, 0, 0.6);
+  --shadow-65: rgba(0, 0, 0, 0.65);
+  --shadow-70: rgba(0, 0, 0, 0.7);
+  --shadow-75: rgba(0, 0, 0, 0.75);
+  /* Sfondo del tema (src/components/Backdrop.module.css). */
+  --backdrop-glow: 1;
+  --backdrop-scene: 0.14;
+  --backdrop-sprite: 0.2;
+  --backdrop-outline: none;
+  /* Wrapped (src/views/WrappedLayer.jsx): sfondi, schede dei periodi, velature e intensità dei bagliori. */
+  --wrapped-sky: radial-gradient(ellipse at 50% 30%, #2a1840 0%, #110d1c 60%, #08070c 100%);
+  --wrapped-sky-house: radial-gradient(ellipse at 50% 30%, #0f3438 0%, #0c1519 60%, #07090b 100%);
+  --wrapped-card: linear-gradient(135deg, #3a1c52, #1a1030 60%, #0f2a2e);
+  --wrapped-card-year: linear-gradient(135deg, #5a3a0a, #2a1a08 55%, #1a1030);
+  --wrapped-fill-rgb: 255 255 255;
+  --wrapped-glow: 1;
+  --wrapped-orb: 0.45;
+  --font-pixel: 'Silkscreen', monospace;
+  --font-text: 'Sora', system-ui, sans-serif;
+}
+
+:root[data-mode='day'] {
+  --bg: #e9e6f0;
+  --bg-rgb: 233 230 240;
+  --deep-rgb: 222 218 232;
+  --surface-1: #f7f6fa;
+  --surface-1-rgb: 247 246 250;
+  --surface-2: #f1eff6;
+  --surface-2-rgb: 241 239 246;
+  --surface-3: #e6e3ee;
+  --border-1: #dcd8e5;
+  --border-2: #cfcbdb;
+  --border-3: #b5b0c6;
+  --text-1: #17151f;
+  --text-2: #2e2b3b;
+  --text-3: #4f4b62;
+  --text-4: #625e76;
+  --text-5: #7a768e;
+  --text-quote: #3b384a;
+  --p1: #dc3550;
+  --p2: #0f8f86;
+  --ok: #178f50;
+  --danger: #d42e49;
+  --danger-rgb: 212 46 73;
+  --danger-soft: #b8263f;
+  --gold: #b88407;
+  --silver: #7c8193;
+  --bronze: #a8622a;
+  --on-accent: #15131c;
+  --shadow-60: rgba(40, 32, 70, 0.18);
+  --shadow-65: rgba(40, 32, 70, 0.2);
+  --shadow-70: rgba(40, 32, 70, 0.22);
+  --shadow-75: rgba(40, 32, 70, 0.24);
+  --backdrop-glow: 0.75;
+  --backdrop-scene: 0.2;
+  --backdrop-sprite: 0.32;
+  --backdrop-outline: drop-shadow(0 0 1px rgba(40, 32, 70, 0.55));
+  --wrapped-sky: radial-gradient(ellipse at 50% 30%, #f6ecff 0%, #e8e0f3 60%, #dcd5e8 100%);
+  --wrapped-sky-house: radial-gradient(ellipse at 50% 30%, #e0f6f3 0%, #e1eaed 60%, #d5dee3 100%);
+  --wrapped-card: linear-gradient(135deg, #efdcfb, #e7e2f4 60%, #d8f0ed);
+  --wrapped-card-year: linear-gradient(135deg, #f8e3ae, #f5ecd6 55%, #ebe3f5);
+  --wrapped-fill-rgb: 40 32 70;
+  --wrapped-glow: 0.35;
+  --wrapped-orb: 0.22;
+}

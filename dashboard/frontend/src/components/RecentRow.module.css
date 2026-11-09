@@ -1,0 +1,72 @@
+.row {
+  height: calc(56px * var(--u));
+  flex-shrink: 0;
+  padding: 0 calc(16px * var(--u)) 0 calc(8px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(16px * var(--u));
+  border: 0;
+  border-radius: calc(14px * var(--u));
+  background: var(--surface-1);
+  color: var(--text-1);
+  text-align: left;
+}
+
+.row:global(.focused) {
+  box-shadow: 0 0 0 2px var(--player);
+}
+
+.missing {
+  opacity: 0.55;
+}
+
+.swatch {
+  width: calc(40px * var(--u));
+  height: calc(40px * var(--u));
+  flex-shrink: 0;
+  border-radius: calc(9px * var(--u));
+}
+
+.title {
+  flex-grow: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(15px * var(--u));
+  font-weight: 600;
+}
+
+.system {
+  width: calc(140px * var(--u));
+  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.when {
+  width: calc(120px * var(--u));
+  flex-shrink: 0;
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.time {
+  width: calc(70px * var(--u));
+  flex-shrink: 0;
+  text-align: right;
+  font-size: calc(14px * var(--u));
+  font-weight: 600;
+}
+
+/* Telefono: resta solo titolo, giorno e durata. */
+[data-layout='compact'] .system {
+  display: none;
+}
+
+[data-layout='compact'] .when {
+  width: auto;
+}

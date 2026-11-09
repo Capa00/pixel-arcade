@@ -1,0 +1,549 @@
+/*
+ * Modale «Salvataggi» (livello 45, sotto la finestra di conferma). Lascia
+ * libera la barra dei comandi in basso, che resta leggibile.
+ * `--player` è il colore del giocatore della scheda attiva (P1/P2),
+ * `--profile` quello del suo profilo.
+ */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: calc(64px * var(--u));
+  z-index: 45;
+  padding: calc(24px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(var(--bg-rgb) / 0.7);
+}
+
+.panel {
+  width: calc(1040px * var(--u));
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border-2);
+  border-radius: calc(24px * var(--u));
+  background: var(--surface-1);
+  box-shadow: 0 calc(40px * var(--u)) calc(80px * var(--u)) calc(-20px * var(--u)) var(--shadow-70);
+}
+
+.strip {
+  height: 4px;
+  flex-shrink: 0;
+  background: var(--player);
+}
+
+.head {
+  padding: calc(26px * var(--u)) calc(32px * var(--u)) calc(18px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(20px * var(--u));
+}
+
+.headText {
+  flex-grow: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+}
+
+.kicker {
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+
+.title {
+  overflow: hidden;
+  font-size: calc(28px * var(--u));
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.player {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+}
+
+.tag {
+  padding: calc(5px * var(--u)) calc(9px * var(--u));
+  border-radius: calc(8px * var(--u));
+  background: var(--player);
+  color: var(--on-accent);
+  font-size: calc(11px * var(--u));
+}
+
+.avatar {
+  width: calc(40px * var(--u));
+  height: calc(40px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(11px * var(--u));
+  background: var(--profile);
+  color: var(--on-accent);
+  font-size: calc(17px * var(--u));
+  font-weight: 700;
+}
+
+.name {
+  font-size: calc(18px * var(--u));
+  font-weight: 700;
+  color: var(--profile);
+  min-width: 0;
+  max-width: calc(360px * var(--u));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Schede dei giocatori: LB/RB, [ ] o clic. */
+.tabs {
+  padding: 0 calc(20px * var(--u));
+  display: flex;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border-2);
+}
+
+.tab {
+  position: relative;
+  height: calc(48px * var(--u));
+  padding: 0 calc(16px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  border: 0;
+  background: transparent;
+  color: var(--text-4);
+  font-family: inherit;
+  font-size: calc(15px * var(--u));
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.tab::after {
+  content: '';
+  position: absolute;
+  left: calc(16px * var(--u));
+  right: calc(16px * var(--u));
+  bottom: -1px;
+  height: calc(3px * var(--u));
+  border-radius: calc(3px * var(--u)) calc(3px * var(--u)) 0 0;
+  background: transparent;
+}
+
+.tab:hover {
+  color: var(--text-2);
+}
+
+.tabActive {
+  color: var(--text-1);
+}
+
+.tabActive::after {
+  background: var(--tab);
+}
+
+.tabTag {
+  font-size: calc(10px * var(--u));
+  color: var(--tab);
+}
+
+/* Voci: miniatura, titolo, data e nota. */
+.grid {
+  min-height: 0;
+  padding: calc(22px * var(--u)) calc(32px * var(--u)) calc(30px * var(--u));
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(220px * var(--u)), 1fr));
+  gap: calc(16px * var(--u));
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.grid::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  position: relative;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border-2);
+  border-radius: calc(14px * var(--u));
+  background: var(--surface-2);
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.card:global(.focused) {
+  border-color: var(--player);
+  box-shadow: 0 0 0 2px var(--player);
+}
+
+/* Stato creato con un altro core: miniatura e testi sbiaditi, nota ben visibile. */
+.disabled {
+  cursor: default;
+}
+
+.disabled .thumb,
+.disabled .label,
+.disabled .date {
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+
+.thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.fresh .thumb {
+  background: var(--surface-3);
+}
+
+.plus {
+  font-size: calc(40px * var(--u));
+  color: var(--text-3);
+}
+
+.text {
+  padding: calc(12px * var(--u)) calc(14px * var(--u)) calc(14px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--u));
+}
+
+.label {
+  overflow: hidden;
+  font-size: calc(16px * var(--u));
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.date {
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.note {
+  font-size: calc(12px * var(--u));
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.disabled .note {
+  margin-top: calc(4px * var(--u));
+  padding: calc(5px * var(--u)) calc(10px * var(--u));
+  align-self: flex-start;
+  border-radius: calc(8px * var(--u));
+  background: var(--danger);
+  color: var(--on-accent);
+  font-size: calc(13px * var(--u));
+  font-weight: 700;
+}
+
+/* Salvataggi condivisi: una riga a parte sotto le altre voci, con titolo e descrizione. */
+.sharedHead {
+  grid-column: 1 / -1;
+  margin-top: calc(6px * var(--u));
+  padding-top: calc(18px * var(--u));
+  border-top: 1px solid var(--border-2);
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+
+.shared {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: stretch;
+  border-style: dashed;
+}
+
+/* Copertina del gioco a sinistra, in verticale come nella libreria. */
+.sharedCover {
+  position: relative;
+  width: calc(120px * var(--u));
+  flex-shrink: 0;
+  align-self: flex-start;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.shared .text {
+  min-width: 0;
+  flex: 1 1 auto;
+  justify-content: center;
+}
+
+.shared .label {
+  white-space: normal;
+}
+
+/* Descrizione completa, su tutte le righe che servono. */
+.description {
+  font-size: calc(15px * var(--u));
+  line-height: 1.4;
+  color: var(--text-2);
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+/* Telefono: modale a tutta larghezza, voci più strette. */
+[data-layout='compact'] .panel {
+  width: 100%;
+}
+
+[data-layout='compact'] .grid {
+  padding: calc(16px * var(--u));
+  grid-template-columns: repeat(auto-fill, minmax(calc(150px * var(--u)), 1fr));
+}
+
+/*
+ * In partita (finestra sopra il gioco): i 9 slot in una griglia 3×3 che
+ * riempie il pannello. La miniatura occupa tutta la voce, i testi stanno
+ * sopra una sfumatura in basso e il numero dello slot in alto a sinistra.
+ * La voce col focus si accende col colore del giocatore.
+ */
+.game {
+  composes: tone-night from global;
+  padding: calc(14px * var(--u));
+  background: rgba(13, 12, 18, 0.55);
+}
+
+.game .panel {
+  width: 100%;
+  height: 100%;
+  background: rgb(var(--surface-1-rgb) / 0.94);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 calc(30px * var(--u)) calc(70px * var(--u)) var(--shadow-75);
+}
+
+.game .strip {
+  height: 6px;
+  background: linear-gradient(90deg, var(--player), var(--profile));
+}
+
+.game .head {
+  padding: calc(18px * var(--u)) calc(28px * var(--u)) calc(10px * var(--u));
+}
+
+.game .kicker {
+  color: var(--player);
+}
+
+.game .title {
+  font-size: calc(24px * var(--u));
+}
+
+.game .grid {
+  flex-grow: 1;
+  padding: calc(12px * var(--u)) calc(28px * var(--u)) calc(24px * var(--u));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: calc(14px * var(--u));
+  overflow: hidden;
+}
+
+.game .card {
+  position: relative;
+  min-height: 0;
+  border-radius: calc(12px * var(--u));
+  background: var(--bg);
+  transition: transform 120ms ease-out, box-shadow 120ms ease-out, border-color 120ms ease-out;
+}
+
+.game .card:global(.focused) {
+  z-index: 1;
+  transform: scale(1.04);
+  border-color: var(--player);
+  box-shadow: 0 0 0 2px var(--player), 0 0 calc(26px * var(--u)) var(--player);
+}
+
+.game .thumb {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.game .image {
+  filter: brightness(0.62) saturate(0.85);
+  transition: filter 120ms ease-out;
+}
+
+.game .card:global(.focused) .image {
+  filter: none;
+}
+
+.game .text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: calc(26px * var(--u)) calc(12px * var(--u)) calc(9px * var(--u));
+  gap: calc(2px * var(--u));
+  background: linear-gradient(to top, rgba(13, 12, 18, 0.95) 30%, rgba(13, 12, 18, 0));
+}
+
+.game .label {
+  font-size: calc(15px * var(--u));
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.game .date {
+  font-size: calc(12px * var(--u));
+  color: var(--text-2);
+}
+
+.game .note {
+  font-size: calc(11px * var(--u));
+  color: var(--text-3);
+}
+
+/* Numero dello slot. */
+.badge {
+  composes: tone-night from global;
+  position: absolute;
+  top: calc(8px * var(--u));
+  left: calc(8px * var(--u));
+  z-index: 1;
+  min-width: calc(26px * var(--u));
+  padding: calc(4px * var(--u)) calc(7px * var(--u));
+  border-radius: calc(7px * var(--u));
+  background: rgba(13, 12, 18, 0.78);
+  color: var(--player);
+  font-size: calc(13px * var(--u));
+  text-align: center;
+}
+
+.game .card:global(.focused) .badge {
+  background: var(--player);
+  color: var(--on-accent);
+}
+
+/* Slot vuoto: bordo tratteggiato, righe diagonali e «+». */
+.game .vacant {
+  border-style: dashed;
+  border-color: var(--border-3);
+  background: repeating-linear-gradient(-45deg, var(--surface-2) 0, var(--surface-2) 10px, var(--surface-1) 10px, var(--surface-1) 20px);
+}
+
+.game .vacant .thumb {
+  padding-bottom: calc(30px * var(--u));
+}
+
+.game .vacant .plus {
+  font-size: calc(34px * var(--u));
+  color: var(--text-5);
+  transition: color 120ms ease-out;
+}
+
+.game .vacant:global(.focused) .plus {
+  color: var(--player);
+}
+
+.game .vacant .label {
+  color: var(--text-3);
+}
+
+/* Lucchetto di uno slot protetto, in alto a destra. */
+.lock {
+  composes: tone-night from global;
+  position: absolute;
+  top: calc(8px * var(--u));
+  right: calc(8px * var(--u));
+  z-index: 1;
+  width: calc(26px * var(--u));
+  height: calc(30px * var(--u));
+  padding: calc(5px * var(--u)) calc(6px * var(--u));
+  border-radius: calc(7px * var(--u));
+  background: rgba(13, 12, 18, 0.78);
+  color: #f5c542;
+}
+
+/* «Annulla ultimo caricamento»: barra a tutta larghezza sopra la griglia. */
+.game .withUndo {
+  grid-template-rows: auto repeat(3, minmax(0, 1fr));
+}
+
+.undo {
+  grid-column: 1 / -1;
+  min-height: calc(48px * var(--u));
+  padding: calc(8px * var(--u)) calc(16px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(14px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 120ms ease-out, box-shadow 120ms ease-out;
+}
+
+.undo:global(.focused) {
+  border-color: var(--player);
+  box-shadow: 0 0 0 2px var(--player), 0 0 calc(18px * var(--u)) var(--player);
+}
+
+.undoIcon {
+  font-size: calc(18px * var(--u));
+  color: var(--player);
+}
+
+.undo .label {
+  font-size: calc(15px * var(--u));
+}
+
+.undo .note {
+  margin-left: auto;
+  color: var(--text-3);
+}
+
+/* «Elimina tutti i salvataggi» (Profilo): pulsante a tutta larghezza in fondo alla griglia. */
+.deleteAll {
+  grid-column: 1 / -1;
+  min-height: calc(48px * var(--u));
+  padding: calc(8px * var(--u)) calc(16px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  color: var(--danger);
+  font-family: inherit;
+  font-size: calc(15px * var(--u));
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.deleteAll:global(.focused) {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 2px var(--danger);
+}

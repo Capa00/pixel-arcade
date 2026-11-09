@@ -1,0 +1,370 @@
+/*
+ * Scheda «Torneo» delle Impostazioni (SettingsTournament.jsx): form del
+ * torneo e finestre della combinazione, della data, del gioco e del
+ * salvataggio di partenza. Le finestre usano la base di Settings.module.css.
+ */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: calc(14px * var(--u));
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(14px * var(--u));
+}
+
+.status {
+  padding: calc(4px * var(--u)) calc(12px * var(--u));
+  border: 1px solid var(--border-3);
+  border-radius: calc(999px * var(--u));
+  font-size: calc(13px * var(--u));
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+.creator {
+  display: flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  font-size: calc(14px * var(--u));
+  color: var(--text-3);
+}
+
+.swatch {
+  width: calc(14px * var(--u));
+  height: calc(14px * var(--u));
+  flex-shrink: 0;
+  border-radius: calc(4px * var(--u));
+}
+
+.section {
+  margin-top: calc(8px * var(--u));
+  font-size: calc(11px * var(--u));
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--text-4);
+}
+
+.hint {
+  font-size: calc(14px * var(--u));
+  color: var(--text-3);
+}
+
+.comboKeys {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(10px * var(--u));
+}
+
+.comboIcons {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(6px * var(--u));
+}
+
+.problem {
+  font-size: calc(14px * var(--u));
+  color: var(--danger-soft);
+}
+
+/* Gioco e salvataggio a sinistra, copertina e miniatura dello stato a destra. */
+.gameRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: calc(16px * var(--u));
+}
+
+.thumbs {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(12px * var(--u));
+}
+
+.cover {
+  width: calc(110px * var(--u));
+  aspect-ratio: 3 / 4;
+  border-radius: calc(10px * var(--u));
+  overflow: hidden;
+}
+
+.stateThumb {
+  width: calc(196px * var(--u));
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid var(--border-2);
+  border-radius: calc(10px * var(--u));
+  image-rendering: pixelated;
+}
+
+/* Finestre piccole: combinazione e data. */
+.small {
+  width: calc(620px * var(--u));
+}
+
+.prompt {
+  font-size: calc(16px * var(--u));
+  color: var(--text-1);
+}
+
+.dots {
+  min-height: calc(64px * var(--u));
+  padding: calc(12px * var(--u)) calc(18px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-2);
+  border-radius: calc(14px * var(--u));
+  background: var(--surface-2);
+  font-size: calc(22px * var(--u));
+  letter-spacing: 0.2em;
+  color: var(--text-1);
+  overflow-wrap: anywhere;
+}
+
+/* Campo data e ora: cinque parti con le frecce sopra e sotto. */
+.clock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(8px * var(--u));
+}
+
+.clockGroup {
+  display: flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+}
+
+.clockSep {
+  font-size: calc(24px * var(--u));
+  color: var(--text-3);
+}
+
+.clockPart {
+  padding: calc(4px * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--border-2);
+  border-radius: calc(14px * var(--u));
+  background: var(--surface-2);
+}
+
+.clockActive {
+  border-color: var(--text-1);
+  background: var(--text-1);
+  color: var(--bg);
+}
+
+/* Frecce e valore: niente bordo e sfondo dei pulsanti del browser. */
+.clockArrow,
+.clockValue {
+  border: 0;
+  background: none;
+  color: inherit;
+}
+
+.clockArrow {
+  padding: calc(2px * var(--u)) calc(14px * var(--u));
+  font-size: calc(11px * var(--u));
+  opacity: 0;
+}
+
+.clockActive .clockArrow {
+  opacity: 0.8;
+}
+
+.clockValue {
+  min-width: calc(72px * var(--u));
+  padding: calc(2px * var(--u)) calc(10px * var(--u));
+  font-size: calc(28px * var(--u));
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+/* Scelta del gioco: schede delle console, elenco a sinistra, copertina a destra. */
+.gameModal {
+  width: calc(980px * var(--u));
+  height: 86%;
+}
+
+.besideKeyboard {
+  justify-content: flex-end;
+}
+
+.besideKeyboard .gameModal {
+  width: calc(620px * var(--u));
+}
+
+.besideKeyboard .gamePreview {
+  display: none;
+}
+
+.systemTabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(10px * var(--u));
+}
+
+.systemStep {
+  width: calc(36px * var(--u));
+  height: calc(36px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(10px * var(--u));
+  background: var(--surface-2);
+  font-size: calc(12px * var(--u));
+}
+
+.systemTab {
+  min-width: calc(180px * var(--u));
+  padding: calc(6px * var(--u)) calc(14px * var(--u));
+  border: 1px solid var(--accent);
+  border-radius: calc(10px * var(--u));
+  font-size: calc(15px * var(--u));
+  font-weight: 600;
+  text-align: center;
+  color: var(--accent);
+}
+
+.search {
+  height: calc(36px * var(--u));
+  margin-left: auto;
+  padding: 0 calc(16px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(10px * var(--u));
+  background: var(--surface-2);
+  font-size: calc(14px * var(--u));
+  color: var(--text-2);
+}
+
+.gameBody {
+  min-height: 0;
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) calc(240px * var(--u));
+  gap: calc(16px * var(--u));
+}
+
+.gameList,
+.saveList {
+  min-height: 0;
+  margin: 0;
+  padding: calc(2px * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--u));
+  overflow-y: auto;
+  list-style: none;
+}
+
+.gameItem,
+.saveItem {
+  width: 100%;
+  min-height: calc(44px * var(--u));
+  padding: calc(8px * var(--u)) calc(16px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(12px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  font-size: calc(15px * var(--u));
+  text-align: left;
+}
+
+.gameActive {
+  border-color: var(--text-1);
+  background: var(--text-1);
+  color: var(--bg);
+}
+
+.gameTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gameNote {
+  flex-shrink: 0;
+  font-size: calc(12px * var(--u));
+  opacity: 0.7;
+}
+
+.gamePreview {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.preview {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: calc(12px * var(--u));
+  overflow: hidden;
+}
+
+/* Scelta del salvataggio: miniatura dello stato, nome e data. */
+.saveModal {
+  width: calc(760px * var(--u));
+}
+
+.saveItem {
+  justify-content: flex-start;
+}
+
+.saveThumb {
+  width: calc(96px * var(--u));
+  aspect-ratio: 4 / 3;
+  flex-shrink: 0;
+  border-radius: calc(8px * var(--u));
+  background: var(--surface-3);
+  overflow: hidden;
+}
+
+.saveThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.saveText {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--u));
+}
+
+.saveText .gameNote {
+  flex-shrink: 1;
+}
+
+/* --- Torneo dell'archivio (sola lettura) --- */
+
+.archiveTitle {
+  margin: 0;
+  font-size: calc(20px * var(--u));
+  color: var(--text-1);
+}
+
+.archiveBracket {
+  overflow-x: auto;
+  padding-bottom: calc(6px * var(--u));
+}
+
+/* Finestra di una serie: edizioni a sinistra, classifiche a destra. */
+.seriesWindow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: calc(28px * var(--u));
+}

@@ -1,0 +1,377 @@
+/*
+ * Schermata «Avvia» del torneo: a tutta pagina sopra la scheda TOURNAMENT,
+ * lascia libera la barra dei comandi in basso. Oro per la scelta e il passo
+ * attivo, rosso per il giocatore preso o segnato.
+ */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: calc(64px * var(--u));
+  z-index: 35;
+  display: flex;
+  background: rgb(var(--bg-rgb) / 0.94);
+  backdrop-filter: blur(calc(6px * var(--u)));
+  animation: appear 0.25s ease-out both;
+}
+
+.screen {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(22px * var(--u));
+  padding: calc(36px * var(--u)) calc(56px * var(--u)) calc(20px * var(--u));
+}
+
+/* --- Testata e passi --- */
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: calc(24px * var(--u));
+  padding-bottom: calc(18px * var(--u));
+  border-bottom: 1px solid rgb(245 197 66 / 0.25);
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+  min-width: 0;
+}
+
+.kicker {
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.3em;
+  color: var(--gold);
+}
+
+.title {
+  margin: 0;
+  overflow: hidden;
+  font-size: calc(26px * var(--u));
+  color: var(--text-1);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: calc(8px * var(--u));
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  padding: calc(8px * var(--u)) calc(14px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: 999px;
+  font-size: calc(13px * var(--u));
+  font-weight: 700;
+  color: var(--text-4);
+}
+
+.stepNo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(20px * var(--u));
+  height: calc(20px * var(--u));
+  border-radius: 50%;
+  background: var(--surface-3);
+  font-size: calc(10px * var(--u));
+}
+
+.stepActive {
+  border-color: var(--gold);
+  background: rgb(245 197 66 / 0.12);
+  color: var(--text-1);
+}
+
+.stepActive .stepNo {
+  background: var(--gold);
+  color: var(--on-accent);
+}
+
+.stepDone {
+  color: var(--text-3);
+}
+
+.stepDone .stepNo {
+  background: var(--ok);
+  color: var(--on-accent);
+}
+
+/* --- Corpo --- */
+
+.body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(18px * var(--u));
+  overflow: auto;
+}
+
+.previewBody {
+  overflow: hidden;
+}
+
+.lead {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: calc(8px * var(--u));
+  font-size: calc(16px * var(--u));
+  color: var(--text-2);
+}
+
+.lead strong {
+  color: var(--text-1);
+}
+
+.big {
+  font-size: calc(22px * var(--u));
+  color: var(--gold);
+}
+
+.markNote {
+  padding: calc(3px * var(--u)) calc(10px * var(--u));
+  border-radius: 999px;
+  background: rgb(var(--danger-rgb) / 0.16);
+  font-size: calc(13px * var(--u));
+  color: var(--danger-soft);
+}
+
+/* --- Passo 1: formati --- */
+
+.formats {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+  max-width: calc(720px * var(--u));
+}
+
+.format {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: calc(14px * var(--u));
+  padding: calc(14px * var(--u)) calc(18px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  font: inherit;
+  text-align: left;
+  color: var(--text-1);
+  cursor: pointer;
+}
+
+.formatName {
+  flex: 1;
+  font-size: calc(16px * var(--u));
+  font-weight: 700;
+}
+
+.fromSettings {
+  padding: calc(3px * var(--u)) calc(9px * var(--u));
+  border-radius: 999px;
+  background: rgb(245 197 66 / 0.14);
+  font-size: calc(11px * var(--u));
+  color: var(--gold);
+}
+
+.formatCount {
+  min-width: calc(120px * var(--u));
+  font-size: calc(12px * var(--u));
+  text-align: right;
+  color: var(--text-2);
+}
+
+.soon {
+  opacity: 0.45;
+}
+
+.soon .formatCount {
+  color: var(--text-4);
+}
+
+.active {
+  border-color: var(--gold);
+  background: rgb(245 197 66 / 0.1);
+  box-shadow: 0 0 calc(16px * var(--u)) rgb(245 197 66 / 0.2);
+}
+
+.summary {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(12px * var(--u));
+  max-width: calc(720px * var(--u));
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.summaryKey {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(6px * var(--u));
+  color: var(--text-4);
+}
+
+.draftNote {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(12px * var(--u));
+  max-width: calc(720px * var(--u));
+  padding: calc(10px * var(--u)) calc(14px * var(--u));
+  border: 1px dashed rgb(245 197 66 / 0.4);
+  border-radius: calc(10px * var(--u));
+  font-size: calc(13px * var(--u));
+  color: var(--text-2);
+}
+
+/* --- Passo 2: teste di serie --- */
+
+.seeds {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(360px * var(--u)), 1fr));
+  gap: calc(8px * var(--u));
+}
+
+.seedRow {
+  display: flex;
+  align-items: center;
+  gap: calc(12px * var(--u));
+  padding: calc(8px * var(--u)) calc(14px * var(--u));
+  border: 1px solid var(--border-2);
+  border-left: calc(4px * var(--u)) solid var(--player);
+  border-radius: calc(10px * var(--u));
+  background: var(--surface-2);
+}
+
+.position {
+  min-width: calc(26px * var(--u));
+  font-size: calc(14px * var(--u));
+  text-align: center;
+  color: var(--gold);
+}
+
+.avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(32px * var(--u));
+  height: calc(32px * var(--u));
+  border-radius: 50%;
+  font-size: calc(14px * var(--u));
+  font-weight: 800;
+  color: var(--on-accent);
+}
+
+.seedName {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-size: calc(15px * var(--u));
+  font-weight: 700;
+  color: var(--text-1);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.seedValue {
+  font-size: calc(12px * var(--u));
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.grabbed {
+  border-color: var(--danger);
+  background: rgb(var(--danger-rgb) / 0.14);
+  box-shadow: 0 calc(8px * var(--u)) calc(20px * var(--u)) calc(-8px * var(--u)) var(--shadow-60);
+  transform: translateX(calc(8px * var(--u)));
+}
+
+.grabMark {
+  font-size: calc(11px * var(--u));
+  color: var(--danger-soft);
+}
+
+/* --- Passo 3 del girone: posizioni nel calendario e anteprima affiancate --- */
+
+.league {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: calc(20px * var(--u));
+}
+
+.leaguePanel {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+}
+
+.panelTitle {
+  margin: 0;
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.22em;
+  color: var(--text-3);
+}
+
+.panelNote {
+  margin: 0;
+  font-size: calc(12px * var(--u));
+  color: var(--text-4);
+}
+
+.ringList {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--u));
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  list-style: none;
+}
+
+/* --- Attesa --- */
+
+.busy {
+  position: absolute;
+  top: calc(16px * var(--u));
+  right: calc(24px * var(--u));
+  font-size: calc(14px * var(--u));
+  color: var(--gold);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+}

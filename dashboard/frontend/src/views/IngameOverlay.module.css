@@ -1,0 +1,47 @@
+/*
+ * Finestra dei salvataggi in partita (`/?overlay=1`): modale, menu e
+ * conferme occupano `.page`; sotto restano lo stato e la barra dei comandi.
+ */
+.page {
+  position: relative;
+  flex-grow: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.wait {
+  position: relative;
+  font-size: calc(14px * var(--u));
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+
+.bar {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+.status {
+  padding: calc(10px * var(--u)) calc(48px * var(--u));
+  border-top: 1px solid var(--border-1);
+  font-size: calc(14px * var(--u));
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+.error {
+  color: var(--danger);
+}

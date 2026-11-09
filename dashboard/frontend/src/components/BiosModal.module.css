@@ -1,0 +1,57 @@
+/*
+ * Pagina «BIOS»: usa gli stili della pagina «Configurazione»
+ * (ConfigModal.module.css) più l'intestazione dei core e i colori dello stato.
+ */
+.heading {
+  padding-top: calc(6px * var(--u));
+  display: flex;
+  flex-shrink: 0;
+  align-items: baseline;
+  gap: calc(12px * var(--u));
+}
+
+.coreNote {
+  font-size: calc(12px * var(--u));
+  color: var(--text-3);
+}
+
+/* Stato del file: presente (verde), versione diversa (accento), obbligatorio mancante (rosso). */
+.status {
+  min-width: calc(110px * var(--u));
+  flex-shrink: 0;
+  padding: calc(4px * var(--u)) calc(8px * var(--u));
+  border-radius: calc(6px * var(--u));
+  background: var(--surface-1);
+  font-size: calc(9px * var(--u));
+  text-align: center;
+  color: var(--text-3);
+}
+
+.ok {
+  background: var(--ok);
+  color: var(--bg);
+}
+
+.warn {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.bad {
+  background: var(--danger);
+  color: var(--bg);
+}
+
+.added {
+  flex-shrink: 0;
+  font-size: calc(11px * var(--u));
+  color: var(--text-4);
+}
+
+.dir {
+  padding: calc(10px * var(--u)) calc(32px * var(--u)) calc(16px * var(--u));
+  flex-shrink: 0;
+  overflow-wrap: anywhere;
+  font-size: calc(11px * var(--u));
+  color: var(--text-4);
+}

@@ -1,0 +1,230 @@
+/* Scheda «Statistiche» della pagina profilo: ore per console, più giocati, storico. */
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: calc(32px * var(--u));
+  align-items: start;
+}
+
+/* Ore per console: una barra orizzontale nel colore della console. */
+.bars {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(12px * var(--u));
+  list-style: none;
+}
+
+.barRow {
+  --accent: var(--text-3);
+  display: grid;
+  grid-template-columns: calc(130px * var(--u)) minmax(0, 1fr) calc(70px * var(--u)) calc(90px * var(--u));
+  align-items: center;
+  gap: calc(14px * var(--u));
+}
+
+.barName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(10px * var(--u));
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+.barTrack {
+  height: calc(12px * var(--u));
+  overflow: hidden;
+  border-radius: calc(6px * var(--u));
+  background: var(--border-1);
+}
+
+.barFill {
+  display: block;
+  height: 100%;
+  border-radius: calc(6px * var(--u));
+  background: var(--accent);
+}
+
+.barValue {
+  text-align: right;
+  font-size: calc(15px * var(--u));
+  font-weight: 600;
+}
+
+.barCount {
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+/* Righe dei giochi più giocati e dello storico. */
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--u));
+}
+
+.row {
+  min-height: calc(56px * var(--u));
+  flex-shrink: 0;
+  padding: calc(8px * var(--u)) calc(16px * var(--u)) calc(8px * var(--u)) calc(8px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(14px * var(--u));
+  border: 0;
+  border-radius: calc(14px * var(--u));
+  background: var(--surface-1);
+  color: var(--text-1);
+  text-align: left;
+}
+
+.row:global(.focused) {
+  box-shadow: 0 0 0 2px var(--player);
+}
+
+.missing {
+  opacity: 0.55;
+}
+
+.rank {
+  width: calc(22px * var(--u));
+  flex-shrink: 0;
+  text-align: center;
+  font-size: calc(14px * var(--u));
+  font-weight: 700;
+  color: var(--text-3);
+}
+
+.swatch {
+  width: calc(40px * var(--u));
+  height: calc(40px * var(--u));
+  flex-shrink: 0;
+  border-radius: calc(9px * var(--u));
+}
+
+.text {
+  flex-grow: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(3px * var(--u));
+}
+
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(15px * var(--u));
+  font-weight: 600;
+}
+
+.meta {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(13px * var(--u));
+  color: var(--text-3);
+}
+
+.trophies {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(13px * var(--u));
+  color: var(--gold);
+}
+
+.tournament {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(11px * var(--u));
+  letter-spacing: 0.08em;
+  color: var(--gold);
+}
+
+.partner {
+  flex-shrink: 0;
+  padding: calc(4px * var(--u)) calc(10px * var(--u));
+  border: 1px solid var(--partner);
+  border-radius: calc(8px * var(--u));
+  font-size: calc(12px * var(--u));
+  font-weight: 600;
+  color: var(--partner);
+}
+
+.xp {
+  width: calc(70px * var(--u));
+  flex-shrink: 0;
+  text-align: right;
+  font-size: calc(13px * var(--u));
+  font-weight: 600;
+  color: var(--profile);
+}
+
+.time {
+  width: calc(70px * var(--u));
+  flex-shrink: 0;
+  text-align: right;
+  font-size: calc(14px * var(--u));
+  font-weight: 600;
+}
+
+.more {
+  align-self: center;
+  margin-top: calc(6px * var(--u));
+}
+
+/* Verticale e telefono: una colonna sola. */
+[data-layout='portrait'] .grid,
+[data-layout='compact'] .grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+[data-layout='compact'] .barRow {
+  grid-template-columns: calc(90px * var(--u)) minmax(0, 1fr) calc(60px * var(--u));
+}
+
+[data-layout='compact'] .barCount,
+[data-layout='compact'] .xp {
+  display: none;
+}
+
+/* --- Tornei --- */
+
+.tournamentsLine {
+  margin: 0 0 calc(18px * var(--u));
+  font-size: calc(13px * var(--u));
+  letter-spacing: 0.06em;
+  color: var(--gold);
+}
+
+.reward {
+  cursor: default;
+}
+
+.medal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(12px * var(--u));
+  color: var(--on-accent);
+}
+
+.place1 {
+  background: var(--gold);
+}
+
+.place2 {
+  background: var(--silver);
+}
+
+.place3 {
+  background: var(--bronze);
+}
+
+.place4 {
+  background: var(--surface-3);
+  color: var(--text-2);
+}

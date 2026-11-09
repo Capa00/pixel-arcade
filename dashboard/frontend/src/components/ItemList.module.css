@@ -1,0 +1,84 @@
+.list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--u));
+  list-style: none;
+}
+
+.row {
+  min-height: calc(44px * var(--u));
+  padding: calc(6px * var(--u)) calc(8px * var(--u)) calc(6px * var(--u)) calc(14px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(14px * var(--u));
+  border: 1px solid var(--border-2);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  transition: border-color 0.1s, background 0.1s;
+}
+
+.row:global(.focused) {
+  border-color: var(--text-1);
+  background: var(--surface-3);
+}
+
+.plus {
+  width: calc(18px * var(--u));
+  flex-shrink: 0;
+  font-size: calc(12px * var(--u));
+  color: var(--text-4);
+  text-align: center;
+}
+
+.content {
+  min-width: 0;
+  flex-grow: 1;
+  font-size: calc(15px * var(--u));
+}
+
+/* Riga attenuata, per esempio un core non disponibile. */
+.muted .content {
+  color: var(--text-4);
+}
+
+/* Righe «Aggiungi…»: bordo tratteggiato. */
+.add {
+  border-style: dashed;
+  color: var(--text-3);
+}
+
+.add:global(.focused) {
+  color: var(--text-1);
+}
+
+/* Pulsanti per il mouse: visibili sulla riga a fuoco. */
+.tools {
+  display: flex;
+  gap: calc(4px * var(--u));
+  visibility: hidden;
+}
+
+.row:global(.focused) .tools {
+  visibility: visible;
+}
+
+.tool {
+  width: calc(32px * var(--u));
+  height: calc(32px * var(--u));
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-3);
+  border-radius: calc(8px * var(--u));
+  background: var(--surface-1);
+  color: var(--text-2);
+  font-size: calc(12px * var(--u));
+}
+
+.tool:hover {
+  border-color: var(--text-2);
+  color: var(--text-1);
+}

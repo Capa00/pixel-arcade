@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pixel Arcade</title>
+  <link rel="stylesheet" href="dashboard/istruzioni.css">
+</head>
+<body>
+  <main class="card">
+    <header class="brand">
+      <svg width="30" height="30" viewBox="0 0 10 10" shape-rendering="crispEdges" aria-hidden="true">
+        <rect x="0" y="3" width="10" height="5" fill="#f3f1f8"></rect>
+        <rect x="1" y="2" width="8" height="7" fill="#f3f1f8"></rect>
+        <rect x="2" y="4" width="1" height="3" fill="#0d0c12"></rect>
+        <rect x="1" y="5" width="3" height="1" fill="#0d0c12"></rect>
+        <rect x="6" y="4" width="1" height="1" fill="#ff5d73"></rect>
+        <rect x="7" y="5" width="1" height="1" fill="#3ccfc4"></rect>
+      </svg>
+      <span class="pix">PIXEL ARCADE</span>
+    </header>
+
+    <h1>Avvio della dashboard</h1>
+    <p class="lead">Questa pagina contiene solo le istruzioni. La dashboard vera gira sulla console, servita da Pixel Arcade.</p>
+
+    <ol class="steps">
+      <li>
+        <span class="num pix">1</span>
+        <div>
+          <strong>Prepara la build</strong> (una volta, dal PC):
+          <code>cd dashboard/frontend &amp;&amp; npm ci &amp;&amp; npm run build</code>
+        </div>
+      </li>
+      <li>
+        <span class="num pix">2</span>
+        <div>
+          <strong>Avvia sulla console</strong>: <code>bash run_dashboard.sh</code>.
+          Chrome si apre a schermo intero, senza barre né schede.
+        </div>
+      </li>
+      <li>
+        <span class="num pix">3</span>
+        <div>
+          <strong>Senza Chrome automatico</strong>: <code>bash run_dashboard.sh --no-browser</code>,
+          poi apri <code>http://127.0.0.1:8765</code> sulla console.
+        </div>
+      </li>
+      <li>
+        <span class="num pix">4</span>
+        <div>
+          <strong>Per fermare</strong>: chiudi la finestra della dashboard oppure premi Ctrl+C nel terminale del servizio. In entrambi i casi si fermano sia il servizio sia il Chrome aperto da Pixel Arcade.
+        </div>
+      </li>
+    </ol>
+
+    <p class="note">Dettagli su build, database e sviluppo in <code>dashboard/README.md</code>.</p>
+  </main>
+</body>
+</html>

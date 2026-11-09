@@ -1,0 +1,133 @@
+.setup {
+  display: flex;
+  flex-direction: column;
+  gap: calc(14px * var(--u));
+}
+
+.title {
+  font-size: calc(12px * var(--u));
+  letter-spacing: 0.12em;
+  color: var(--text-3);
+}
+
+.who {
+  font-size: calc(14px * var(--u));
+  color: var(--text-3);
+}
+
+.prompt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(12px * var(--u));
+  font-size: calc(20px * var(--u));
+  font-weight: 600;
+}
+
+.target {
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+  color: var(--ok);
+}
+
+.note {
+  font-size: calc(14px * var(--u));
+  font-weight: 400;
+  color: var(--text-4);
+}
+
+.skip {
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(8px * var(--u));
+  font-size: calc(16px * var(--u));
+  font-weight: 400;
+  color: var(--text-2);
+}
+
+.message {
+  min-height: calc(20px * var(--u));
+  font-size: calc(14px * var(--u));
+  color: var(--p1);
+}
+
+.error {
+  font-size: calc(15px * var(--u));
+  line-height: 1.5;
+  color: var(--p1);
+}
+
+.map {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(210px * var(--u)), 1fr));
+  gap: calc(6px * var(--u));
+  list-style: none;
+}
+
+.entry {
+  min-height: calc(36px * var(--u));
+  padding: calc(4px * var(--u)) calc(10px * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--u));
+  border: 1px solid var(--border-1);
+  border-radius: calc(10px * var(--u));
+  font-size: calc(13px * var(--u));
+}
+
+.current {
+  border-color: var(--ok);
+}
+
+.lit {
+  border-color: var(--ok);
+  background: var(--surface-2);
+}
+
+.name {
+  flex-grow: 1;
+  color: var(--text-2);
+}
+
+.token {
+  font-size: calc(12px * var(--u));
+  color: var(--text-4);
+}
+
+.pill {
+  min-width: calc(22px * var(--u));
+  height: calc(22px * var(--u));
+  padding: 0 calc(8px * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--text-5);
+  border-radius: calc(11px * var(--u));
+  font-size: calc(10px * var(--u));
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: calc(10px * var(--u));
+}
+
+.button {
+  height: calc(40px * var(--u));
+  padding: 0 calc(20px * var(--u));
+  border: 1px solid var(--border-3);
+  border-radius: calc(12px * var(--u));
+  background: var(--surface-2);
+  font-size: calc(14px * var(--u));
+}
+
+.button:hover {
+  border-color: var(--text-2);
+}
