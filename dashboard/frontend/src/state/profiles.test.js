@@ -29,8 +29,8 @@ import { crtOn, favoriteSlots, gameSummary, isFavorite, profileOf, profileTabs, 
 import { allConsoles, currentGame, initialState, reducer } from './reducer.js'
 
 const systems = [
-  { id: 'arcade', name: 'ARCADE', covers: [] },
-  { id: 'mame', name: 'MAME', arcade: true, covers: [] },
+  { id: 'arcade', name: 'ARCADE', count: 1, arcade: true, covers: [] },
+  { id: 'mame', name: 'MAME', count: 1, arcade: true, covers: [] },
 ]
 
 function account(id, name, extra = {}) {

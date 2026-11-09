@@ -1,22 +1,26 @@
-"""Repository delle console della riga (tabelle ``consoles_off`` e ``account_consoles``)."""
+"""Repository delle console della riga (tabelle ``console_settings`` e ``account_consoles``)."""
 
 
 class ConsolesRepository:
-    """Console spente per tutti e scelte dei profili rispetto alle Impostazioni."""
+    """Stato delle console deciso nelle Impostazioni e scelte dei profili."""
 
     def __init__(self, db):
         self.db = db
 
-    def off(self):
-        """Id delle console spente per tutti, in ordine alfabetico."""
-        return [system_id for (system_id,) in self.db.query('SELECT system_id FROM consoles_off ORDER BY system_id')]
+    def settings(self):
+        """Stato deciso nelle Impostazioni: ``(accese, spente)``, liste di id in ordine alfabetico."""
+        rows = self.db.query('SELECT system_id, shown FROM console_settings ORDER BY system_id')
+        return ([system_id for system_id, shown in rows if shown],
+                [system_id for system_id, shown in rows if not shown])
 
-    def set_off(self, system_ids):
-        """Sostituisce l'elenco delle console spente per tutti."""
+    def set_settings(self, on, off):
+        """Sostituisce lo stato deciso nelle Impostazioni (liste di id accese e spente)."""
         with self.db.transaction() as conn:
-            conn.execute('DELETE FROM consoles_off')
-            for system_id in dict.fromkeys(system_ids):
-                conn.execute('INSERT INTO consoles_off (system_id) VALUES (?)', (system_id,))
+            conn.execute('DELETE FROM console_settings')
+            for system_id in dict.fromkeys(on):
+                conn.execute('INSERT INTO console_settings (system_id, shown) VALUES (?, 1)', (system_id,))
+            for system_id in dict.fromkeys(off):
+                conn.execute('INSERT OR REPLACE INTO console_settings (system_id, shown) VALUES (?, 0)', (system_id,))
 
     def choices(self):
         """Scelte dei profili: ``[(account_id, system_id, shown)]`` con ``shown`` booleano."""

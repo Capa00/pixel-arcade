@@ -12,7 +12,14 @@ di Commons. Accanto ai loghi lo script scrive ``index.json``:
 ``{preset: {file, source, license, author}}``, con fonte e licenza di ognuno.
 I loghi sono marchi dei rispettivi proprietari.
 
-Uso: ``python3 dashboard/tools/fetch_logos.py [--out CARTELLA] [--force]``.
+Ai sistemi senza logo su Commons lo script dà l'icona del tema «Systematic» di
+RetroArch (``assets/xmb/systematic/png/<sistema>.png``, CC BY 4.0 nella copia di
+libretro, MIT per l'autore BAXY), copiata dalla cartella degli asset di RetroArch
+installata: il nome del file è quello del sistema nei ``.info`` dei core
+(``types`` dei ``PRESETS`` del backend), così anche le console aggiunte in futuro
+la trovano. Senza asset installati quei sistemi restano senza immagine.
+
+Uso: ``python3 dashboard/tools/fetch_logos.py [--out CARTELLA] [--assets CARTELLA] [--force]``.
 Rispetta le regole di Wikimedia: User-Agent che identifica lo script e un
 file alla volta, con una pausa tra le richieste.
 """
@@ -26,16 +33,20 @@ import time
 import urllib.parse
 import urllib.request
 
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(HERE, '..', 'backend'))
+from pixelarcade.systems import PRESETS  # noqa: E402
+
 API = 'https://commons.wikimedia.org/w/api.php'
 USER_AGENT = 'PixelArcadeLogoFetcher/0.1 (https://github.com/Capa00/pixel-arcade)'
 PAUSE = 1.0
 # Larghezza dei PNG scaricati: Commons li genera anche dagli SVG, che possono pesare decine
 # di MB (il logo del Saturn ne pesa 44) e rallentano il disegno della pagina.
 RASTER_WIDTH = 480
-HERE = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_OUT = os.path.join(HERE, '..', 'frontend', 'public', 'logos')
 
-# Sistema (``preset`` del backend) o marca (``brand-<id>``, src/lib/consoleTabs.js) → file di Wikimedia Commons.
+# Sistema (``preset`` del backend, ``PRESETS`` in systems.py) o marca (``brand-<id>``, src/lib/consoleTabs.js)
+# → file di Wikimedia Commons.
 LOGOS = {
     'nes': 'NES logo.svg',
     'snes': 'SNES logo.svg',
@@ -71,7 +82,6 @@ LOGOS = {
     'neogeocd': 'NEOGEO CD logo.svg',
     'ngp': 'Neo Geo Pocket logo.svg',
     'wonderswan': 'WonderSwan logo.svg',
-    'wonderswancolor': 'Wonderswan-Color-Logo.svg',
     'channelf': 'Channel F Logo.svg',
     'intellivision': 'Intellivision-logo.svg',
     'colecovision': 'COLECO VISION LOGO.svg',
@@ -84,6 +94,30 @@ LOGOS = {
     'amiga': 'Amiga Logo 1985.svg',
     'dos': 'MS-DOS logo black.svg',
     'pico8': 'PICO-8 logo modern.svg',
+    # Sistemi aggiunti dai core di RetroArch (2026-11-09). Restano senza logo, perché su Commons non c'è:
+    # Arcadia 2001, VC 4000, Elektor, Odyssey², Videopac+, Super Cassette Vision, Sega Pico, Arduboy,
+    # Uzebox, WASM-4, Atari 8-bit, ZX81, Macintosh, BBC Micro, Enterprise, Thomson, P2000T, TV Computer.
+    'fds': 'Family Computer Disk System logo.svg',
+    'pcecd': 'SUPER CD-ROM2 System Logo.svg',
+    '3do': '3DO Logo.svg',
+    'supervision': 'Watara Supervision logo.svg',
+    'megaduck': 'Mega Duck Console Logo.png',
+    'gameandwatch': 'Game and watch logo.svg',
+    'gx4000': 'Amstrad GX4000 logo.svg',
+    'cdi': 'Philips CD-i logo.svg',
+    'xbox': 'Xbox Logo 2001.svg',
+    'cd32': 'Commodore Amiga CD32 logo-09.svg',
+    'cdtv': 'Commodore CDTV logo-01.svg',
+    'vic20': 'Commodore VIC-20 logo-20.svg',
+    'plus4': 'Commodore Plus 4 logo-04.svg',
+    'pet': 'Commodore PET logo-01.svg',
+    'apple2': 'Apple Computer Logo rainbow.svg',
+    'pc88': 'PC8800 logo.svg',
+    'pc98': 'PC9800 logo 1982.svg',
+    'x1': 'Sharp X1 logo.svg',
+    'x68000': 'Logo X68000.png',
+    'spectravideo': 'Spectravideo Logo.svg',
+    'samcoupe': 'Miles Gordon Technology Logo.svg',
     # Marche (gruppi della scheda TUTTE, `brand-<id>`).
     'brand-nintendo': 'Nintendo logo.svg',
     'brand-sega': 'SEGA logo.svg',
@@ -131,10 +165,72 @@ def info(title):
     }
 
 
+# Cartelle degli asset di RetroArch provate in ordine (snap, installazione normale, pacchetti di sistema).
+ASSETS_DIRS = (
+    '~/snap/retroarch/common/.config/retroarch/assets',
+    '~/.config/retroarch/assets',
+    '/usr/share/libretro/assets',
+)
+ICON_THEME = os.path.join('xmb', 'systematic', 'png')
+# Nome dell'icona per i sistemi senza tipologie nei core (il nome che usa RetroArch).
+ICON_NAMES = {'vc4000': 'Interton - VC 4000'}
+ICON_INFO = {
+    'source': 'https://github.com/libretro/retroarch-assets/tree/master/xmb/systematic',
+    'license': 'CC BY 4.0 (retroarch-assets); MIT (BAXY Themes)',
+    'author': 'BAXY (baxysquare), tema Systematic: https://github.com/baxysquare/baxy-retroarch-themes',
+}
+
+
+def icons_dir(assets=None):
+    """Cartella delle icone del tema Systematic, oppure ``None`` se gli asset di RetroArch mancano."""
+    for base in ([assets] if assets else ASSETS_DIRS):
+        folder = os.path.join(os.path.expanduser(base), ICON_THEME)
+        if os.path.isdir(folder):
+            return folder
+    return None
+
+
+def icon_for(folder, preset_id):
+    """Percorso dell'icona del sistema ``preset_id`` (nome esplicito, tipologie dei core, nome delle copertine)."""
+    preset = PRESETS[preset_id]
+    names = ([ICON_NAMES[preset_id]] if preset_id in ICON_NAMES else []) + list(preset.get('types') or [])
+    names += [preset['thumbnails']] if preset.get('thumbnails') else []
+    for name in names:
+        path = os.path.join(folder, name + '.png')
+        if '/' not in name and os.path.isfile(path):
+            return path
+    return None
+
+
+def copy_icons(out, index, force, assets=None):
+    """Copia le icone di RetroArch dei sistemi senza logo di Commons; restituisce i sistemi rimasti senza."""
+    folder = icons_dir(assets)
+    without = [preset_id for preset_id in PRESETS if preset_id not in LOGOS]
+    if folder is None:
+        print('Asset di RetroArch non trovati: i sistemi senza logo restano senza icona.', file=sys.stderr)
+        return without
+    left = []
+    for preset_id in without:
+        name = preset_id + '.png'
+        known = index.get(preset_id)
+        if known and not force and os.path.exists(os.path.join(out, known['file'])):
+            continue
+        path = icon_for(folder, preset_id)
+        if path is None:
+            left.append(preset_id)
+            continue
+        with open(path, 'rb') as source, open(os.path.join(out, name), 'wb') as target:
+            target.write(source.read())
+        index[preset_id] = dict(ICON_INFO, file=name)
+        print(f'{preset_id}: {name} (icona di RetroArch)')
+    return left
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument('--out', default=DEFAULT_OUT, help='cartella dei loghi')
     parser.add_argument('--force', action='store_true', help='scarica anche i loghi già presenti')
+    parser.add_argument('--assets', help='cartella degli asset di RetroArch (predefinita: le installazioni note)')
     args = parser.parse_args()
     out = os.path.abspath(args.out)
     os.makedirs(out, exist_ok=True)
@@ -167,11 +263,15 @@ def main():
         index[preset] = {'file': name, 'source': found['source'], 'license': found['license'], 'author': found['author']}
         print(f'{preset}: {name} ({found["license"] or "licenza non indicata"})')
 
+    left = copy_icons(out, index, args.force, args.assets)
+
     with open(index_path, 'w', encoding='utf-8') as handle:
         json.dump(index, handle, ensure_ascii=False, indent=2, sort_keys=True)
     print(f'{len(index)} loghi in {out}')
     for line in missing:
         print('Mancante:', line, file=sys.stderr)
+    if left:
+        print('Senza logo né icona:', ', '.join(left), file=sys.stderr)
     return 1 if missing else 0
 
 

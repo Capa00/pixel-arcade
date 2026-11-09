@@ -1,8 +1,8 @@
 /**
  * Console nella riga delle schede.
  *
- * Le Impostazioni decidono quali console sono accese per tutti (`off`: le
- * spente). Dalla scheda TUTTE ogni profilo accende o spegne le proprie:
+ * Le Impostazioni decidono quali console sono accese per tutti (`on`, `off`);
+ * una console che non hanno mai toccato è accesa se ha giochi. Dalla scheda TUTTE ogni profilo accende o spegne le proprie:
  * `profiles[account] = {add, remove}`. Una scelta del profilo resta anche
  * quando cambiano le Impostazioni; le console mai toccate le seguono. La
  * console preferita del profilo è sempre nella sua riga.
@@ -15,49 +15,36 @@ import { stepId } from '../input/wrap.js'
 /** Scheda TUTTE: in fondo alla riga, prima di TOURNAMENT. */
 export const ALL_CONSOLE = { id: '@all', name: 'TUTTE', accent: '#c9d1d9' }
 
-export const EMPTY_PREFS = { off: [], profiles: {} }
+export const EMPTY_PREFS = { on: [], off: [], profiles: {} }
 
 /** Ambiti di navigazione della scheda TUTTE (`state.focus`): marche, console della marca aperta, marca aperta. */
 export const ALL_SCOPES = { brands: 'allBrands', consoles: 'allConsoles', open: 'allBrand' }
 
 /**
  * Marche delle console, nell'ordine della riga, dei gruppi di TUTTE e delle
- * Impostazioni: alfabetico, con ALTRO (console miste) per ultimo.
- * `presets` sono i sistemi riconosciuti dal backend (`preset`), nell'ordine
- * di uscita in cui stanno nel gruppo; computer e arcade fanno gruppo a parte.
+ * Impostazioni: alfabetico, con ALTRO (console miste) per ultimo. La marca di
+ * ogni console e la sua posizione nella marca (ordine di uscita) le manda il
+ * backend (`brand`, `order` di `GET /api/bootstrap`, `BRANDS` in systems.py).
  */
 export const BRANDS = [
-  { id: 'arcade', name: 'ARCADE', presets: ['arcade'] },
-  { id: 'atari', name: 'ATARI', presets: ['atari2600', 'atari5200', 'atari7800', 'jaguar', 'lynx'] },
-  { id: 'bandai', name: 'BANDAI', presets: ['wonderswan', 'wonderswancolor'] },
-  { id: 'computer', name: 'COMPUTER', presets: ['c64', 'zxspectrum', 'cpc', 'msx', 'msx2', 'pc88', 'atarist', 'amiga', 'dos'] },
-  { id: 'nec', name: 'NEC', presets: ['pce', 'pcecd', 'supergrafx', 'pcfx'] },
-  { id: 'nintendo', name: 'NINTENDO', presets: ['nes', 'fds', 'snes', 'n64', 'gamecube', 'wii', 'gb', 'gbc', 'gba', 'vb', 'pokemini', 'nds', '3ds'] },
-  { id: 'sega', name: 'SEGA', presets: ['sg1000', 'sms', 'md', 'segacd', 'sega32x', 'saturn', 'dreamcast', 'gg'] },
-  { id: 'snk', name: 'SNK', presets: ['neogeocd', 'ngp'] },
-  { id: 'sony', name: 'SONY', presets: ['psx', 'ps2', 'psp'] },
-  {
-    id: 'other',
-    name: 'ALTRO',
-    presets: ['channelf', 'odyssey2', 'intellivision', 'colecovision', 'vectrex', '3do', 'arcadia2001', 'vc4000', 'elektor',
-      'supervision', 'megaduck', 'arduboy', 'uzebox', 'wasm4', 'pico8'],
-  },
+  { id: 'arcade', name: 'ARCADE' },
+  { id: 'atari', name: 'ATARI' },
+  { id: 'bandai', name: 'BANDAI' },
+  { id: 'computer', name: 'COMPUTER' },
+  { id: 'nec', name: 'NEC' },
+  { id: 'nintendo', name: 'NINTENDO' },
+  { id: 'sega', name: 'SEGA' },
+  { id: 'snk', name: 'SNK' },
+  { id: 'sony', name: 'SONY' },
+  { id: 'other', name: 'ALTRO' },
 ]
 
-const BRAND_OF = {}
-for (const brand of BRANDS) {
-  brand.presets.forEach((preset, index) => {
-    BRAND_OF[preset] = { brand: brand.id, index }
-  })
-}
+const BRAND_IDS = new Set(BRANDS.map((brand) => brand.id))
 
-/** Marca della console (`other` se il sistema non è riconosciuto) e posizione nel suo gruppo. */
+/** Marca della console (`other`, o `arcade` per gli arcade, se il backend non la indica) e posizione nella marca. */
 export function brandOf(system) {
-  const known = BRAND_OF[system.preset] || BRAND_OF[system.id]
-  if (known) {
-    return known
-  }
-  return { brand: system.arcade ? 'arcade' : 'other', index: Infinity }
+  const brand = BRAND_IDS.has(system.brand) ? system.brand : system.arcade ? 'arcade' : 'other'
+  return { brand, index: Number.isInteger(system.order) ? system.order : Infinity }
 }
 
 /** Console divise per marca: `[{brand, name, systems}]`, solo i gruppi non vuoti, nell'ordine di `BRANDS`. */
@@ -90,19 +77,23 @@ export function normalizePrefs(value) {
       }
     }
   }
-  return { off: idList(value.off), profiles }
+  return { on: idList(value.on), off: idList(value.off), profiles }
 }
 
-/** Vero se la console `id` è accesa per tutti (Impostazioni). */
-export function onForAll(prefs, id) {
-  return !prefs.off.includes(id)
+/** Vero se la console `system` è accesa per tutti: come dicono le Impostazioni, altrimenti se ha giochi. */
+export function onForAll(prefs, system) {
+  if ((prefs.off || []).includes(system.id)) {
+    return false
+  }
+  return (prefs.on || []).includes(system.id) || (system.count || 0) > 0
 }
 
 /**
- * Vero se la console `id` è nella riga del profilo `account` (`null` = nessun
- * profilo). `favorite` è la console preferita del profilo: c'è sempre.
+ * Vero se la console `system` è nella riga del profilo `account` (`null` =
+ * nessun profilo). `favorite` è la console preferita del profilo: c'è sempre.
  */
-export function inRow(prefs, account, id, favorite = null) {
+export function inRow(prefs, account, system, favorite = null) {
+  const id = system.id
   if (favorite !== null && id === favorite) {
     return true
   }
@@ -113,7 +104,7 @@ export function inRow(prefs, account, id, favorite = null) {
   if (entry && entry.remove.includes(id)) {
     return false
   }
-  return onForAll(prefs, id)
+  return onForAll(prefs, system)
 }
 
 /** Accende (`on`) o spegne la console `id` nella riga del profilo `account`; la scelta resta anche se uguale alle Impostazioni. */
@@ -129,14 +120,26 @@ export function setForProfile(prefs, account, id, on) {
   return { ...prefs, profiles: { ...prefs.profiles, [account]: { add, remove } } }
 }
 
-/** Preferenze con le console spente per tutti `off` (lista di id). */
-export function withOff(prefs, off) {
-  return { ...prefs, off: [...new Set(off)] }
+/** Preferenze con le console accese (`on`) e spente (`off`) per tutti nelle Impostazioni. */
+export function withSettings(prefs, on, off) {
+  return { ...prefs, on: [...new Set(on)], off: [...new Set(off)] }
+}
+
+/** Stato delle Impostazioni `{on, off}` con la console `id` accesa (`value` vero) o spenta per tutti. */
+export function setForAll(settings, id, value) {
+  const on = settings.on.filter((item) => item !== id)
+  const off = settings.off.filter((item) => item !== id)
+  if (value) {
+    on.push(id)
+  } else {
+    off.push(id)
+  }
+  return { on, off }
 }
 
 /** Console di `systems` nella riga del profilo `account` (con la preferita `favorite`), per marca come in TUTTE. */
 export function rowSystems(systems, prefs, account, favorite = null) {
-  const shown = systems.filter((system) => inRow(prefs, account, system.id, favorite))
+  const shown = systems.filter((system) => inRow(prefs, account, system, favorite))
   return groupSystems(shown).flatMap((group) => group.systems)
 }
 

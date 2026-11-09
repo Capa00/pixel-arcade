@@ -9,7 +9,12 @@ CLAUDE.local.md
 .Trash-*/
 
 # --- Giochi, ROM e archivi ---
-games/
+# Della cartella games/ vanno nella repo solo le sottocartelle delle console, vuote, con il loro .gitkeep:
+# tutto il resto (giochi, file sparsi, sottocartelle dei giochi) resta escluso.
+games/*
+!games/*/
+games/*/*
+!games/*/.gitkeep
 *.zip
 *.7z
 *.rar

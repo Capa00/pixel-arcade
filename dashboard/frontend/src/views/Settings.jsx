@@ -9,7 +9,7 @@ import ConfigModal from '../components/ConfigModal.jsx'
 import ConfirmDialog from '../components/ConfirmDialog.jsx'
 import { BrandLogo, ConsoleLogo } from '../components/ConsoleLogo.jsx'
 import toggleStyles from '../components/Toggle.module.css'
-import { groupSystems, normalizePrefs } from '../lib/consoleTabs.js'
+import { groupSystems, normalizePrefs, onForAll, setForAll } from '../lib/consoleTabs.js'
 import { YES_NO, moveChoice } from '../components/confirmChoices.js'
 import ItemList from '../components/ItemList.jsx'
 import MultiPickerMenu from '../components/MultiPickerMenu.jsx'
@@ -416,7 +416,8 @@ function AddonConsoleDialog({ entry, values, ctx, scopeRef, item, onClose }) {
  * bozza a parte e si salvano anche loro con «Salva».
  * Ogni console ha un interruttore accesa/spenta per tutti (riga delle schede,
  * src/lib/consoleTabs.js): lo cambia il tasto ovest, anche questo in una bozza
- * salvata con «Salva» (`POST /api/consoles/off`).
+ * salvata con «Salva» (`POST /api/consoles/settings`). Una console senza
+ * giochi è spenta finché non la si accende.
  *
  * Gli eventi di input arrivano da App tramite `inputRef.current(event)`,
  * con priorità: apprendimento dei tasti, conferma, menu a comparsa,
@@ -489,24 +490,30 @@ export default function Settings({ inputRef, gamepad, onContext }) {
   // Bozze delle console delle estensioni: `{addon: {original, draft}}`.
   const [addonDrafts, setAddonDrafts] = useState({})
   const addonDirty = CONSOLE_SETTINGS.some((entry) => addonChanged(addonDrafts[entry.addon]))
-  // Console spente per tutti: bozza a parte, salvata con «Salva» (`POST /api/consoles/off`).
-  const [consoleOff, setConsoleOff] = useState(() => ({ original: state.consolePrefs.off, draft: state.consolePrefs.off }))
-  const consoleDirty = consoleOff.draft.length !== consoleOff.original.length
-    || consoleOff.draft.some((id) => !consoleOff.original.includes(id))
+  // Console accese e spente per tutti (`{on, off}`; le altre: accese se hanno giochi): bozza a parte,
+  // salvata con «Salva» (`POST /api/consoles/settings`).
+  const [consoleSet, setConsoleSet] = useState(() => {
+    const saved = { on: state.consolePrefs.on, off: state.consolePrefs.off }
+    return { original: saved, draft: saved }
+  })
+  const consoleDirty = JSON.stringify(consoleSet.draft) !== JSON.stringify(consoleSet.original)
   const dirty = isDirty(settings) || addonDirty || consoleDirty
-  const consoleOn = (id) => !consoleOff.draft.includes(id)
+  const consoleOn = (system) => onForAll({ ...state.consolePrefs, ...consoleSet.draft }, system)
   const switchConsole = (id) => {
-    setConsoleOff((current) => ({
+    const system = state.systems.find((entry) => entry.id === id) || { id, count: 0 }
+    setConsoleSet((current) => ({
       ...current,
-      draft: current.draft.includes(id) ? current.draft.filter((item) => item !== id) : [...current.draft, id],
+      draft: setForAll(current.draft, id, !onForAll({ ...state.consolePrefs, ...current.draft }, system)),
     }))
   }
   // Scheda Console a due livelli, come TUTTE: prima le marche, A entra, B torna alle marche.
   const [openBrand, setOpenBrand] = useState(null)
-  // Marca della console per i gruppi: `preset` e `arcade` vengono dalle console caricate all'avvio.
+  // Marca, posizione e giochi della console per i gruppi e l'interruttore: vengono dalle console caricate all'avvio.
   const withBrandInfo = (system) => {
     const known = state.systems.find((entry) => entry.id === system.id)
-    return known ? { ...system, preset: known.preset, arcade: known.arcade } : system
+    return known
+      ? { ...system, preset: known.preset, arcade: known.arcade, brand: known.brand, order: known.order, count: known.count }
+      : system
   }
 
   useEffect(() => {
@@ -896,11 +903,11 @@ export default function Settings({ inputRef, gamepad, onContext }) {
     const changed = CONSOLE_SETTINGS.filter((entry) => addonChanged(addonDrafts[entry.addon]))
     const main = isDirty(settings) || (!changed.length && !consoleDirty)
     if (consoleDirty) {
-      const off = consoleOff.draft
+      const draft = consoleSet.draft
       try {
-        const data = await api.saveConsolesOff(off)
+        const data = await api.saveConsoleSettings(draft.on, draft.off)
         dispatch(consolePrefsChanged(normalizePrefs(data.consoles)))
-        setConsoleOff((current) => ({ ...current, original: off }))
+        setConsoleSet((current) => ({ ...current, original: draft }))
       } catch (error) {
         dispatch(showToast(error.message, 'error'))
         return { saved: false, error: error.message }
@@ -1350,7 +1357,7 @@ export default function Settings({ inputRef, gamepad, onContext }) {
                               {summary.ready ? 'Pronta' : 'Non pronta'}
                             </span>
                             <span className={styles.count}>{coresLabel(summary)}</span>
-                            <ConsoleSwitch on={consoleOn(system.id)} />
+                            <ConsoleSwitch on={consoleOn(system)} />
                             <span className={styles.open} aria-hidden="true">▸</span>
                           </button>
                         )

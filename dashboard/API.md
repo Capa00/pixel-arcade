@@ -106,7 +106,7 @@ Aggiornato sprint per sprint: qui compaiono solo le rotte già implementate.
 | GET | `/api/replays/status` | — | `{playing, reason, showing}` | Salvaschermo |
 | POST | `/api/replays/stop` | — | `{playing, reason, showing}` | Salvaschermo |
 | POST | `/api/favorites` | `{account, game: "<system>/<id>", on: bool}` | `{favorites: [key], games: {key: gameSummary}}` | 08 |
-| POST | `/api/consoles/off` | `{off: [id]}` | `{consoles}` | console della riga |
+| POST | `/api/consoles/settings` | `{on: [id], off: [id]}` | `{consoles}` | console della riga |
 | POST | `/api/consoles/row` | `{account, id, on}` | `{consoles}` | console della riga |
 | GET | `/api/playlists` | — | `playlists` | playlist |
 | POST | `/api/playlists` | `{name, filters?, games?: [key]}` | `playlists` | playlist |
@@ -148,6 +148,8 @@ Aggiornato sprint per sprint: qui compaiono solo le rotte già implementate.
 | `covers` | 4 colori | sfondi delle copertine pixel art; calcolati da `name` |
 | `quote`, `source` | stringhe | citazione in fondo alla sezione del gioco (dal preset riconosciuto, altrimenti «Press Start.») |
 | `arcade` | booleano | titoli = nomi brevi MAME |
+| `brand` | stringa | marca della console (`arcade`, `atari`, `bandai`, `computer`, `nec`, `nintendo`, `sega`, `snk`, `sony`, `other`; `BRANDS` in `systems.py`) |
+| `order` | intero o `null` | posizione nella marca (ordine di uscita); `null` per le cartelle non riconosciute |
 | `count` | intero | numero di giochi |
 | `cores` | lista | core della console nell'ordine automatico (compatibili con RetroAchievements disponibili nel loro ordine, poi installati, scaricabili e non disponibili, ciascun gruppo in ordine alfabetico): `[{name, installed, downloadable}]`, con `name` = nome breve (`fbneo`) |
 | `ready` | booleano | vero se almeno un core della lista è installato o scaricabile |
@@ -579,15 +581,15 @@ Nelle partite normali col P1 registrato (non nelle sfide trofeo, nelle prove dei
 
 ### Console della riga
 
-Le Impostazioni decidono quali console sono accese per tutti; ogni profilo accende o spegne le console della propria riga delle schede. Una scelta del profilo resta salvata così com'è, anche quando le Impostazioni cambiano; le console che il profilo non ha mai toccato seguono le Impostazioni. La console preferita del profilo (`favConsole`) è sempre nella sua riga: lo decide l'interfaccia. Il riquadro `consoles` arriva con `GET /api/bootstrap` e con la risposta delle due rotte:
+Le Impostazioni decidono quali console sono accese per tutti; una console che le Impostazioni non hanno mai toccato è accesa se ha giochi (`count` > 0), spenta altrimenti. Ogni profilo accende o spegne le console della propria riga delle schede. Una scelta del profilo resta salvata così com'è, anche quando le Impostazioni cambiano; le console che il profilo non ha mai toccato seguono le Impostazioni. La console preferita del profilo (`favConsole`) è sempre nella sua riga: lo decide l'interfaccia. Il riquadro `consoles` arriva con `GET /api/bootstrap` e con la risposta delle due rotte:
 
 ```json
-{"off": ["snes"], "profiles": {"3": {"add": ["snes"], "remove": ["nes"]}}}
+{"on": ["saturn"], "off": ["snes"], "profiles": {"3": {"add": ["snes"], "remove": ["nes"]}}}
 ```
 
-- `off`: id delle console spente per tutti, in ordine alfabetico. Una console senza giochi o non più nella libreria può restarci: la scelta vale di nuovo quando ritorna.
+- `on`, `off`: id delle console accese e spente per tutti nelle Impostazioni, in ordine alfabetico; le altre seguono il predefinito. Una console non più nella libreria può restarci: la scelta vale di nuovo quando ritorna.
 - `profiles`: per ogni profilo (id come testo) le console che ha acceso (`add`) e spento (`remove`). I profili senza scelte non compaiono. Un ospite non ha scelte proprie.
-- `POST /api/consoles/off` sostituisce l'elenco delle console spente (al massimo 500 id); le scelte dei profili restano.
+- `POST /api/consoles/settings` sostituisce le console accese e spente per tutti (al massimo 500 id per lista; una console non può stare in tutte e due); le scelte dei profili restano.
 - `POST /api/consoles/row` accende (`on: true`) o spegne (`on: false`) la console nella riga del profilo; ripetere la stessa scelta non cambia nulla.
 - Le scelte di un profilo si cancellano insieme al profilo.
 - 400: elenco non valido, id di console vuoto, troppo lungo (oltre 64 caratteri) o non testuale, `on` non booleano, profilo inesistente.

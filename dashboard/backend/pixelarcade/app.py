@@ -598,6 +598,8 @@ def main(argv=None):
         services['play'].boost_call('off')
         services['addons'] = addons.load(services)
         start_core_index_refresh(services)
+        # Una cartella per ogni console riconosciuta, così si sa dove mettere i giochi.
+        services['library'].ensure_folders()
         for warning in services['library'].warnings():
             log.warning('%s', warning)
         server = create_server(args.port, services, dist)

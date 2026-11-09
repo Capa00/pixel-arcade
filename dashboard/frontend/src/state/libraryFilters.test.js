@@ -46,8 +46,8 @@ const NES = [
 ]
 
 const systems = [
-  { id: 'arcade', name: 'ARCADE' },
-  { id: 'mame', name: 'MAME', arcade: true },
+  { id: 'arcade', name: 'ARCADE', count: 1, arcade: true },
+  { id: 'mame', name: 'MAME', count: 1, arcade: true },
 ]
 
 function ids(list) {

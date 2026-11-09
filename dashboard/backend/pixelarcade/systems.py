@@ -164,16 +164,17 @@ PRESETS.update({
     'pcfx': _preset(['cue', 'chd', 'm3u'], 'NEC - PC-FX', []),
     'neogeocd': _preset(['cue', 'chd'], 'SNK - Neo Geo CD', ['ngcd']),
     'ngp': _preset(['ngp', 'ngc', 'zip', '7z'], 'SNK - Neo Geo Pocket',
-                   ['neogeopocket', 'neogeopocketcolor', 'ngpc']),
+                   ['neogeopocket', 'neogeopocketcolor', 'ngpc'], types=['SNK - Neo Geo Pocket', 'SNK - Neo Geo Pocket Color']),
     'wonderswan': _preset(['ws', 'wsc', 'zip', '7z'], 'Bandai - WonderSwan',
-                          ['ws', 'wsc', 'wonderswancolor']),
+                          ['ws', 'wsc', 'wonderswancolor'], types=['Bandai - WonderSwan', 'Bandai - WonderSwan Color']),
     'atari2600': _preset(['a26', 'bin', 'zip', '7z'], 'Atari - 2600', ['2600', 'vcs', 'atarivcs']),
     'atari7800': _preset(['a78', 'bin', 'zip', '7z'], 'Atari - 7800', ['7800']),
     'lynx': _preset(['lnx', 'zip', '7z'], 'Atari - Lynx', ['atarilynx']),
     'jaguar': _preset(['j64', 'jag', 'zip', '7z'], 'Atari - Jaguar', ['atarijaguar']),
     '3do': _preset(['iso', 'chd', 'cue'], 'The 3DO Company - 3DO', ['3docompany', 'panasonic3do']),
     'colecovision': _preset(['col', 'rom', 'zip', '7z'], 'Coleco - ColecoVision', ['coleco']),
-    'msx': _preset(['rom', 'mx1', 'mx2', 'dsk', 'cas', 'zip', '7z'], 'Microsoft - MSX', ['msx1', 'msx2']),
+    'msx': _preset(['rom', 'mx1', 'mx2', 'dsk', 'cas', 'zip', '7z'], 'Microsoft - MSX', ['msx1', 'msx2'],
+                   types=['Microsoft - MSX', 'Microsoft - MSX2']),
     'intellivision': _preset(['int', 'bin', 'rom', 'zip', '7z'], 'Mattel - Intellivision', ['intv']),
     'odyssey2': _preset(['bin', 'zip', '7z'], 'Magnavox - Odyssey2', ['odyssey', 'videopac']),
     'vectrex': _preset(['vec', 'bin', 'zip', '7z'], 'GCE - Vectrex', []),
@@ -185,11 +186,116 @@ PRESETS.update({
     'vc4000': _preset(['bin', 'zip'], None, ['intertonvc4000', 'interton'], types=[]),
     'elektor': _preset(['bin', 'zip'], None, ['elektortvgames', 'tvgamescomputer'], types=[]),
     'supervision': _preset(['sv', 'bin', 'zip', '7z'], 'Watara - Supervision', ['watara']),
-    'megaduck': _preset(['bin', 'zip'], None, ['duck'], types=[]),
+    'megaduck': _preset(['bin', 'zip'], None, ['duck'], types=['Welback Holdings - Mega Duck']),
     'arduboy': _preset(['hex', 'arduboy'], 'Arduboy Inc - Arduboy', []),
-    'uzebox': _preset(['uze'], None, [], types=['Uzebox']),
+    'uzebox': _preset(['uze'], None, [], types=['Uzebox', 'Uzebox - Uzebox']),
     'wasm4': _preset(['wasm'], 'WASM-4', []),
 })
+
+# Altre console e computer dei core di RetroArch (campo ``database`` dei ``.info``, 2026-11-09).
+# Restano fuori motori di gioco, varianti della stessa console, arcade già nella console Arcade,
+# calcolatrici e macchine virtuali.
+PRESETS.update({
+    'gamecube': _preset(['iso', 'gcm', 'gcz', 'rvz', 'ciso', 'wbfs', 'm3u'], 'Nintendo - GameCube',
+                        ['gc', 'nintendogamecube']),
+    'wii': _preset(['iso', 'wbfs', 'rvz', 'gcz', 'ciso', 'wad', 'm3u'], 'Nintendo - Wii', ['nintendowii'],
+                   types=['Nintendo - Wii', 'Nintendo - Wii (Digital)']),
+    '3ds': _preset(['3ds', 'cci', 'cxi', '3dsx', 'app'], 'Nintendo - Nintendo 3DS', ['n3ds', 'nintendo3ds']),
+    'gameandwatch': _preset(['mgw'], 'Handheld Electronic Game', ['gw', 'gamewatch'],
+                            types=['Handheld Electronic']),
+    'pico': _preset(['md', 'bin', 'zip', '7z'], 'Sega - PICO', ['segapico']),
+    'atari5200': _preset(['a52', 'bin', 'car', 'zip', '7z'], 'Atari - 5200', ['5200']),
+    'supergrafx': _preset(['sgx', 'pce', 'cue', 'chd'], 'NEC - PC Engine SuperGrafx', ['sgx', 'pcenginesupergrafx']),
+    'gx4000': _preset(['cpr', 'dsk', 'zip'], 'Amstrad - GX4000', ['amstradgx4000']),
+    'scv': _preset(['cart', 'bin', 'rom', 'zip'], 'Epoch - Super Cassette Vision',
+                   ['supercassettevision', 'epochscv']),
+    'cdi': _preset(['chd', 'cue', 'iso'], 'Philips - CD-i', ['philipscdi']),
+    'videopacplus': _preset(['bin', 'zip'], 'Philips - Videopac+', []),
+    'xbox': _preset(['iso'], 'Microsoft - Xbox', ['microsoftxbox']),
+    'cd32': _preset(['chd', 'cue', 'iso', 'm3u'], 'Commodore - CD32', ['amigacd32']),
+    'cdtv': _preset(['chd', 'cue', 'iso', 'm3u'], 'Commodore - CDTV', ['commodorecdtv', 'amigacdtv']),
+    'atari8bit': _preset(['atr', 'xex', 'xfd', 'dcm', 'atx', 'cas', 'car', 'rom', 'com', 'zip', 'm3u'],
+                         'Atari - 8-bit Family', ['atari800', 'atarixl']),
+    'atarist': _preset(['st', 'msa', 'stx', 'dim', 'ipf', 'zip', 'm3u'], 'Atari - ST', []),
+    'c64': _preset(['d64', 't64', 'tap', 'prg', 'crt', 'g64', 'd81', 'x64', 'p00', 'zip', 'm3u'], 'Commodore - 64',
+                   ['commodore64']),
+    'amiga': _preset(['adf', 'adz', 'dms', 'ipf', 'hdf', 'hdz', 'lha', 'zip', 'm3u'], 'Commodore - Amiga',
+                     ['commodoreamiga']),
+    'vic20': _preset(['d64', 't64', 'tap', 'prg', 'crt', 'zip', 'm3u'], 'Commodore - VIC-20', ['commodorevic20']),
+    'plus4': _preset(['d64', 't64', 'tap', 'prg', 'crt', 'zip', 'm3u'], 'Commodore - Plus-4',
+                     ['commodoreplus4', 'c16']),
+    'pet': _preset(['d64', 't64', 'tap', 'prg', 'zip', 'm3u'], 'Commodore - PET', ['commodorepet']),
+    'zx81': _preset(['p', 'tzx', 't81'], 'Sinclair - ZX 81', ['sinclairzx81']),
+    'zxspectrum': _preset(['tzx', 'tap', 'z80', 'sna', 'szx', 'rzx', 'dsk', 'trd', 'scl', 'zip'],
+                          'Sinclair - ZX Spectrum', ['spectrum', 'sinclairzxspectrum'],
+                          types=['Sinclair - ZX Spectrum', 'Sinclair - ZX Spectrum +3']),
+    'apple2': _preset(['dsk', 'do', 'po', 'nib', 'woz', '2mg', 'hdv', 'zip', 'm3u'], 'Apple - II', ['appleii']),
+    'mac68k': _preset(['dsk', 'img', 'zip'], 'Apple - Mac68k', ['macintosh']),
+    'bbcmicro': _preset(['ssd', 'dsd'], 'Acorn - BBC Micro', ['acornbbc']),
+    'pc98': _preset(['d98', 'hdi', 'fdi', 'fdd', 'd88', 'zip', 'm3u'], 'NEC - PC-98', ['pc9801']),
+    'x1': _preset(['dx1', '2d', 'd88', 'tap', 'zip'], 'Sharp - X1', ['sharpx1']),
+    'x68000': _preset(['dim', 'hdf', 'xdf', 'd88', '2hd', 'm3u'], 'Sharp - X68000', ['x68k', 'sharpx68000']),
+    'dos': _preset(['zip', 'dosz', 'exe', 'com', 'bat', 'iso', 'cue', 'm3u', 'conf'], 'Microsoft - DOS', ['msdos']),
+    'spectravideo': _preset(['rom', 'cas', 'dsk', 'zip'], 'Spectravideo - SVI-318 - SVI-328', ['svi318', 'svi328']),
+    'enterprise': _preset(['img', 'dsk', 'tap', 'com', 'zip'], 'Enterprise - 128', ['enterprise128']),
+    'samcoupe': _preset(['dsk', 'mgt', 'sad', 'sbt'], 'Miles Gordon Technology - SAM coupe', []),
+    'thomson': _preset(['fd', 'sap', 'k7', 'm7', 'm5', 'rom'], 'Thomson - MOTO', ['thomsonmoto']),
+    'p2000t': _preset(['cas'], 'Philips - P2000T', ['philipsp2000t']),
+    'tvcomputer': _preset(['img', 'dsk', 'tap', 'cas'], 'Videoton - TV-Computer', []),
+    'pico8': _preset(['p8', 'png'], 'Lexaloffle - PICO-8', []),
+})
+
+# Marche delle console, ciascuna con i suoi sistemi in ordine di uscita: ordinano la riga delle
+# schede, la scheda TUTTE e le Impostazioni (README, «Riga delle console e scheda TUTTE»).
+BRANDS = {
+    'arcade': ['arcade'],
+    'atari': ['atari2600', 'atari5200', 'atari7800', 'lynx', 'jaguar'],
+    'bandai': ['wonderswan'],
+    'computer': ['pet', 'apple2', 'zx81', 'vic20', 'atari8bit', 'bbcmicro', 'zxspectrum', 'c64', 'pc88', 'x1',
+                 'spectravideo', 'msx', 'plus4', 'cpc', 'thomson', 'enterprise', 'mac68k', 'p2000t', 'tvcomputer',
+                 'pc98', 'atarist', 'amiga', 'x68000', 'samcoupe', 'dos'],
+    'nec': ['pce', 'pcecd', 'supergrafx', 'pcfx'],
+    'nintendo': ['gameandwatch', 'nes', 'fds', 'snes', 'gb', 'vb', 'n64', 'gbc', 'pokemini', 'gba', 'gamecube',
+                 'nds', 'wii', '3ds'],
+    'sega': ['sg1000', 'sms', 'md', 'gg', 'segacd', 'sega32x', 'pico', 'saturn', 'dreamcast'],
+    'snk': ['neogeocd', 'ngp'],
+    'sony': ['psx', 'ps2', 'psp'],
+    'other': ['channelf', 'odyssey2', 'videopacplus', 'intellivision', 'colecovision', 'vectrex', 'arcadia2001',
+              'vc4000', 'elektor', 'scv', 'gx4000', 'cdtv', '3do', 'cdi', 'cd32', 'supervision', 'megaduck', 'xbox',
+              'arduboy', 'uzebox', 'pico8', 'wasm4'],
+}
+BRAND_OF = {preset_id: (brand, index) for brand, ids in BRANDS.items() for index, preset_id in enumerate(ids)}
+
+# Cartella di ogni sistema dentro la cartella dei giochi: il backend crea quelle mancanti all'avvio
+# (``Library.ensure_folders``) e la repo le porta vuote, con un ``.gitkeep``. Il nome mostrato viene
+# dalla cartella (``display_name``). Per i sistemi non elencati la cartella ha il nome del preset.
+FOLDERS = {
+    'md': 'mega_drive', 'sms': 'master_system', 'gg': 'game_gear', 'psx': 'ps1', 'pce': 'pc_engine',
+    'pcecd': 'pc_engine_cd', 'pcfx': 'pc_fx', 'fds': 'famicom_disk_system', 'nds': 'nintendo_ds',
+    'vb': 'virtual_boy', 'pokemini': 'pokemon_mini', 'sega32x': 'sega_32x', 'segacd': 'sega_cd',
+    'sg1000': 'sg_1000', 'neogeocd': 'neo_geo_cd', 'ngp': 'neo_geo_pocket', 'atari2600': 'atari_2600',
+    'atari5200': 'atari_5200', 'atari7800': 'atari_7800', 'channelf': 'channel_f', 'cpc': 'amstrad_cpc',
+    'pc88': 'pc_88', 'arcadia2001': 'arcadia_2001', 'vc4000': 'vc_4000', 'megaduck': 'mega_duck',
+    '3ds': 'nintendo_3ds', 'gameandwatch': 'game_and_watch', 'pico': 'sega_pico', 'gx4000': 'amstrad_gx4000',
+    'scv': 'super_cassette_vision', 'cdi': 'philips_cdi', 'videopacplus': 'videopac_plus', 'cd32': 'amiga_cd32',
+    'cdtv': 'commodore_cdtv', 'atari8bit': 'atari_8bit', 'atarist': 'atari_st', 'c64': 'commodore_64',
+    'vic20': 'vic_20', 'plus4': 'commodore_plus4', 'pet': 'commodore_pet', 'zxspectrum': 'zx_spectrum',
+    'apple2': 'apple_ii', 'mac68k': 'macintosh', 'bbcmicro': 'bbc_micro', 'pc98': 'pc_98', 'x1': 'sharp_x1',
+    'enterprise': 'enterprise_128', 'samcoupe': 'sam_coupe', 'thomson': 'thomson_moto',
+    'p2000t': 'philips_p2000t', 'tvcomputer': 'tv_computer', 'pico8': 'pico_8',
+}
+
+
+def folder_of(preset_id):
+    """Nome della cartella del sistema ``preset_id`` dentro la cartella dei giochi."""
+    return FOLDERS.get(preset_id, preset_id)
+
+
+def brand_of(preset_id, arcade=False):
+    """``(marca, posizione nella marca)``; un sistema non riconosciuto va in fondo ad ``arcade`` o ``other``."""
+    if preset_id in BRAND_OF:
+        return BRAND_OF[preset_id]
+    return ('arcade' if arcade else 'other'), None
 
 GENERIC = {
     'quote': DEFAULT_QUOTE,

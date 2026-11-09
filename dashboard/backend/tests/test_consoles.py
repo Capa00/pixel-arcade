@@ -26,17 +26,23 @@ class ConsoleRowServiceTest(unittest.TestCase):
         self.tmp.cleanup()
 
     def test_vuoto(self):
-        self.assertEqual(self.service.data(), {'off': [], 'profiles': {}})
+        self.assertEqual(self.service.data(), {'on': [], 'off': [], 'profiles': {}})
 
-    def test_spente_per_tutti(self):
-        self.assertEqual(self.service.set_off(['snes', 'nes', 'snes'])['off'], ['nes', 'snes'])
-        self.assertEqual(self.service.set_off([])['off'], [])
+    def test_accese_e_spente_per_tutti(self):
+        data = self.service.set_settings(['3do'], ['snes', 'nes', 'snes'])
+        self.assertEqual((data['on'], data['off']), (['3do'], ['nes', 'snes']))
+        data = self.service.set_settings([], [])
+        self.assertEqual((data['on'], data['off']), ([], []))
         for value in (None, 'nes', [3], [''], ['x' * 65], ['a\0b']):
             with self.assertRaises(ConfigError):
-                self.service.set_off(value)
+                self.service.set_settings([], value)
+            with self.assertRaises(ConfigError):
+                self.service.set_settings(value, [])
+        with self.assertRaises(ConfigError):
+            self.service.set_settings(['nes'], ['nes'])
 
     def test_scelte_del_profilo(self):
-        self.service.set_off(['snes'])
+        self.service.set_settings([], ['snes'])
         self.service.set_row(self.sara, 'snes', True)
         data = self.service.set_row(self.sara, 'nes', False)
         self.assertEqual(data['profiles'], {str(self.sara): {'add': ['snes'], 'remove': ['nes']}})
@@ -46,10 +52,10 @@ class ConsoleRowServiceTest(unittest.TestCase):
     def test_le_scelte_restano_se_cambiano_le_impostazioni(self):
         # LUCA accende GB, che è già accesa: la scelta resta anche quando le Impostazioni la spengono.
         self.service.set_row(self.luca, 'gb', True)
-        data = self.service.set_off(['gb'])
+        data = self.service.set_settings([], ['gb'])
         self.assertEqual(data['profiles'], {str(self.luca): {'add': ['gb'], 'remove': []}})
         # E resta anche se torna uguale alle Impostazioni.
-        self.service.set_off([])
+        self.service.set_settings([], [])
         data = self.service.set_row(self.luca, 'gb', False)
         self.assertEqual(data['profiles'], {str(self.luca): {'add': [], 'remove': ['gb']}})
 

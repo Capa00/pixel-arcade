@@ -6,7 +6,7 @@ import threading
 
 from .config import parse_extensions
 from .errors import LibraryError
-from .systems import describe
+from .systems import PRESETS, brand_of, describe, folder_of
 
 log = logging.getLogger(__name__)
 
@@ -75,6 +75,35 @@ class Library:
             return ['Cartella dei giochi non trovata: %s' % (roms or '(non impostata)')]
         return []
 
+    def ensure_folders(self):
+        """Crea nella cartella dei giochi le cartelle dei sistemi riconosciuti che non ne hanno una.
+
+        Un sistema ha già la sua cartella se una sottocartella lo indica, anche
+        con un altro nome (``megadrive`` per il Mega Drive). Restituisce i nomi
+        delle cartelle create; senza cartella dei giochi non crea niente.
+        """
+        roms = self.roms_dir()
+        if not roms or not os.path.isdir(roms):
+            return []
+        present = {describe(folder)['preset'] for folder in self.folders()}
+        created = []
+        for preset_id in PRESETS:
+            if preset_id in present:
+                continue
+            name = folder_of(preset_id)
+            try:
+                os.mkdir(os.path.join(roms, name))
+            except FileExistsError:
+                continue
+            except OSError as error:
+                log.warning('Cartella dei giochi non creata (%s): %s', name, error)
+                continue
+            created.append(name)
+        if created:
+            log.info('Cartelle dei giochi create: %s', ', '.join(created))
+            self.invalidate()
+        return created
+
     def folders(self):
         """Sottocartelle della cartella ROM, senza nascoste né link simbolici, ordinate."""
         roms = self.roms_dir()
@@ -102,6 +131,7 @@ class Library:
         result = []
         for folder in self.folders():
             system = describe(folder)
+            brand, order = brand_of(system['preset'], system['arcade'])
             cores = [{'name': core['name'], 'installed': core['installed'], 'downloadable': core['downloadable']}
                      for core in self.config.candidate_cores(folder, settings.get(folder, {}), available)]
             result.append({
@@ -113,6 +143,8 @@ class Library:
                 'quote': system['quote'],
                 'source': system['source'],
                 'arcade': system['arcade'],
+                'brand': brand,
+                'order': order,
                 'count': len(self.games(folder)),
                 'cores': cores,
                 'ready': any(core['installed'] or core['downloadable'] for core in cores),

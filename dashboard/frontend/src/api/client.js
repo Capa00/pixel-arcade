@@ -601,9 +601,12 @@ export function played(id) {
   return request('GET', '/api/profiles/played?id=' + encodeURIComponent(id))
 }
 
-/** Spegne per tutti le console `off` (lista di id); restituisce `{consoles: {off, profiles}}` (API.md, «Console della riga»). */
-export function saveConsolesOff(off) {
-  return request('POST', '/api/consoles/off', { off })
+/**
+ * Console accese (`on`) e spente (`off`) per tutti nelle Impostazioni (liste di id; le altre seguono il
+ * predefinito); restituisce `{consoles: {on, off, profiles}}` (API.md, «Console della riga»).
+ */
+export function saveConsoleSettings(on, off) {
+  return request('POST', '/api/consoles/settings', { on, off })
 }
 
 /** Accende (`on`) o spegne la console `id` nella riga del profilo `account`; restituisce `{consoles}` come sopra. */

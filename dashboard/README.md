@@ -27,7 +27,7 @@ La build finisce in `dashboard/frontend/dist/`, che il backend serve così com'�
 python3 dashboard/tools/fetch_logos.py
 ```
 
-I PNG finiscono in `dashboard/frontend/public/logos/` (esclusa dal `.gitignore`), che la build copia in `dist/logos/`; accanto, `index.json` riporta file, fonte, licenza e autore di ogni logo. I loghi sono marchi dei rispettivi proprietari. `--force` scarica di nuovo anche quelli già presenti, `--out CARTELLA` cambia la destinazione. Senza loghi la dashboard mostra il nome della console.
+I PNG finiscono in `dashboard/frontend/public/logos/` (esclusa dal `.gitignore`), che la build copia in `dist/logos/`; accanto, `index.json` riporta file, fonte, licenza e autore di ogni logo. I loghi sono marchi dei rispettivi proprietari. Ai sistemi che su Commons non hanno un logo lo script dà l'icona del tema «Systematic» di RetroArch (CC BY 4.0 nella copia di libretro, MIT per l'autore BAXY), copiata dagli asset di RetroArch installati sulla macchina (`--assets CARTELLA` per indicarli): per questo conviene lanciarlo sulla console. `--force` scarica di nuovo anche quelli già presenti, `--out CARTELLA` cambia la destinazione. Senza loghi né icone la dashboard mostra il nome della console.
 
 ## Avvio sulla console
 
@@ -74,7 +74,8 @@ Il governor in uso prima della partita si annota in `cpu-governor` nella cartell
 
 ## Libreria e comandi
 
-Ogni sottocartella di `games/` è una console. Il nome mostrato è quello della cartella in maiuscolo, con `_`, `-`, `.` ecc. al posto degli spazi; i colori si calcolano da quel nome.
+Ogni sottocartella di `games/` è una console. La repo porta già, vuote, le cartelle di tutte le console e i computer riconosciuti (circa 90, dai core di RetroArch: `PRESETS` e `FOLDERS` in `backend/pixelarcade/systems.py`), e all'avvio la dashboard crea quelle che mancano nella cartella dei giochi: basta mettere i file nella cartella giusta. Restano fuori motori di gioco e giochi singoli (DOOM, Quake, ScummVM…), varianti della stessa console e calcolatrici.
+Una console senza giochi è spenta per tutti: non compare nella riga delle schede finché non la si accende nelle Impostazioni o con la casella in TUTTE; quando riceve i giochi si accende da sola, se nessuno l'ha spenta. Il nome mostrato è quello della cartella in maiuscolo, con `_`, `-`, `.` ecc. al posto degli spazi; i colori si calcolano da quel nome.
 Le cartelle riconosciute (`backend/pixelarcade/systems.py`, con alias come `megadrive`, `ps1`) hanno estensioni e citazione dedicate.
 I giochi si leggono all'avvio e restano in memoria: dopo aver aggiunto file o cartelle, usa «Aggiorna libreria» nelle Impostazioni.
 
@@ -101,7 +102,7 @@ SELECT e START agiscono al rilascio, così si possono premere insieme per la chi
 Nella griglia ↑ e ↓ passano alla prima o all'ultima riga nella stessa colonna (se manca, all'ultimo gioco).
 Una direzione tenuta premuta e la rotellina si fermano invece al bordo: per ripartire dall'altro capo si rilascia e si preme di nuovo.
 
-**Riga delle console e scheda TUTTE.** Le schede in alto seguono l'ordine delle marche, alfabetico: Arcade, Atari, Bandai, Computer, NEC, Nintendo, Sega, SNK, Sony e per ultime le console di «Altro». Dentro una marca le console sono in ordine di uscita (`BRANDS` in `frontend/src/lib/consoleTabs.js`). In coda vengono le schede delle estensioni, tra cui TUTTE e TOURNAMENT.
+**Riga delle console e scheda TUTTE.** Le schede in alto seguono l'ordine delle marche, alfabetico: Arcade, Atari, Bandai, Computer, NEC, Nintendo, Sega, SNK, Sony e per ultime le console di «Altro». Dentro una marca le console sono in ordine di uscita (`BRANDS` in `backend/pixelarcade/systems.py`). In coda vengono le schede delle estensioni, tra cui TUTTE e TOURNAMENT.
 TUTTE mostra ogni console, anche quelle fuori dalla riga, divise per marca: le frecce scelgono la marca, A ci entra (le altre si attenuano), poi le frecce scelgono la console.
 
 | Joypad | Tastiera | Azione |
@@ -117,7 +118,7 @@ La casella accanto al nome è verde con la spunta se la console è nella riga, v
 - La console preferita ha il cuore rosso ed è sempre nella riga: la sua casella ha il lucchetto e X non la toglie.
 - Senza profilo (ospite o nessun giocatore) la riga è quella delle Impostazioni: le caselle hanno il lucchetto, X e Y mostrano un avviso.
 
-Le scelte stanno nel database (`POST /api/consoles/off` e `POST /api/consoles/row`, vedi API.md). Una console aperta da TUTTE, o fuori dalla riga, torna a TUTTE con B dalla griglia; LB e RB partono da TUTTE.
+Le scelte stanno nel database (`POST /api/consoles/settings` e `POST /api/consoles/row`, vedi API.md). Una console aperta da TUTTE, o fuori dalla riga, torna a TUTTE con B dalla griglia; LB e RB partono da TUTTE.
 
 **Giocatori.** Un joypad comanda la dashboard solo dopo aver premuto START: il primo che lo preme diventa P1, il secondo P2 (un terzo riceve «Due giocatori già attivi»).
 Ognuno sceglie il proprio profilo nella sua finestra «Chi gioca?» (P1 a sinistra, P2 a destra), ne crea uno nuovo o gioca come ospite. In cima ci sono «Gioca come ospite» (già selezionato) e «Crea un nuovo profilo», sotto i profili: chi non ha un profilo suo entra come ospite invece di usare quello di un altro.
@@ -291,7 +292,7 @@ Se il salvataggio non riesce si resta nelle Impostazioni e l'errore compare in u
 | B o SELECT | Esc o F3 | Clic su «Indietro» nella barra comandi | Chiude la finestra della console, oppure torna alla libreria |
 
 **Console.** La sezione elenca le cartelle di `games/` divise per marca, come la scheda TUTTE: le frecce scelgono la marca, A ci entra, B torna alle marche. Dentro, una riga per console (logo, giochi, «Pronta», numero di core, interruttore); A apre la finestra della console con la sua lista di core e le estensioni, B la chiude. Subito sotto l'elenco c'è «Elimina core inutilizzati».
-L'interruttore «Accesa / Spenta» decide se la console è nella riga delle schede di tutti: si cambia con X (tastiera `/`, legenda «Accendi/spegni») e si salva con «Salva», come il resto delle Impostazioni. Le scelte dei profili valgono sopra l'interruttore (vedi «Riga delle console e scheda TUTTE»).
+L'interruttore «Accesa / Spenta» decide se la console è nella riga delle schede di tutti (senza scelta: accesa se ha giochi): si cambia con X (tastiera `/`, legenda «Accendi/spegni») e si salva con «Salva», come il resto delle Impostazioni. Le scelte dei profili valgono sopra l'interruttore (vedi «Riga delle console e scheda TUTTE»).
 In fondo, nel gruppo ESTENSIONI, ci sono le console delle estensioni con impostazioni proprie, con il loro logo se ce l'hanno.
 Per ogni cartella c'è una lista di core, provati nell'ordine mostrato all'avvio dei giochi (sprint 05).
 - **Ordine**: automatico. Prima i core compatibili con RetroAchievements della console, installati o scaricabili, nell'ordine consigliato dalla [documentazione di RetroAchievements](https://docs.retroachievements.org/general/emulator-support-and-issues.html) (elenco in `backend/pixelarcade/ra_cores.py`); poi gli altri core installati in ordine alfabetico, gli altri scaricabili in ordine alfabetico e infine quelli non disponibili. Così il primo core provato, e scaricato se manca, è quello che attiva i trofei.
@@ -368,7 +369,7 @@ Le impostazioni (tabella `settings`) partono dai valori predefiniti di `backend/
 Le console hanno estensioni e lista dei core nelle tabelle `systems` e `system_cores`; l'elenco dei core scaricabili sta in `buildbot_cores`, i core scaricati dalla dashboard in `downloaded_cores`.
 Il core di ogni gioco sta in `game_cores`, i core provati (con esito e ultime righe del log di RetroArch) in `core_attempts`, le partite in `sessions`.
 Il gioco della sfida di ogni settimana sta in `weekly_challenges` (data del lunedì, console, gioco).
-Le console spente per tutti dalle Impostazioni stanno in `consoles_off`; le console accese o spente da ogni profilo nella propria riga in `account_consoles` (con `ON DELETE CASCADE`: le righe di un profilo se ne vanno con lui).
+Le console accese o spente per tutti dalle Impostazioni stanno in `console_settings`; le console accese o spente da ogni profilo nella propria riga in `account_consoles` (con `ON DELETE CASCADE`: le righe di un profilo se ne vanno con lui).
 RetroAchievements: account dei profili (nome utente e token) in `ra_accounts`, gioco riconosciuto di ogni file in `ra_games`, trofei delle partite in `ra_unlocks`; la chiave Web API è la riga interna `retroachievements.api_key` di `settings`. Gli elenchi dei giochi con gli hash e i badge stanno in cache in `~/.config/pixel-arcade/retroachievements/`.
 Le migrazioni in `backend/pixelarcade/db/migrations/` vengono applicate all'avvio, una sola volta ciascuna.
 

@@ -31,8 +31,8 @@ import {
 import { initialState, reducer } from './reducer.js'
 
 const systems = [
-  { id: 'arcade', name: 'ARCADE', covers: [] },
-  { id: 'mame', name: 'MAME', arcade: true, covers: [] },
+  { id: 'arcade', name: 'ARCADE', count: 1, arcade: true, covers: [] },
+  { id: 'mame', name: 'MAME', count: 1, arcade: true, covers: [] },
 ]
 
 const LUCA = { id: 1, name: 'LUCA_8BIT', color: '#ff5d73' }

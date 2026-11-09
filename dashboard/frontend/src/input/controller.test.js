@@ -4,9 +4,9 @@ import { currentGame, filtered, heroView, initialState, presentLetters, reducer 
 import { heroActionsFor, route, settingsCommand } from './controller.js'
 
 const systems = [
-  { id: 'arcade', name: 'ARCADE', covers: [] },
-  { id: 'mame', name: 'MAME', arcade: true, covers: [] },
-  { id: 'neogeo', name: 'NEO GEO', arcade: true, covers: [] },
+  { id: 'arcade', name: 'ARCADE', count: 1, arcade: true, covers: [] },
+  { id: 'mame', name: 'MAME', count: 1, arcade: true, covers: [] },
+  { id: 'neogeo', name: 'NEO GEO', count: 1, arcade: true, covers: [] },
 ]
 
 const titles = ['1942', 'Asteroids', 'Bomb Jack', 'Dig Dug', 'Dig Dug II', 'Donkey Kong', 'Élite', 'Galaga', 'Zaxxon']

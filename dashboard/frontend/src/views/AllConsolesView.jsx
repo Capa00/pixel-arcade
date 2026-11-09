@@ -21,6 +21,9 @@ const BRAND = 'brand:'
 const SYS = 'sys:'
 
 function gamesLabel(count) {
+  if (count === 0) {
+    return 'Nessun gioco'
+  }
   return count === 1 ? '1 gioco' : `${count} giochi`
 }
 
@@ -138,7 +141,8 @@ export default function AllConsolesView({ inputRef, onContext }) {
   // risposta del backend, oppure torna com'era se il salvataggio non riesce.
   const toggle = (id) => {
     const current = live.current
-    if (!current.systems.some((entry) => entry.id === id)) {
+    const system = current.systems.find((entry) => entry.id === id)
+    if (!system) {
       return
     }
     if (current.account === null) {
@@ -150,7 +154,7 @@ export default function AllConsolesView({ inputRef, onContext }) {
       return
     }
     const previous = current.prefs
-    const on = !inRow(previous, current.account, id)
+    const on = !inRow(previous, current.account, system)
     dispatch(consolePrefsChanged(setForProfile(previous, current.account, id, on)))
     api.toggleConsoleRow(current.account, id, on)
       .then((data) => dispatch(consolePrefsChanged(normalizePrefs(data.consoles))))
@@ -205,7 +209,7 @@ export default function AllConsolesView({ inputRef, onContext }) {
     inputRef.current = null
   }, [inputRef])
 
-  const shown = state.systems.filter((system) => inRow(prefs, account, system.id, favorite)).length
+  const shown = state.systems.filter((system) => inRow(prefs, account, system, favorite)).length
   const owner = account !== null && user ? user.name : 'casa'
 
   return (
@@ -234,7 +238,7 @@ export default function AllConsolesView({ inputRef, onContext }) {
               <BrandSide group={group} />
               <div className={styles.grid} ref={isOpen ? consolesScope.ref : undefined}>
                 {group.systems.map((system) => {
-                  const row = inRow(prefs, account, system.id, favorite)
+                  const row = inRow(prefs, account, system, favorite)
                   const loved = system.id === favorite
                   const locked = account === null || loved
                   const focusProps = isOpen

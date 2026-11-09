@@ -75,7 +75,12 @@ export default function Library({ onWheelMove }) {
   const dotsFor = (entry) => present.filter((player) => player.keys.has(gameKey(system.id, entry.id)))
 
   if (!game && !state.query && !filtersActive(state)) {
-    return <Message title={`Nessun gioco per ${system.name}`} text="Aggiungi i file dei giochi nella cartella della console." />
+    return (
+      <Message
+        title={`Nessun gioco per ${system.name}`}
+        text={`Metti i file dei giochi nella cartella «${system.id}» della cartella dei giochi (di solito games/${system.id}/), poi usa «Aggiorna libreria» nelle Impostazioni.`}
+      />
+    )
   }
   return (
     <div className={styles.library}>

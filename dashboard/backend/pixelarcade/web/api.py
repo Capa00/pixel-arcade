@@ -1124,9 +1124,9 @@ def profile_played(ctx, request):
 # --- Playlist -----------------------------------------------------------------
 
 
-def consoles_off(ctx, request):
-    """``POST /api/consoles/off`` ``{off: [id]}``: console spente per tutti, ``{consoles}``."""
-    return {'consoles': ctx['consoles'].set_off(request.body.get('off'))}
+def consoles_settings(ctx, request):
+    """``POST /api/consoles/settings`` ``{on: [id], off: [id]}``: console accese e spente per tutti, ``{consoles}``."""
+    return {'consoles': ctx['consoles'].set_settings(request.body.get('on'), request.body.get('off'))}
 
 
 def consoles_row(ctx, request):
@@ -1653,7 +1653,7 @@ def register(router):
     router.add('GET', '/api/replays/status', replay_status)
     router.add('POST', '/api/replays/stop', replay_stop)
     router.add('POST', '/api/favorites', set_favorite)
-    router.add('POST', '/api/consoles/off', consoles_off)
+    router.add('POST', '/api/consoles/settings', consoles_settings)
     router.add('POST', '/api/consoles/row', consoles_row)
     router.add('GET', '/api/playlists', playlists)
     router.add('POST', '/api/playlists', create_playlist)

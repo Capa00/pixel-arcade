@@ -41,8 +41,8 @@ import {
 import { activeTab, allConsoles, backToAll, currentAddonConsole, currentGame, currentSystem, filtered, initialState, reducer, rowInfo } from './reducer.js'
 
 const systems = [
-  { id: 'arcade', name: 'ARCADE', covers: [] },
-  { id: 'mame', name: 'MAME', arcade: true, covers: [] },
+  { id: 'arcade', name: 'ARCADE', count: 1, arcade: true, covers: [] },
+  { id: 'mame', name: 'MAME', count: 1, arcade: true, covers: [] },
 ]
 
 function makeGames(count) {
@@ -128,7 +128,7 @@ describe('reducer', () => {
   })
 
   it('bootstrap legge le console della riga dal backend', () => {
-    const consoles = { off: ['arcade'], profiles: { 4: { add: ['arcade'], remove: [] } } }
+    const consoles = { on: [], off: ['arcade'], profiles: { 4: { add: ['arcade'], remove: [] } } }
     const state = reducer(initialState, bootstrapLoaded({ systems, warnings: [], consoles }))
     expect(state.consolePrefs).toEqual(consoles)
     expect(state.systemId).toBe('mame')

@@ -4,7 +4,7 @@ import unittest
 
 from pixelarcade.errors import LibraryError
 from pixelarcade.library import Library, clean_title
-from pixelarcade.systems import describe
+from pixelarcade.systems import PRESETS, describe, folder_of
 
 
 class FakeConfig:
@@ -59,6 +59,29 @@ class LibraryTest(unittest.TestCase):
 
     def ids(self, system):
         return [game['id'] for game in self.library.games(system)]
+
+    def test_cartelle_dei_sistemi(self):
+        # Il Mega Drive ha già una cartella con un altro nome: non se ne crea una seconda.
+        os.makedirs(self.path('megadrive'))
+        created = self.library.ensure_folders()
+        self.assertNotIn('mega_drive', created)
+        self.assertIn('ps1', created)
+        self.assertIn('commodore_64', created)
+        self.assertEqual(len(created), len(PRESETS) - 1)
+        self.assertEqual({describe(folder)['preset'] for folder in self.library.folders()}, set(PRESETS))
+        self.assertEqual(self.library.ensure_folders(), [])
+        # Senza cartella dei giochi non si crea niente.
+        self.assertEqual(Library(FakeConfig(self.path('manca'))).ensure_folders(), [])
+
+    def test_marca_e_ordine(self):
+        for folder in ('ps1', 'mega_drive', 'boh', 'mame'):
+            os.makedirs(self.path(folder))
+        systems = {system['id']: system for system in self.library.systems()}
+        self.assertEqual((systems['ps1']['brand'], systems['ps1']['order']), ('sony', 0))
+        self.assertEqual((systems['mega_drive']['brand'], systems['mega_drive']['order']), ('sega', 2))
+        self.assertEqual((systems['boh']['brand'], systems['boh']['order']), ('other', None))
+        self.assertEqual(systems['mame']['brand'], 'arcade')
+        self.assertEqual(folder_of('md'), 'mega_drive')
 
     def test_titoli(self):
         self.assertEqual(clean_title('digdug2.zip', True), 'digdug2')

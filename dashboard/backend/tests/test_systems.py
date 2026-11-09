@@ -2,7 +2,7 @@ import re
 import unittest
 
 from pixelarcade.ra_cores import COMPATIBLE
-from pixelarcade.systems import PRESETS, colors, describe, display_name
+from pixelarcade.systems import ALIASES, BRAND_OF, PRESETS, colors, describe, display_name, folder_of, normalize
 
 HEX = re.compile(r'^#[0-9a-f]{6}$')
 
@@ -45,9 +45,12 @@ class SystemsTest(unittest.TestCase):
         # Database dei core diverso dal nome di libretro-thumbnails, oppure nessuna copertina.
         self.assertEqual(describe('PC-88')['types'], ['NEC - PC-8001 - PC-8801'])
         self.assertEqual(describe('PC-88')['thumbnails'], 'NEC - PC-88')
-        self.assertEqual(describe('Mega Duck')['types'], [])
+        self.assertEqual(describe('Mega Duck')['types'], ['Welback Holdings - Mega Duck'])
+        self.assertEqual(describe('VC 4000')['types'], [])
+        # Più tipologie solo per le varianti della stessa console (WonderSwan Color, MSX2…).
+        self.assertEqual(describe('wonderswan')['types'], ['Bandai - WonderSwan', 'Bandai - WonderSwan Color'])
         for preset_id, preset in PRESETS.items():
-            self.assertLessEqual(len(preset['types']), 1, preset_id)
+            self.assertEqual(len(preset['types']), len(set(preset['types'])), preset_id)
 
     def test_core_compatibili_retroachievements(self):
         self.assertEqual(describe('Mega_Drive')['cores'], ['genesis_plus_gx', 'picodrive'])
@@ -62,9 +65,11 @@ class SystemsTest(unittest.TestCase):
         describe('psp')['cores'].append('altro')
         self.assertEqual(describe('psp')['cores'], ['ppsspp'])
 
-    def test_ogni_preset_ha_core_compatibili(self):
-        self.assertEqual(sorted(COMPATIBLE), sorted(PRESETS))
-        for preset_id in PRESETS:
+    def test_core_compatibili_dei_preset(self):
+        # Le console aggiunte dai core di RetroArch (2026-11-09) possono non averne.
+        self.assertLessEqual(set(COMPATIBLE), set(PRESETS))
+        self.assertEqual(describe('commodore_64')['cores'], [])
+        for preset_id in COMPATIBLE:
             cores = describe(preset_id)['cores']
             # La PS2 non ha core libretro compatibili con RetroAchievements.
             self.assertEqual(bool(cores), preset_id != 'ps2', preset_id)
@@ -99,6 +104,20 @@ class SystemsTest(unittest.TestCase):
         for preset_id, preset in PRESETS.items():
             self.assertTrue(preset['extensions'], preset_id)
             self.assertIn('quote', preset, preset_id)
+
+
+class BrandsAndFoldersTest(unittest.TestCase):
+    def test_ogni_sistema_ha_marca_e_cartella(self):
+        self.assertEqual(set(BRAND_OF), set(PRESETS))
+        for preset_id in PRESETS:
+            # La cartella si riconosce come il suo sistema.
+            self.assertEqual(ALIASES.get(normalize(folder_of(preset_id))), preset_id, preset_id)
+
+    def test_alias_senza_conflitti(self):
+        seen = {}
+        for preset_id, preset in PRESETS.items():
+            for alias in [preset_id] + preset['aliases']:
+                self.assertEqual(seen.setdefault(alias, preset_id), preset_id, alias)
 
 
 if __name__ == '__main__':
